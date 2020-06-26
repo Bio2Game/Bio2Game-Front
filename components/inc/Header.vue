@@ -7,14 +7,12 @@
             <img class="logo" src="/images/logo.png" alt="Logo Bio2Game" />
           </nuxt-link>
           <nuxt-link class="link" to="/">Accueil</nuxt-link>
-          <nuxt-link class="link" to="/">Créer un quiz</nuxt-link>
-          <nuxt-link class="link" to="/domaines">Domaines</nuxt-link>
-          <nuxt-link class="link" to="/">Blog</nuxt-link>
-          <nuxt-link class="link" to="/">Communauté</nuxt-link>
+          <nuxt-link class="link" to="/quizs">Quizs</nuxt-link>
+          <nuxt-link class="link" to="/parties">Parties</nuxt-link>
         </div>
         <div class="right-menu">
-          <nuxt-link class="button md green" to="/register">
-            S’inscrire
+          <nuxt-link class="button md green" to="/">
+            Créer un quiz
           </nuxt-link>
           <nuxt-link class="button md gray right" to="/login">
             Se connecter
