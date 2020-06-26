@@ -40,7 +40,7 @@ export default {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 750ms ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 
 .db-container {
@@ -53,6 +53,7 @@ export default {
     left: 0;
     right: 0;
     padding: 30px 0;
+    min-height: calc(100vh - 5rem);
   }
 }
 .route.index .db-container {

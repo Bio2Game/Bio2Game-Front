@@ -2,14 +2,6 @@
   <div class="content-hero">
     <NotifHandler />
     <div class="content-part" :class="{ isFromIndex }">
-      <svg
-        class="decorator"
-        fill="currentColor"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <polygon points="0,0 100,0 0,100 0,100" />
-      </svg>
       <div class="content-text">
         <h2>
           Chalengez-vous
@@ -66,11 +58,13 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
-    width: 50%;
+    width: 58vw;
     height: calc(100vh - 5rem);
     transform: translateX(-50vw);
-    transition: transform 0.6s ease;
     z-index: 10;
+    padding-right: 8vw;
+    clip-path: polygon(0 0, calc(100% - 8vw) 0, calc(100% - 8vw) 100%, 0 100%);
+    background-color: white;
     &.isFromIndex {
       animation: fadeOutBiggerPage 0.3s ease-out forwards 0.6s;
       height: 100vh;
@@ -82,15 +76,6 @@ export default {
           height: calc(100vh - 5rem);
         }
       }
-    }
-    .decorator {
-      position: absolute;
-      top: 0;
-      left: 100%;
-      color: white;
-      width: 0;
-      height: 100vh;
-      transition: width 0.6s ease;
     }
     .content-text {
       padding-left: calc((100vw - 1280px) / 2);
@@ -130,7 +115,7 @@ export default {
       left: 0;
       z-index: 2;
       background: rgba(200, 200, 200, 0.65);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
       transition: 0.6s backdrop-filter ease;
     }
     .back {
@@ -150,12 +135,10 @@ export default {
     transform: translateX(0);
     transition: transform 0.6s ease;
     height: 100vh;
-    .decorator {
-      width: 8vw;
-    }
+    clip-path: polygon(0 0, 100% 0, calc(100% - 8vw) 100%, 0 100%);
   }
   .background {
-    width: 50%;
+    width: 50vw;
     min-height: 100vh;
     .cover {
       backdrop-filter: blur(0);
