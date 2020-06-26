@@ -1,0 +1,446 @@
+<template>
+  <div class="features-page">
+    <div class="features">
+      <div v-for="(feature, index) in features" :key="index" class="feature">
+        <div class="container">
+          <div class="image-container">
+            <img :src="feature.image" alt="feature.name" />
+          </div>
+          <div class="content">
+            <h3>{{ feature.name }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contributors">
+      <div class="title">
+        <h2>Contributeurs</h2>
+      </div>
+
+      <carousel
+        :perPage="3"
+        :autoplay="true"
+        :navigationEnabled="true"
+        paginationPosition="top"
+        :navigationClickTargetSize="0"
+        :paginationEnabled="false"
+        class="container carousel"
+      >
+        <slide v-for="contributor in contributors" :key="contributor.id">
+          <div class="contributor">
+            <div class="content-contributor">
+              <div class="avatar">
+                <img :src="contributor.avatar" :alt="contributor.name" />
+              </div>
+              <div class="content-text">
+                <div class="contributor-name">
+                  {{ contributor.name }}
+                </div>
+                <div class="contributor-description">
+                  {{ contributor.description }}
+                </div>
+              </div>
+            </div>
+            <div class="quizs">
+              <div class="quizs-title">Quiz créés</div>
+              <div class="quizs-list">
+                <div
+                  v-for="quiz in contributor.quizs"
+                  :key="quiz.id"
+                  class="quiz"
+                >
+                  <div class="icon">
+                    <img :src="quiz.icon" :alt="quiz.name" />
+                  </div>
+                  <div class="quiz-content">
+                    <div class="quiz-name">
+                      {{ quiz.name }}
+                    </div>
+                    <div class="quiz-description">
+                      {{ quiz.description }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </slide>
+      </carousel>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Features',
+  data() {
+    return {
+      contributors: [
+        {
+          id: 1,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+      ],
+      features: [
+        {
+          name: 'Moderne',
+          description:
+            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleur experience !',
+          image: '/images/features/ui.svg',
+        },
+        {
+          name: 'Votre vie privée',
+          description:
+            'La nature est pour nous, aussi importante que votre vie privé. C’est pour cela que vos informations privés resteront privés ! ',
+          image: '/images/features/private.svg',
+        },
+        {
+          name: 'Education',
+          description:
+            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quiz adaptés aux profil de vos élèves et étudiez leurs résultats et statistiques',
+          image: '/images/features/education.svg',
+        },
+        {
+          name: 'Communautaire',
+          description:
+            "Un lieu de rencontre et de partage d'information innovant entre tous ceux qui cherchent des solutions au quotidien.",
+          image: '/images/features/community.svg',
+        },
+        {
+          name: 'Un échange',
+          description:
+            "C'est un observatoire pour les marques permettant aux consommateurs de faire connattre leur choix en matiére de consommation.",
+          image: '/images/features/deal.svg',
+        },
+        {
+          name: 'Une API',
+          description:
+            'Bio2Game vous propose une api pour pouvoir accéder à vos données depuis vos sites ou projets.',
+          image: '/images/features/api.svg',
+        },
+      ],
+    }
+  },
+}
+</script>
+
+<style lang="scss">
+.features-page {
+  padding: 0 !important;
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    .feature {
+      background-color: #ffffff;
+      padding: 32px 0;
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .image-container {
+          margin: 0 64px;
+          display: flex;
+          width: 40%;
+          img {
+            display: flex;
+            width: 100%;
+          }
+        }
+        .content {
+          max-width: 450px;
+          margin: 0 64px;
+          h3 {
+            font-weight: normal;
+            font-size: 36px;
+            line-height: 44px;
+            margin-bottom: 16px;
+          }
+          p {
+            font-size: 18px;
+            line-height: 28px;
+            color: #767676;
+          }
+        }
+      }
+      &:nth-child(2n + 1) {
+        background-color: #f1f1f1;
+
+        .container {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+  }
+  .contributors {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(
+        0deg,
+        rgba(162, 238, 194, 0.8),
+        rgba(162, 238, 194, 0.8)
+      ),
+      url('/images/background-contributers.jpg') fixed;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    .title {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin: 60px 0 50px;
+      h2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 700;
+        font-size: 35px;
+        text-transform: uppercase;
+        &::after {
+          content: '';
+          position: absolute;
+          border-bottom: 5px solid #19683b;
+          width: 130px;
+          bottom: -10px;
+        }
+      }
+    }
+
+    .carousel {
+      .contributor {
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 32px 16px;
+        &:last-child {
+          margin-right: 32px 0;
+        }
+        .content-contributor {
+          display: flex;
+          margin-bottom: 16px;
+          .avatar {
+            min-width: 72px;
+            width: 72px;
+            height: 72px;
+            img {
+              width: 100%;
+              border-radius: 36px;
+            }
+          }
+          .content-text {
+            margin-left: 12px;
+            .contributor-name {
+              font-weight: 600;
+              font-size: 20px;
+              line-height: 29px;
+              color: #000000;
+            }
+            .contributor-description {
+              font-size: 14px;
+              line-height: 17px;
+              color: #4d4d4d;
+            }
+          }
+        }
+        .quizs-title {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 22px;
+          color: #000000;
+          margin-bottom: 12px;
+        }
+        .quizs-list {
+          .quiz {
+            display: flex;
+            background: #f1f1f1;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 6px;
+            padding: 8px 16px 8px 8px;
+            margin-bottom: 16px;
+            .icon {
+              width: 48px;
+              min-width: 48px;
+              min-height: 48px;
+              margin-right: 16px;
+              img {
+                width: 100%;
+                border-radius: 24px;
+              }
+            }
+            .quiz-content {
+              display: flex;
+              flex-direction: column;
+              .quiz-name {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
+                color: #19683b;
+              }
+              .quiz-description {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 14px;
+                color: #494949;
+              }
+            }
+          }
+        }
+      }
+      .VueCarousel-navigation {
+        position: absolute;
+        bottom: 100%;
+        margin-left: 16px;
+      }
+      .VueCarousel-navigation-button {
+        transform: none;
+        position: relative;
+        font-size: 42px;
+        outline: 0;
+        cursor: pointer;
+        color: white;
+        text-shadow: 0 2px 6px #2c2c2cb3;
+        height: 40px;
+        &.VueCarousel-navigation--disabled {
+          opacity: 1;
+          color: #cccccc;
+        }
+      }
+    }
+  }
+}
+</style>
