@@ -119,6 +119,37 @@ export default {
   },
 
   /*
+   ** Auth module configuration
+   ** See https://dev.auth.nuxtjs.org/schemes/local.html#options
+   */
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: 'user',
+          autoFetch: true,
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' },
+        },
+      },
+    },
+    redirect: {
+      callback: '/login/callback',
+      login: '/',
+      logout: '/',
+      home: '/',
+    },
+  },
+
+  /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
