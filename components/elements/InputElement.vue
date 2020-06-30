@@ -1,5 +1,5 @@
 <template>
-  <div class="input-container">
+  <div class="input-container" :class="{ 'has-error': error }">
     <input
       :class="{ false: !check, 'has-content': hasContent }"
       :type="type"
@@ -16,6 +16,7 @@
       <span>{{ caracters }}</span>
       /{{ max }}
     </label>
+    <div v-if="error" class="error">{{ error.message }}</div>
   </div>
 </template>
 
@@ -53,6 +54,10 @@ export default {
     max: {
       type: [Number, String],
       default: '',
+    },
+    error: {
+      type: Object,
+      default: () => null,
     },
   },
   computed: {
@@ -101,6 +106,13 @@ export default {
 .input-container {
   position: relative;
   margin: 8px 0 16px;
+  .error {
+    position: absolute;
+    color: #c90a0a;
+    font-size: 12px;
+    top: calc(100% + 6px);
+    right: 0;
+  }
   input {
     color: #333333;
     width: 100%;
@@ -149,6 +161,12 @@ export default {
       font-size: 12px;
       color: $green;
       transition: 0.3s;
+    }
+  }
+  &.has-error {
+    margin-bottom: 32px;
+    input {
+      border: 1px solid #c90a0a;
     }
   }
 }
