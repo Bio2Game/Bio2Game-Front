@@ -62,4 +62,34 @@ export default {
     background-color: white;
   }
 }
+
+.vue-notification-group {
+  top: 5rem !important;
+  padding: 16px 11px;
+  width: 400px !important;
+  .notifications {
+    padding: 16px;
+    margin: 0 5px 8px;
+    font-size: 14px;
+    color: #636363;
+    background: #ffffff;
+    border-left: 5px solid #187fe7;
+    box-shadow: 0 3px 6px #00000033;
+
+    &.warn {
+      background: #ffb648;
+      border-left-color: #f48a06;
+    }
+
+    &.error {
+      background: #e54d42;
+      border-left-color: #b82e24;
+    }
+
+    &.success {
+      // background: #68cd86;
+      border-left-color: #42a85f;
+    }
+  }
+}
 </style>
