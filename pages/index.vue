@@ -132,61 +132,61 @@ export default {
           ],
         },
         {
-          id: 2,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
-          id: 2,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
           id: 3,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: 'DraftMan',
+          description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+          avatar: 'https://www.draftman.fr/images/me.png',
+          quizs: [
+            {
+              id: 1,
+              name: 'Devoirs de vigilance',
+              description: `Qu'est ce que le devoir de vigilance des entreprises`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 2,
+              name: `Efficacité énergétique de l'aviation`,
+              description: `Baisse anticipée de la consommation des avions sur les terrains`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+            {
+              id: 3,
+              name: 'Climatoseptiques',
+              description: `Comment le DD est perçu par l'opinion publique en France`,
+              icon: 'https://www.draftman.fr/images/me.png',
+            },
+          ],
+        },
+        {
+          id: 5,
           name: 'DraftMan',
           description:
             'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
