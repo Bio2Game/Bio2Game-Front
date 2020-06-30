@@ -50,7 +50,10 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [{ src: '~/plugins/vue-carousel.js', mode: 'client' }],
+  plugins: [
+    { src: '~/plugins/vue-carousel.js', mode: 'client' },
+    { src: '~/plugins/vue-notification.js', mode: 'client' },
+  ],
 
   /*
    ** Auto import components
@@ -86,6 +89,9 @@ export default {
     // Doc: https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
 
+    // Doc: https://github.com/nuxt-community/proxy-module
+    '@nuxtjs/proxy',
+
     // Doc: https://github.com/Developmint/nuxt-webfontloader
     'nuxt-webfontloader',
 
@@ -119,6 +125,14 @@ export default {
   },
 
   /*
+   ** Proxy module configuration
+   ** See https://github.com/nuxt-community/proxy-module#options
+   */
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+  },
+
+  /*
    ** Auth module configuration
    ** See https://dev.auth.nuxtjs.org/schemes/local.html#options
    */
@@ -126,17 +140,22 @@ export default {
     strategies: {
       local: {
         token: {
-          property: 'token',
-          required: true,
-          type: 'Bearer',
+          required: false,
+          type: false,
         },
         user: {
-          property: 'user',
+          property: false,
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post',
+          },
           user: { url: '/api/auth/user', method: 'get' },
         },
       },
