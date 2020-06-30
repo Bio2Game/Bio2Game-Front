@@ -1,14 +1,14 @@
 <template>
   <div class="login-page">
     <div class="modal">
-      <div class="overlay" :class="{ register }">
-        <div v-if="register" class="content">
+      <div class="overlay" :class="{ register: isRegister }">
+        <div v-if="isRegister" class="content">
           <h3>Vous avez déjà<br />un compte?</h3>
           <p>
             Cela signifie que vous êtes déjà des nôtres !<br />Connectez-vous
             dès maintenant à votre compte
           </p>
-          <a class="button green md equal" @click="register = false"
+          <a class="button green md equal" @click="isRegister = false"
             >Se connecter</a
           >
         </div>
@@ -18,7 +18,7 @@
             Créer votre compte gratuitement et commencez<br />dès maintenant à
             jouer à nos quizz
           </p>
-          <a class="button green md equal" @click="register = true"
+          <a class="button green md equal" @click="isRegister = true"
             >Créer un compte</a
           >
         </div>
@@ -26,28 +26,28 @@
       <div class="part register-part">
         <h1>Créer un compte</h1>
         <Input
-          v-model="pseudo"
+          v-model="username"
           type="text"
           placeholder="Pseudonyme"
-          :error="error"
+          :error="filtredErrors('username')"
         />
         <Input
           v-model="email"
           type="email"
           placeholder="Email"
-          :error="error"
+          :error="filtredErrors('email')"
         />
         <Input
           v-model="password"
           type="password"
           placeholder="Mot de passe"
-          :error="error"
+          :error="filtredErrors('password')"
         />
         <Input
           v-model="password_confirmation"
           type="password"
           placeholder="Confirmez votre mot de passe"
-          :error="error"
+          :error="filtredErrors('password_confirmation')"
         />
         <a class="button green md full" @click="register()">Créer mon compte</a>
       </div>
@@ -57,15 +57,17 @@
           v-model="email"
           type="email"
           placeholder="Email"
-          :error="error"
+          :error="filtredErrors('email')"
         />
         <Input
           v-model="password"
           type="password"
           placeholder="Mot de passe"
-          :error="error"
+          :error="filtredErrors('password')"
         />
-        <a href="/connexion/forgot" class="password">Mot de passe oublié ?</a>
+        <div class="password">
+          <nuxt-link to="/login/forgot">Mot de passe oublié ?</nuxt-link>
+        </div>
 
         <div class="group">
           <Checkbox
@@ -118,29 +120,70 @@ export default {
   },
   data() {
     return {
-      pseudo: '',
+      username: '',
       email: '',
       password: '',
       password_confirmation: '',
-      error: false,
-      register: false,
+      errors: [],
+      isRegister: false,
       remember: true,
     }
   },
   methods: {
+    filtredErrors(field) {
+      return this.errors.find((error) => error.field === field)
+    },
     async login() {
       try {
-        const response = await this.$auth.loginWith('local', {
+        await this.$auth.login({
           data: {
             email: this.email,
             password: this.password,
           },
         })
         // eslint-disable-next-line no-console
-        console.log(response)
+        this.$notify({
+          group: 'auth',
+          type: 'success',
+          position: 'bottom right',
+          text: 'Merci de vous être connecté !',
+          duration: 5000,
+          width: 400,
+        })
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err)
+        const messages = err.response.data.messages
+        if (messages) {
+          this.errors = messages.errors
+        }
+      }
+    },
+    async register() {
+      try {
+        await this.$axios.post('/api/auth/register', {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        })
+        await this.$auth.login({
+          data: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+        this.$notify({
+          group: 'auth',
+          type: 'success',
+          position: 'bottom right',
+          text: 'Merci de vous être inscrit !',
+          duration: 5000,
+          width: 400,
+        })
+      } catch (err) {
+        const messages = err.response.data.messages
+        if (messages) {
+          this.errors = messages.errors
+        }
       }
     },
   },
@@ -203,13 +246,15 @@ export default {
         border: 1px solid #999999;
       }
       .password {
-        color: #19683b;
-        font-size: 14px;
-        margin: -6px 0 16px;
         display: flex;
         justify-content: flex-end;
-        text-decoration: none;
-        font-weight: 500;
+        margin: -6px 0 16px;
+        a {
+          color: #19683b;
+          font-size: 14px;
+          text-decoration: none;
+          font-weight: 500;
+        }
       }
       .description {
         text-align: center;
