@@ -2,6 +2,7 @@
   <div :class="['route', $route.name]">
     <Header />
     <div class="db-container">
+      <div class="cover-hero" />
       <Hero />
       <transition name="slide">
         <Nuxt class="page" />
@@ -46,30 +47,33 @@ export default {
 .db-container {
   position: relative;
   min-height: calc(100vh - 5rem);
+  .cover-hero {
+    height: 0;
+    transition: all 0.3s;
+  }
   .page {
-    position: absolute;
+    position: relative;
     z-index: 3;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 30px 0;
+    padding: 24px 0;
     min-height: calc(100vh - 5rem);
   }
 }
 .route.index .db-container {
   .page {
-    position: relative;
     background-color: white;
+  }
+  .cover-hero {
+    height: 100vh;
+    transition: all 0.1s;
   }
 }
 
 .vue-notification-group {
-  top: 5rem !important;
-  padding: 16px 11px;
+  top: 6rem !important;
   width: 400px !important;
   .notifications {
     padding: 16px;
-    margin: 0 5px 8px;
+    margin: 0 16px 8px;
     font-size: 14px;
     color: #636363;
     background: #ffffff;

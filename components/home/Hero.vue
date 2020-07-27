@@ -54,7 +54,11 @@ export default {
 
 <style lang="scss">
 .content-hero {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   .content-part {
     display: flex;
     align-items: center;
