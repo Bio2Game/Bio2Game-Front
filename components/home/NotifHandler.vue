@@ -34,11 +34,12 @@ export default {
   },
   watch: {
     $route(newValue, oldValue) {
-      this.hide =
-        this.display && oldValue.name === 'index' && newValue.name !== 'index'
+      this.display = newValue.name === 'index' || oldValue.name === 'index'
+      this.hide = newValue.name !== 'index'
     },
   },
   mounted() {
+    this.display = this.$route.name === 'index'
     this.hide = this.$route.name !== 'index'
   },
 }
