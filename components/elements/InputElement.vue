@@ -1,7 +1,7 @@
 <template>
   <div class="input-container" :class="{ 'has-error': error }">
     <input
-      :class="{ false: !check, 'has-content': hasContent }"
+      :class="{ false: !check, 'has-content': hasContent || type === 'date' }"
       :type="type"
       class="input"
       :value="value"
@@ -11,7 +11,7 @@
       @keypress="checkMax"
     />
     <label class="placeholder">{{ placeholder }}</label>
-    <span class="focus-bg"></span>
+    <span class="focus-bg" :class="{ 'has-content': hasContent }"></span>
     <label v-if="counter" :for="id" class="counter">
       <span>{{ caracters }}</span>
       /{{ max }}
@@ -137,12 +137,6 @@ export default {
       transition: 0.4s;
       z-index: 1;
     }
-    &:focus ~ .focus-bg,
-    &.has-content ~ .focus-bg {
-      transition: 0.4s;
-      width: 100%;
-      background-color: #ededed;
-    }
     & ~ .placeholder {
       position: absolute;
       left: 14px;
@@ -162,6 +156,12 @@ export default {
       color: $green;
       transition: 0.3s;
     }
+  }
+  input:focus ~ .focus-bg,
+  .focus-bg.has-content {
+    transition: 0.4s;
+    width: 100%;
+    background-color: #ededed;
   }
   &.has-error {
     margin-bottom: 32px;
