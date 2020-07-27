@@ -212,14 +212,14 @@ export default {
     display: flex;
     margin: 50px 0;
     background-color: #ffffff;
-    border-radius: 16px;
+    border-radius: 8px;
     position: relative;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     .part {
       display: flex;
       flex: 1 0;
       flex-direction: column;
-      padding: 48px;
+      padding: 48px 32px;
       h1 {
         font-weight: bold;
         font-size: 35px;
@@ -296,8 +296,10 @@ export default {
     }
     .overlay {
       position: absolute;
-      width: 50%;
-      height: 100%;
+      width: calc(50% + 8px);
+      left: -8px;
+      top: -8px;
+      bottom: -8px;
       display: flex;
       align-items: flex-end;
       flex: 1 0;
@@ -308,10 +310,11 @@ export default {
         ),
         url('/images/login.jpg');
       background-size: cover;
-      padding: 40px;
+      padding: 48px;
       z-index: 10;
       border-radius: 16px;
-      transition: transform 0.3s ease;
+      box-shadow: 0 3px 16px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease-in-out;
       &.register {
         transform: translateX(100%);
       }
