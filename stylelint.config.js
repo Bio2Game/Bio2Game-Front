@@ -4,5 +4,11 @@ module.exports = {
   // https://stylelint.io/user-guide/configuration
   rules: {
     'color-hex-length': 'long',
+    'block-no-empty': [
+      true,
+      {
+        severity: 'warning',
+      },
+    ],
   },
 }
