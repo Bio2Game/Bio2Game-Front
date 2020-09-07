@@ -11,9 +11,7 @@
           <nuxt-link class="link" to="/parties">Parties</nuxt-link>
         </div>
         <div v-if="!$auth.loggedIn" class="right-menu">
-          <nuxt-link class="button md green" to="/">
-            Créer un quiz
-          </nuxt-link>
+          <nuxt-link class="button md green" to="/">Créer un quiz</nuxt-link>
           <nuxt-link class="button md gray right" to="/login">
             Se connecter
           </nuxt-link>
@@ -31,7 +29,7 @@
               :name="$auth.user.username"
               :size="32"
             />
-            <span>{{ $auth.user.username }}</span>
+            <span class="username">{{ $auth.user.username }}</span>
             <ul v-if="toggleUserMenu">
               <nuxt-link to="/profil">Mon profil</nuxt-link>
               <nuxt-link to="/quizs">Mes domaines</nuxt-link>
@@ -41,6 +39,15 @@
             </ul>
           </div>
         </div>
+        <a
+          class="hamburger"
+          :class="{ open: toggleUserMenu }"
+          @click="toggleUserMenu = !toggleUserMenu"
+          ><span /><span /><span
+        /></a>
+      </div>
+      <div class="mobile-nav">
+        <span>Menu Moblie</span>
       </div>
     </div>
     <notifications group="auth" classes="notifications" />
@@ -48,12 +55,7 @@
 </template>
 
 <script>
-import Avatar from '@/components/elements/AvatarElement'
-
 export default {
-  components: {
-    Avatar,
-  },
   data() {
     return {
       isFixed: false,
@@ -132,10 +134,16 @@ export default {
           color: #4f4f4f;
           margin: 0 0.8rem;
           text-decoration: none;
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
         }
       }
       .right-menu {
         display: flex;
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
         .user {
           display: flex;
           align-items: center;
@@ -144,25 +152,12 @@ export default {
           text-decoration: none;
           cursor: pointer;
           user-select: none;
-          @media screen and (max-width: 680px) {
-            display: none;
-          }
           .avatar {
             height: 32px;
             width: 32px;
             border: 2px solid $green;
             border-radius: 16px;
             margin-right: 8px;
-          }
-          & > span {
-            display: flex;
-            align-items: center;
-            color: #000000;
-            font-size: 19px;
-            i {
-              font-size: 30px;
-              margin-top: 2px;
-            }
           }
           ul {
             width: 100%;
@@ -197,6 +192,16 @@ export default {
               }
             }
           }
+          .username {
+            display: flex;
+            align-items: center;
+            color: #000000;
+            font-size: 19px;
+            i {
+              font-size: 30px;
+              margin-top: 2px;
+            }
+          }
           &.active ul {
             animation: DropDownSlide 0.3s both;
             @keyframes DropDownSlide {
@@ -207,6 +212,62 @@ export default {
                 transform: translateY(80px);
               }
             }
+          }
+        }
+      }
+      .hamburger {
+        display: none;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        transform: rotate(0deg);
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+
+        @media screen and (max-width: 768px) {
+          display: flex;
+        }
+
+        span {
+          display: block;
+          position: absolute;
+          height: 8px;
+          width: 100%;
+          background: #909090;
+          border-radius: 10px;
+          opacity: 1;
+          left: 0;
+          transform: rotate(0deg);
+          transition: all 0.25s ease-in-out;
+          transform-origin: left center;
+
+          &:nth-child(1) {
+            top: 3px;
+          }
+
+          &:nth-child(2) {
+            top: 18px;
+          }
+
+          &:nth-child(3) {
+            top: 34px;
+          }
+        }
+
+        &.open {
+          span:nth-child(1) {
+            transform: rotate(45deg) translate(-1px, -3px);
+            width: 52px;
+          }
+
+          span:nth-child(2) {
+            width: 0%;
+            opacity: 0;
+          }
+
+          span:nth-child(3) {
+            transform: rotate(-45deg) translate(-1px, 3px);
+            width: 52px;
           }
         }
       }
