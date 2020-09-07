@@ -15,12 +15,8 @@
           aliqua.
         </p>
         <div class="buttons">
-          <a href="#" class="button green lg">
-            Jouer
-          </a>
-          <a href="#" class="button gray lg right">
-            Parties
-          </a>
+          <a href="#" class="button green lg">Jouer</a>
+          <a href="#" class="button gray lg right">Parties</a>
         </div>
       </div>
     </div>
@@ -70,6 +66,11 @@ export default {
     padding-right: 2vw;
     clip-path: ellipse(71vw 160vh at -30vw 30vh);
     background-color: white;
+
+    @media screen and (max-width: 1024px) {
+      transform: translateY(-100vh) translateX(0);
+    }
+
     &.isFromIndex {
       animation: fadeOutBiggerPage 0.3s ease-out forwards 0.6s;
       height: 100vh;
@@ -93,15 +94,38 @@ export default {
       left: 0;
       right: 0;
       bottom: 4px;
+      z-index: -1;
     }
     .content-text {
-      padding-left: calc((100vw - 1280px) / 2);
+      padding-left: calc((100vw - 1280px) / 2 + 20px);
+      @media screen and (max-width: 1280px) {
+        padding-left: calc((100vw - 1024px) / 2 + 20px);
+      }
+
+      @media screen and (max-width: 1024px) {
+        padding-left: calc((100vw - 768px) / 2 + 20px);
+      }
+
+      @media screen and (max-width: 768px) {
+        padding-left: calc(max((100vw - 640px), 1px) / 2 + 20px);
+      }
       h2 {
         font-weight: 800;
         font-size: 64px;
         line-height: 70px;
         color: #161e2e;
         margin-bottom: 16px;
+
+        @media screen and (max-width: 1280px) {
+          font-size: 48px;
+          line-height: 54px;
+        }
+
+        @media screen and (max-width: 768px) {
+          font-size: 38px;
+          line-height: 42px;
+        }
+
         .color {
           color: #19683b;
         }
@@ -111,6 +135,10 @@ export default {
         line-height: 24px;
         color: #6b7280;
         margin-bottom: 24px;
+
+        @media screen and (max-width: 1280px) {
+          max-width: 80%;
+        }
       }
       .buttons {
         display: flex;
@@ -124,6 +152,7 @@ export default {
     right: 0;
     top: 0;
     width: 100%;
+
     .cover {
       position: absolute;
       top: 0;
@@ -149,14 +178,30 @@ export default {
 }
 .route.index {
   .content-part {
-    transform: translateX(0);
+    transform: translateX(0) translateY(0);
     transition: transform 0.6s ease;
     height: 100vh;
     clip-path: ellipse(71vw 160vh at -13vw 30vh);
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      height: calc(60vh + 80px);
+      padding-top: 80px;
+      clip-path: ellipse(137vw 169vh at 29vw -99vh);
+    }
+
+    @media screen and (max-width: 768px) {
+      height: calc(70vh + 80px);
+      clip-path: ellipse(137vw 169vh at 25vw -88vh);
+    }
   }
   .background {
     width: 50vw;
     min-height: 100vh;
+    @media screen and (max-width: 1024px) {
+      width: 100vw;
+      min-height: auto;
+    }
     .cover {
       backdrop-filter: blur(0);
     }

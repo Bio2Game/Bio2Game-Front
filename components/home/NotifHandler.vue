@@ -2,22 +2,24 @@
   <div v-if="display" class="notif-container">
     <div class="notif" :class="{ hide }">
       <h3 class="title">Un nouveau quiz est disponible !</h3>
-      <div class="quiz">
-        <div class="icon">
-          <img src="/images/icon-notif.svg" />
-        </div>
-        <div class="quiz-content">
-          <h4 class="name">Devoirs de vigilance</h4>
-          <div class="description">
-            Qu'est ce que le devoir de vigilance des entreprises
+      <div class="wrapper">
+        <div class="quiz">
+          <div class="icon">
+            <img src="/images/icon-notif.svg" />
+          </div>
+          <div class="quiz-content">
+            <h4 class="name">Devoirs de vigilance</h4>
+            <div class="description">
+              Qu'est ce que le devoir de vigilance des entreprises
+            </div>
           </div>
         </div>
-      </div>
-      <div class="buttons">
-        <nuxt-link class="button lg green" to="/quiz">Jouer</nuxt-link>
-        <nuxt-link class="button lg white right" to="/quiz">
-          <i class="material-icons">add</i><span>Ma liste</span>
-        </nuxt-link>
+        <div class="buttons">
+          <nuxt-link class="button lg green" to="/quiz">Jouer</nuxt-link>
+          <nuxt-link class="button lg white right" to="/quiz">
+            <i class="material-icons">add</i><span>Ma liste</span>
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -48,10 +50,16 @@ export default {
 <style lang="scss">
 .notif-container {
   position: absolute;
-  bottom: 0;
+  top: calc(100vh - 268px);
   right: 0;
-  z-index: 4;
+  z-index: 38;
   overflow: hidden;
+  @media screen and (max-width: 1024px) {
+    top: calc(100vh - 190px);
+  }
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
   .notif {
     min-width: 22vw;
     max-width: 420px;
@@ -64,6 +72,13 @@ export default {
     margin-right: 40px;
     transform: translateX(550px);
     animation: fadeInLeft 0.3s ease-out forwards 1s;
+    @media screen and (max-width: 1024px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-left: 40px;
+      max-width: 100%;
+    }
     @keyframes fadeInLeft {
       0% {
         opacity: 0;
@@ -92,42 +107,58 @@ export default {
       font-size: 22px;
       line-height: 27px;
       color: #000000;
-      margin-bottom: 24px;
-    }
-    .quiz {
-      display: flex;
-      .icon {
-        width: 48px;
-        min-width: 48px;
-        min-height: 48px;
-        margin-right: 16px;
+      margin-bottom: 16px;
+      @media screen and (max-width: 1024px) {
+        width: 100%;
       }
-      .quiz-content {
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      @media screen and (max-width: 1024px) {
+        flex-direction: row;
+      }
+      .quiz {
         display: flex;
-        flex-direction: column;
-        margin-bottom: 24px;
-        .name {
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 24px;
-          color: #19683b;
+        .icon {
+          width: 48px;
+          min-width: 48px;
+          min-height: 48px;
+          margin-right: 16px;
         }
-        .description {
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 17px;
-          color: #494949;
+        .quiz-content {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 16px;
+          @media screen and (max-width: 1024px) {
+            margin-bottom: 0;
+          }
+          .name {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            color: #19683b;
+          }
+          .description {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: #494949;
+          }
         }
       }
-    }
-    .buttons {
-      display: flex;
-      justify-content: flex-end;
-    }
-    .close {
-      position: absolute;
-      top: 0;
-      right: 0;
+      .buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
   }
 }
