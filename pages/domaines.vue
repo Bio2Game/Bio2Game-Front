@@ -1,8 +1,6 @@
 <template>
   <div class="domaines-page">
-    <div class="container">
-      Domaines
-    </div>
+    <div class="container">Domaines</div>
   </div>
 </template>
 

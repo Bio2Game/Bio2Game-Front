@@ -408,7 +408,8 @@ export default {
               .quiz-name {
                 font-weight: 500;
                 font-size: 16px;
-                line-height: 24px;
+                line-height: 18px;
+                margin-bottom: 5px;
                 color: #19683b;
               }
               .quiz-description {
