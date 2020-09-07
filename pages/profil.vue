@@ -20,8 +20,8 @@
           />
         </label>
 
-        <h5 class="pseudo">{{ $auth.user.username }}</h5>
-        <h6 class="fullName">{{ $auth.user.name }}</h6>
+        <h5 class="username">{{ $auth.user.username }}</h5>
+        <h6 class="fullname">{{ $auth.user.name }}</h6>
       </div>
       <hr />
       <div class="infos">
@@ -38,6 +38,13 @@
         <div class="info">
           <span>Adresse</span>
           <p>{{ $auth.user.localisation || 'Aucune adresse' }}</p>
+        </div>
+      </div>
+      <hr />
+      <div class="badges">
+        <h3 class="title">Badges</h3>
+        <div class="elements">
+          <!-- badges -->
         </div>
       </div>
       <a
@@ -135,7 +142,7 @@
         </div>
         <a class="button md green" @click="saveFull()">Sauvegarder</a>
       </div>
-      <div class="block" v-if="$auth.user.status > 0">
+      <div v-if="$auth.user.status > 0" class="block">
         <h5>Informations contributeur</h5>
         <div class="content">
           <div class="basics mr-3"></div>
@@ -190,6 +197,7 @@ export default {
   components: {
     Input,
   },
+  middleware: 'auth',
   data() {
     return {
       user: {
@@ -268,8 +276,9 @@ export default {
     &.user-card {
       display: flex;
       flex-direction: column;
+      padding: 0;
       .user {
-        margin-bottom: 16px;
+        padding: 24px 24px 16px;
         .image {
           position: relative;
           display: flex;
@@ -315,11 +324,22 @@ export default {
             visibility: hidden;
           }
         }
+        .username {
+          font-size: 18px;
+          font-weight: 400;
+          text-align: center;
+          margin-top: 24px;
+        }
+        .fullname {
+          font-size: 14px;
+          font-weight: 400;
+        }
       }
       hr {
         width: 100%;
       }
       .infos {
+        padding: 16px 24px 0;
         .info {
           display: flex;
           flex-direction: column;
@@ -334,6 +354,16 @@ export default {
             font-size: 14px;
             color: #727272;
           }
+        }
+      }
+      .badges {
+        padding: 16px 24px 24px;
+        .title {
+          font-size: 16px;
+        }
+        .elements {
+          display: flex;
+          flex-wrap: wrap;
         }
       }
       .before {
