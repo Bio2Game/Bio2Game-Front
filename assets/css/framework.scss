@@ -33,7 +33,7 @@
 
   &.green {
     background-color: $green;
-    color: $gray;
+    color: white;
 
     &:hover {
       background-color: $green-light;
@@ -52,8 +52,25 @@
   &.white {
     background-color: white;
     color: #494949;
-    border: 2px solid #c8c8c8;
+    border: 3px solid #c8c8c8;
     box-shadow: none;
+
+    &:hover {
+      background-color: $gray-light;
+    }
+  }
+
+  &.border_white {
+    background-color: transparent;
+    color: white;
+    border: 3px solid white;
+    box-shadow: none;
+  }
+
+  &.border_green {
+    background-color: white;
+    color: $green;
+    border: 3px solid $green;
 
     &:hover {
       background-color: $gray-light;
