@@ -12,7 +12,7 @@
         </div>
         <div v-if="!$auth.loggedIn" class="right-menu">
           <nuxt-link class="button md green" to="/">Créer un quiz</nuxt-link>
-          <nuxt-link class="button md gray right" to="/login">
+          <nuxt-link class="button md border_white right" to="/login">
             Se connecter
           </nuxt-link>
         </div>
@@ -284,6 +284,18 @@ export default {
       opacity: 0;
       height: 5rem;
       animation: fadeIn 0.3s ease-out forwards;
+      .right-menu {
+        .button.border_white {
+          background-color: transparent;
+          color: $green;
+          border: 3px solid $green;
+          box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+
+          &:hover {
+            background-color: $gray-light;
+          }
+        }
+      }
     }
     &.stage {
       animation: fadeOutBigger 0.3s ease-out forwards 0.4s;
