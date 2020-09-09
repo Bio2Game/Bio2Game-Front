@@ -27,10 +27,22 @@
     <div class="copyright">
       <p class="text">
         Copyright Bio2Game 2018 © - All rights reserved - Développé par
-        <a href="https://www.draftman.fr">DraftMan</a>
+        <a class="author-link" href="https://www.draftman.fr">DraftMan</a>
       </p>
-      <div class="scroll-top"></div>
-      <i class="icon-scroll-top"></i>
+      <div class="scroll-top" @click="scrollToTop()"></div>
+      <svg
+        width="32"
+        height="20"
+        viewBox="0 0 32 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        @click="scrollToTop()"
+      >
+        <path
+          d="M32 16L16 0L0 16L3.90018 19.9002L16.0001 7.8003L28.0999 19.9001L32 16Z"
+          fill="white"
+        />
+      </svg>
     </div>
   </footer>
 </template>
@@ -38,6 +50,11 @@
 <script>
 export default {
   name: 'Footer',
+  methods: {
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+  },
 }
 </script>
 
@@ -73,7 +90,7 @@ footer {
             &::after {
               content: '';
               position: absolute;
-              border-left: 3px solid #19683b;
+              border-left: 3px solid $green;
               height: 100%;
               left: 2px;
             }
@@ -88,7 +105,7 @@ footer {
         }
         &.a-propos a {
           text-decoration: none;
-          color: #27ae60;
+          color: $green;
           text-transform: uppercase;
           font-weight: 600;
           font-size: 14px;
@@ -103,7 +120,7 @@ footer {
             font-size: 13px;
             transition: color 0.3s ease-in-out;
             &:hover {
-              color: #27ae60;
+              color: $green;
             }
           }
         }
@@ -111,9 +128,9 @@ footer {
           flex: none;
         }
         .contact-button {
-          color: #27ae60;
+          color: $green;
           line-height: 34px;
-          border: 2px solid #27ae60;
+          border: 2px solid $green;
           border-radius: 30px;
           padding: 8px 14px;
           font-size: 11px;
@@ -122,7 +139,7 @@ footer {
           font-weight: 600;
           transition: all 0.3s ease-in-out;
           &:hover {
-            background-color: #27ae60;
+            background-color: $green;
             color: #3b413e;
           }
         }
@@ -149,23 +166,32 @@ footer {
       color: #757575;
       font-size: 14px;
       padding: 0 20px;
+      .author-link {
+        color: $green;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
     .scroll-top {
       position: absolute;
       bottom: 0;
       right: 0;
-      border-bottom: 90px solid #19683b;
+      border-bottom: 90px solid $green;
       border-left: 90px solid transparent;
-      & + i {
+      cursor: pointer;
+      & + svg {
         position: absolute;
         bottom: 20px;
         right: 15px;
         z-index: 1;
         color: #ffffff;
         transition: opacity 0.3s;
+        cursor: pointer;
       }
-      &:hover + i,
-      & + i:hover {
+      &:hover + svg,
+      & + svg:hover {
         opacity: 0.6;
       }
     }
