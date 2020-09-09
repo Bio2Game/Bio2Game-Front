@@ -5,18 +5,17 @@
       <div class="doted"></div>
       <div class="content-text">
         <h2>
-          Chalengez-vous
+          La <span class="color">Nature</span>
           <br />
-          sur la <span class="color">Nature</span> !
+          vous challenge !
         </h2>
         <p>
-          Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-          cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat
-          aliqua.
+          Apprenez à consommer en respectant l'environnement avec des quizzs
+          intéractifs proposés par nos différents contributeurs partenaires.
         </p>
         <div class="buttons">
           <a href="#" class="button green lg">Jouer</a>
-          <a href="#" class="button gray lg right">Parties</a>
+          <a href="#" class="button border_green lg right">Parties</a>
         </div>
       </div>
     </div>
@@ -127,7 +126,7 @@ export default {
         }
 
         .color {
-          color: #19683b;
+          color: $green;
         }
       }
       p {
@@ -160,7 +159,7 @@ export default {
       bottom: 0;
       left: 0;
       z-index: 2;
-      background: rgba(200, 200, 200, 0.65);
+      background: rgba(89, 89, 89, 0.5);
       backdrop-filter: blur(12px);
       transition: 0.6s backdrop-filter ease;
     }
@@ -169,7 +168,7 @@ export default {
       height: 100vh;
       width: 100%;
       z-index: 1;
-      background-image: url('/images/hero.jpg');
+      background-image: url('/images/hero2.png');
       background-position: center;
       background-size: cover;
       transition: width 0.6s ease;
