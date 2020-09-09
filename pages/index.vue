@@ -215,39 +215,33 @@ export default {
       ],
       features: [
         {
-          name: 'Moderne',
+          name: 'Moderne et Ergonomique',
           description:
-            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleur experience !',
+            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
           image: '/images/features/ui.svg',
-        },
-        {
-          name: 'Votre vie privée',
-          description:
-            'La nature est pour nous, aussi importante que votre vie privé. C’est pour cela que vos informations privés resteront privés ! ',
-          image: '/images/features/private.svg',
         },
         {
           name: 'Education',
           description:
-            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quiz adaptés aux profil de vos élèves et étudiez leurs résultats et statistiques',
+            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats et statistiques.',
           image: '/images/features/education.svg',
+        },
+        {
+          name: 'Vie privée',
+          description:
+            'La nature est aussi importante que votre vie privée. C’est pour cela que vos informations privées resteront privées !',
+          image: '/images/features/private.svg',
         },
         {
           name: 'Communautaire',
           description:
-            "Un lieu de rencontre et de partage d'information innovant entre tous ceux qui cherchent des solutions au quotidien.",
+            "Un lieu de rencontre et de partage d'informations innovantes entre tous ceux qui cherchent des solutions au quotidien.",
           image: '/images/features/community.svg',
-        },
-        {
-          name: 'Un échange',
-          description:
-            "C'est un observatoire pour les marques permettant aux consommateurs de faire connattre leur choix en matiére de consommation.",
-          image: '/images/features/deal.svg',
         },
         {
           name: 'Une API',
           description:
-            'Bio2Game vous propose une api pour pouvoir accéder à vos données depuis vos sites ou projets.',
+            'Bio2Game vous propose une API pour pouvoir accéder à vos données depuis vos sites ou projets.',
           image: '/images/features/api.svg',
         },
       ],
@@ -265,16 +259,17 @@ export default {
     flex-direction: column;
     .feature {
       background-color: #ffffff;
-      padding: 32px 0;
+      padding: 80px 0;
       .container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 220px;
 
         .image-container {
           margin: 0 64px;
           display: flex;
-          width: 40%;
+          height: 100%;
           img {
             display: flex;
             width: 100%;
@@ -284,23 +279,29 @@ export default {
           max-width: 450px;
           margin: 0 64px;
           h3 {
-            font-weight: normal;
+            font-weight: 800;
             font-size: 36px;
             line-height: 44px;
             margin-bottom: 16px;
+            color: $green;
           }
           p {
             font-size: 18px;
-            line-height: 28px;
-            color: #767676;
+            line-height: 26px;
+            color: #414141;
           }
         }
       }
       &:nth-child(2n + 1) {
-        background-color: #f1f1f1;
-
+        background: linear-gradient(180deg, #bce342 0%, #9cc321 100%);
         .container {
           flex-direction: row-reverse;
+          .content {
+            text-align: right;
+            h3 {
+              color: white;
+            }
+          }
         }
       }
     }
