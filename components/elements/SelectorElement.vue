@@ -39,6 +39,7 @@
 
 <script>
 export default {
+  name: 'SelectorElement',
   props: {
     noSelect: {
       type: String,
@@ -68,10 +69,11 @@ export default {
   },
   computed: {
     getSelectedName() {
-      return [
-        ...this.items,
-        { ref: this.defaultValue, name: this.noSelect },
-      ].find((item) => item.ref === this.selected).name
+      return (
+        [...this.items, { ref: this.defaultValue, name: this.noSelect }].find(
+          (item) => item.ref === this.selected
+        ) || {}
+      ).name
     },
   },
   watch: {
@@ -151,14 +153,14 @@ export default {
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.25);
     &::-webkit-scrollbar {
       -webkit-appearance: none;
-      background-color: rgb(48, 48, 48);
+      background-color: rgb(238, 238, 238);
       border-radius: 5px;
       width: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background-color: #cd6e57;
+      background-color: $green;
       transition: background-color 0.1s ease;
     }
     .element {
