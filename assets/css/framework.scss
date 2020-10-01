@@ -1,4 +1,5 @@
 .container {
+  display: flex;
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
@@ -60,11 +61,19 @@
     }
   }
 
+  &.white_sky {
+    background-color: white;
+    color: #BBE242;
+
+    &:hover {
+      background-color: $gray-light;
+    }
+  }
+
   &.border_white {
     background-color: transparent;
     color: white;
     border: 3px solid white;
-    box-shadow: none;
   }
 
   &.border_green {
@@ -80,6 +89,7 @@
   &.lg {
     height: 48px;
     min-width: 155px;
+    max-width: 180px;
     font-size: 18px;
 
     &.equal {
@@ -324,5 +334,42 @@ a.b2glink:hover {
   &::after {
     text-transform: none;
     transform: translateX(-50%) scaleX(1);
+  }
+}
+
+.left-enter-active,
+.left-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.left-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.left-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.block{
+  background-color: white;
+    margin-top: 24px;
+    border-radius: 8px;
+  .head {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: $green;
+    color: #ffffff;
+    border-radius: 8px 8px 0 0;
+    h5 {
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+  .content {
+    display: flex;
+    padding: 24px;
   }
 }
