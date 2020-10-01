@@ -1,17 +1,25 @@
 <template>
   <div class="input-container" :class="{ 'has-error': error }">
     <input
-      :class="{ false: !check, 'has-content': hasContent || type === 'date' }"
+      :class="{
+        false: !check,
+        'has-content': hasContent,
+        date: type === 'date',
+      }"
       :type="type"
       class="input"
       :value="value"
       min="0"
       :max="max"
+      :disabled="disabled"
       @input="update"
       @keypress="checkMax"
     />
     <label class="placeholder">{{ placeholder }}</label>
-    <span class="focus-bg" :class="{ 'has-content': hasContent }"></span>
+    <span
+      class="focus-bg"
+      :class="{ 'has-content': hasContent || disabled, disabled }"
+    ></span>
     <label v-if="counter" :for="id" class="counter">
       <span>{{ caracters }}</span>
       /{{ max }}
@@ -44,6 +52,10 @@ export default {
       default: null,
     },
     counter: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -106,6 +118,12 @@ export default {
 .input-container {
   position: relative;
   margin: 8px 0 16px;
+  border-radius: 4px;
+  background-color: white;
+
+  &:last-child {
+    margin-bottom: 8px;
+  }
   .error {
     position: absolute;
     color: #c90a0a;
@@ -127,6 +145,9 @@ export default {
     font-size: 15px;
     z-index: 3;
     border-radius: 4px;
+    &.date {
+      padding: 6px 15px;
+    }
     & ~ .focus-bg {
       position: absolute;
       left: 0;
@@ -136,6 +157,7 @@ export default {
       background-color: transparent;
       transition: 0.4s;
       z-index: 1;
+      border-radius: 4px;
     }
     & ~ .placeholder {
       position: absolute;
@@ -149,12 +171,16 @@ export default {
       font-size: 14px;
     }
     &:focus ~ .placeholder,
-    &.has-content ~ .placeholder {
+    &.has-content ~ .placeholder,
+    &.date ~ .placeholder {
       top: -16px;
       left: 0;
       font-size: 12px;
       color: $green;
       transition: 0.3s;
+    }
+    &:disabled {
+      cursor: not-allowed;
     }
   }
   input:focus ~ .focus-bg,
@@ -162,12 +188,20 @@ export default {
     transition: 0.4s;
     width: 100%;
     background-color: #ededed;
+    &.disabled {
+      background-color: #e2e2e2;
+    }
   }
   &.has-error {
     margin-bottom: 32px;
     input {
       border: 1px solid #c90a0a;
     }
+  }
+  &.white_label input:focus ~ .placeholder,
+  &.white_label input.has-content ~ .placeholder,
+  &.white_label input.date ~ .placeholder {
+    color: #ffffff !important;
   }
 }
 
