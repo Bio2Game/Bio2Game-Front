@@ -3,7 +3,10 @@
     <div class="content">
       <div class="items">
         <div class="item a-propos">
-          <div class="title"><h5>A PROPOS</h5></div>
+          <div class="title">
+            <Nature />
+            <h5>A PROPOS</h5>
+          </div>
           <p>
             Un jeu qui vous permet de tester vos connaissances sur l’impact
             environnemental de votre consommation et d'apprendre.
@@ -11,7 +14,10 @@
           <nuxt-link to="/a-propos">En savoir plus</nuxt-link>
         </div>
         <div class="item contact">
-          <div class="title"><h5>CONTACT</h5></div>
+          <div class="title">
+            <Nature />
+            <h5>CONTACT</h5>
+          </div>
           <nuxt-link to="/charte-bio2game">La Charte Bio2Game</nuxt-link>
           <nuxt-link to="/donnees-personnelles">
             Politique de protection des données personnelles
@@ -19,7 +25,10 @@
           <nuxt-link to="/cookies">Utilisation des cookies</nuxt-link>
         </div>
         <div class="item social">
-          <div class="title"><h5>SOCIAL</h5></div>
+          <div class="title">
+            <Nature />
+            <h5>SOCIAL</h5>
+          </div>
           <a class="contact-button" href="mailto:">Contactez nous</a>
         </div>
       </div>
@@ -48,8 +57,13 @@
 </template>
 
 <script>
+import Nature from '@/assets/icons/nature.svg?inline'
+
 export default {
   name: 'Footer',
+  components: {
+    Nature,
+  },
   methods: {
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -64,7 +78,7 @@ footer {
   flex-direction: column;
   align-items: center;
   position: relative;
-  background: url('/images/footer.jpg');
+  background: url('../../assets/images/footer.jpg');
   background-size: cover;
   background-position: center;
   .content {
@@ -81,19 +95,13 @@ footer {
       .item {
         flex: 1;
         .title {
+          display: flex;
           position: relative;
           margin-bottom: 16px;
           h5 {
             padding-left: 15px;
             margin: 0;
             color: white;
-            &::after {
-              content: '';
-              position: absolute;
-              border-left: 3px solid $green;
-              height: 100%;
-              left: 2px;
-            }
           }
         }
         p {
