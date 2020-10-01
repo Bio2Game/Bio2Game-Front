@@ -9,9 +9,10 @@
             :path="$auth.user.avatar_path"
             :size="160"
           />
-          <div class="cover"></div>
-          <span class="target">Modifier</span>
+          <div v-if="isIndex" class="cover"></div>
+          <span v-if="isIndex" class="target">Modifier</span>
           <input
+            v-if="isIndex"
             id="avatar"
             type="file"
             name="avatar"
@@ -23,7 +24,6 @@
         <h5 class="username">{{ $auth.user.username }}</h5>
         <h6 class="fullname">{{ $auth.user.name }}</h6>
       </div>
-      <hr />
       <div class="infos">
         <div class="info">
           <span>Adresse email</span>
@@ -47,229 +47,72 @@
           <!-- badges -->
         </div>
       </div>
-      <a
-        v-if="!$auth.user.status"
-        href="/become-contributor"
+      <div class="status-container">
+        <label>
+          <input
+            id="isAnimator"
+            type="checkbox"
+            name="isAnimator"
+            :checked="$auth.user.isAnimator"
+            value="1"
+          />
+          <span>Animateur ?</span>
+        </label>
+      </div>
+      <nuxt-link
+        v-if="!$auth.user.status && isIndex"
+        to="/profil/become"
         class="before button md green"
-        >Devenir contributeur</a
       >
+        Devenir contributeur
+      </nuxt-link>
     </div>
     <div class="forms ml-3">
-      <div class="block">
-        <h5>Informations primordiales</h5>
-        <div class="content">
-          <div class="basics mr-3">
-            <Input
-              v-model="user.username"
-              :value="getInfo('username')"
-              type="text"
-              placeholder="Pseudonyme"
-              :error="filtredErrors('username')"
-            />
-            <Input
-              v-model="user.email"
-              :value="getInfo('email')"
-              type="email"
-              placeholder="Adresse email"
-              :error="filtredErrors('email')"
-            />
-            <Input
-              v-model="user.old_password"
-              type="password"
-              placeholder="Ancien mot de passe"
-              :error="filtredErrors('old_password')"
-            />
-            <Input
-              v-model="user.password"
-              type="password"
-              placeholder="Nouveau mot de passe"
-              :error="filtredErrors('password')"
-            />
-          </div>
-          <div class="full">
-            <Input
-              v-model="user.name"
-              :value="getInfo('name')"
-              type="text"
-              name="name"
-              placeholder="Nom complet"
-              :error="filtredErrors('name')"
-            />
-            <Input
-              v-model="user.birthDate"
-              :value="formatDate(getInfo('birthDate'))"
-              type="date"
-              placeholder="Date de naissance"
-              :error="filtredErrors('birthDate')"
-            />
-            <div class="input-field">
-              <SelectorElement
-                v-model="user.sex"
-                :selected="getInfo('sex')"
-                :items="sexes"
-                :defaultValue="0"
-                noSelect="Sexe"
-              />
-            </div>
-            <div class="input-field input-with-label">
-              <span>Animateurs à suivre :</span>
-              <select
-                v-if="all_animators.length > 0"
-                name="playersAnimators"
-                multiple
-              >
-                <option
-                  v-for="(animator, index) in all_animators"
-                  :key="index"
-                  :value="animator.id"
-                  :selected="current_animators_ids.includes(animator.id)"
-                >
-                  {{ animator.username }}
-                </option>
-              </select>
-              <!-- <select v-else>
-                <option selected disabled>Aucun animateur pour l'instant</option>
-              </select> -->
-            </div>
-            <Input
-              v-model="user.localisation"
-              :value="getInfo('localisation')"
-              type="text"
-              placeholder="Localisation"
-              :error="filtredErrors('localisation')"
-            />
-          </div>
-        </div>
-        <a class="button md green" @click="saveFull()">Sauvegarder</a>
-      </div>
-      <div v-if="$auth.user.status > 0" class="block">
-        <h5>Informations contributeur</h5>
-        <div class="content">
-          <div class="basics mr-3"></div>
-          <div class="full">
-            <div class="input-field">
-              <SelectorElement
-                v-model="user.contributorType"
-                :selected="getInfo('contributorType')"
-                :items="types"
-                noSelect="Contributeur"
-              />
-            </div>
-            <div class="status-container">
-              <label>
-                <input
-                  id="isAnimator"
-                  type="checkbox"
-                  name="isAnimator"
-                  :checked="$auth.user.isAnimator"
-                  value="1"
-                />
-                <span>Animateur ?</span>
-              </label>
-            </div>
-            <Input
-              v-model="user.contributor_mobile"
-              :value="getInfo('contributor_mobile')"
-              type="tel"
-              placeholder="Numéro de téléphone (Contributeur)"
-              :error="filtredErrors('contributor_mobile')"
-            />
-            <Input
-              v-model="user.website"
-              :value="getInfo('website')"
-              type="url"
-              placeholder="Site web (Contributeur)"
-              :error="filtredErrors('website')"
-            />
-          </div>
-        </div>
-        <a class="button md green" @click="saveFull()">Sauvegarder</a>
-      </div>
+      <nuxt-child />
     </div>
   </section>
 </template>
 
 <script>
-import Input from '@/components/elements/InputElement.vue'
-
 export default {
   name: 'Profil',
-  components: {
-    Input,
-  },
   middleware: 'auth',
-  data() {
-    return {
-      user: {
-        username: '',
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-        sex: '',
-        birthDate: '',
-      },
-      errors: [],
-      all_animators: [],
-      sexes: [
-        {
-          ref: 1,
-          name: 'Homme',
-        },
-        {
-          ref: 2,
-          name: 'Femme',
-        },
-        {
-          ref: 3,
-          name: 'Autre',
-        },
-      ],
-      types: [
-        {
-          ref: 1,
-          name: 'Association',
-        },
-        {
-          ref: 2,
-          name: 'Expert',
-        },
-        {
-          ref: 3,
-          name: 'Institution',
-        },
-        {
-          ref: 4,
-          name: 'Marque',
-        },
-        {
-          ref: 5,
-          name: 'Producteur',
-        },
-      ],
-    }
-  },
-  methods: {
-    getInfo(key) {
-      return this.user[key] !== '' ? this.user[key] : this.$auth.user[key]
-    },
-    formatDate(date) {
-      return date
-    },
-    filtredErrors(field) {
-      return this.errors.find((error) => error.field === field)
+  computed: {
+    isIndex() {
+      return this.$route.name === 'profil'
     },
   },
 }
 </script>
 
 <style lang="scss">
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+}
+.slide-leave,
+.slide-enter-to {
+  opacity: 1;
+}
+.slide-enter-active {
+  position: absolute;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.6s ease-in-out;
+}
+
 .profil-page {
   display: flex;
+  @media screen and (max-width: $sm) {
+    flex-direction: column;
+    .forms.ml-3 {
+      margin-left: 0;
+      margin-top: 24px;
+    }
+  }
   .block {
-    background-color: $gray-light;
-    padding: 24px;
-    margin-top: 24px;
     &:first-child {
       margin-top: 0;
     }
@@ -277,14 +120,18 @@ export default {
       display: flex;
       flex-direction: column;
       padding: 0;
+      min-width: 300px;
       .user {
-        padding: 24px 24px 16px;
+        padding: 24px;
+        background-color: $green;
+        border-radius: 8px 8px 0 0;
         .image {
           position: relative;
           display: flex;
           justify-content: center;
           margin-bottom: 10px;
           .cover {
+            border: 3px solid #ffffff;
             position: absolute;
             top: 0;
             bottom: 0;
@@ -300,6 +147,7 @@ export default {
             }
           }
           img {
+            border: 3px solid #ffffff;
             border-radius: 80px;
             &:hover + .cover {
               opacity: 1;
@@ -326,33 +174,39 @@ export default {
         }
         .username {
           font-size: 18px;
-          font-weight: 400;
+          font-weight: 600;
           text-align: center;
           margin-top: 24px;
+          color: #ffffff;
         }
         .fullname {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 400;
+          color: #4e4e4e;
+          text-align: center;
+          margin-top: 8px;
         }
       }
       hr {
         width: 100%;
       }
       .infos {
-        padding: 16px 24px 0;
+        padding: 24px;
         .info {
           display: flex;
           flex-direction: column;
           margin-bottom: 16px;
           span {
-            text-transform: uppercase;
             font-size: 10px;
-            color: #666666;
+            color: #ababab;
             margin-bottom: 4px;
           }
           p {
             font-size: 14px;
-            color: #727272;
+            color: #717171;
+          }
+          &:last-child {
+            margin-bottom: 0;
           }
         }
       }
@@ -367,7 +221,7 @@ export default {
         }
       }
       .before {
-        margin-top: auto;
+        margin: auto 24px 24px;
         font-size: 14px;
         color: white;
       }
@@ -375,17 +229,29 @@ export default {
   }
   .forms {
     width: 100%;
-    .content {
-      display: flex;
-      & > div {
+    position: relative;
+    .animation-container {
+      width: 100%;
+      .content {
         display: flex;
-        flex-direction: column;
-        flex: 1 0;
+        padding: 24px;
+        @media screen and (max-width: $lg) {
+          flex-direction: column;
+          & > .part {
+            margin-right: 0;
+          }
+        }
+        & > .part {
+          display: flex;
+          flex-direction: column;
+          flex: 1 0;
+          .button {
+            margin-top: 8px;
+            box-shadow: none;
+            height: 44px;
+          }
+        }
       }
-      // .basics {
-      // }
-      // .full {
-      // }
     }
   }
 }
