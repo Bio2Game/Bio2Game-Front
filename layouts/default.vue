@@ -54,7 +54,8 @@ export default {
   .page {
     position: relative;
     z-index: 3;
-    padding: 24px 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
     min-height: calc(100vh - 5rem);
   }
 }
@@ -87,11 +88,13 @@ export default {
 
     &.error {
       background: #e54d42;
+      color: #ffffff;
       border-left-color: #b82e24;
     }
 
     &.success {
       // background: #68cd86;
+      color: #636363;
       border-left-color: #42a85f;
     }
   }
