@@ -260,16 +260,28 @@ export default {
     .feature {
       background-color: #ffffff;
       padding: 80px 0;
+      @media screen and (max-width: $md) {
+        padding: 48px 0;
+      }
+      @media screen and (max-width: $sm) {
+        padding: 24px 0;
+      }
       .container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 220px;
+        @media screen and (max-width: $sm) {
+          height: 200px;
+        }
 
         .image-container {
           margin: 0 64px;
           display: flex;
           height: 100%;
+          @media screen and (max-width: $md) {
+            display: none;
+          }
           img {
             display: flex;
             width: 100%;
@@ -278,12 +290,19 @@ export default {
         .content {
           max-width: 450px;
           margin: 0 64px;
+          @media screen and (max-width: $sm) {
+            margin: 0 24px;
+          }
           h3 {
             font-weight: 800;
             font-size: 36px;
             line-height: 44px;
             margin-bottom: 16px;
             color: $green;
+            @media screen and (max-width: $sm) {
+              font-size: 30px;
+              line-height: 40px;
+            }
           }
           p {
             font-size: 18px;
@@ -293,7 +312,7 @@ export default {
         }
       }
       &:nth-child(2n + 1) {
-        background: linear-gradient(180deg, #bce342 0%, #9cc321 100%);
+        background-color: #bce443;
         .container {
           flex-direction: row-reverse;
           .content {
