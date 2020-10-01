@@ -26,19 +26,19 @@
       <div class="parts" :class="{ wrap: !isRegister }">
         <div class="part register-part">
           <h1>Créer un compte</h1>
-          <Input
+          <InputElement
             v-model="username"
             type="text"
             placeholder="Pseudonyme"
             :error="filtredErrors('username')"
           />
-          <Input
+          <InputElement
             v-model="email"
             type="email"
             placeholder="Email"
             :error="filtredErrors('email')"
           />
-          <Input
+          <InputElement
             v-model="password"
             type="password"
             placeholder="Mot de passe"
@@ -50,13 +50,13 @@
         </div>
         <div class="part login-part">
           <h1>Connectez vous</h1>
-          <Input
+          <InputElement
             v-model="email"
             type="email"
             placeholder="Email"
             :error="filtredErrors('email')"
           />
-          <Input
+          <InputElement
             v-model="password"
             type="password"
             placeholder="Mot de passe"
@@ -67,7 +67,7 @@
           </div>
 
           <div class="group">
-            <Checkbox
+            <CheckboxElement
               id="remember"
               :checked="remember"
               label="Se souvenir de moi"
@@ -98,23 +98,18 @@
 </template>
 
 <script>
-import Input from '@/components/elements/InputElement.vue'
 import Facebook from '@/assets/icons/facebook.svg?inline'
 import Google from '@/assets/icons/google.svg?inline'
 import Twitter from '@/assets/icons/twitter.svg?inline'
 import Linkedin from '@/assets/icons/linkedin.svg?inline'
 
-import Checkbox from '@/components/elements/CheckboxElement.vue'
-
 export default {
   name: 'Login',
   components: {
-    Input,
     Facebook,
     Google,
     Twitter,
     Linkedin,
-    Checkbox,
   },
   data() {
     return {
@@ -144,13 +139,14 @@ export default {
         })
         // eslint-disable-next-line no-console
         this.$notify({
-          group: 'auth',
           type: 'success',
-          position: 'bottom right',
           text: 'Merci de vous être connecté !',
-          duration: 5000,
+          duration: 3000,
           width: 400,
         })
+        if (this.$route.query.redirect) {
+          this.$router.push(this.$route.query.redirect)
+        }
       } catch (err) {
         const messages = err.response.data.messages
         if (messages) {
@@ -172,13 +168,14 @@ export default {
           },
         })
         this.$notify({
-          group: 'auth',
           type: 'success',
-          position: 'bottom right',
           text: 'Merci de vous être inscrit !',
-          duration: 5000,
+          duration: 3000,
           width: 400,
         })
+        if (this.$route.query.redirect) {
+          this.$router.push(this.$route.query.redirect)
+        }
       } catch (err) {
         const messages = err.response.data.messages
         if (messages) {
@@ -332,7 +329,7 @@ export default {
           rgba(33, 37, 34, 0.85),
           rgba(33, 37, 34, 0.85)
         ),
-        url('/images/login.jpg');
+        url('../../assets/images/login.jpg');
       background-size: cover;
       padding: 48px;
       z-index: 10;
