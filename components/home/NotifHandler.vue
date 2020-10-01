@@ -19,7 +19,7 @@
       <div class="wrapper">
         <div class="quiz">
           <div class="icon">
-            <img src="/images/icon-notif.svg" />
+            <img src="../../assets/icons/notif.svg" />
           </div>
           <div class="quiz-content">
             <h4 class="name">Devoirs de vigilance</h4>
