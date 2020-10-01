@@ -10,12 +10,14 @@
           vous challenge !
         </h2>
         <p>
-          Apprenez à consommer en respectant l'environnement avec des quizzs
-          intéractifs proposés par nos différents contributeurs partenaires.
+          Des quizzes qui vous permettent de tester vos connaissances sur
+          l’impact environnemental de votre consommation et d'apprendre.
         </p>
         <div class="buttons">
-          <a href="#" class="button green lg">Jouer</a>
-          <a href="#" class="button border_green lg right">Parties</a>
+          <nuxt-link to="/quizs" class="button green lg">Jouer</nuxt-link>
+          <nuxt-link to="/parties" class="button border_green lg right">
+            Parties
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -97,15 +99,15 @@ export default {
     }
     .content-text {
       padding-left: calc((100vw - 1280px) / 2 + 20px);
-      @media screen and (max-width: 1280px) {
+      @media screen and (max-width: $xl) {
         padding-left: calc((100vw - 1024px) / 2 + 20px);
       }
 
-      @media screen and (max-width: 1024px) {
+      @media screen and (max-width: $lg) {
         padding-left: calc((100vw - 768px) / 2 + 20px);
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $md) {
         padding-left: calc(max((100vw - 640px), 1px) / 2 + 20px);
       }
       h2 {
@@ -141,6 +143,13 @@ export default {
       }
       .buttons {
         display: flex;
+        @media screen and (max-width: $sm) {
+          flex-direction: column;
+          .right {
+            margin-left: 0;
+            margin-top: 16px;
+          }
+        }
       }
     }
   }
@@ -159,16 +168,16 @@ export default {
       bottom: 0;
       left: 0;
       z-index: 2;
-      background: rgba(89, 89, 89, 0.5);
-      backdrop-filter: blur(12px);
-      transition: 0.6s backdrop-filter ease;
+      background-color: rgba(200, 200, 200, 0.8);
+      backdrop-filter: blur(16px);
+      transition: 0.6s backdrop-filter ease, 0.6s background-color ease;
     }
     .back {
       position: relative;
       height: 100vh;
       width: 100%;
       z-index: 1;
-      background-image: url('/images/hero2.png');
+      background-image: url('../../assets/images/hero.png');
       background-position: center;
       background-size: cover;
       transition: width 0.6s ease;
@@ -182,16 +191,21 @@ export default {
     height: 100vh;
     clip-path: ellipse(71vw 160vh at -13vw 30vh);
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: $lg) {
       width: 100%;
       height: calc(60vh + 80px);
       padding-top: 80px;
       clip-path: ellipse(137vw 169vh at 29vw -99vh);
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: $md) {
       height: calc(70vh + 80px);
       clip-path: ellipse(137vw 169vh at 25vw -88vh);
+    }
+
+    @media screen and (max-width: $sm) {
+      height: calc(80vh + 80px);
+      clip-path: ellipse(137vw 169vh at 25vw -76vh);
     }
   }
   .background {
@@ -203,6 +217,7 @@ export default {
     }
     .cover {
       backdrop-filter: blur(0);
+      background: rgba(59, 59, 59, 0.5);
     }
   }
 }
