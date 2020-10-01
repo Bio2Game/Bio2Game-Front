@@ -1,15 +1,21 @@
 export default {
   /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: 'universal',
-
-  /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
   target: 'server',
+
+  /*
+   ** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: true,
+
+  /*
+   ** Loading progress bar
+   ** See https://nuxtjs.org/api/configuration-loading
+   */
+  loading: false,
 
   /*
    ** Headers of the page
@@ -48,21 +54,18 @@ export default {
 
   /*
    ** Plugins to load before mounting the App
-   ** https://nuxtjs.org/guide/plugins
+   ** See https://nuxtjs.org/guide/plugins
    */
   plugins: [
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-notification.js', mode: 'client' },
     { src: '~/plugins/vue-closable.js', mode: 'client' },
+    { src: '~/plugins/vue-socket.io.js', mode: 'client' },
   ],
 
   /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
-  components: true,
-  /*
    ** Nuxt.js dev-modules
+   ** See https://nuxtjs.org/api/configuration-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
@@ -74,6 +77,7 @@ export default {
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
   ],
+
   /*
    ** Nuxt.js modules
    */
@@ -84,7 +88,7 @@ export default {
     // Doc: https://pwa.nuxtjs.org/
     '@nuxtjs/pwa',
 
-    // Doc: https://auth.nuxtjs.org/
+    // Doc: https://dev.auth.nuxtjs.org/
     '@nuxtjs/auth',
 
     // Doc: https://github.com/nuxt-community/style-resources-module
@@ -95,12 +99,6 @@ export default {
 
     // Doc: https://github.com/Developmint/nuxt-webfontloader
     'nuxt-webfontloader',
-
-    /*
-     ** TODO Later
-     ** @name @nuxt/content
-     ** @link https://github.com/nuxt/content
-     */
   ],
 
   /*
@@ -133,6 +131,7 @@ export default {
    */
   proxy: {
     '/api': 'http://127.0.0.1:3333',
+    '/socket': 'http://127.0.0.1:3333',
   },
 
   /*
@@ -143,8 +142,10 @@ export default {
     strategies: {
       local: {
         token: {
-          required: false,
-          type: false,
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 7200,
         },
         user: {
           property: false,
@@ -159,7 +160,7 @@ export default {
     },
     redirect: {
       callback: '/login/callback',
-      login: '/',
+      login: '/login',
       logout: '/',
       home: '/',
     },
@@ -169,5 +170,14 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    postcss: {
+      preset: {
+        stage: 2,
+        autoprefixer: {
+          flexbox: true,
+        },
+      },
+    },
+  },
 }
