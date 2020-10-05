@@ -17,6 +17,14 @@ export default {
    */
   loading: false,
 
+  // /*
+  //  ** Scroll top
+  //  ** See https://nuxtjs.org/api/configuration-router/#scrollbehavior
+  //  */
+  // scrollBehavior(to, from, savedPosition) {
+  //   return { x: 0, y: 0 }
+  // },
+
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -145,7 +153,7 @@ export default {
           property: 'token',
           required: true,
           type: 'Bearer',
-          maxAge: 7200,
+          maxAge: false,
         },
         user: {
           property: false,
