@@ -90,7 +90,7 @@ export default {
     },
     update(event) {
       if (this.max && this.caracters >= this.max) {
-        this.value = this.value.slice(0, this.max)
+        event.target.value = event.target.value.slice(0, this.max)
       }
 
       this.$emit('input', event.target.value || this.default)
@@ -162,13 +162,16 @@ export default {
     & ~ .placeholder {
       position: absolute;
       left: 14px;
-      width: 100%;
       top: 15px;
       color: #aaaaaa;
       transition: 0.3s;
       z-index: 2;
       letter-spacing: 0.5px;
       font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100% - 24px);
     }
     &:focus ~ .placeholder,
     &.has-content ~ .placeholder,
@@ -178,6 +181,7 @@ export default {
       font-size: 12px;
       color: $green;
       transition: 0.3s;
+      width: calc(100% - 12px);
     }
     &:disabled {
       cursor: not-allowed;
