@@ -22,5 +22,7 @@ module.exports = {
     indent: ['warn', 2],
     'vue/attribute-hyphenation': ['error', 'never'],
     'vue/multiline-html-element-content-newline': 'error',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },
 }
