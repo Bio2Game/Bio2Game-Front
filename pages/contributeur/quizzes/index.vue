@@ -3,7 +3,7 @@
     <div class="container">
       <div class="block">
         <div class="head">
-          <h5>Configuration du Quiz</h5>
+          <h5>Mes quizzes</h5>
           <nuxt-link
             to="/contributeur/quizzes/create"
             class="button white_sky sm equal"
@@ -12,16 +12,26 @@
           </nuxt-link>
         </div>
         <div class="content">
-          <client-only placeholder="Loading...">
-            <vuetable
-              :apiMode="false"
-              :data="quizzes"
-              :fields="tableFields"
-              :perPage="20"
-              data-path=""
-              paginationPath=""
-            ></vuetable>
-          </client-only>
+          <TableElement
+            v-if="quizzes.length"
+            :fields="tableFields"
+            :data="quizzes"
+            @selectRow="
+              $router.push(
+                `/contributeur/quizzes/${$event.data.id}-${$event.data.url}`
+              )
+            "
+          />
+          <div v-else class="no-quizzes">
+            <h3>Aucuns quizzes</h3>
+            <p>Votre profil ne contient pas le moindre quiz !</p>
+            <nuxt-link
+              class="button md green equal"
+              to="/contributeur/quizzes/create"
+            >
+              Créer un quiz
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -29,13 +39,12 @@
 </template>
 
 <script>
-import Vuetable from 'vuetable-2'
+import moment from 'moment'
+
+moment.locale('fr')
 
 export default {
   name: 'MesQuizzes',
-  components: {
-    Vuetable,
-  },
   middleware: ['auth', 'contributor'],
   async fetch({ store, error }) {
     try {
@@ -53,45 +62,54 @@ export default {
         {
           name: 'id',
           title: 'ID',
+          sortField: 'id',
         },
         {
           name: 'label',
           title: 'Nom',
+          sortField: 'label',
         },
         {
-          name: 'domain.name',
+          name: 'domain',
           title: 'Domaine',
+          sortField: 'domain.label',
+          formatter: (domain) => (domain ? domain.label : 'Aucun'),
         },
         {
-          name: 'language',
-          title: 'Langue',
+          name: 'status',
+          title: 'Status',
+          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
+          sortField: 'status',
         },
         {
-          name: 'public',
-          title: 'Publique',
-        },
-        {
-          name: 'user_id',
+          name: 'author.username',
           title: 'Contributeur',
+          sortField: 'author.username',
+          visible: this.$auth.user.status > 1,
         },
         {
-          name: 'id',
+          name: 'questions',
           title: 'Questions',
+          formatter: (questions) => questions.length,
         },
         {
           name: 'updated_at',
           title: 'Edition',
+          formatter: (date) => moment(date).fromNow(),
+          sortField: 'updated_at',
         },
         {
           name: 'created_at',
           title: 'Création',
+          formatter: (date) => moment(date).fromNow(),
+          sortField: 'created_at',
         },
       ],
     }
   },
   computed: {
     quizzes() {
-      return this.$store.state.quizzes.contributor_quizzes
+      return this.$store.state.quizzes.contributorQuizzes
     },
   },
 }
@@ -103,6 +121,27 @@ export default {
     flex-direction: column;
     .head {
       align-items: center;
+    }
+    .content {
+      .no-quizzes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        h3 {
+          font-weight: 700;
+          font-size: 32px;
+          color: $green;
+          margin-bottom: 16px;
+        }
+        p {
+          color: #777777;
+          font-size: 16px;
+          margin-bottom: 24px;
+          text-align: center;
+        }
+      }
     }
   }
 }
