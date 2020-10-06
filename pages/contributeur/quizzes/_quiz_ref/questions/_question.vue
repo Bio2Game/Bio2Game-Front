@@ -10,7 +10,7 @@
             class="white_label"
             placeholder="Libélé de la question"
             :error="filtredErrors('label')"
-            @input="(value) => (label = value)"
+            @input="value => (label = value)"
           />
           <InputElement
             :value="get('description')"
@@ -19,7 +19,7 @@
             class="white_label"
             placeholder="Temps autorisé(s)"
             :error="filtredErrors('time')"
-            @input="(value) => (time = value)"
+            @input="value => (time = value)"
           />
           <InputElement
             :value="get('quizId')"
@@ -28,7 +28,7 @@
             class="white_label"
             placeholder="Quiz de la question"
             :error="filtredErrors('quizId')"
-            @input="(value) => (quizId = value)"
+            @input="value => (quizId = value)"
           />
           <div class="button md equal border_white" @click="status = !status">
             {{ get('status') ? 'Publique' : 'Privé' }}
@@ -41,7 +41,7 @@
               <MarkdownEditor
                 :value="get('question')"
                 placeholder="Intitulé de la question"
-                @input="(value) => (question = value)"
+                @input="value => (question = value)"
               />
             </client-only>
             <InputElement
@@ -50,7 +50,7 @@
               name="source"
               placeholder="Source"
               :error="filtredErrors('source')"
-              @input="(value) => (source = value)"
+              @input="value => (source = value)"
             />
             <InputElement
               :value="get('endDate')"
@@ -58,7 +58,7 @@
               name="endDate"
               placeholder="Date d’expiration (optionnel)"
               :error="filtredErrors('endDate')"
-              @input="(value) => (endDate = value)"
+              @input="value => (endDate = value)"
             />
             <InputElement
               :value="get('profil')"
@@ -66,7 +66,7 @@
               name="profil"
               placeholder="Profil du joueur"
               :error="filtredErrors('profil')"
-              @input="(value) => (profil = value)"
+              @input="value => (profil = value)"
             />
           </div>
           <div class="section">
@@ -77,7 +77,7 @@
               name="response0"
               placeholder="Bonne réponse"
               :error="filtredErrors('response0')"
-              @input="(value) => (response0 = value)"
+              @input="value => (response0 = value)"
             />
             <InputElement
               :value="getResponse('response1')"
@@ -85,7 +85,7 @@
               name="response1"
               placeholder="Mauvaise réponse n°1"
               :error="filtredErrors('response1')"
-              @input="(value) => (response1 = value)"
+              @input="value => (response1 = value)"
             />
             <InputElement
               :value="getResponse('response2')"
@@ -93,7 +93,7 @@
               name="response2"
               placeholder="Mauvaise réponse n°2"
               :error="filtredErrors('response2')"
-              @input="(value) => (response2 = value)"
+              @input="value => (response2 = value)"
             />
             <InputElement
               :value="getResponse('response2')"
@@ -101,30 +101,24 @@
               name="response2"
               placeholder="Réponse improbable"
               :error="filtredErrors('response2')"
-              @input="(value) => (response2 = value)"
+              @input="value => (response2 = value)"
             />
             <h5 class="section-title">Explications</h5>
             <client-only>
               <MarkdownEditor
                 :value="get('explication')"
                 placeholder="Explication de la réponse"
-                @input="(value) => (explication = value)"
+                @input="value => (explication = value)"
               />
             </client-only>
           </div>
         </div>
       </div>
       <div class="buttons-bar">
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Mes quizzes
-        </nuxt-link>
-        <nuxt-link class="button green lg" to="/contributeur/questions">
-          Mes questions
-        </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Mes quizzes </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/questions"> Mes questions </nuxt-link>
         <div class="button green lg">Sauvegarder</div>
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Supprimer
-        </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Supprimer </nuxt-link>
       </div>
     </div>
   </div>
@@ -177,7 +171,7 @@ export default {
     questionObj() {
       return this.$store.getters['quizzes/getPersonnalQuestion'](
         this.$route.params.quiz_ref,
-        this.$route.params.question
+        this.$route.params.question,
       )
     },
     isCreationPage() {
@@ -186,43 +180,35 @@ export default {
   },
   methods: {
     getResponse(key) {
-      return (
-        this[key] ||
-        (this.questionObj.responses
-          ? JSON.parse(this.questionObj.responses)[key]
-          : '')
-      )
+      return this[key] || (this.questionObj.responses ? JSON.parse(this.questionObj.responses)[key] : '')
     },
     get(key) {
       return this[key] || this.questionObj[key]
     },
     filtredErrors(field) {
-      return this.errors.find((error) => error.field === field)
+      return this.errors.find(error => error.field === field)
     },
     async createQuestion() {
       try {
-        const quiz = await this.$store.dispatch(
-          `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
-          {
-            id: this.questionObj.id,
-            label: this.get('label'),
-            time: this.generateURL(this.get('label')),
-            quizId: this.get('quizId'),
-            question: this.get('question'),
-            source: this.get('source'),
-            endDate: this.get('endDate'),
-            profil: this.get('profil'),
-            responses: {
-              response0: this.getResponse('response0'),
-              response1: this.getResponse('response1'),
-              response2: this.getResponse('response2'),
-              response3: this.getResponse('response3'),
-            },
-            explication: this.get('explication'),
-            contributorId: this.$auth.user.id,
-            status: this.get('status'),
-          }
-        )
+        const quiz = await this.$store.dispatch(`quizzes/${this.isCreationPage ? 'create' : 'update'}Question`, {
+          id: this.questionObj.id,
+          label: this.get('label'),
+          time: this.generateURL(this.get('label')),
+          quizId: this.get('quizId'),
+          question: this.get('question'),
+          source: this.get('source'),
+          endDate: this.get('endDate'),
+          profil: this.get('profil'),
+          responses: {
+            response0: this.getResponse('response0'),
+            response1: this.getResponse('response1'),
+            response2: this.getResponse('response2'),
+            response3: this.getResponse('response3'),
+          },
+          explication: this.get('explication'),
+          contributorId: this.$auth.user.id,
+          status: this.get('status'),
+        })
 
         return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
       } catch (error) {

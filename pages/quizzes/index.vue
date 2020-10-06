@@ -20,18 +20,8 @@
       </div>
     </div>
     <div class="filters">
-      <Input
-        v-model="search"
-        class="white_label"
-        type="text"
-        placeholder="Rechercher"
-      />
-      <Input
-        v-model="places"
-        class="white_label"
-        type="text"
-        placeholder="Lieux"
-      />
+      <Input v-model="search" class="white_label" type="text" placeholder="Rechercher" />
+      <Input v-model="places" class="white_label" type="text" placeholder="Lieux" />
     </div>
     <div class="container quizzes">
       <div
@@ -44,10 +34,7 @@
       >
         <div class="top-part">
           <div class="icon">
-            <img
-              :src="getIcon(quiz.domain.icon.reference)"
-              :alt="quiz.domain.name"
-            />
+            <img :src="getIcon(quiz.domain.icon.reference)" :alt="quiz.domain.name" />
           </div>
         </div>
         <div class="bottom-part">
@@ -246,8 +233,7 @@ export default {
       flex-direction: column;
       margin: 0;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
-        0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
       background-color: $green;
       user-select: none;
       cursor: pointer;

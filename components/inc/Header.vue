@@ -3,34 +3,20 @@
     <div class="wrapper">
       <div class="container">
         <nuxt-link to="/" class="logo-link">
-          <img
-            class="logo"
-            src="@/assets/images/logo.png"
-            alt="Logo Bio2Game"
-          />
+          <img class="logo" src="@/assets/images/logo.png" alt="Logo Bio2Game" />
         </nuxt-link>
         <div class="menu" :class="{ open: toggleUserMenu }">
           <div class="left-menu">
             <nuxt-link class="link" to="/"><HomeIcon /> Accueil</nuxt-link>
-            <nuxt-link class="link" to="/quizzes">
-              <GamesIcon /> Quizzes
-            </nuxt-link>
-            <nuxt-link class="link" to="/parties">
-              <GroupIcon /> Parties
-            </nuxt-link>
+            <nuxt-link class="link" to="/quizzes"> <GamesIcon /> Quizzes </nuxt-link>
+            <nuxt-link class="link" to="/parties"> <GroupIcon /> Parties </nuxt-link>
           </div>
           <div v-if="!$auth.loggedIn" class="right-menu">
             <nuxt-link class="button md green" to="/">Créer un quiz</nuxt-link>
-            <nuxt-link class="button md border_white right" to="/login">
-              Se connecter
-            </nuxt-link>
+            <nuxt-link class="button md border_white right" to="/login"> Se connecter </nuxt-link>
           </div>
           <div v-else class="right-menu">
-            <div
-              class="user"
-              :class="{ active: toggleUserMenu }"
-              @click="toggleUserMenu = !toggleUserMenu"
-            >
+            <div class="user" :class="{ active: toggleUserMenu }" @click="toggleUserMenu = !toggleUserMenu">
               <AvatarElement
                 class="avatar"
                 :email="$auth.user.email"
@@ -44,22 +30,15 @@
                 <ul>
                   <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
                   <nuxt-link to="/quizzes">Mes favoris</nuxt-link>
-                  <nuxt-link to="/contributeur/quizzes">
-                    <Nature2Icon /> Mes quizz
-                  </nuxt-link>
-                  <nuxt-link v-if="$auth.user.status > 1" to="/admin">
-                    <SettingsIcon /> Admin
-                  </nuxt-link>
+                  <nuxt-link to="/contributeur/quizzes"> <Nature2Icon /> Mes quizz </nuxt-link>
+                  <nuxt-link v-if="$auth.user.status > 1" to="/admin"> <SettingsIcon /> Admin </nuxt-link>
                   <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <a
-          class="hamburger"
-          :class="{ open: toggleUserMenu }"
-          @click="toggleUserMenu = !toggleUserMenu"
+        <a class="hamburger" :class="{ open: toggleUserMenu }" @click="toggleUserMenu = !toggleUserMenu"
           ><span /><span /><span
         /></a>
       </div>
@@ -455,8 +434,7 @@ export default {
       animation: none;
       .wrapper {
         background-color: white;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
       }
     }
   }

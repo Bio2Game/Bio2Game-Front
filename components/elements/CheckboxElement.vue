@@ -1,11 +1,6 @@
 <template>
   <label class="checkbox" :for="id">
-    <input
-      :id="id"
-      type="checkbox"
-      :checked="checked"
-      @change="$emit('input', $event.target.checked)"
-    />
+    <input :id="id" type="checkbox" :checked="checked" @change="$emit('input', $event.target.checked)" />
     <span>{{ label }}</span>
   </label>
 </template>
@@ -44,8 +39,7 @@ export default {
     &::before {
       content: '';
       position: absolute;
-      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
-        height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
+      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s, height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
       z-index: 1;
       width: 0;
       height: 0;
@@ -60,8 +54,7 @@ export default {
       content: '';
       left: 0;
       position: absolute;
-      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
-        height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
+      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s, height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
       z-index: 1;
       height: 20px;
       width: 20px;

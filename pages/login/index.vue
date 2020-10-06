@@ -4,58 +4,31 @@
       <div class="overlay" :class="{ register: isRegister }">
         <div v-if="isRegister" class="content">
           <h3>Vous avez déjà <br />un compte?</h3>
-          <p>
-            Cela signifie que vous êtes déjà des nôtres !<br />Connectez-vous
-            dès maintenant à votre compte
-          </p>
-          <a class="button green md equal" @click="switchForm(false)"
-            >Se connecter</a
-          >
+          <p>Cela signifie que vous êtes déjà des nôtres !<br />Connectez-vous dès maintenant à votre compte</p>
+          <a class="button green md equal" @click="switchForm(false)">Se connecter</a>
         </div>
         <div v-else class="content">
           <h3>Vous n’avez pas de compte?</h3>
-          <p>
-            Créer votre compte gratuitement et commencez<br />dès maintenant à
-            jouer à nos quizz
-          </p>
-          <a class="button green md equal" @click="switchForm(true)"
-            >Créer un compte</a
-          >
+          <p>Créer votre compte gratuitement et commencez<br />dès maintenant à jouer à nos quizz</p>
+          <a class="button green md equal" @click="switchForm(true)">Créer un compte</a>
         </div>
       </div>
       <div class="parts" :class="{ wrap: !isRegister }">
         <div class="part register-part">
           <h1>Créer un compte</h1>
-          <InputElement
-            v-model="username"
-            type="text"
-            placeholder="Pseudonyme"
-            :error="filtredErrors('username')"
-          />
-          <InputElement
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            :error="filtredErrors('email')"
-          />
+          <InputElement v-model="username" type="text" placeholder="Pseudonyme" :error="filtredErrors('username')" />
+          <InputElement v-model="email" type="email" placeholder="Email" :error="filtredErrors('email')" />
           <InputElement
             v-model="password"
             type="password"
             placeholder="Mot de passe"
             :error="filtredErrors('password')"
           />
-          <a class="button green md full" @click="register()"
-            >Créer mon compte</a
-          >
+          <a class="button green md full" @click="register()">Créer mon compte</a>
         </div>
         <div class="part login-part">
           <h1>Connectez vous</h1>
-          <InputElement
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            :error="filtredErrors('email')"
-          />
+          <InputElement v-model="email" type="email" placeholder="Email" :error="filtredErrors('email')" />
           <InputElement
             v-model="password"
             type="password"
@@ -67,11 +40,7 @@
           </div>
 
           <div class="group">
-            <CheckboxElement
-              id="remember"
-              :checked="remember"
-              label="Se souvenir de moi"
-            />
+            <CheckboxElement id="remember" :checked="remember" label="Se souvenir de moi" />
             <a class="button green sm" @click="login()">Connexion</a>
           </div>
           <hr />
@@ -123,7 +92,7 @@ export default {
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find((error) => error.field === field)
+      return this.errors.find(error => error.field === field)
     },
     switchForm(value) {
       this.isRegister = value
@@ -324,11 +293,7 @@ export default {
       display: flex;
       align-items: flex-end;
       flex: 1 0;
-      background: linear-gradient(
-          0deg,
-          rgba(33, 37, 34, 0.85),
-          rgba(33, 37, 34, 0.85)
-        ),
+      background: linear-gradient(0deg, rgba(33, 37, 34, 0.85), rgba(33, 37, 34, 0.85)),
         url('../../assets/images/login.jpg');
       background-size: cover;
       padding: 48px;

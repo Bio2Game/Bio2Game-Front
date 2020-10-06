@@ -4,12 +4,12 @@ let handleOutsideClick
 
 Vue.directive('closable', {
   bind(el, binding, vnode) {
-    handleOutsideClick = (e) => {
+    handleOutsideClick = e => {
       e.stopPropagation()
       const { handler, exclude = [] } = binding.value
 
       let clickedOnExcludedEl = false
-      exclude.forEach((refName) => {
+      exclude.forEach(refName => {
         if (!clickedOnExcludedEl) {
           const excludedEl = vnode.context.$refs[refName]
           clickedOnExcludedEl = excludedEl === e.target

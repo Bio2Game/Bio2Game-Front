@@ -66,11 +66,7 @@
             :defaultValue="0"
             noSelect="Sexe"
           />
-          <AnimatorSelectorElement
-            v-model="animators"
-            :selectedAnimators="animators"
-            :animators="all_animators"
-          />
+          <AnimatorSelectorElement v-model="animators" :selectedAnimators="animators" :animators="all_animators" />
           <SelectorElement
             v-model="complete.contributor_type"
             :selected="complete.contributor_type"
@@ -186,12 +182,8 @@ export default {
       sex: this.$auth.user.sex,
       birth_date: this.$auth.user.birth_date,
       current_animators_ids: [],
-      contributor_mobile: this.$auth.user.status
-        ? this.$auth.user.contributor_mobile
-        : '',
-      contributor_type: this.$auth.user.status
-        ? this.$auth.user.contributor_type
-        : '',
+      contributor_mobile: this.$auth.user.status ? this.$auth.user.contributor_mobile : '',
+      contributor_type: this.$auth.user.status ? this.$auth.user.contributor_type : '',
       website: this.$auth.user.status ? this.$auth.user.website : '',
     }
   },
@@ -200,7 +192,7 @@ export default {
       return date
     },
     filtredErrors(field) {
-      return this.errors.find((error) => error.field === field)
+      return this.errors.find(error => error.field === field)
     },
     async update(payload) {
       try {

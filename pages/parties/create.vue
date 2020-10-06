@@ -9,11 +9,7 @@
           <h5>Configuration du Quiz</h5>
         </div>
         <div class="item_content">
-          <InputElement
-            v-model="name"
-            type="text"
-            placeholder="Nom de la partie"
-          />
+          <InputElement v-model="name" type="text" placeholder="Nom de la partie" />
           <div class="quizcreator">
             <SelectorElement
               class="select-quiz"
@@ -22,9 +18,7 @@
               noSelect="Selectionner le quiz"
               @input="changeQuiz($event.target)"
             />
-            <nuxt-link to="/" class="button md green create-quiz">
-              Créer un quiz
-            </nuxt-link>
+            <nuxt-link to="/" class="button md green create-quiz"> Créer un quiz </nuxt-link>
           </div>
           <a class="button md green" @click="startParty()">Lancer la partie</a>
         </div>
@@ -34,11 +28,7 @@
           <h5>Choix des questions</h5>
         </div>
         <div class="item_content">
-          <label
-            v-for="(question, index) in questions"
-            :key="question.id"
-            class="question"
-          >
+          <label v-for="(question, index) in questions" :key="question.id" class="question">
             <input
               name="1"
               type="checkbox"
@@ -83,11 +73,11 @@ export default {
   },
   methods: {
     checkQuestion(id, checked) {
-      this.questions.find((q) => q.id === id).active = checked
+      this.questions.find(q => q.id === id).active = checked
     },
     changeQuiz(target) {
       this.quizId = target.value
-      const quiz = this.quizzes.find((q) => q.id === target.value)
+      const quiz = this.quizzes.find(q => q.id === target.value)
       this.questions = quiz.questions
     },
     startParty() {
@@ -100,7 +90,7 @@ export default {
         })
       }
 
-      if (this.questions.filter((q) => q.active).length < 3) {
+      if (this.questions.filter(q => q.active).length < 3) {
         return this.$notify({
           type: 'error',
           text: 'Veuillez selectionner au moins 3 questions !',
@@ -112,7 +102,7 @@ export default {
       this.$socket.emit('createGame', {
         quizId: this.quizId,
         name: this.name,
-        questions: this.questions.filter((q) => q.active),
+        questions: this.questions.filter(q => q.active),
         animatorId: this.user.id,
       })
     },

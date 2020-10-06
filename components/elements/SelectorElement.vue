@@ -1,20 +1,8 @@
 <template>
-  <div
-    v-closable="{ handler: 'closeSelector' }"
-    class="selector"
-    :class="{ active }"
-    @click="active = !active"
-  >
+  <div v-closable="{ handler: 'closeSelector' }" class="selector" :class="{ active }" @click="active = !active">
     <div class="select_element">
       {{ selected !== defaultValue ? getSelectedName : noSelect }}
-      <svg
-        class="down"
-        width="11"
-        height="7"
-        viewBox="0 0 11 7"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg class="down" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -70,9 +58,7 @@ export default {
   computed: {
     getSelectedName() {
       return (
-        [...this.items, { ref: this.defaultValue, name: this.noSelect }].find(
-          (item) => item.ref === this.selected
-        ) || {}
+        [...this.items, { ref: this.defaultValue, name: this.noSelect }].find(item => item.ref === this.selected) || {}
       ).name
     },
   },
@@ -83,16 +69,11 @@ export default {
   },
   methods: {
     select(itemRef, clicked = false) {
-      if (!this.items.some((item) => item.ref === itemRef)) {
+      if (!this.items.some(item => item.ref === itemRef)) {
         return this.$emit('input', this.defaultValue)
       }
 
-      if (
-        this.toggle &&
-        clicked &&
-        this.selected !== null &&
-        itemRef === this.selected
-      ) {
+      if (this.toggle && clicked && this.selected !== null && itemRef === this.selected) {
         return this.$emit('input', this.defaultValue)
       }
 

@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find((error) => error.field === field)
+      return this.errors.find(error => error.field === field)
     },
     async register(payload) {
       try {

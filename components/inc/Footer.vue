@@ -8,8 +8,8 @@
             <h5>A PROPOS</h5>
           </div>
           <p>
-            Un jeu qui vous permet de tester vos connaissances sur l’impact
-            environnemental de votre consommation et d'apprendre.
+            Un jeu qui vous permet de tester vos connaissances sur l’impact environnemental de votre consommation et
+            d'apprendre.
           </p>
           <nuxt-link to="/a-propos">En savoir plus</nuxt-link>
         </div>
@@ -19,9 +19,7 @@
             <h5>CONTACT</h5>
           </div>
           <nuxt-link to="/charte-bio2game">La Charte Bio2Game</nuxt-link>
-          <nuxt-link to="/donnees-personnelles">
-            Politique de protection des données personnelles
-          </nuxt-link>
+          <nuxt-link to="/donnees-personnelles"> Politique de protection des données personnelles </nuxt-link>
           <nuxt-link to="/cookies">Utilisation des cookies</nuxt-link>
         </div>
         <div class="item social">
@@ -47,10 +45,7 @@
         xmlns="http://www.w3.org/2000/svg"
         @click="scrollToTop()"
       >
-        <path
-          d="M32 16L16 0L0 16L3.90018 19.9002L16.0001 7.8003L28.0999 19.9001L32 16Z"
-          fill="white"
-        />
+        <path d="M32 16L16 0L0 16L3.90018 19.9002L16.0001 7.8003L28.0999 19.9001L32 16Z" fill="white" />
       </svg>
     </div>
   </footer>

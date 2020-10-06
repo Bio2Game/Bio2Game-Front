@@ -4,10 +4,7 @@
       <div class="block">
         <div class="head">
           <h5>Mes questions</h5>
-          <nuxt-link
-            to="/contributeur/questions/create"
-            class="button white_sky sm equal"
-          >
+          <nuxt-link to="/contributeur/questions/create" class="button white_sky sm equal">
             Créer une question
           </nuxt-link>
         </div>
@@ -18,17 +15,14 @@
             :data="questions"
             @selectRow="
               $router.push(
-                `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`
+                `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
               )
             "
           />
           <div v-else class="no-questions">
             <h3>Aucunes questions</h3>
             <p>Ce quiz ne contient pas la moindre question !</p>
-            <nuxt-link
-              to="/contributeur/questions/create"
-              class="button md green equal"
-            >
+            <nuxt-link to="/contributeur/questions/create" class="button md green equal">
               Créer une question
             </nuxt-link>
           </div>
@@ -79,25 +73,25 @@ export default {
         {
           name: 'quiz',
           title: 'Quiz',
-          formatter: (quiz) => (quiz ? quiz.label : 'Aucun'),
+          formatter: quiz => (quiz ? quiz.label : 'Aucun'),
           sortField: 'quiz',
         },
         {
           name: 'status',
           title: 'Status',
-          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
+          formatter: bool => (bool ? 'Publique' : 'Privé'),
           sortField: 'status',
         },
         {
           name: 'updated_at',
           title: 'Edition',
-          formatter: (date) => moment(date).fromNow(),
+          formatter: date => moment(date).fromNow(),
           sortField: 'updated_at',
         },
         {
           name: 'created_at',
           title: 'Création',
-          formatter: (date) => moment(date).fromNow(),
+          formatter: date => moment(date).fromNow(),
           sortField: 'created_at',
         },
       ],
@@ -106,9 +100,7 @@ export default {
   computed: {
     questions() {
       return this.$store.state.quizzes.contributorQuizzes
-        .map((quiz) =>
-          quiz.questions.map((question) => ({ ...question, quiz }))
-        )
+        .map(quiz => quiz.questions.map(question => ({ ...question, quiz })))
         .flat()
     },
   },

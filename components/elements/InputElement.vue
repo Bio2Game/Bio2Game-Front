@@ -16,10 +16,7 @@
       @keypress="checkMax"
     />
     <label class="placeholder">{{ placeholder }}</label>
-    <span
-      class="focus-bg"
-      :class="{ 'has-content': hasContent || disabled, disabled }"
-    ></span>
+    <span class="focus-bg" :class="{ 'has-content': hasContent || disabled, disabled }"></span>
     <label v-if="counter" :for="id" class="counter">
       <span>{{ caracters }}</span>
       /{{ max }}
@@ -99,14 +96,7 @@ export default {
       return !(
         this.max &&
         this.value.length >= this.max &&
-        ![
-          'Backspace',
-          'Delete',
-          'ArrowUp',
-          'ArrowDown',
-          'ArrowLeft',
-          'ArrowRight',
-        ].includes(event.key) &&
+        !['Backspace', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key) &&
         (!event.ctrlKey || (event.ctrlKey && event.code === 'KeyV'))
       )
     },
