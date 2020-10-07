@@ -13,7 +13,7 @@
             @input="value => (label = value)"
           />
           <InputElement
-            :value="get('description')"
+            :value="get('time')"
             type="number"
             name="time"
             class="white_label"
@@ -96,12 +96,12 @@
               @input="value => (response2 = value)"
             />
             <InputElement
-              :value="getResponse('response2')"
+              :value="getResponse('response3')"
               type="text"
-              name="response2"
+              name="response3"
               placeholder="Réponse improbable"
-              :error="filtredErrors('response2')"
-              @input="value => (response2 = value)"
+              :error="filtredErrors('response3')"
+              @input="value => (response3 = value)"
             />
             <h5 class="section-title">Explications</h5>
             <client-only>
@@ -121,7 +121,7 @@
         <nuxt-link class="button green lg" to="/contributeur/questions">
           Mes questions
         </nuxt-link>
-        <div class="button green lg">Sauvegarder</div>
+        <div class="button green lg" @click="createQuestion()">Sauvegarder</div>
         <nuxt-link class="button green lg" to="/contributeur/quizzes">
           Supprimer
         </nuxt-link>
@@ -144,8 +144,11 @@ export default {
   },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
-    if (params.quiz !== 'create') {
+    if (params.quiz_ref !== 'create') {
       try {
+        if (!/\d-.+/.test(params.quiz_ref)) {
+          throw new Error('Match failed')
+        }
         await store.dispatch('quizzes/fetchPeronnalQuizzes')
       } catch (e) {
         error({
@@ -183,6 +186,36 @@ export default {
     isCreationPage() {
       return this.$route.params.question === 'create'
     },
+    isDataEdited() {
+      return !!(
+        this.label !== null ||
+        this.time !== null ||
+        this.quizId !== this.$route.params.quiz_ref.split('-')[0] ||
+        this.question !== null ||
+        this.source !== null ||
+        this.endDate !== null ||
+        this.profil !== null ||
+        this.response0 !== null ||
+        this.response1 !== null ||
+        this.response2 !== null ||
+        this.response3 !== null ||
+        this.explication !== null ||
+        this.status !== null
+      )
+    },
+  },
+  mounted() {
+    this.quizId = this.$route.params.quiz_ref.split('-')[0]
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isDataEdited) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
+      ),
+    )
   },
   methods: {
     getResponse(key) {
@@ -201,12 +234,12 @@ export default {
     },
     async createQuestion() {
       try {
-        const quiz = await this.$store.dispatch(
+        const question = await this.$store.dispatch(
           `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
           {
             id: this.questionObj.id,
             label: this.get('label'),
-            time: this.generateURL(this.get('label')),
+            time: this.get('time'),
             quizId: this.get('quizId'),
             question: this.get('question'),
             source: this.get('source'),
@@ -220,12 +253,15 @@ export default {
             },
             explication: this.get('explication'),
             contributorId: this.$auth.user.id,
-            status: this.get('status'),
+            status: !!this.get('status') + 0,
           },
         )
 
-        return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
+        return this.$router.push(
+          `/contributeur/quizzes/${this.$route.params.quiz_ref}/questions/${question.id}`,
+        )
       } catch (error) {
+        console.log(error)
         const messages = error.response.data.messages
         if (messages) {
           this.errors = messages.errors
