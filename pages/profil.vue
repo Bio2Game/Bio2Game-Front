@@ -11,7 +11,14 @@
           />
           <div v-if="isIndex" class="cover"></div>
           <span v-if="isIndex" class="target">Modifier</span>
-          <input v-if="isIndex" id="avatar" type="file" name="avatar" class="form-control" accept="image/*" />
+          <input
+            v-if="isIndex"
+            id="avatar"
+            type="file"
+            name="avatar"
+            class="form-control"
+            accept="image/*"
+          />
         </label>
 
         <h5 class="username">{{ $auth.user.username }}</h5>
@@ -42,11 +49,21 @@
       </div>
       <div class="status-container">
         <label>
-          <input id="isAnimator" type="checkbox" name="isAnimator" :checked="$auth.user.isAnimator" value="1" />
+          <input
+            id="isAnimator"
+            type="checkbox"
+            name="isAnimator"
+            :checked="$auth.user.isAnimator"
+            value="1"
+          />
           <span>Animateur ?</span>
         </label>
       </div>
-      <nuxt-link v-if="!$auth.user.status && isIndex" to="/profil/become" class="before button md green">
+      <nuxt-link
+        v-if="!$auth.user.status && isIndex"
+        to="/profil/become"
+        class="before button md green"
+      >
         Devenir contributeur
       </nuxt-link>
     </div>

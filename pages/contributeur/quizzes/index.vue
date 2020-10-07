@@ -4,19 +4,33 @@
       <div class="block">
         <div class="head">
           <h5>Mes quizzes</h5>
-          <nuxt-link to="/contributeur/quizzes/create" class="button white_sky sm equal"> Créer un quizz </nuxt-link>
+          <nuxt-link
+            to="/contributeur/quizzes/create"
+            class="button white_sky sm equal"
+          >
+            Créer un quizz
+          </nuxt-link>
         </div>
         <div class="content">
           <TableElement
             v-if="quizzes.length"
             :fields="tableFields"
             :data="quizzes"
-            @selectRow="$router.push(`/contributeur/quizzes/${$event.data.id}-${$event.data.url}`)"
+            @selectRow="
+              $router.push(
+                `/contributeur/quizzes/${$event.data.id}-${$event.data.url}`,
+              )
+            "
           />
           <div v-else class="no-quizzes">
             <h3>Aucuns quizzes</h3>
             <p>Votre profil ne contient pas le moindre quiz !</p>
-            <nuxt-link class="button md green equal" to="/contributeur/quizzes/create"> Créer un quiz </nuxt-link>
+            <nuxt-link
+              class="button md green equal"
+              to="/contributeur/quizzes/create"
+            >
+              Créer un quiz
+            </nuxt-link>
           </div>
         </div>
       </div>

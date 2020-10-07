@@ -5,9 +5,16 @@
         <h1>PARTIES EN GROUPE</h1>
         <p>Ce mode de jeu vous permettra de jouer avec d’autres personnes</p>
       </div>
-      <div class="items" :class="{ center: !$auth.user || !$auth.user.isAnimator }">
+      <div
+        class="items"
+        :class="{ center: !$auth.user || !$auth.user.isAnimator }"
+      >
         <!--           v-if="$auth.user && $auth.user.isAnimator" -->
-        <nuxt-link class="item" to="/parties/create" :class="{ disabled: !isContributor }">
+        <nuxt-link
+          class="item"
+          to="/parties/create"
+          :class="{ disabled: !isContributor }"
+        >
           <div class="wrapper">
             <img src="@/assets/images/create.jpg" alt="Créer une partie" />
             <div class="item__content">
@@ -21,7 +28,12 @@
             <div class="item__content join">
               <h2>Rejoindre</h2>
               <div class="input-continer">
-                <input id="to-focus" type="text" placeholder="code" maxlength="8" />
+                <input
+                  id="to-focus"
+                  type="text"
+                  placeholder="code"
+                  maxlength="8"
+                />
                 <a class="go show" href="">GO</a>
               </div>
             </div>
@@ -127,7 +139,11 @@ export default {
       position: relative;
       flex: 1 0;
       margin: 0 32px;
-      background: linear-gradient(180deg, rgba(33, 150, 83, 0.25) 0%, rgba(33, 150, 83, 0.9) 100%),
+      background: linear-gradient(
+          180deg,
+          rgba(33, 150, 83, 0.25) 0%,
+          rgba(33, 150, 83, 0.9) 100%
+        ),
         url('/images/create.jpg');
       border: 6px solid #ffffff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
@@ -166,7 +182,11 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(0deg, rgba(187, 226, 66, 0.9) 0%, rgba(187, 226, 66, 0.65) 100%);
+        background: linear-gradient(
+          0deg,
+          rgba(187, 226, 66, 0.9) 0%,
+          rgba(187, 226, 66, 0.65) 100%
+        );
         transition: padding-top 0.3s;
 
         h2 {
@@ -209,7 +229,8 @@ export default {
               text-decoration: none;
               margin: 0 0 8px 10px;
               background-color: transparent;
-              transition: opacity 0.3s, background-color 0.3s, color 0.3s, border-width 0.3s;
+              transition: opacity 0.3s, background-color 0.3s, color 0.3s,
+                border-width 0.3s;
 
               &.show {
                 display: flex;

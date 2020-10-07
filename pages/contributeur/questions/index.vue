@@ -4,7 +4,10 @@
       <div class="block">
         <div class="head">
           <h5>Mes questions</h5>
-          <nuxt-link to="/contributeur/questions/create" class="button white_sky sm equal">
+          <nuxt-link
+            to="/contributeur/questions/create"
+            class="button white_sky sm equal"
+          >
             Créer une question
           </nuxt-link>
         </div>
@@ -22,7 +25,10 @@
           <div v-else class="no-questions">
             <h3>Aucunes questions</h3>
             <p>Ce quiz ne contient pas la moindre question !</p>
-            <nuxt-link to="/contributeur/questions/create" class="button md green equal">
+            <nuxt-link
+              to="/contributeur/questions/create"
+              class="button md green equal"
+            >
               Créer une question
             </nuxt-link>
           </div>

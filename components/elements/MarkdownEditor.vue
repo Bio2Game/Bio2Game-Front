@@ -1,7 +1,18 @@
 <template>
   <div class="markdown-editor">
-    <input ref="files" type="file" accept="image/*" style="display: none" @change="handleFilesUpload()" />
-    <textarea ref="editor" :value="value" :placeholder="placeholder" @input="$emit($event.target.value)"></textarea>
+    <input
+      ref="files"
+      type="file"
+      accept="image/*"
+      style="display: none"
+      @change="handleFilesUpload()"
+    />
+    <textarea
+      ref="editor"
+      :value="value"
+      :placeholder="placeholder"
+      @input="$emit($event.target.value)"
+    ></textarea>
   </div>
 </template>
 
@@ -159,7 +170,9 @@ export default {
           },
         })
         .then(data => {
-          this.simpleMde.codemirror.replaceSelection("![Nom de l'image Image](" + data + ')')
+          this.simpleMde.codemirror.replaceSelection(
+            "![Nom de l'image Image](" + data + ')',
+          )
         })
         .catch(function (error) {
           console.log(error)
@@ -595,7 +608,11 @@ span.CodeMirror-selectedtext {
 .editor-toolbar.fullscreen::before {
   width: 20px;
   height: 50px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 1) 0,
+    rgba(255, 255, 255, 0) 100%
+  );
   position: fixed;
   top: 0;
   left: 0;
@@ -605,7 +622,11 @@ span.CodeMirror-selectedtext {
 .editor-toolbar.fullscreen::after {
   width: 20px;
   height: 50px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 1) 100%
+  );
   position: fixed;
   top: 0;
   right: 0;
@@ -783,7 +804,8 @@ span.CodeMirror-selectedtext {
 .CodeMirror .CodeMirror-placeholder {
   opacity: 0.5;
 }
-.CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+.CodeMirror
+  .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
   background: rgba(255, 0, 0, 0.15);
 }
 </style>

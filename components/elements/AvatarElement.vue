@@ -29,7 +29,9 @@ export default {
     getImage() {
       return this.path
         ? `/avatar_uploads/${this.path}`
-        : `https://www.gravatar.com/avatar/` + md5(this.email.trim().toLowerCase()) + `?s=${this.size}&d=mp`
+        : `https://www.gravatar.com/avatar/` +
+            md5(this.email.trim().toLowerCase()) +
+            `?s=${this.size}&d=mp`
     },
   },
 }

@@ -10,12 +10,14 @@
           vous challenge !
         </h2>
         <p>
-          Des quizzes qui vous permettent de tester vos connaissances sur l’impact environnemental de votre consommation
-          et d'apprendre.
+          Des quizzes qui vous permettent de tester vos connaissances sur
+          l’impact environnemental de votre consommation et d'apprendre.
         </p>
         <div class="buttons">
           <nuxt-link to="/quizs" class="button green lg">Jouer</nuxt-link>
-          <nuxt-link to="/parties" class="button border_green lg right"> Parties </nuxt-link>
+          <nuxt-link to="/parties" class="button border_green lg right">
+            Parties
+          </nuxt-link>
         </div>
       </div>
     </div>

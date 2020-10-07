@@ -115,10 +115,16 @@
         </div>
       </div>
       <div class="buttons-bar">
-        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Mes quizzes </nuxt-link>
-        <nuxt-link class="button green lg" to="/contributeur/questions"> Mes questions </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes">
+          Mes quizzes
+        </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/questions">
+          Mes questions
+        </nuxt-link>
         <div class="button green lg">Sauvegarder</div>
-        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Supprimer </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes">
+          Supprimer
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -180,7 +186,12 @@ export default {
   },
   methods: {
     getResponse(key) {
-      return this[key] || (this.questionObj.responses ? JSON.parse(this.questionObj.responses)[key] : '')
+      return (
+        this[key] ||
+        (this.questionObj.responses
+          ? JSON.parse(this.questionObj.responses)[key]
+          : '')
+      )
     },
     get(key) {
       return this[key] || this.questionObj[key]
@@ -190,25 +201,28 @@ export default {
     },
     async createQuestion() {
       try {
-        const quiz = await this.$store.dispatch(`quizzes/${this.isCreationPage ? 'create' : 'update'}Question`, {
-          id: this.questionObj.id,
-          label: this.get('label'),
-          time: this.generateURL(this.get('label')),
-          quizId: this.get('quizId'),
-          question: this.get('question'),
-          source: this.get('source'),
-          endDate: this.get('endDate'),
-          profil: this.get('profil'),
-          responses: {
-            response0: this.getResponse('response0'),
-            response1: this.getResponse('response1'),
-            response2: this.getResponse('response2'),
-            response3: this.getResponse('response3'),
+        const quiz = await this.$store.dispatch(
+          `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
+          {
+            id: this.questionObj.id,
+            label: this.get('label'),
+            time: this.generateURL(this.get('label')),
+            quizId: this.get('quizId'),
+            question: this.get('question'),
+            source: this.get('source'),
+            endDate: this.get('endDate'),
+            profil: this.get('profil'),
+            responses: {
+              response0: this.getResponse('response0'),
+              response1: this.getResponse('response1'),
+              response2: this.getResponse('response2'),
+              response3: this.getResponse('response3'),
+            },
+            explication: this.get('explication'),
+            contributorId: this.$auth.user.id,
+            status: this.get('status'),
           },
-          explication: this.get('explication'),
-          contributorId: this.$auth.user.id,
-          status: this.get('status'),
-        })
+        )
 
         return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
       } catch (error) {

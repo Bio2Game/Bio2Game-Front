@@ -45,13 +45,19 @@ export const actions = {
   },
 
   async createQuiz({ commit }, payload) {
-    const response = await this.$axios.$post('/api/contributor/quizzes', payload)
+    const response = await this.$axios.$post(
+      '/api/contributor/quizzes',
+      payload,
+    )
     commit('ADD_CONTRIBUTOR_QUIZZ', response.quiz)
     return response.quiz
   },
 
   async updateQuiz({ commit }, payload) {
-    const response = await this.$axios.$patch(`/api/contributor/quizzes/${payload.id}`, payload)
+    const response = await this.$axios.$patch(
+      `/api/contributor/quizzes/${payload.id}`,
+      payload,
+    )
     commit('UPDATE_CONTRIBUTOR_QUIZZ', response.quiz)
     return response.quiz
   },

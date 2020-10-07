@@ -45,7 +45,11 @@
             <div class="quizs">
               <div class="quizs-title">Quiz créés</div>
               <div class="quizs-list">
-                <div v-for="quiz in contributor.quizs" :key="quiz.id" class="quiz">
+                <div
+                  v-for="quiz in contributor.quizs"
+                  :key="quiz.id"
+                  class="quiz"
+                >
                   <div class="icon">
                     <img :src="quiz.icon" :alt="quiz.name" />
                   </div>
@@ -236,7 +240,8 @@ export default {
         },
         {
           name: 'Une API',
-          description: 'Bio2Game vous propose une API pour pouvoir accéder à vos données depuis vos sites ou projets.',
+          description:
+            'Bio2Game vous propose une API pour pouvoir accéder à vos données depuis vos sites ou projets.',
           image: '/images/features/api.svg',
         },
       ],
@@ -324,7 +329,11 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(0deg, rgba(162, 238, 194, 0.8), rgba(162, 238, 194, 0.8)),
+    background: linear-gradient(
+        0deg,
+        rgba(162, 238, 194, 0.8),
+        rgba(162, 238, 194, 0.8)
+      ),
       url('/images/background-contributers.jpg') fixed;
     background-size: cover;
     background-position: center;

@@ -50,20 +50,32 @@
             class="questions"
             :fields="tableFields"
             :data="questions"
-            @selectRow="$router.push(`/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`)"
+            @selectRow="
+              $router.push(
+                `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
+              )
+            "
           />
           <div v-else class="no-questions">
             <h3>Aucunes questions</h3>
             <p>Ce quiz ne contient pas la moindre question !</p>
-            <div class="button md green equal" @click="createQuiz(true)">Créer une question</div>
+            <div class="button md green equal" @click="createQuiz(true)">
+              Créer une question
+            </div>
           </div>
         </div>
       </div>
       <div class="buttons-bar">
-        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Mes quizzes </nuxt-link>
-        <nuxt-link class="button green lg" to="/contributeur/questions"> Mes questions </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes">
+          Mes quizzes
+        </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/questions">
+          Mes questions
+        </nuxt-link>
         <div class="button green lg" @click="createQuiz()">Sauvegarder</div>
-        <nuxt-link class="button green lg" to="/contributeur/quizzes"> Supprimer </nuxt-link>
+        <nuxt-link class="button green lg" to="/contributeur/quizzes">
+          Supprimer
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -138,7 +150,9 @@ export default {
   },
   computed: {
     quiz() {
-      return this.$store.getters['quizzes/getPersonnalQuiz'](this.$route.params.quiz)
+      return this.$store.getters['quizzes/getPersonnalQuiz'](
+        this.$route.params.quiz,
+      )
     },
     isCreationPage() {
       return this.$route.params.quiz === 'create'
@@ -153,19 +167,24 @@ export default {
     },
     async createQuiz(questionCreation = false) {
       try {
-        const quiz = await this.$store.dispatch(`quizzes/${this.isCreationPage ? 'create' : 'update'}Quiz`, {
-          id: this.quiz.id,
-          label: this.get('label'),
-          url: this.generateURL(this.get('label')),
-          description: this.get('description'),
-          localisation: this.get('localisation'),
-          status: this.get('status'),
-          contributorId: this.$auth.user.id,
-          domainId: this.get('domain_id'),
-        })
+        const quiz = await this.$store.dispatch(
+          `quizzes/${this.isCreationPage ? 'create' : 'update'}Quiz`,
+          {
+            id: this.quiz.id,
+            label: this.get('label'),
+            url: this.generateURL(this.get('label')),
+            description: this.get('description'),
+            localisation: this.get('localisation'),
+            status: this.get('status'),
+            contributorId: this.$auth.user.id,
+            domainId: this.get('domain_id'),
+          },
+        )
 
         if (questionCreation) {
-          return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}/questions/create`)
+          return this.$router.push(
+            `/contributeur/quizzes/${quiz.id}-${quiz.url}/questions/create`,
+          )
         }
 
         return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
@@ -177,7 +196,8 @@ export default {
         if (questionCreation) {
           this.$notify({
             type: 'error',
-            text: 'Veuillez résoudre les erreurs au niveau du quiz avant de vouloir créer une question.',
+            text:
+              'Veuillez résoudre les erreurs au niveau du quiz avant de vouloir créer une question.',
             duration: 3000,
             width: 400,
           })

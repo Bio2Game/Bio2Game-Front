@@ -46,7 +46,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~/assets/css/reset.css', '~/assets/css/framework.scss', '~/assets/css/variables.scss'],
+  css: [
+    '~/assets/css/reset.css',
+    '~/assets/css/framework.scss',
+    '~/assets/css/variables.scss',
+  ],
 
   /*
    ** Style Ressources configuration

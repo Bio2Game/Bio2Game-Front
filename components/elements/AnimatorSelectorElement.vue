@@ -1,8 +1,24 @@
 <template>
-  <div v-closable="{ handler: 'closeAnimatorSelector' }" class="animator_selector_element" :class="{ active }">
+  <div
+    v-closable="{ handler: 'closeAnimatorSelector' }"
+    class="animator_selector_element"
+    :class="{ active }"
+  >
     <div class="select_element">
-      <input v-model="search" type="text" :placeholder="placeholder" @focus="active = true" />
-      <svg class="down" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <input
+        v-model="search"
+        type="text"
+        :placeholder="placeholder"
+        @focus="active = true"
+      />
+      <svg
+        class="down"
+        width="11"
+        height="7"
+        viewBox="0 0 11 7"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -51,7 +67,11 @@ export default {
           ...item,
           selected: this.selectedAnimators.includes(item.id),
         }))
-        .filter(animator => this.searchElement(animator.name) || this.searchElement(animator.username))
+        .filter(
+          animator =>
+            this.searchElement(animator.name) ||
+            this.searchElement(animator.username),
+        )
     },
     placeholder() {
       if (!this.selectedAnimators.length) {
@@ -65,14 +85,18 @@ export default {
       const index = this.selectedAnimators.indexOf(animatorId)
       this.$emit(
         'input',
-        index === -1 ? [...this.selectedAnimators, animatorId] : this.selectedAnimators.filter(a => a !== animatorId),
+        index === -1
+          ? [...this.selectedAnimators, animatorId]
+          : this.selectedAnimators.filter(a => a !== animatorId),
       )
     },
     closeAnimatorSelector() {
       if (this.active) this.active = false
     },
     searchElement(element) {
-      return element ? element.toLowerCase().includes(this.search.toLowerCase()) : null
+      return element
+        ? element.toLowerCase().includes(this.search.toLowerCase())
+        : null
     },
   },
 }

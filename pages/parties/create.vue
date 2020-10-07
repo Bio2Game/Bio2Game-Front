@@ -9,7 +9,11 @@
           <h5>Configuration du Quiz</h5>
         </div>
         <div class="item_content">
-          <InputElement v-model="name" type="text" placeholder="Nom de la partie" />
+          <InputElement
+            v-model="name"
+            type="text"
+            placeholder="Nom de la partie"
+          />
           <div class="quizcreator">
             <SelectorElement
               class="select-quiz"
@@ -18,7 +22,9 @@
               noSelect="Selectionner le quiz"
               @input="changeQuiz($event.target)"
             />
-            <nuxt-link to="/" class="button md green create-quiz"> Créer un quiz </nuxt-link>
+            <nuxt-link to="/" class="button md green create-quiz">
+              Créer un quiz
+            </nuxt-link>
           </div>
           <a class="button md green" @click="startParty()">Lancer la partie</a>
         </div>
@@ -28,7 +34,11 @@
           <h5>Choix des questions</h5>
         </div>
         <div class="item_content">
-          <label v-for="(question, index) in questions" :key="question.id" class="question">
+          <label
+            v-for="(question, index) in questions"
+            :key="question.id"
+            class="question"
+          >
             <input
               name="1"
               type="checkbox"
