@@ -46,10 +46,10 @@
         </div>
         <div class="content">
           <TableElement
-            v-if="questions.length"
+            v-if="quiz.questions && quiz.questions.length"
             class="questions"
             :fields="tableFields"
-            :data="questions"
+            :data="quiz.questions"
             @selectRow="
               $router.push(
                 `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
@@ -108,7 +108,6 @@ export default {
       domain_id: null,
       localisation: null,
       errors: [],
-      questions: [],
       tableFields: [
         {
           name: 'id',
@@ -157,6 +156,24 @@ export default {
     isCreationPage() {
       return this.$route.params.quiz === 'create'
     },
+    isDataEdited() {
+      return !!(
+        this.label ||
+        this.description ||
+        this.domain_id ||
+        this.localisation
+      )
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isDataEdited) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
+      ),
+    )
   },
   methods: {
     get(key) {
@@ -175,6 +192,7 @@ export default {
             url: this.generateURL(this.get('label')),
             description: this.get('description'),
             localisation: this.get('localisation'),
+            language: 'fr',
             status: this.get('status'),
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
