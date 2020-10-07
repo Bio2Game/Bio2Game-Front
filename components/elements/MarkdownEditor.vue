@@ -11,8 +11,8 @@
       ref="editor"
       :value="value"
       :placeholder="placeholder"
-      @input="$emit($event.target.value)"
-    ></textarea>
+      @input="handleInput($event.target.value)"
+    />
   </div>
 </template>
 
@@ -30,8 +30,18 @@ export default {
   },
   data() {
     return {
-      simpleMde: null,
+      simplemde: null,
+      isValueUpdateFromInner: false,
     }
+  },
+  watch: {
+    value(val) {
+      if (this.isValueUpdateFromInner) {
+        this.isValueUpdateFromInner = false
+      } else {
+        this.simplemde.value(val)
+      }
+    },
   },
   mounted() {
     // eslint-disable-next-line nuxt/no-env-in-hooks
@@ -39,7 +49,7 @@ export default {
       window.SimpleMDE = require('simplemde')
     }
     /* eslint-disable no-undef */
-    this.simpleMde = new SimpleMDE({
+    this.simplemde = new SimpleMDE({
       element: this.$refs.editor,
       spellChecker: false,
       renderingConfig: {
@@ -157,9 +167,24 @@ export default {
         },
       ],
     })
+
+    this.simplemde.codemirror.on('change', (instance, changeObj) => {
+      if (changeObj.origin === 'setValue') {
+        return
+      }
+      const val = this.simplemde.value()
+      this.handleInput(val)
+    })
     /* eslint-enable no-undef */
   },
+  destroyed() {
+    this.simplemde = null
+  },
   methods: {
+    handleInput(val) {
+      this.isValueUpdateFromInner = true
+      this.$emit('input', val)
+    },
     handleFilesUpload() {
       const formData = new FormData()
       formData.append('image', this.$refs.files.files[0])
@@ -170,7 +195,7 @@ export default {
           },
         })
         .then(data => {
-          this.simpleMde.codemirror.replaceSelection(
+          this.simplemde.codemirror.replaceSelection(
             "![Nom de l'image Image](" + data + ')',
           )
         })
