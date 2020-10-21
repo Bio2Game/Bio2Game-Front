@@ -26,12 +26,12 @@
     <div class="select_elements">
       <div
         v-for="item in items"
-        :key="item.ref"
+        :key="item[refKey]"
         class="element"
-        :class="{ active: selected === item.ref }"
-        @click="select(item.ref, true)"
+        :class="{ active: selected === item[refKey] }"
+        @click="select(item[refKey], true)"
       >
-        {{ item.name }}
+        {{ item[displayKey] }}
       </div>
     </div>
   </div>
@@ -61,6 +61,14 @@ export default {
       type: [String, Boolean, Number],
       default: null,
     },
+    displayKey: {
+      type: String,
+      default: 'name',
+    },
+    refKey: {
+      type: String,
+      default: 'ref',
+    },
   },
   data() {
     return {
@@ -69,11 +77,12 @@ export default {
   },
   computed: {
     getSelectedName() {
-      return (
-        [...this.items, { ref: this.defaultValue, name: this.noSelect }].find(
-          item => item.ref === this.selected,
-        ) || {}
-      ).name
+      return ([
+        ...this.items,
+        { [this.refKey]: this.defaultValue, [this.displayKey]: this.noSelect },
+      ].find(item => item[this.refKey] === this.selected) || {})[
+        this.displayKey
+      ]
     },
   },
   watch: {
@@ -83,7 +92,7 @@ export default {
   },
   methods: {
     select(itemRef, clicked = false) {
-      if (!this.items.some(item => item.ref === itemRef)) {
+      if (!this.items.some(item => item[this.refKey] === itemRef)) {
         return this.$emit('input', this.defaultValue)
       }
 
@@ -143,7 +152,7 @@ export default {
     left: -1px;
     z-index: 1000;
     width: calc(100% + 2px);
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     border-radius: 0 0 3px 3px;
     border: 1px solid #cccccc;
     box-sizing: border-box;
@@ -171,7 +180,7 @@ export default {
       align-items: center;
       position: relative;
       &:hover {
-        background-color: #e7e7e7;
+        background-color: #f5f5f5;
       }
       &.active {
         background-color: #e7e7e7;
