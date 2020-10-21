@@ -1,6 +1,8 @@
 export const state = () => ({
   quizzes: [],
+  quizzesFetched: false,
   contributorQuizzes: [],
+  contributorQuizzesFetched: false,
 })
 
 export const getters = {
@@ -15,6 +17,15 @@ export const getters = {
     if (!quiz.questions) return {}
     return quiz.questions.find(question => question.id === questionId) || {}
   },
+  questions: ({ quizzes }) => {
+    return quizzes
+      .map(quiz =>
+        quiz.questions
+          ? quiz.questions.map(question => ({ ...question, quiz }))
+          : [],
+      )
+      .flat()
+  },
 }
 
 export const mutations = {
@@ -25,12 +36,27 @@ export const mutations = {
     state.contributorQuizzes = quizzes
   },
 
+  SET_QUIZZES_FETCHED(state) {
+    state.quizzesFetched = true
+  },
+  SET_CONTRIBUTOR_QUIZZES_FETCHED(state) {
+    state.contributorQuizzesFetched = true
+  },
+
   ADD_CONTRIBUTOR_QUIZZ(state, quiz) {
     state.contributorQuizzes.push(quiz)
   },
   UPDATE_CONTRIBUTOR_QUIZZ(state, quiz) {
     const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quiz.id)
-    state.contributorQuizzes[quizIndex] = quiz
+    state.contributorQuizzes[quizIndex] = Object.assign(
+      {},
+      state.contributorQuizzes[quizIndex],
+      quiz,
+    )
+  },
+  DELETE_CONTRIBUTOR_QUIZZ(state, quizId) {
+    const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quizId)
+    this.$delete(state.contributorQuizzes, quizIndex)
   },
 
   ADD_CONTRIBUTOR_QUESTION(state, question) {
@@ -44,16 +70,30 @@ export const mutations = {
     const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
     quiz.questions[questionIndex] = question
   },
+  DELETE_CONTRIBUTOR_QUESTION(state, question) {
+    const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
+    if (!quiz) return
+    const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
+    this.$delete(quiz.questions, questionIndex)
+  },
 }
 
 export const actions = {
-  async fetchQuizzes({ commit }) {
+  async fetchQuizzes({ state, commit }) {
+    if (state.quizzesFetched) {
+      return
+    }
     const response = await this.$axios.$get('/api/quizzes')
+    commit('SET_QUIZZES_FETCHED')
     commit('SET_QUIZZES', response.quizzes)
   },
 
-  async fetchPeronnalQuizzes({ commit }) {
+  async fetchPeronnalQuizzes({ state, commit }) {
+    if (state.contributorQuizzesFetched) {
+      return
+    }
     const response = await this.$axios.$get('/api/contributor/quizzes')
+    commit('SET_CONTRIBUTOR_QUIZZES_FETCHED')
     commit('SET_CONTRIBUTOR_QUIZZES', response.quizzes)
   },
 
@@ -75,6 +115,11 @@ export const actions = {
     return response.quiz
   },
 
+  async deleteQuiz({ commit }, quizId) {
+    await this.$axios.$delete(`/api/contributor/quizzes/${quizId}`)
+    commit('DELETE_CONTRIBUTOR_QUIZZ', quizId)
+  },
+
   async createQuestion({ commit }, payload) {
     const response = await this.$axios.$post(
       '/api/contributor/questions',
@@ -91,5 +136,12 @@ export const actions = {
     )
     commit('UPDATE_CONTRIBUTOR_QUESTION', response.question)
     return response.question
+  },
+
+  async deleteQuestion({ commit }, payload) {
+    await this.$axios.$delete(
+      `/api/contributor/questions/${payload.question_id}`,
+    )
+    commit('DELETE_CONTRIBUTOR_QUESTION', payload)
   },
 }
