@@ -134,6 +134,12 @@
   i {
     margin-left: -8px;
   }
+
+  &.disabled {
+    background-color: #cccccc !important;
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 .m-1 {
@@ -364,6 +370,7 @@ a.b2glink:hover {
   background-color: white;
     margin-top: 24px;
     border-radius: 8px;
+    cursor: default;
   .head {
     display: flex;
     justify-content: space-between;
