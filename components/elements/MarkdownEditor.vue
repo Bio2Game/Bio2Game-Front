@@ -13,6 +13,7 @@
       :placeholder="placeholder"
       @input="handleInput($event.target.value)"
     />
+    <div v-if="error" class="error">{{ error.message }}</div>
   </div>
 </template>
 
@@ -27,12 +28,25 @@ export default {
       type: String,
       default: '',
     },
+    max: {
+      type: Number,
+      default: 0,
+    },
+    error: {
+      type: Object,
+      default: () => null,
+    },
   },
   data() {
     return {
       simplemde: null,
       isValueUpdateFromInner: false,
     }
+  },
+  computed: {
+    displayError() {
+      return this.error ? this.error.message : ''
+    },
   },
   watch: {
     value(val) {
@@ -48,6 +62,7 @@ export default {
     if (process.client) {
       window.SimpleMDE = require('simplemde')
     }
+    const max = this.max
     /* eslint-disable no-undef */
     this.simplemde = new SimpleMDE({
       element: this.$refs.editor,
@@ -55,6 +70,22 @@ export default {
       renderingConfig: {
         singleLineBreaks: false,
       },
+      status: [
+        'lines',
+        'words',
+        'cursor',
+        {
+          className: 'characters',
+          defaultValue(el) {
+            el.innerHTML = '0'
+          },
+          onUpdate: el => {
+            el.innerHTML = `${this.simplemde.codemirror.getValue().length}${
+              max ? ` /${max}` : ''
+            }`
+          },
+        },
+      ],
       toolbar: [
         {
           name: 'undo',
@@ -175,6 +206,15 @@ export default {
       const val = this.simplemde.value()
       this.handleInput(val)
     })
+    this.simplemde.codemirror.on('beforeChange', (instance, changes) => {
+      if (
+        this.max &&
+        this.simplemde.value().length > this.max - 1 &&
+        changes.origin !== '+delete'
+      ) {
+        changes.cancel()
+      }
+    })
     /* eslint-enable no-undef */
   },
   destroyed() {
@@ -210,6 +250,7 @@ export default {
 <style lang="css">
 .markdown-editor {
   width: 100%;
+  position: relative;
 }
 .CodeMirror-gutter-filler,
 .CodeMirror-scrollbar-filler {
@@ -727,6 +768,7 @@ span.CodeMirror-selectedtext {
   color: #959694;
   text-align: right;
   margin-bottom: 11px;
+  position: relative;
 }
 .editor-statusbar:last-child {
   margin-bottom: 0;
@@ -745,8 +787,13 @@ span.CodeMirror-selectedtext {
 .editor-statusbar .words::before {
   content: 'mots: ';
 }
-.editor-statusbar .characters::before {
-  content: 'caractères: ';
+.editor-statusbar + .error {
+  position: absolute;
+  color: #c90a0a;
+  font-size: 12px;
+  text-align: left;
+  bottom: 18px;
+  left: 1em;
 }
 .editor-preview {
   position: absolute;
