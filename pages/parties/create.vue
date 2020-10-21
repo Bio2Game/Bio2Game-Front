@@ -1,56 +1,74 @@
 <template>
-  <div class="quiz-creation">
-    <div class="infos">
-      <h1>CRÉATION D’UNE PARTIE</h1>
-    </div>
-    <div class="container content">
-      <div class="item quiz">
-        <div class="head">
-          <h5>Configuration du Quiz</h5>
-        </div>
-        <div class="item_content">
-          <InputElement
-            v-model="name"
-            type="text"
-            placeholder="Nom de la partie"
-          />
-          <div class="quizcreator">
-            <SelectorElement
-              class="select-quiz"
-              :selected="$route.query.autoselect || null"
-              :items="quizzes"
-              noSelect="Selectionner le quiz"
-              @input="changeQuiz($event.target)"
-            />
-            <nuxt-link to="/" class="button md green create-quiz">
-              Créer un quiz
-            </nuxt-link>
+  <div class="party-creation">
+    <div class="container">
+      <div class="infos">
+        <h1>CRÉATION D’UNE PARTIE</h1>
+        <p>Les parties sont des quizzes intéractifs en groupe administrés</p>
+      </div>
+      <div class="blocks">
+        <div class="block">
+          <div class="head">
+            <h5>Configuration du Quiz</h5>
           </div>
-          <a class="button md green" @click="startParty()">Lancer la partie</a>
-        </div>
-      </div>
-      <div class="item questions">
-        <div class="head">
-          <h5>Choix des questions</h5>
-        </div>
-        <div class="item_content">
-          <label
-            v-for="(question, index) in questions"
-            :key="question.id"
-            class="question"
-          >
-            <input
-              name="1"
-              type="checkbox"
-              class="filled-in"
-              :checked="question.active !== false"
-              @input="checkQuestion(question.id, $event.target.checked)"
+          <div class="content">
+            <InputElement
+              v-model="name"
+              type="text"
+              placeholder="Nom de la partie"
             />
-            <span>Question n°{{ index + 1 }}: {{ question.label }}</span>
-          </label>
+            <div class="quizcreator">
+              <SelectorElement
+                class="select-quiz"
+                :selected="quizId || $route.query.autoselect"
+                :items="quizzes"
+                noSelect="Selectionner le quiz"
+                displayKey="label"
+                refKey="id"
+                @input="loadQuiz($event)"
+              />
+              <nuxt-link
+                to="/contributeur/quizzes/create"
+                class="button md green create-quiz"
+              >
+                Créer un quiz
+              </nuxt-link>
+            </div>
+            <a class="button md green" @click="startParty()"
+              >Lancer la partie</a
+            >
+          </div>
+        </div>
+        <div class="block">
+          <div class="head">
+            <h5>Questions</h5>
+            <div
+              class="button white_sky sm equal"
+              @click="questionPanel = true"
+            >
+              Créer une question
+            </div>
+          </div>
+          <div class="content">
+            <div class="questions-selector">
+              <CheckboxElement
+                v-for="(question, index) of questions"
+                :id="question.id"
+                :key="question.id"
+                :checked="question.active"
+                :label="generateLabel(question.label, index)"
+                @input="question.active = $event"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <QuestionsSelector
+      v-if="questionPanel"
+      :questions="questions"
+      @close="questionPanel = false"
+      @questions="loadQuestions($event)"
+    />
   </div>
 </template>
 
@@ -74,6 +92,7 @@ export default {
       questions: [],
       quizId: null,
       autoselect: null,
+      questionPanel: false,
     }
   },
   computed: {
@@ -81,20 +100,29 @@ export default {
       return this.$store.state.quizzes.quizzes
     },
   },
+  mounted() {
+    if (!this.$socket.connected) {
+      this.$socket.client.open()
+    }
+  },
   methods: {
-    checkQuestion(id, checked) {
-      this.questions.find(q => q.id === id).active = checked
+    loadQuestions(questions) {
+      this.questions = questions.map(q => ({ ...q, active: true }))
+      this.questionPanel = false
     },
-    changeQuiz(target) {
-      this.quizId = target.value
-      const quiz = this.quizzes.find(q => q.id === target.value)
+    generateLabel(label, index) {
+      return `<b>Question ${index + 1}</b>: ${label}`
+    },
+    loadQuiz(value) {
+      this.quizId = value
+      const quiz = this.quizzes.find(q => q.id === value)
       this.questions = quiz.questions
     },
     startParty() {
-      if (!this.quizId) {
+      if (!this.name.length) {
         return this.$notify({
           type: 'error',
-          text: 'Veuillez selectionner un quiz !',
+          text: 'Veuillez nommer votre partie.',
           duration: 3000,
           width: 400,
         })
@@ -103,120 +131,98 @@ export default {
       if (this.questions.filter(q => q.active).length < 3) {
         return this.$notify({
           type: 'error',
-          text: 'Veuillez selectionner au moins 3 questions !',
+          text: 'Veuillez selectionner au moins 3 questions.',
           duration: 3000,
           width: 400,
         })
       }
 
-      this.$socket.emit('createGame', {
-        quizId: this.quizId,
+      this.$socket.client.emit('createGame', {
         name: this.name,
         questions: this.questions.filter(q => q.active),
-        animatorId: this.user.id,
+        animatorId: this.$auth.user.id,
       })
     },
   },
   sockets: {
-    game_created(game) {
-      this.$router.push(`/parties/${game.id}`)
+    game_created(gameId) {
+      this.$router.push(`/parties/${gameId}`)
     },
   },
 }
 </script>
 
 <style lang="scss">
-.quiz-creation {
-  .infos {
-    margin-bottom: 25px;
-    h1 {
-      font-weight: 700;
-      font-size: 40px;
-      text-transform: uppercase;
-      text-align: center;
-      margin: 64px 0 32px;
-      color: #414141;
-      @media screen and (max-width: $md) {
-        font-size: 32px;
-        margin: 32px 0;
+.party-creation {
+  .container {
+    flex-direction: column;
+    .infos {
+      h1 {
+        font-weight: 700;
+        font-size: 40px;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 48px 0 24px;
+        color: #414141;
+        @media screen and (max-width: $md) {
+          font-size: 32px;
+          margin: 32px 0 24px;
+        }
+        @media screen and (max-width: $sm) {
+          font-size: 24px;
+          margin: 24px 0;
+        }
       }
-      @media screen and (max-width: $sm) {
-        font-size: 24px;
-        margin: 24px 0;
-      }
-    }
-  }
-  p {
-    text-align: center;
-    font-weight: 500;
-    font-size: 15px;
-    margin-bottom: 32px;
-  }
-  .content {
-    margin-bottom: 20px;
-
-    @media screen and (max-width: $md) {
-      flex-direction: column;
-      .item {
-        margin: 0 0 25px 0 !important;
+      p {
+        text-align: center;
+        font-weight: 500;
+        font-size: 16px;
+        margin-bottom: 16px;
       }
     }
-    .item {
+    .blocks {
       display: flex;
-      flex: 1;
-      flex-direction: column;
-      .head {
-        padding: 16px 24px;
-        background-color: $green;
-        color: #ffffff;
-        border-radius: 8px 8px 0 0;
-        h5 {
-          font-weight: 400;
-          font-size: 18px;
-        }
-      }
-      .item_content {
-        padding: 24px 24px 32px;
-        background-color: white;
-        border-radius: 0 0 8px 8px;
+      .block {
         flex: 1;
-      }
-      &.quiz {
-        margin-right: 10px;
-        .quizcreator {
-          display: flex;
-          .select-quiz {
-            flex: 1;
-            margin-right: 16px;
-          }
-
-          @media screen and (max-width: $lg) {
+        &:first-child {
+          margin-right: 24px;
+          .quizcreator {
+            display: flex;
             .select-quiz {
-              margin-right: 0;
+              flex: 1;
+              margin-right: 16px;
             }
-            .create-quiz {
-              display: none;
+            .button {
+              margin: 8px 0 16px;
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+            @media screen and (max-width: $lg) {
+              .select-quiz {
+                margin-right: 0;
+              }
+              .create-quiz {
+                display: none;
+              }
             }
           }
         }
-        .button {
-          margin: 8px 0 16px;
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
-      &.questions {
-        margin-left: 10px;
-        .questions_content {
+        .questions-selector {
           display: flex;
           flex-direction: column;
-        }
-        .question {
-          margin-bottom: 10px;
-          span {
-            font-size: 18px;
+          .checkbox {
+            margin-bottom: 8px;
           }
+        }
+        .head {
+          min-height: 70px;
+          align-items: center;
+        }
+        .content {
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
         }
       }
     }
