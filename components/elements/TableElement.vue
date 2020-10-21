@@ -1,10 +1,10 @@
 <template>
-  <client-only placeholder="Loading...">
+  <client-only>
     <vuetable
       :apiMode="false"
-      :data="data"
       :fields="fields"
       :sortOrder="sortOrder"
+      :dataManager="dataManager"
       :css="table"
       @vuetable:row-clicked="$emit('selectRow', $event)"
     >
@@ -14,6 +14,8 @@
 
 <script>
 import Vuetable from 'vuetable-2'
+
+import { orderBy } from 'lodash'
 
 export default {
   name: 'Table',
@@ -48,6 +50,17 @@ export default {
         },
       },
     }
+  },
+  methods: {
+    dataManager(sortOrder) {
+      if (!this.data.length) return
+
+      return {
+        data: sortOrder.length
+          ? orderBy(this.data, sortOrder[0].sortField, sortOrder[0].direction)
+          : this.data,
+      }
+    },
   },
   head() {
     return {
