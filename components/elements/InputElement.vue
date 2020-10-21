@@ -129,7 +129,7 @@ export default {
     color: #c90a0a;
     font-size: 12px;
     top: calc(100% + 6px);
-    right: 0;
+    right: 1em;
   }
   input {
     color: #333333;
