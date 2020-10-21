@@ -6,7 +6,7 @@
       :checked="checked"
       @change="$emit('input', $event.target.checked)"
     />
-    <span>{{ label }}</span>
+    <span v-html="label"></span>
   </label>
 </template>
 
@@ -18,8 +18,8 @@ export default {
       required: true,
     },
     id: {
-      type: String,
-      required: true,
+      type: [String, Number],
+      default: () => Math.random().toString().substring(2),
     },
     label: {
       type: String,
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .checkbox {
   span {
     position: relative;
@@ -40,7 +40,7 @@ export default {
     line-height: 25px;
     font-size: 14px;
     user-select: none;
-    color: #9e9e9e;
+    color: $green;
     &::before {
       content: '';
       position: absolute;
@@ -66,7 +66,7 @@ export default {
       height: 20px;
       width: 20px;
       background-color: transparent;
-      border: 2px solid #5a5a5a;
+      border: 2px solid #999999;
       top: 2px;
       border-radius: 2px;
       box-sizing: border-box;
@@ -93,8 +93,8 @@ export default {
         top: 2px;
         width: 20px;
         height: 20px;
-        border: 2px solid #19683b;
-        background-color: #19683b;
+        border: 2px solid $green;
+        background-color: $green;
         z-index: 0;
       }
     }
