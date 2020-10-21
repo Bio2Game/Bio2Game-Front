@@ -28,7 +28,7 @@
           <div v-else class="right-menu">
             <div
               class="user"
-              :class="{ active: toggleUserMenu }"
+              :class="{ active: toggleUserMenu, transition }"
               @click="toggleUserMenu = !toggleUserMenu"
             >
               <AvatarElement
@@ -43,7 +43,7 @@
               <div class="user-menu">
                 <ul>
                   <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
-                  <nuxt-link to="/quizzes">Mes favoris</nuxt-link>
+                  <nuxt-link to="/quizzes"><Favorite /> Mes favoris</nuxt-link>
                   <nuxt-link to="/contributeur/quizzes">
                     <Nature2Icon /> Mes quizz
                   </nuxt-link>
@@ -72,7 +72,7 @@
 import DownIcon from '@/assets/icons/down.svg?inline'
 import UserIcon from '@/assets/icons/user.svg?inline'
 import Nature2Icon from '@/assets/icons/nature2.svg?inline'
-// import NatureIcon from '@/assets/icons/dble_nature.svg?inline'
+import Favorite from '@/assets/icons/favorite.svg?inline'
 import SettingsIcon from '@/assets/icons/settings.svg?inline'
 import PowerIcon from '@/assets/icons/power.svg?inline'
 import HomeIcon from '@/assets/icons/home.svg?inline'
@@ -82,7 +82,7 @@ import GroupIcon from '@/assets/icons/group.svg?inline'
 export default {
   components: {
     DownIcon,
-    // NatureIcon,
+    Favorite,
     Nature2Icon,
     SettingsIcon,
     UserIcon,
@@ -96,6 +96,7 @@ export default {
       isFixed: false,
       stage: false,
       toggleUserMenu: false,
+      transition: false,
     }
   },
   watch: {
@@ -113,7 +114,7 @@ export default {
     window.removeEventListener('scroll', this.checkHeader)
   },
   methods: {
-    checkHeader() {
+    async checkHeader() {
       if (this.$route.name !== 'index') {
         this.isFixed = true
         return
@@ -123,7 +124,11 @@ export default {
       const isScrollingUp = this.isFixed ? position > 0 : position > 0
 
       if (this.isFixed !== isScrollingUp) {
+        this.transition = true
+        await this.$nextTick()
         this.isFixed = isScrollingUp
+        await this.$nextTick()
+        this.transition = false
       }
     },
     async logout() {
@@ -201,6 +206,7 @@ export default {
           text-decoration: none;
           cursor: pointer;
           user-select: none;
+          min-width: 188px;
           .avatar {
             height: 32px;
             width: 32px;
@@ -211,7 +217,7 @@ export default {
           .username {
             display: flex;
             align-items: center;
-            color: #000000;
+            color: #4f4f4f;
             font-size: 19px;
             transition: 0.2s color 0.5s ease-out;
           }
@@ -230,7 +236,7 @@ export default {
             left: 0;
             background-color: $green;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.175);
-            border-radius: 0 0 0 16px;
+            border-radius: 0 0 16px 16px;
             max-height: 0;
             transition: 0.6s max-height ease-out;
             overflow: hidden;
@@ -257,7 +263,7 @@ export default {
           &.active {
             .username {
               transition: 0.2s color ease-out;
-              color: #ffffff;
+              color: #ffffff !important;
             }
             svg.down path {
               transition: 0.2s fill ease-out;
@@ -309,6 +315,7 @@ export default {
           }
           .user {
             padding: 0;
+            min-width: 0;
             .avatar,
             .username,
             .down {
@@ -449,6 +456,17 @@ export default {
     .wrapper {
       background-color: transparent;
       position: absolute;
+      .menu .right-menu .user {
+        .username {
+          color: white;
+          @media screen and (max-width: $lg) {
+            color: #4f4f4f;
+          }
+        }
+        &.transition .username {
+          transition: 0.2s color ease-out;
+        }
+      }
     }
     &.fixed-header {
       height: 0;
@@ -457,6 +475,11 @@ export default {
         background-color: white;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
           0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        .menu .right-menu .user {
+          .username {
+            color: #4f4f4f;
+          }
+        }
       }
     }
   }
