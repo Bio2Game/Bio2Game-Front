@@ -1,39 +1,47 @@
 <template>
-  <div class="quiz-creation index">
-    <div class="container">
-      <div class="block">
-        <div class="head">
-          <h5>Mes questions</h5>
+  <div class="container">
+    <div class="block index">
+      <div class="head">
+        <h5>Mes questions</h5>
+        <nuxt-link
+          to="/contributeur/questions/create"
+          class="button white_sky sm equal"
+        >
+          Créer une question
+        </nuxt-link>
+      </div>
+      <div class="content">
+        <TableElement
+          v-if="questions.length"
+          :fields="tableFields"
+          :data="questions"
+          @selectRow="
+            $router.push(
+              `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
+            )
+          "
+        />
+        <div v-else class="no-elements">
+          <h3>Aucunes questions</h3>
+          <p>Ce quiz ne contient pas la moindre question !</p>
           <nuxt-link
             to="/contributeur/questions/create"
-            class="button white_sky sm equal"
+            class="button md green equal"
           >
             Créer une question
           </nuxt-link>
         </div>
-        <div class="content">
-          <TableElement
-            v-if="questions.length"
-            :fields="tableFields"
-            :data="questions"
-            @selectRow="
-              $router.push(
-                `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
-              )
-            "
-          />
-          <div v-else class="no-questions">
-            <h3>Aucunes questions</h3>
-            <p>Ce quiz ne contient pas la moindre question !</p>
-            <nuxt-link
-              to="/contributeur/questions/create"
-              class="button md green equal"
-            >
-              Créer une question
-            </nuxt-link>
-          </div>
-        </div>
       </div>
+    </div>
+    <div class="buttons-bar">
+      <nuxt-link class="button green lg" to="/contributeur/quizzes">
+        Mes quizzes
+      </nuxt-link>
+      <nuxt-link class="button green lg" to="/contributeur/questions">
+        Mes questions
+      </nuxt-link>
+      <div class="button green lg disabled">Sauvegarder</div>
+      <div class="button green lg disabled">Supprimer</div>
     </div>
   </div>
 </template>
@@ -105,9 +113,7 @@ export default {
   },
   computed: {
     questions() {
-      return this.$store.state.quizzes.contributorQuizzes
-        .map(quiz => quiz.questions.map(question => ({ ...question, quiz })))
-        .flat()
+      return this.$store.getters['quizzes/questions']
     },
   },
 }

@@ -1,131 +1,131 @@
 <template>
-  <div class="quiz-creation question">
-    <div class="container">
-      <div class="block">
-        <div class="head">
+  <div class="container">
+    <div class="block question">
+      <div class="head">
+        <InputElement
+          :value="get('label')"
+          type="text"
+          name="label"
+          class="white_label"
+          placeholder="Libélé de la question"
+          :error="filtredErrors('label')"
+          @input="value => (label = value)"
+        />
+        <InputElement
+          :value="get('time')"
+          type="number"
+          name="time"
+          class="white_label"
+          placeholder="Temps autorisé(s)"
+          :error="filtredErrors('time')"
+          @input="value => (time = value)"
+        />
+        <InputElement
+          :value="get('quizId')"
+          type="number"
+          name="quizId"
+          class="white_label"
+          placeholder="Quiz de la question"
+          :error="filtredErrors('quizId')"
+          @input="value => (quizId = value)"
+        />
+        <div class="button md equal border_white" @click="status = !status">
+          {{ get('status') ? 'Publique' : 'Privé' }}
+        </div>
+      </div>
+      <div class="content">
+        <div class="section">
+          <h5 class="section-title">Question</h5>
+          <client-only>
+            <MarkdownEditor
+              :value="get('question')"
+              placeholder="Intitulé de la question"
+              :max="250"
+              :error="filtredErrors('question')"
+              @input="value => (question = value)"
+            />
+          </client-only>
           <InputElement
-            :value="get('label')"
+            :value="get('source')"
             type="text"
-            name="label"
-            class="white_label"
-            placeholder="Libélé de la question"
-            :error="filtredErrors('label')"
-            @input="value => (label = value)"
+            name="source"
+            placeholder="Source"
+            :error="filtredErrors('source')"
+            @input="value => (source = value)"
           />
           <InputElement
-            :value="get('time')"
-            type="number"
-            name="time"
-            class="white_label"
-            placeholder="Temps autorisé(s)"
-            :error="filtredErrors('time')"
-            @input="value => (time = value)"
+            :value="get('endDate')"
+            type="date"
+            name="endDate"
+            placeholder="Date d’expiration (optionnel)"
+            :error="filtredErrors('endDate')"
+            @input="value => (endDate = value)"
           />
           <InputElement
-            :value="get('quizId')"
+            :value="get('profil')"
             type="number"
-            name="quizId"
-            class="white_label"
-            placeholder="Quiz de la question"
-            :error="filtredErrors('quizId')"
-            @input="value => (quizId = value)"
+            name="profil"
+            placeholder="Profil du joueur"
+            :error="filtredErrors('profil')"
+            @input="value => (profil = value)"
           />
-          <div class="button md equal border_white" @click="status = !status">
-            {{ get('status') ? 'Publique' : 'Privé' }}
-          </div>
         </div>
-        <div class="content">
-          <div class="section">
-            <h5 class="section-title">Question</h5>
-            <client-only>
-              <MarkdownEditor
-                :value="get('question')"
-                placeholder="Intitulé de la question"
-                @input="value => (question = value)"
-              />
-            </client-only>
-            <InputElement
-              :value="get('source')"
-              type="text"
-              name="source"
-              placeholder="Source"
-              :error="filtredErrors('source')"
-              @input="value => (source = value)"
+        <div class="section">
+          <h5 class="section-title">Réponses</h5>
+          <InputElement
+            :value="getResponse('response0')"
+            type="text"
+            name="response0"
+            placeholder="Bonne réponse"
+            :error="filtredErrors('responses.response0')"
+            @input="value => (response0 = value)"
+          />
+          <InputElement
+            :value="getResponse('response1')"
+            type="text"
+            name="response1"
+            placeholder="Mauvaise réponse n°1"
+            :error="filtredErrors('responses.response1')"
+            @input="value => (response1 = value)"
+          />
+          <InputElement
+            :value="getResponse('response2')"
+            type="text"
+            name="response2"
+            placeholder="Mauvaise réponse n°2"
+            :error="filtredErrors('responses.response2')"
+            @input="value => (response2 = value)"
+          />
+          <InputElement
+            :value="getResponse('response3')"
+            type="text"
+            name="response3"
+            placeholder="Réponse improbable"
+            :error="filtredErrors('responses.response3')"
+            @input="value => (response3 = value)"
+          />
+          <h5 class="section-title">Explications</h5>
+          <client-only>
+            <MarkdownEditor
+              :value="get('explication')"
+              placeholder="Explication de la réponse"
+              :max="250"
+              :error="filtredErrors('explication')"
+              @input="value => (explication = value)"
             />
-            <InputElement
-              :value="get('endDate')"
-              type="date"
-              name="endDate"
-              placeholder="Date d’expiration (optionnel)"
-              :error="filtredErrors('endDate')"
-              @input="value => (endDate = value)"
-            />
-            <InputElement
-              :value="get('profil')"
-              type="number"
-              name="profil"
-              placeholder="Profil du joueur"
-              :error="filtredErrors('profil')"
-              @input="value => (profil = value)"
-            />
-          </div>
-          <div class="section">
-            <h5 class="section-title">Réponses</h5>
-            <InputElement
-              :value="getResponse('response0')"
-              type="text"
-              name="response0"
-              placeholder="Bonne réponse"
-              :error="filtredErrors('response0')"
-              @input="value => (response0 = value)"
-            />
-            <InputElement
-              :value="getResponse('response1')"
-              type="text"
-              name="response1"
-              placeholder="Mauvaise réponse n°1"
-              :error="filtredErrors('response1')"
-              @input="value => (response1 = value)"
-            />
-            <InputElement
-              :value="getResponse('response2')"
-              type="text"
-              name="response2"
-              placeholder="Mauvaise réponse n°2"
-              :error="filtredErrors('response2')"
-              @input="value => (response2 = value)"
-            />
-            <InputElement
-              :value="getResponse('response3')"
-              type="text"
-              name="response3"
-              placeholder="Réponse improbable"
-              :error="filtredErrors('response3')"
-              @input="value => (response3 = value)"
-            />
-            <h5 class="section-title">Explications</h5>
-            <client-only>
-              <MarkdownEditor
-                :value="get('explication')"
-                placeholder="Explication de la réponse"
-                @input="value => (explication = value)"
-              />
-            </client-only>
-          </div>
+          </client-only>
         </div>
       </div>
-      <div class="buttons-bar">
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Mes quizzes
-        </nuxt-link>
-        <nuxt-link class="button green lg" to="/contributeur/questions">
-          Mes questions
-        </nuxt-link>
-        <div class="button green lg" @click="createQuestion()">Sauvegarder</div>
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Supprimer
-        </nuxt-link>
-      </div>
+    </div>
+    <div class="buttons-bar">
+      <nuxt-link class="button green lg" to="/contributeur/quizzes">
+        Mes quizzes
+      </nuxt-link>
+      <nuxt-link class="button green lg" to="/contributeur/questions">
+        Mes questions
+      </nuxt-link>
+      <div class="button green lg" @click="createQuestion()">Sauvegarder</div>
+      <div class="button green lg" @click="deleteQuestion()">Supprimer</div>
     </div>
   </div>
 </template>
@@ -234,7 +234,7 @@ export default {
     },
     async createQuestion() {
       try {
-        const question = await this.$store.dispatch(
+        await this.$store.dispatch(
           `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
           {
             id: this.questionObj.id,
@@ -251,14 +251,23 @@ export default {
               response2: this.getResponse('response2'),
               response3: this.getResponse('response3'),
             },
-            explication: this.get('explication'),
+            explication: this.get('explication') || '',
             contributorId: this.$auth.user.id,
             status: !!this.get('status') + 0,
           },
         )
 
+        this.$notify({
+          type: 'success',
+          text: `Votre question a été ${
+            this.questionObj.id ? 'sauvegardé' : 'créée'
+          } avec succès`,
+          duration: 3000,
+          width: 400,
+        })
+
         return this.$router.push(
-          `/contributeur/quizzes/${this.$route.params.quiz_ref}/questions/${question.id}`,
+          `/contributeur/quizzes/${this.$route.params.quiz_ref}`,
         )
       } catch (error) {
         console.log(error)
@@ -268,69 +277,61 @@ export default {
         }
       }
     },
+    async deleteQuestion() {
+      try {
+        await this.$store.dispatch(`quizzes/deleteQuestion`, {
+          quiz_id: this.questionObj.quizId,
+          question_id: this.questionObj.id,
+        })
+
+        return this.$router.push(
+          `/contributeur/quizzes/${this.$route.params.quiz_ref}`,
+        )
+      } catch (error) {
+        console.log(error)
+        this.$notify({
+          type: 'error',
+          text:
+            "Une erreur s'est produite lors de la suppression de la question.",
+          duration: 3000,
+          width: 400,
+        })
+      }
+    },
   },
 }
 </script>
 
 <style lang="scss">
-.quiz-creation {
-  .container {
-    flex-direction: column;
-    .buttons-bar {
+.block.question {
+  .head {
+    .input-container {
+      margin-bottom: 8px;
+      flex: 2;
+      margin-right: 16px;
+      &:first-child {
+        flex: 3;
+      }
+    }
+    .button {
+      min-width: 120px;
+    }
+  }
+  .content {
+    display: flex;
+    padding-top: 16px;
+    .section {
+      flex: 1;
       display: flex;
-      justify-content: space-between;
-      margin: 24px -12px 0;
-      .button {
-        flex: 1;
-        margin: 0 12px;
-        max-width: none;
+      flex-direction: column;
+      &:last-child {
+        margin-left: 24px;
       }
-    }
-  }
-  .block {
-    flex: 1;
-    flex-direction: column;
-    margin-top: 32px;
-    .content {
-      min-height: calc(50vh);
-      .big {
-        width: 45%;
-      }
-    }
-  }
-  &.question {
-    .block {
-      .head {
-        .input-container {
-          margin-bottom: 8px;
-          flex: 2;
-          margin-right: 16px;
-          &:first-child {
-            flex: 3;
-          }
-        }
-        .button {
-          margin-top: 8px;
-          min-width: 120px;
-        }
-      }
-      .content {
-        display: flex;
-        padding-top: 16px;
-        .section {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          &:last-child {
-            margin-left: 24px;
-          }
-          .section-title {
-            user-select: none;
-            font-weight: 600;
-            font-size: 15px;
-            margin: 8px 0 16px;
-          }
-        }
+      .section-title {
+        user-select: none;
+        font-weight: 600;
+        font-size: 15px;
+        margin: 8px 0 16px;
       }
     }
   }

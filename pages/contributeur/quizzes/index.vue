@@ -1,39 +1,47 @@
 <template>
-  <div class="quiz-creation index">
-    <div class="container">
-      <div class="block">
-        <div class="head">
-          <h5>Mes quizzes</h5>
+  <div class="container">
+    <div class="block index">
+      <div class="head">
+        <h5>Mes quizzes</h5>
+        <nuxt-link
+          to="/contributeur/quizzes/create"
+          class="button white_sky sm equal"
+        >
+          Créer un quizz
+        </nuxt-link>
+      </div>
+      <div class="content">
+        <TableElement
+          v-if="quizzes.length"
+          :fields="tableFields"
+          :data="quizzes"
+          @selectRow="
+            $router.push(
+              `/contributeur/quizzes/${$event.data.id}-${$event.data.url}`,
+            )
+          "
+        />
+        <div v-else class="no-elements">
+          <h3>Aucuns quizzes</h3>
+          <p>Votre profil ne contient pas le moindre quiz !</p>
           <nuxt-link
+            class="button md green equal"
             to="/contributeur/quizzes/create"
-            class="button white_sky sm equal"
           >
-            Créer un quizz
+            Créer un quiz
           </nuxt-link>
         </div>
-        <div class="content">
-          <TableElement
-            v-if="quizzes.length"
-            :fields="tableFields"
-            :data="quizzes"
-            @selectRow="
-              $router.push(
-                `/contributeur/quizzes/${$event.data.id}-${$event.data.url}`,
-              )
-            "
-          />
-          <div v-else class="no-quizzes">
-            <h3>Aucuns quizzes</h3>
-            <p>Votre profil ne contient pas le moindre quiz !</p>
-            <nuxt-link
-              class="button md green equal"
-              to="/contributeur/quizzes/create"
-            >
-              Créer un quiz
-            </nuxt-link>
-          </div>
-        </div>
       </div>
+    </div>
+    <div class="buttons-bar">
+      <nuxt-link class="button green lg" to="/contributeur/quizzes">
+        Mes quizzes
+      </nuxt-link>
+      <nuxt-link class="button green lg" to="/contributeur/questions">
+        Mes questions
+      </nuxt-link>
+      <div class="button green lg disabled">Sauvegarder</div>
+      <div class="button green lg disabled">Supprimer</div>
     </div>
   </div>
 </template>
@@ -90,7 +98,7 @@ export default {
         {
           name: 'questions',
           title: 'Questions',
-          formatter: questions => questions.length,
+          formatter: questions => (questions ? questions.length : 0),
         },
         {
           name: 'updated_at',
@@ -116,33 +124,7 @@ export default {
 </script>
 
 <style lang="scss">
-.quiz-creation.index {
-  .block {
-    flex-direction: column;
-    .head {
-      align-items: center;
-    }
-    .content {
-      .no-quizzes {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        h3 {
-          font-weight: 700;
-          font-size: 32px;
-          color: $green;
-          margin-bottom: 16px;
-        }
-        p {
-          color: #777777;
-          font-size: 16px;
-          margin-bottom: 24px;
-          text-align: center;
-        }
-      }
-    }
-  }
+.block.index .head {
+  align-items: center;
 }
 </style>

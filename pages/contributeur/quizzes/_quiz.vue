@@ -1,82 +1,86 @@
 <template>
-  <div class="quiz-creation create">
-    <div class="container">
-      <div class="block">
-        <div class="head">
-          <div class="section">
-            <InputElement
-              :value="get('label')"
-              type="text"
-              name="label"
-              class="white_label"
-              placeholder="Libélé du quizz"
-              :error="filtredErrors('label')"
-              @input="value => (label = value)"
-            />
-            <InputElement
-              :value="get('description')"
-              type="text"
-              name="name"
-              class="white_label"
-              placeholder="Description du quizz"
-              :error="filtredErrors('description')"
-              @input="value => (description = value)"
-            />
-          </div>
-          <div class="section">
-            <InputElement
-              :value="get('domain_id')"
-              type="number"
-              name="domain_id"
-              class="white_label"
-              placeholder="domain_id"
-              :error="filtredErrors('domainId')"
-              @input="value => (domain_id = value)"
-            />
-            <InputElement
-              :value="get('localisation')"
-              type="text"
-              name="localisation"
-              class="white_label"
-              placeholder="Localisation (optionnel)"
-              :error="filtredErrors('localisation')"
-              @input="value => (localisation = value)"
-            />
-          </div>
-        </div>
-        <div class="content">
-          <TableElement
-            v-if="quiz.questions && quiz.questions.length"
-            class="questions"
-            :fields="tableFields"
-            :data="quiz.questions"
-            @selectRow="
-              $router.push(
-                `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
-              )
-            "
+  <div class="container">
+    <div class="block">
+      <div class="head">
+        <div class="section">
+          <InputElement
+            :value="get('label')"
+            type="text"
+            name="label"
+            class="white_label"
+            placeholder="Libélé du quizz"
+            :error="filtredErrors('label')"
+            @input="value => (label = value)"
           />
-          <div v-else class="no-questions">
-            <h3>Aucunes questions</h3>
-            <p>Ce quiz ne contient pas la moindre question !</p>
-            <div class="button md green equal" @click="createQuiz(true)">
-              Créer une question
-            </div>
+          <InputElement
+            :value="get('description')"
+            type="text"
+            name="name"
+            class="white_label"
+            placeholder="Description du quizz"
+            :error="filtredErrors('description')"
+            @input="value => (description = value)"
+          />
+        </div>
+        <div class="section">
+          <InputElement
+            :value="get('domain_id')"
+            type="number"
+            name="domain_id"
+            class="white_label"
+            placeholder="domain_id"
+            :error="filtredErrors('domainId')"
+            @input="value => (domain_id = value)"
+          />
+          <InputElement
+            :value="get('localisation')"
+            type="text"
+            name="localisation"
+            class="white_label"
+            placeholder="Localisation (optionnel)"
+            :error="filtredErrors('localisation')"
+            @input="value => (localisation = value)"
+          />
+        </div>
+        <div class="section top-buttons">
+          <div class="button md equal border_white" @click="status = !status">
+            {{ get('status') ? 'Publique' : 'Privé' }}
+          </div>
+          <div class="button white_sky sm equal" @click="createQuiz(true)">
+            Créer une question
           </div>
         </div>
       </div>
-      <div class="buttons-bar">
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Mes quizzes
-        </nuxt-link>
-        <nuxt-link class="button green lg" to="/contributeur/questions">
-          Mes questions
-        </nuxt-link>
-        <div class="button green lg" @click="createQuiz()">Sauvegarder</div>
-        <nuxt-link class="button green lg" to="/contributeur/quizzes">
-          Supprimer
-        </nuxt-link>
+      <div class="content">
+        <TableElement
+          v-if="quiz.questions && quiz.questions.length"
+          class="questions"
+          :fields="tableFields"
+          :data="quiz.questions"
+          @selectRow="
+            $router.push(
+              `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
+            )
+          "
+        />
+        <div v-else class="no-elements">
+          <h3>Aucunes questions</h3>
+          <p>Ce quiz ne contient pas la moindre question !</p>
+          <div class="button md green equal" @click="createQuiz(true)">
+            Créer une question
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="buttons-bar">
+      <nuxt-link class="button green lg" to="/contributeur/quizzes">
+        Mes quizzes
+      </nuxt-link>
+      <nuxt-link class="button green lg" to="/contributeur/questions">
+        Mes questions
+      </nuxt-link>
+      <div class="button green lg" @click="createQuiz()">Sauvegarder</div>
+      <div class="button green lg" @click="deleteQuiz()">Supprimer</div>
     </div>
   </div>
 </template>
@@ -107,6 +111,7 @@ export default {
       description: null,
       domain_id: null,
       localisation: null,
+      status: null,
       errors: [],
       tableFields: [
         {
@@ -158,10 +163,11 @@ export default {
     },
     isDataEdited() {
       return !!(
-        this.label ||
-        this.description ||
-        this.domain_id ||
-        this.localisation
+        this.label !== null ||
+        this.description !== null ||
+        this.domain_id !== null ||
+        this.localisation !== null ||
+        this.status !== null
       )
     },
   },
@@ -182,6 +188,13 @@ export default {
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)
     },
+    deleteData() {
+      this.label = null
+      this.description = null
+      this.domain_id = null
+      this.localisation = null
+      this.status = null
+    },
     async createQuiz(questionCreation = false) {
       try {
         const quiz = await this.$store.dispatch(
@@ -193,13 +206,14 @@ export default {
             description: this.get('description'),
             localisation: this.get('localisation'),
             language: 'fr',
-            status: this.get('status'),
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
+            status: !!this.get('status') + 0,
           },
         )
 
         if (questionCreation) {
+          this.deleteData()
           return this.$router.push(
             `/contributeur/quizzes/${quiz.id}-${quiz.url}/questions/create`,
           )
@@ -222,6 +236,31 @@ export default {
         }
       }
     },
+    async deleteQuiz() {
+      try {
+        if (!(this.quiz && !this.quiz.questions.length)) {
+          return this.$notify({
+            type: 'error',
+            text:
+              'Vous ne pouvez pas supprimer ce quiz car il contient des questions.',
+            duration: 3000,
+            width: 400,
+          })
+        }
+
+        await this.$store.dispatch(`quizzes/deleteQuiz`, this.quiz.id)
+
+        return this.$router.push(`/contributeur/quizzes`)
+      } catch (error) {
+        console.error(error)
+        this.$notify({
+          type: 'error',
+          text: "Une erreur s'est produite lors de la suppression du quiz.",
+          duration: 3000,
+          width: 400,
+        })
+      }
+    },
     generateURL(label = '') {
       /* eslint-disable no-control-regex */
       return label
@@ -235,55 +274,17 @@ export default {
 </script>
 
 <style lang="scss">
-.quiz-creation {
-  .container {
-    flex-direction: column;
-    .block .head .section {
-      display: flex;
-      flex-direction: column;
-      flex: 1 0;
-      &:last-child {
-        margin-left: 24px;
-      }
-    }
-    .buttons-bar {
-      display: flex;
-      justify-content: space-between;
-      margin: 24px -12px 0;
+.block {
+  .head {
+    .top-buttons {
+      flex: 0 !important;
       .button {
-        flex: 1;
-        margin: 0 12px;
-        max-width: none;
-      }
-    }
-  }
-  .block {
-    flex: 1;
-    flex-direction: column;
-    margin-top: 32px;
-    .content {
-      min-height: calc(50vh);
-      .no-questions {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        h3 {
-          font-weight: 700;
-          font-size: 32px;
-          color: $green;
-          margin-bottom: 16px;
+        margin-left: 0 !important;
+        white-space: nowrap;
+        height: 43px;
+        &:last-child {
+          margin-top: 24px;
         }
-        p {
-          color: #777777;
-          font-size: 16px;
-          margin-bottom: 24px;
-          text-align: center;
-        }
-      }
-      .big {
-        width: 45%;
       }
     }
   }
