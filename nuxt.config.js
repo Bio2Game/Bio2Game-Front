@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   /*
    ** Nuxt target
@@ -138,8 +140,8 @@ export default {
    ** See https://github.com/nuxt-community/proxy-module#options
    */
   proxy: {
-    '/api': 'http://127.0.0.1:3333',
-    '/socket': 'http://127.0.0.1:3333',
+    '/api': process.env.API_URL,
+    '/socket': process.env.API_URL,
   },
 
   /*
@@ -148,7 +150,8 @@ export default {
    */
   auth: {
     strategies: {
-      local: {
+      user: {
+        scheme: 'local',
         token: {
           property: 'token',
           required: true,
@@ -160,9 +163,27 @@ export default {
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
+          login: { url: '/api/auth/user/login', method: 'post' },
+          logout: { url: '/api/auth/user/logout', method: 'post' },
           user: { url: '/api/auth/user', method: 'get' },
+        },
+      },
+      guest: {
+        scheme: 'local',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: false,
+        },
+        user: {
+          property: false,
+          autoFetch: true,
+        },
+        endpoints: {
+          login: { url: '/api/auth/guest/register', method: 'post' },
+          logout: { url: '/api/auth/guest/logout', method: 'post' },
+          user: { url: '/api/auth/guest', method: 'get' },
         },
       },
     },
