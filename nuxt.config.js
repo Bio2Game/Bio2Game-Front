@@ -109,7 +109,19 @@ export default {
 
     // Doc: https://github.com/Developmint/nuxt-webfontloader
     'nuxt-webfontloader',
+
+    // Doc: https://github.com/nuxt-community/robots-module
+    '@nuxtjs/robots',
   ],
+
+  /*
+   ** Robots module configuration
+   ** See https://github.com/nuxt-community/robots-module#options
+   */
+  robots: {
+    UserAgent: '*',
+    Disallow: '/',
+  },
 
   /*
    ** Axios module configuration

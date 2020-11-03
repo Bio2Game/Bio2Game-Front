@@ -23,6 +23,16 @@ export default {
     Footer,
     Hero,
   },
+  head: {
+    meta: [
+      // OpenGraph data (Most widely used)
+      {
+        hid: 'robots',
+        name: 'robots',
+        content: 'noindex',
+      },
+    ],
+  },
 }
 </script>
 
