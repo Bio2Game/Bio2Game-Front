@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-page">
-    <img class="nature" src="@/assets/images/nature.svg" alt="Nature" />
+    <NatureImage class="nature" />
     <div class="top">
       <h1>QUIZZES</h1>
       <p>Choisissez les quizzes succeptibles de vous intéresser.</p>
@@ -20,13 +20,13 @@
       </div>
     </div>
     <div class="filters">
-      <Input
+      <InputElement
         v-model="search"
         class="white_label"
         type="text"
         placeholder="Rechercher"
       />
-      <Input
+      <InputElement
         v-model="places"
         class="white_label"
         type="text"
@@ -44,7 +44,7 @@
       >
         <div class="top-part">
           <div class="icon">
-            <img :src="quiz.domain.icon.reference" :alt="quiz.domain.name" />
+            <img src="../../assets/car.svg" :alt="quiz.domain.name" />
           </div>
         </div>
         <div class="bottom-part">
@@ -53,6 +53,10 @@
             <p class="creator"><b>Créateur :</b> {{ quiz.author.username }}</p>
           </div>
           <div class="buttons">
+            <template v-if="$auth.loggedIn">
+              <!-- <Favorite class="favorite" /> -->
+              <FavoriteBorder class="favorite" />
+            </template>
             <a :href="getURL(quiz)" class="jouer">Jouer</a>
           </div>
           <span class="quiz-id">#{{ quiz.id }}</span>
@@ -66,12 +70,14 @@
 </template>
 
 <script>
-import Input from '@/components/elements/InputElement.vue'
+// import Favorite from '@/assets/icons/favorite.svg?inline'
+import FavoriteBorder from '@/assets/icons/favorite_border.svg?inline'
 
 export default {
   name: 'Quizzes',
   components: {
-    Input,
+    // Favorite,
+    FavoriteBorder,
   },
   async fetch({ store, error }) {
     try {
@@ -159,10 +165,11 @@ export default {
   .nature {
     margin: 24px 0 16px;
     width: 350px;
+    height: 293.5px;
   }
   .top {
     h1 {
-      color: #000000;
+      color: #292929;
       font-size: 36px;
       font-weight: 700;
       margin: 32px 0 24px;
@@ -171,6 +178,7 @@ export default {
     p {
       text-align: center;
       font-size: 18px;
+      color: #292929;
     }
   }
   .levels {
@@ -227,6 +235,14 @@ export default {
   .filters {
     display: flex;
     .input-container {
+      border-radius: 22px;
+      input {
+        border-radius: 22px;
+        &:focus ~ .placeholder,
+        &.has-content ~ .placeholder {
+          left: 14px;
+        }
+      }
       &:last-child {
         margin-left: 32px;
         margin-bottom: auto;
@@ -237,6 +253,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 32px;
+    margin-top: 32px;
     .quiz {
       height: 220px;
       display: flex;
@@ -247,7 +264,7 @@ export default {
         0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
       background-color: $green;
       user-select: none;
-      cursor: pointer;
+      cursor: default;
       position: relative;
       border-radius: 16px;
       overflow: hidden;
@@ -266,9 +283,10 @@ export default {
           transition: 0.4s margin-left ease;
           img {
             width: 106px;
+            height: 106px;
             position: relative;
             z-index: 2;
-            transition: 0.4s width ease;
+            transition: 0.4s width ease, 0.4s height ease;
             margin: 4px;
           }
           &::after {
@@ -324,12 +342,22 @@ export default {
             justify-content: space-between;
           }
 
+          .favorite {
+            color: $green;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            opacity: 0;
+            cursor: pointer;
+          }
+
           .jouer {
             color: #ffffff;
             font-size: 18px;
             font-weight: 600;
             text-transform: uppercase;
             padding: 6px 24px;
+            cursor: pointer;
             border-radius: 15px;
             text-decoration: none;
             background-color: $green;
@@ -368,6 +396,7 @@ export default {
             margin-left: calc(100% - 64px);
             img {
               width: 32px;
+              height: 32px;
             }
           }
         }
@@ -375,7 +404,8 @@ export default {
           animation: 0.4s title_enter ease forwards;
         }
 
-        .buttons .jouer {
+        .buttons .jouer,
+        .buttons .favorite {
           opacity: 1;
           transition: opacity 0.6s 0.3s;
         }
