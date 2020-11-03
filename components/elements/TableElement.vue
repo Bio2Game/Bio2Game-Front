@@ -8,6 +8,12 @@
       :css="table"
       @vuetable:row-clicked="$emit('selectRow', $event)"
     >
+      <template slot="status-slot" slot-scope="props">
+        <slot name="status-slot" v-bind="props" />
+      </template>
+      <template slot="actions-slot" slot-scope="props">
+        <slot name="actions-slot" v-bind="props" />
+      </template>
     </vuetable>
   </client-only>
 </template>
@@ -119,7 +125,7 @@ export default {
         cursor: pointer;
         text-align: left;
         font-size: 15px;
-        padding: 12px 0;
+        padding: 12px 24px 12px 0;
       }
     }
   }
