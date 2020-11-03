@@ -54,7 +54,7 @@
                 v-for="(question, index) of questions"
                 :id="question.id"
                 :key="question.id"
-                :checked="question.active"
+                :checked="!!question.active"
                 :label="generateLabel(question.label, index)"
                 @input="question.active = $event"
               />
