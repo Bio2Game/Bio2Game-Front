@@ -43,7 +43,7 @@
               <div class="user-menu">
                 <ul>
                   <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
-                  <nuxt-link to="/quizzes"><Favorite /> Mes favoris</nuxt-link>
+                  <!-- <nuxt-link to="/quizzes"><Favorite /> Mes favoris</nuxt-link> -->
                   <nuxt-link to="/contributeur/quizzes">
                     <Nature2Icon /> Mes quizz
                   </nuxt-link>
@@ -72,7 +72,7 @@
 import DownIcon from '@/assets/icons/down.svg?inline'
 import UserIcon from '@/assets/icons/user.svg?inline'
 import Nature2Icon from '@/assets/icons/nature2.svg?inline'
-import Favorite from '@/assets/icons/favorite.svg?inline'
+// import Favorite from '@/assets/icons/favorite.svg?inline'
 import SettingsIcon from '@/assets/icons/settings.svg?inline'
 import PowerIcon from '@/assets/icons/power.svg?inline'
 import HomeIcon from '@/assets/icons/home.svg?inline'
@@ -82,7 +82,7 @@ import GroupIcon from '@/assets/icons/group.svg?inline'
 export default {
   components: {
     DownIcon,
-    Favorite,
+    // Favorite,
     Nature2Icon,
     SettingsIcon,
     UserIcon,
