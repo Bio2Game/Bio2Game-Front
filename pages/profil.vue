@@ -47,18 +47,6 @@
           <!-- badges -->
         </div>
       </div>
-      <div class="status-container">
-        <label>
-          <input
-            id="isAnimator"
-            type="checkbox"
-            name="isAnimator"
-            :checked="$auth.user.isAnimator"
-            value="1"
-          />
-          <span>Animateur ?</span>
-        </label>
-      </div>
       <nuxt-link
         v-if="!$auth.user.status && isIndex"
         to="/profil/become"
