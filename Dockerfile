@@ -1,12 +1,10 @@
-FROM node:10.20
+FROM node:12.10
+WORKDIR /app
+COPY . .
 
-ENV APP_ROOT /src
-
-RUN mkdir ${APP_ROOT}
-WORKDIR ${APP_ROOT}
-ADD . ${APP_ROOT}
-
-RUN npm ci
+RUN npm install
 RUN npm run build
 
-ENV HOST 0.0.0.0
+EXPOSE 6001
+
+CMD npm run start
