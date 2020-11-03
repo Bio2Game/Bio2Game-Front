@@ -78,7 +78,7 @@ export default {
     font-size: 14px;
     color: #636363;
     background: #ffffff;
-    border-left: 5px solid #187fe7;
+    border-left: 5px solid $green;
     box-shadow: 0 3px 6px #00000033;
 
     &.warn {
@@ -95,7 +95,7 @@ export default {
     &.success {
       // background: #68cd86;
       color: #636363;
-      border-left-color: #42a85f;
+      border-left-color: $green;
     }
   }
 }
