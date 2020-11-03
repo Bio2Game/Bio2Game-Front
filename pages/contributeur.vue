@@ -14,16 +14,6 @@ export default {
 .quiz-creation {
   .container {
     flex-direction: column;
-    .buttons-bar {
-      display: flex;
-      justify-content: space-between;
-      margin: 24px -12px 0;
-      .button {
-        flex: 1;
-        margin: 0 12px;
-        max-width: none;
-      }
-    }
     .block {
       .head {
         align-items: center;
@@ -64,6 +54,17 @@ export default {
             text-align: center;
           }
         }
+      }
+    }
+    .buttons-bar {
+      display: flex;
+      justify-content: space-between;
+      margin: 24px -12px 0;
+      /* stylelint-disable-next-line  */
+      .button {
+        flex: 1;
+        margin: 0 12px;
+        max-width: none;
       }
     }
   }
