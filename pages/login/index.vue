@@ -156,7 +156,7 @@ export default {
     },
     async register() {
       try {
-        await this.$axios.post('/api/auth/register', {
+        await this.$axios.post('/api/auth/user/register', {
           username: this.username,
           email: this.email,
           password: this.password,
