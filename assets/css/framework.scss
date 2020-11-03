@@ -49,6 +49,15 @@
     }
   }
 
+  &.red {
+    background-color: #ff6060;
+    color: white;
+
+    &:hover {
+      background-color: #ff6f6f;
+    }
+  }
+
   &.gray {
     background-color: $gray;
     color: $green;
@@ -371,6 +380,7 @@ a.b2glink:hover {
     margin-top: 24px;
     border-radius: 8px;
     cursor: default;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
   .head {
     display: flex;
     justify-content: space-between;
