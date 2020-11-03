@@ -41,7 +41,7 @@ export default {
         await this.$nextTick()
         this.status = value
       } else {
-        this.status = true
+        this.status = false
         setTimeout(() => {
           this.showIt = false
         }, 400)
