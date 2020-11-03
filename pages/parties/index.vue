@@ -5,11 +5,7 @@
         <h1>PARTIES EN GROUPE</h1>
         <p>Ce mode de jeu vous permettra de jouer avec d’autres personnes</p>
       </div>
-      <div
-        class="items"
-        :class="{ center: !$auth.user || !$auth.user.isAnimator }"
-      >
-        <!--           v-if="$auth.user && $auth.user.isAnimator" -->
+      <div class="items" :class="{ center: !$auth.user || !$auth.user.status }">
         <nuxt-link
           class="item"
           to="/parties/create"
@@ -98,27 +94,29 @@ export default {
 .parties-page {
   display: flex;
   justify-content: center;
-  h1 {
-    font-weight: 700;
-    font-size: 40px;
-    text-transform: uppercase;
-    text-align: center;
-    margin: 64px 0 16px;
-    color: #414141;
-    @media screen and (max-width: $md) {
-      font-size: 32px;
-      margin: 32px 0 16px;
+  .infos {
+    h1 {
+      font-weight: 700;
+      font-size: 40px;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 48px 0 24px;
+      color: #414141;
+      @media screen and (max-width: $md) {
+        font-size: 32px;
+        margin: 32px 0 24px;
+      }
+      @media screen and (max-width: $sm) {
+        font-size: 24px;
+        margin: 24px 0;
+      }
     }
-    @media screen and (max-width: $sm) {
-      font-size: 24px;
-      margin: 24px 0 16px;
+    p {
+      text-align: center;
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 16px;
     }
-  }
-  p {
-    text-align: center;
-    font-weight: 500;
-    font-size: 15px;
-    margin-bottom: 32px;
   }
 
   .items {
