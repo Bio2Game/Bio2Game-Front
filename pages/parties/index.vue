@@ -18,7 +18,7 @@
             </div>
           </div>
         </nuxt-link>
-        <label class="item" for="to-focus">
+        <label class="item" for="to-focus" :class="{ focus: code.length }">
           <div class="wrapper">
             <img src="@/assets/images/join.jpg" alt="Rejoindre une partie" />
             <div class="item__content join">
@@ -26,11 +26,18 @@
               <div class="input-continer">
                 <input
                   id="to-focus"
+                  v-model="code"
+                  :value="code"
                   type="text"
                   placeholder="code"
                   maxlength="8"
                 />
-                <a class="go show" href="">GO</a>
+                <span
+                  class="go"
+                  :class="{ show: showButton }"
+                  @click="redirectToParty(code)"
+                  >GO</span
+                >
               </div>
             </div>
           </div>
@@ -80,11 +87,20 @@ export default {
   data() {
     return {
       parties: [],
+      code: '',
     }
   },
   computed: {
     isContributor() {
       return this.$auth.loggedIn && this.$auth.user.status > 0
+    },
+    showButton() {
+      return this.code.length === 8
+    },
+  },
+  methods: {
+    redirectToParty(code) {
+      this.$router.push(`/parties/${code}`)
     },
   },
 }
