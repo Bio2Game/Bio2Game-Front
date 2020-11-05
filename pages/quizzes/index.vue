@@ -44,7 +44,13 @@
       >
         <div class="top-part">
           <div class="icon">
-            <img src="../../assets/car.svg" :alt="quiz.domain.name" />
+            <img
+              :src="
+                'https://www.bio2game.com/images/icons/' +
+                quiz.domain.icon.reference
+              "
+              :alt="quiz.domain.name"
+            />
           </div>
         </div>
         <div class="bottom-part">
@@ -53,10 +59,12 @@
             <p class="creator"><b>Créateur :</b> {{ quiz.author.username }}</p>
           </div>
           <div class="buttons">
-            <template v-if="$auth.loggedIn">
-              <!-- <Favorite class="favorite" /> -->
+            <!-- 
+              <template v-if="$auth.loggedIn">
+              <Favorite class="favorite" />
               <FavoriteBorder class="favorite" />
-            </template>
+            </template> 
+            -->
             <a :href="getURL(quiz)" class="jouer">Jouer</a>
           </div>
           <span class="quiz-id">#{{ quiz.id }}</span>
@@ -71,13 +79,13 @@
 
 <script>
 // import Favorite from '@/assets/icons/favorite.svg?inline'
-import FavoriteBorder from '@/assets/icons/favorite_border.svg?inline'
+// import FavoriteBorder from '@/assets/icons/favorite_border.svg?inline'
 
 export default {
   name: 'Quizzes',
   components: {
     // Favorite,
-    FavoriteBorder,
+    // FavoriteBorder,
   },
   async fetch({ store, error }) {
     try {
@@ -242,6 +250,9 @@ export default {
         &.has-content ~ .placeholder {
           left: 14px;
         }
+      }
+      .focus-bg {
+        border-radius: 22px;
       }
       &:last-child {
         margin-left: 32px;
