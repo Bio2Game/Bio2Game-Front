@@ -43,6 +43,7 @@
             type="password"
             placeholder="Mot de passe"
             :error="filtredErrors('password')"
+            @keydown.enter.native="register()"
           />
           <a class="button green md full" @click="register()"
             >Créer mon compte</a
@@ -61,6 +62,7 @@
             type="password"
             placeholder="Mot de passe"
             :error="filtredErrors('password')"
+            @keydown.enter.native="login()"
           />
           <div class="password">
             <nuxt-link to="/login/forgot">Mot de passe oublié ?</nuxt-link>
