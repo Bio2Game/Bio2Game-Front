@@ -204,7 +204,7 @@ export default {
     },
     async update(payload) {
       try {
-        await this.$axios.$patch('/api/user', this.become)
+        await this.$axios.$patch('/api/user', payload)
         this.$notify({
           type: 'success',
           text: 'Vos informations ont été mises à jour !',
