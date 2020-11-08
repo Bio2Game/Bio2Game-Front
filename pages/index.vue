@@ -35,7 +35,7 @@
               </div>
               <div class="content-text">
                 <div class="contributor-name">
-                  {{ contributor.name }}
+                  {{ contributor.name || contributor.username }}
                 </div>
                 <div class="contributor-description">
                   {{ contributor.description }}
@@ -76,143 +76,34 @@ export default {
   name: 'Features',
   data() {
     return {
-      contributors: [
-        {
-          id: 1,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
-          id: 2,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
-          id: 4,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-        {
-          id: 5,
-          name: 'DraftMan',
-          description:
-            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-          avatar: 'https://www.draftman.fr/images/me.png',
-          quizs: [
-            {
-              id: 1,
-              name: 'Devoirs de vigilance',
-              description: `Qu'est ce que le devoir de vigilance des entreprises`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 2,
-              name: `Efficacité énergétique de l'aviation`,
-              description: `Baisse anticipée de la consommation des avions sur les terrains`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-            {
-              id: 3,
-              name: 'Climatoseptiques',
-              description: `Comment le DD est perçu par l'opinion publique en France`,
-              icon: 'https://www.draftman.fr/images/me.png',
-            },
-          ],
-        },
-      ],
+      contributors: [],
+      //       {
+      //   id: 5,
+      //   name: 'DraftMan',
+      //   description:
+      //     'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+      //   avatar: 'https://www.draftman.fr/images/me.png',
+      //   quizs: [
+      //     {
+      //       id: 1,
+      //       name: 'Devoirs de vigilance',
+      //       description: `Qu'est ce que le devoir de vigilance des entreprises`,
+      //       icon: 'https://www.draftman.fr/images/me.png',
+      //     },
+      //     {
+      //       id: 2,
+      //       name: `Efficacité énergétique de l'aviation`,
+      //       description: `Baisse anticipée de la consommation des avions sur les terrains`,
+      //       icon: 'https://www.draftman.fr/images/me.png',
+      //     },
+      //     {
+      //       id: 3,
+      //       name: 'Climatoseptiques',
+      //       description: `Comment le DD est perçu par l'opinion publique en France`,
+      //       icon: 'https://www.draftman.fr/images/me.png',
+      //     },
+      //   ],
+      // },
       features: [
         {
           name: 'Moderne et Ergonomique',
@@ -246,6 +137,10 @@ export default {
         },
       ],
     }
+  },
+  async mounted() {
+    const { contributors } = await this.$axios.$get('/api/contributors')
+    this.contributors = contributors
   },
 }
 </script>
@@ -329,14 +224,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(
-        0deg,
-        rgba(162, 238, 194, 0.8),
-        rgba(162, 238, 194, 0.8)
-      ),
-      url('/images/background-contributers.jpg') fixed;
-    background-size: cover;
-    background-position: center;
+    background-color: white;
     position: relative;
     .title {
       display: flex;
@@ -350,13 +238,7 @@ export default {
         font-weight: 700;
         font-size: 35px;
         text-transform: uppercase;
-        &::after {
-          content: '';
-          position: absolute;
-          border-bottom: 5px solid #19683b;
-          width: 130px;
-          bottom: -10px;
-        }
+        color: $green;
       }
     }
 
@@ -430,7 +312,7 @@ export default {
                 font-size: 16px;
                 line-height: 18px;
                 margin-bottom: 5px;
-                color: #19683b;
+                color: #000000;
               }
               .quiz-description {
                 font-weight: 500;
@@ -453,12 +335,12 @@ export default {
         font-size: 42px;
         outline: 0;
         cursor: pointer;
-        color: white;
-        text-shadow: 0 2px 6px #2c2c2cb3;
+        color: $green;
+        text-shadow: 0 2px 4px #00000040;
         height: 40px;
         &.VueCarousel-navigation--disabled {
           opacity: 1;
-          color: #cccccc;
+          color: #afafaf;
         }
       }
     }
