@@ -27,7 +27,6 @@
                 <input
                   id="to-focus"
                   v-model="code"
-                  :value="code"
                   type="text"
                   placeholder="code"
                   maxlength="8"
