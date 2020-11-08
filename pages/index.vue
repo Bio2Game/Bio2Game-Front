@@ -31,7 +31,12 @@
           <div class="contributor">
             <div class="content-contributor">
               <div class="avatar">
-                <img :src="contributor.avatar" :alt="contributor.name" />
+                <AvatarElement
+                  :email="contributor.email"
+                  :path="contributor.avatar_path"
+                  :name="contributor.name || contributor.username"
+                  :size="72"
+                />
               </div>
               <div class="content-text">
                 <div class="contributor-name">
@@ -46,16 +51,16 @@
               <div class="quizs-title">Quiz créés</div>
               <div class="quizs-list">
                 <div
-                  v-for="quiz in contributor.quizs"
+                  v-for="quiz in contributor.quizzes"
                   :key="quiz.id"
                   class="quiz"
                 >
                   <div class="icon">
-                    <img :src="quiz.icon" :alt="quiz.name" />
+                    <img :src="quiz.domain.icon.reference" :alt="quiz.label" />
                   </div>
                   <div class="quiz-content">
                     <div class="quiz-name">
-                      {{ quiz.name }}
+                      {{ quiz.label }}
                     </div>
                     <div class="quiz-description">
                       {{ quiz.description }}
