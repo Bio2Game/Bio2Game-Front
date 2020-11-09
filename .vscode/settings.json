@@ -12,5 +12,5 @@
   "editor.tabSize": 2,
   "prettier.tabWidth": 2,
   "files.eol": "\n",
-  "editor.detectIndentation": false,
+  "editor.detectIndentation": false
 }
