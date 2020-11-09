@@ -56,7 +56,13 @@
                   class="quiz"
                 >
                   <div class="icon">
-                    <img :src="quiz.domain.icon.reference" :alt="quiz.label" />
+                    <img
+                      :src="
+                        'https://www.bio2game.com/images/icons/' +
+                        quiz.domain.icon.reference
+                      "
+                      :alt="quiz.label"
+                    />
                   </div>
                   <div class="quiz-content">
                     <div class="quiz-name">
