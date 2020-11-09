@@ -21,6 +21,14 @@
             placeholder="Nom complet"
             :error="filtredErrors('name')"
           />
+          <TextareaElement
+            v-model="basics.description"
+            :value="basics.description"
+            placeholder="Description"
+            :error="filtredErrors('description')"
+          />
+        </div>
+        <div class="part">
           <InputElement
             v-model="basics.email"
             :value="basics.email"
@@ -28,8 +36,6 @@
             placeholder="Adresse email"
             :error="filtredErrors('email')"
           />
-        </div>
-        <div class="part">
           <InputElement
             v-model="basics.old_password"
             type="password"
@@ -118,6 +124,7 @@ export default {
       basics: {
         username: '',
         name: '',
+        description: '',
         email: '',
         password: '',
         password_confirmation: '',
