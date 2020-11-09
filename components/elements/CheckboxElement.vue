@@ -36,8 +36,8 @@ export default {
     padding-left: 35px;
     cursor: pointer;
     display: inline-block;
-    height: 25px;
-    line-height: 25px;
+    height: 24px;
+    line-height: 24px;
     font-size: 14px;
     user-select: none;
     color: $green;

@@ -49,16 +49,34 @@
             </div>
           </div>
           <div class="content">
-            <div class="questions-selector">
-              <CheckboxElement
-                v-for="(question, index) of questions"
-                :id="question.id"
-                :key="question.id"
-                :checked="!!question.active"
-                :label="generateLabel(question.label, index)"
-                @input="question.active = $event"
-              />
-            </div>
+            <draggable
+              v-model="questions"
+              tag="ul"
+              class="list-group"
+              v-bind="dragOptions"
+              @start="drag = true"
+              @end="drag = false"
+            >
+              <transition-group
+                class="questions-selector"
+                type="transition"
+                :name="!drag ? 'flip-list' : null"
+              >
+                <li
+                  v-for="(question, index) of questions"
+                  :key="question.id"
+                  class="question-element list-group-item"
+                >
+                  <DragIcon />
+                  <CheckboxElement
+                    :id="question.id"
+                    :checked="!!question.active"
+                    :label="generateLabel(question.label, index)"
+                    @input="question.active = $event"
+                  />
+                </li>
+              </transition-group>
+            </draggable>
           </div>
         </div>
       </div>
@@ -73,9 +91,16 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+import DragIcon from '@/assets/icons/drag.svg?inline'
+
 export default {
   name: 'Create',
   middleware: ['auth', 'contributor'],
+  components: {
+    draggable,
+    DragIcon,
+  },
   async fetch({ store, error }) {
     try {
       await store.dispatch('quizzes/fetchQuizzes')
@@ -93,11 +118,23 @@ export default {
       quizId: null,
       autoselect: null,
       questionPanel: false,
+      drag: false,
     }
   },
   computed: {
     quizzes() {
       return this.$store.state.quizzes.quizzes
+    },
+    questionsOrder() {
+      return this.questions.map((q, i) => ({ order: i + 1, ...q }))
+    },
+    dragOptions() {
+      return {
+        animation: 200,
+        group: 'description',
+        disabled: false,
+        ghostClass: 'ghost',
+      }
     },
   },
   mounted() {
@@ -211,8 +248,28 @@ export default {
         .questions-selector {
           display: flex;
           flex-direction: column;
-          .checkbox {
-            margin-bottom: 8px;
+          .question-element {
+            display: flex;
+            padding: 4px 0;
+            cursor: move;
+            svg {
+              margin-left: -8px;
+              margin-right: 8px;
+              opacity: 0.6;
+              transition: opacity 0.5s ease;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
+            .checkbox {
+              margin-bottom: 8px;
+            }
+            &.flip-list-move {
+              transition: transform 0.5s;
+            }
+            &.no-move {
+              transition: transform 0s;
+            }
           }
         }
         .head {
