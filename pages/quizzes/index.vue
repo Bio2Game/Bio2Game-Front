@@ -33,7 +33,7 @@
         placeholder="Lieux"
       />
     </div>
-    <div class="container quizzes">
+    <transition-group tag="div" class="container quizzes" name="fade">
       <div
         v-for="quiz of filtredQuizzes"
         :key="quiz.id"
@@ -73,7 +73,7 @@
           <h6 class="name">{{ quiz.label }}</h6>
         </div>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -133,19 +133,22 @@ export default {
       return this.$store.state.quizzes.quizzes
     },
     filtredQuizzes() {
-      return this.places || this.search
-        ? this.quizzes.filter(quiz =>
-            quiz.name.includes(this.search) ||
-            quiz.description.includes(this.search) ||
-            quiz.id === this.search ||
-            quiz.user.username.includes(this.search) ||
-            quiz.domain.name.includes(this.search) ||
-            quiz.localisation.includes(this.places) ||
-            quiz.user.name
-              ? quiz.user.name.includes(this.search)
-              : false,
-          )
-        : this.quizzes
+      const search = this.search.toLowerCase()
+      const places = this.places.toLowerCase()
+      return this.quizzes.filter(
+        quiz =>
+          this.selectedLevels.includes(quiz.level) &&
+          (!search ||
+            quiz.label.toLowerCase().includes(search) ||
+            quiz.description.toLowerCase().includes(search) ||
+            `#${quiz.id}` === search ||
+            quiz.author.username.toLowerCase().includes(search) ||
+            quiz.domain.label.toLowerCase().includes(search) ||
+            (quiz.author.name
+              ? quiz.author.name.toLowerCase().includes(search)
+              : false)) &&
+          (!places || quiz.localisation.toLowerCase().includes(places)),
+      )
     },
   },
   methods: {
@@ -181,6 +184,10 @@ export default {
 </script>
 
 <style lang="scss">
+.fade-move {
+  transition: transform 1s;
+}
+
 .quiz-page {
   display: flex;
   flex-direction: column;
