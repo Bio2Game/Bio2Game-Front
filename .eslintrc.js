@@ -19,21 +19,10 @@ module.exports = {
   rules: {
     'vue/no-v-html': 'off',
     curly: [2, 'multi-line'],
-    indent: ['warn', 2],
     'vue/attribute-hyphenation': ['error', 'never'],
     'vue/multiline-html-element-content-newline': 'error',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'prettier/prettier': [
-      2,
-      {
-        singleQuote: true,
-        quoteProps: 'as-needed',
-        trailingComma: 'all',
-        endOfLine: 'lf',
-        arrowParens: 'avoid',
-      },
-    ],
     'arrow-parens': ['error', 'as-needed'],
   },
 }
