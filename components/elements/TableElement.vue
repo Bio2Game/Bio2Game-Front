@@ -1,6 +1,7 @@
 <template>
   <client-only>
     <vuetable
+      ref="vuetable"
       :apiMode="false"
       :fields="fields"
       :sortOrder="sortOrder"
@@ -56,6 +57,11 @@ export default {
         },
       },
     }
+  },
+  watch: {
+    data() {
+      this.$refs.vuetable.refresh()
+    },
   },
   methods: {
     dataManager(sortOrder) {
