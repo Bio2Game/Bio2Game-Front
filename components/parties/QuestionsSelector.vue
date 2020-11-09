@@ -48,7 +48,7 @@
                 <div class="list">
                   <CheckboxElement
                     v-for="question of splitedQuestions[0]"
-                    :id="question.id"
+                    :id="'select-' + question.id"
                     :key="question.id"
                     :checked="!!selectedQuestions[question.id]"
                     :label="question.fakeLabel"
@@ -58,7 +58,7 @@
                 <div class="list">
                   <CheckboxElement
                     v-for="question of splitedQuestions[1]"
-                    :id="question.id"
+                    :id="'select-' + question.id"
                     :key="question.id"
                     :checked="!!selectedQuestions[question.id]"
                     :label="question.fakeLabel"
