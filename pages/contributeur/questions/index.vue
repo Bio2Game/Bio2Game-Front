@@ -15,7 +15,7 @@
           v-if="questions.length"
           :fields="tableFields"
           :data="questions"
-          @selectRow="
+          @select-row="
             $router.push(
               `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
             )

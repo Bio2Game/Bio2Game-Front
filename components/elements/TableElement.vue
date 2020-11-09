@@ -7,7 +7,7 @@
       :sortOrder="sortOrder"
       :dataManager="dataManager"
       :css="table"
-      @vuetable:row-clicked="$emit('selectRow', $event)"
+      @vuetable:row-clicked="$emit('select-row', $event)"
     >
       <template slot="status-slot" slot-scope="props">
         <slot name="status-slot" v-bind="props" />
