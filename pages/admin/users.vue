@@ -14,10 +14,10 @@
     </div>
     <div class="content">
       <TableElement
-        v-if="users.length"
+        v-if="filtredUsers.length"
         class="users"
         :fields="tableFields"
-        :data="users"
+        :data="filtredUsers"
       >
         <template slot="status-slot" slot-scope="props">
           <span
@@ -100,6 +100,18 @@ export default {
   computed: {
     users() {
       return this.$store.state.admin.users.filter(u => u.status < 2)
+    },
+    filtredUsers() {
+      /* eslint-disable indent */
+      return this.search
+        ? this.users.filter(
+            user =>
+              user.username.includes(this.search) ||
+              user.email.includes(this.search) ||
+              user.id === this.search,
+          )
+        : this.users
+      /* eslint-enable indent */
     },
   },
   methods: {

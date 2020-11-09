@@ -35,7 +35,7 @@
     </div>
     <div class="container quizzes">
       <div
-        v-for="quiz of quizzes"
+        v-for="quiz of filtredQuizzes"
         :key="quiz.id"
         class="quiz"
         :class="{ enter: enter === quiz.id, leave: leave === quiz.id }"
@@ -131,6 +131,21 @@ export default {
   computed: {
     quizzes() {
       return this.$store.state.quizzes.quizzes
+    },
+    filtredQuizzes() {
+      return this.places || this.search
+        ? this.quizzes.filter(quiz =>
+            quiz.name.includes(this.search) ||
+            quiz.description.includes(this.search) ||
+            quiz.id === this.search ||
+            quiz.user.username.includes(this.search) ||
+            quiz.domain.name.includes(this.search) ||
+            quiz.localisation.includes(this.places) ||
+            quiz.user.name
+              ? quiz.user.name.includes(this.search)
+              : false,
+          )
+        : this.quizzes
     },
   },
   methods: {
