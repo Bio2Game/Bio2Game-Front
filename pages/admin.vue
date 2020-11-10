@@ -28,6 +28,7 @@ export default {
     .block {
       .head {
         align-items: center;
+        height: 92px;
         .infos {
           h5 {
             font-weight: 500;

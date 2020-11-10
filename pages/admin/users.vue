@@ -55,6 +55,7 @@ moment.locale('fr')
 
 export default {
   name: 'Utilisateurs',
+  transition: 'left',
   middleware: ['auth', 'admin'],
   async fetch({ store, error }) {
     try {
