@@ -152,12 +152,6 @@ export default {
       position: relative;
       flex: 1 0;
       margin: 0 32px;
-      background: linear-gradient(
-          180deg,
-          rgba(33, 150, 83, 0.25) 0%,
-          rgba(33, 150, 83, 0.9) 100%
-        ),
-        url('/images/create.jpg');
       border: 6px solid #ffffff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
       cursor: pointer;
