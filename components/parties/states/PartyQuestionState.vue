@@ -170,8 +170,8 @@ export default {
     shuffleResponses() {
       const responses = Object.values(JSON.parse(this.questionState.responses))
 
-      this.$store.commit('parties/QUESTIONS_EQUIVALENTS', responses)
-      this.$store.commit('parties/QUESTIONS_ORDER', shuffle(responses))
+      this.$store.commit('parties/RESPONSES_EQUIVALENTS', responses)
+      this.$store.commit('parties/RESPONSES_ORDER', shuffle(responses))
     },
     getColor(index) {
       return colors[this.equivalents.indexOf(this.responses[index])]
