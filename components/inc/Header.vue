@@ -29,20 +29,18 @@
             </nuxt-link>
           </div>
           <div v-else class="right-menu">
-            <div
-              class="user"
-              :class="{ active: toggleUserMenu, transition }"
-              @click="toggleUserMenu = !toggleUserMenu"
-            >
-              <AvatarElement
-                class="avatar"
-                :email="$auth.user.email"
-                :path="$auth.user.path"
-                :name="$auth.user.username"
-                :size="32"
-              />
-              <span class="username">{{ $auth.user.username }}</span>
-              <DownIcon class="down" />
+            <div class="user" :class="{ active: toggleUserMenu, transition }">
+              <div class="group" @click="toggleUserMenu = !toggleUserMenu">
+                <AvatarElement
+                  class="avatar"
+                  :email="$auth.user.email"
+                  :path="$auth.user.path"
+                  :name="$auth.user.username"
+                  :size="32"
+                />
+                <span class="username">{{ $auth.user.username }}</span>
+                <DownIcon class="down" />
+              </div>
               <div class="user-menu">
                 <ul>
                   <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
@@ -210,26 +208,30 @@ export default {
           cursor: pointer;
           user-select: none;
           min-width: 188px;
-          .avatar {
-            height: 32px;
-            width: 32px;
-            border: 2px solid $green;
-            border-radius: 16px;
-            margin-right: 8px;
-          }
-          .username {
+          .group {
             display: flex;
             align-items: center;
-            color: #4f4f4f;
-            font-size: 19px;
-            transition: 0.2s color 0.5s ease-out;
-          }
-          svg.down {
-            width: 16px;
-            margin-left: 6px;
-            margin-top: 2px;
-            path {
-              transition: 0.2s fill 0.5s ease-out;
+            .avatar {
+              height: 32px;
+              width: 32px;
+              border: 2px solid $green;
+              border-radius: 16px;
+              margin-right: 8px;
+            }
+            .username {
+              display: flex;
+              align-items: center;
+              color: #4f4f4f;
+              font-size: 19px;
+              transition: 0.2s color 0.5s ease-out;
+            }
+            svg.down {
+              width: 16px;
+              margin-left: 6px;
+              margin-top: 2px;
+              path {
+                transition: 0.2s fill 0.5s ease-out;
+              }
             }
           }
           .user-menu {
