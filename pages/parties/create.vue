@@ -3,7 +3,10 @@
     <div class="container">
       <div class="infos">
         <h1>CRÉATION D’UNE PARTIE</h1>
-        <p>Les parties sont des quizzes intéractifs en groupe administrés</p>
+        <p>
+          Créez des parties pour répondre simultanément à des quizzes
+          intéractifs !
+        </p>
       </div>
       <div class="blocks">
         <div class="block">
