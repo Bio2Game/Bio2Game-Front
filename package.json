@@ -25,7 +25,7 @@
     "@nuxtjs/auth": "github:DraftProducts/auth-module",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
-    "@nuxtjs/pwa": "^3.0.2",
+    "@nuxtjs/pwa": "^3.2.2",
     "@nuxtjs/robots": "^2.4.2",
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
