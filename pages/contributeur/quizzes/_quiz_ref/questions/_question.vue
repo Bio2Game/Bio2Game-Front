@@ -20,14 +20,15 @@
           :error="filtredErrors('time')"
           @input="value => (time = value)"
         />
-        <InputElement
-          :value="get('quizId')"
-          type="number"
-          name="quizId"
-          class="white_label"
-          placeholder="Quiz de la question"
-          :error="filtredErrors('quizId')"
-          @input="value => (quizId = value)"
+        <SelectorElement
+          :selected="get('quiz_id')"
+          :items="quizzes"
+          :error="filtredErrors('quiz_id')"
+          :defaultValue="get('quiz_id')"
+          refKey="id"
+          displayKey="label"
+          noSelect="Quiz de la question"
+          @input="quiz_id = $event"
         />
         <div class="button md equal border_white" @click="status = !status">
           {{ get('status') ? 'Publique' : 'Privé' }}
@@ -61,13 +62,12 @@
             :error="filtredErrors('endDate')"
             @input="value => (endDate = value)"
           />
-          <InputElement
-            :value="get('profil')"
-            type="number"
-            name="profil"
-            placeholder="Profil du joueur"
+          <SelectorElement
+            :selected="get('profil')"
+            :items="profils"
             :error="filtredErrors('profil')"
-            @input="value => (profil = value)"
+            noSelect="Profil du joueur"
+            @input="profil = $event"
           />
         </div>
         <div class="section">
@@ -162,7 +162,7 @@ export default {
     return {
       label: null,
       time: null,
-      quizId: null,
+      quiz_id: null,
       question: null,
       source: null,
       endDate: null,
@@ -174,6 +174,24 @@ export default {
       explication: null,
       status: null,
       errors: [],
+      profils: [
+        {
+          ref: 0,
+          name: 'Informé',
+        },
+        {
+          ref: 1,
+          name: 'Consomateur',
+        },
+        {
+          ref: 2,
+          name: 'Producteur',
+        },
+        {
+          ref: 3,
+          name: 'Expert',
+        },
+      ],
     }
   },
   computed: {
@@ -183,32 +201,28 @@ export default {
         this.$route.params.question,
       )
     },
+    quizzes() {
+      return this.$store.state.quizzes.contributorQuizzes
+    },
     isCreationPage() {
       return this.$route.params.question === 'create'
     },
     isDataEdited() {
-      return !!(
-        this.label !== null ||
-        this.time !== null ||
-        this.quizId !== this.$route.params.quiz_ref.split('-')[0] ||
-        this.question !== null ||
-        this.source !== null ||
-        this.endDate !== null ||
-        this.profil !== null ||
-        this.response0 !== null ||
-        this.response1 !== null ||
-        this.response2 !== null ||
-        this.response3 !== null ||
-        this.explication !== null ||
-        this.status !== null
-      )
+      // eslint-disable-next-line prettier/prettier
+      return [ 'label', 'time', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
+      ].some(v => this.get(v) !== this.questionObj[v])
     },
   },
   mounted() {
-    this.quizId = this.$route.params.quiz_ref.split('-')[0]
+    this.quiz_id = parseInt(this.$route.params.quiz_ref.split('-')[0])
   },
   beforeRouteLeave(to, from, next) {
-    if (!this.isDataEdited) {
+    console.log(to)
+    if (
+      !this.isDataEdited &&
+      (!to.params.quiz_ref ||
+        this.get('quiz_id') === to.params.quiz_ref.split('-')[0])
+    ) {
       return next()
     }
     next(
@@ -234,13 +248,14 @@ export default {
     },
     async createQuestion() {
       try {
-        await this.$store.dispatch(
+        console.log(this.questionObj)
+        const quiz = await this.$store.dispatch(
           `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
           {
             id: this.questionObj.id,
             label: this.get('label'),
             time: this.get('time'),
-            quizId: this.get('quizId'),
+            quiz_id: this.get('quiz_id'),
             question: this.get('question'),
             source: this.get('source'),
             endDate: this.get('endDate'),
@@ -266,9 +281,9 @@ export default {
           width: 400,
         })
 
-        return this.$router.push(
-          `/contributeur/quizzes/${this.$route.params.quiz_ref}`,
-        )
+        await this.$nextTick()
+
+        return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
       } catch (error) {
         console.log(error)
         const messages = error.response.data.messages
@@ -280,7 +295,7 @@ export default {
     async deleteQuestion() {
       try {
         await this.$store.dispatch(`quizzes/deleteQuestion`, {
-          quiz_id: this.questionObj.quizId,
+          quiz_id: this.questionObj.quiz_id,
           question_id: this.questionObj.id,
         })
 
@@ -305,7 +320,8 @@ export default {
 <style lang="scss">
 .block.question {
   .head {
-    .input-container {
+    .input-container,
+    .selector-container {
       margin-bottom: 8px;
       flex: 2;
       margin-right: 16px;

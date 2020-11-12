@@ -7,7 +7,8 @@ export const state = () => ({
 
 export const getters = {
   getPersonnalQuiz: state => query => {
-    const quizId = parseInt(query.split('-')[0])
+    const quizId =
+      typeof query === 'string' ? parseInt(query.split('-')[0]) : query
     return state.contributorQuizzes.find(quiz => quiz.id === quizId) || {}
   },
   getPersonnalQuestion: ({ contributorQuizzes }) => (quizQ, questionQ) => {
@@ -67,6 +68,15 @@ export const mutations = {
   UPDATE_CONTRIBUTOR_QUESTION(state, question) {
     const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
     if (!quiz) return
+    if (!quiz.questions.some(q => q.id === question.id)) {
+      const oldQuiz = state.contributorQuizzes.find(quiz =>
+        quiz.questions.some(q => q.id === question.id),
+      )
+      const oldQuestion = oldQuiz.questions.findIndex(q => q.id === question.id)
+      oldQuiz.questions.splice(oldQuestion, 1)
+      quiz.questions.push(question)
+      return
+    }
     const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
     quiz.questions[questionIndex] = question
   },
@@ -74,7 +84,7 @@ export const mutations = {
     const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
     if (!quiz) return
     const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
-    this.$delete(quiz.questions, questionIndex)
+    quiz.questions.splice(quiz.questions, questionIndex)
   },
 }
 
@@ -120,22 +130,22 @@ export const actions = {
     commit('DELETE_CONTRIBUTOR_QUIZZ', quizId)
   },
 
-  async createQuestion({ commit }, payload) {
+  async createQuestion({ commit, getters }, payload) {
     const response = await this.$axios.$post(
       '/api/contributor/questions',
       payload,
     )
     commit('ADD_CONTRIBUTOR_QUESTION', response.question)
-    return response.question
+    return getters.getPersonnalQuiz(response.question.quiz_id)
   },
 
-  async updateQuestion({ commit }, payload) {
+  async updateQuestion({ commit, getters }, payload) {
     const response = await this.$axios.$patch(
       `/api/contributor/questions/${payload.id}`,
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_QUESTION', response.question)
-    return response.question
+    return getters.getPersonnalQuiz(response.question.quiz_id)
   },
 
   async deleteQuestion({ commit }, payload) {
