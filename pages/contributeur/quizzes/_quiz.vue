@@ -57,7 +57,7 @@
           class="questions"
           :fields="tableFields"
           :data="quiz.questions"
-          @selectRow="
+          @select-row="
             $router.push(
               `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
             )
