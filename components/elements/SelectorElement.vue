@@ -1,12 +1,12 @@
 <template>
   <div
     v-closable="{ handler: 'closeSelector' }"
-    class="selector"
-    :class="{ active }"
+    class="selector-container"
+    :class="{ active, 'has-error': !!error }"
     @click="active = !active"
   >
     <div class="select_element">
-      {{ selected !== defaultValue ? getSelectedName : noSelect }}
+      {{ selected !== null ? getSelectedName : noSelect }}
       <svg
         class="down"
         width="11"
@@ -34,6 +34,7 @@
         {{ item[displayKey] }}
       </div>
     </div>
+    <div v-if="error" class="error">{{ error.message }}</div>
   </div>
 </template>
 
@@ -69,6 +70,10 @@ export default {
       type: String,
       default: 'ref',
     },
+    error: {
+      type: Object,
+      default: () => null,
+    },
   },
   data() {
     return {
@@ -80,9 +85,8 @@ export default {
       return ([
         ...this.items,
         { [this.refKey]: this.defaultValue, [this.displayKey]: this.noSelect },
-      ].find(item => item[this.refKey] === this.selected) || {})[
-        this.displayKey
-      ]
+        // eslint-disable-next-line eqeqeq
+      ].find(item => item[this.refKey] == this.selected) || {})[this.displayKey]
     },
   },
   watch: {
@@ -92,7 +96,8 @@ export default {
   },
   methods: {
     select(itemRef, clicked = false) {
-      if (!this.items.some(item => item[this.refKey] === itemRef)) {
+      // eslint-disable-next-line eqeqeq
+      if (!this.items.some(item => item[this.refKey] == itemRef)) {
         return this.$emit('input', this.defaultValue)
       }
 
@@ -100,7 +105,8 @@ export default {
         this.toggle &&
         clicked &&
         this.selected !== null &&
-        itemRef === this.selected
+        // eslint-disable-next-line eqeqeq
+        itemRef == this.selected
       ) {
         return this.$emit('input', this.defaultValue)
       }
@@ -117,12 +123,12 @@ export default {
 </script>
 
 <style lang="scss">
-.selector {
+.selector-container {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  background: transparent;
+  background-color: white;
   border: 1px solid #cccccc;
   border-radius: 3px;
   color: #aaaaaa;
@@ -135,6 +141,17 @@ export default {
   transition: border 250ms ease-out;
   margin: 8px 0 16px;
   user-select: none;
+  &.has-error {
+    margin-bottom: 32px;
+    border: 1px solid #c90a0a;
+  }
+  .error {
+    position: absolute;
+    color: #c90a0a;
+    font-size: 12px;
+    top: calc(100% + 6px);
+    right: 1em;
+  }
   .select_element {
     display: flex;
     align-items: center;
