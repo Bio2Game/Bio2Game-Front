@@ -5,11 +5,7 @@
     :class="{ open: status, close: !status }"
     @click.self="$emit('close')"
   >
-    <div
-      v-body-scroll-lock="status"
-      class="modal"
-      :class="[status ? 'open' : 'close', classes]"
-    >
+    <div class="modal" :class="[status ? 'open' : 'close', classes]">
       <slot />
     </div>
   </div>
