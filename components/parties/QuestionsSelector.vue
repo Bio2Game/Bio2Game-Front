@@ -25,7 +25,7 @@
               >
                 <img
                   class="quiz-icon"
-                  src="../../assets/car.svg"
+                  :src="selectedQuiz.domain.icon.reference"
                   :alt="selectedQuiz.label"
                   :title="selectedQuiz.label"
                   :class="{ active: selectedQuiz.id === quizId }"
@@ -202,7 +202,6 @@ export default {
               .quiz-label {
                 font-weight: 600;
                 font-size: 12px;
-                text-transform: uppercase;
                 color: #414141;
               }
             }
