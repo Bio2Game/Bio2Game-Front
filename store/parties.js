@@ -40,10 +40,10 @@ export const mutations = {
     state.game.pause = status
   },
 
-  QUESTIONS_ORDER(state, responses) {
+  RESPONSES_ORDER(state, responses) {
     state.responses = responses
   },
-  QUESTIONS_EQUIVALENTS(state, equivalents) {
+  RESPONSES_EQUIVALENTS(state, equivalents) {
     state.equivalents = equivalents
   },
 
