@@ -141,7 +141,7 @@ export default {
           (!search ||
             quiz.label.toLowerCase().includes(search) ||
             quiz.description.toLowerCase().includes(search) ||
-            `#${quiz.id}` === search ||
+            quiz.id.toString() === search ||
             quiz.author.username.toLowerCase().includes(search) ||
             quiz.domain.label.toLowerCase().includes(search) ||
             (quiz.author.name
@@ -177,7 +177,7 @@ export default {
       }
     },
     getURL(quiz) {
-      return `/quiz/play/${quiz.id}-${quiz.url}`
+      return `/quizzes/${quiz.id}-${quiz.url}`
     },
   },
 }
