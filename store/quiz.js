@@ -1,13 +1,24 @@
+import shuffle from 'lodash/fp/shuffle'
+
 const getDefaultState = () => ({
   quiz: null,
   currentQuestion: null,
   position: 0,
   status: 0,
-  responses: [],
-  equivalents: [],
+  responses: {},
 })
 
 export const state = getDefaultState
+
+export const getters = {
+  getRealIndex: state => (index, questionIndex = null) => {
+    const question = questionIndex
+      ? state.quiz.questions[questionIndex]
+      : state.currentQuestion
+    const { responses, equivalents } = state.responses[question.id] || {}
+    return responses ? equivalents.indexOf(responses[index]) : index
+  },
+}
 
 export const mutations = {
   RESET_STATE(state) {
@@ -26,11 +37,11 @@ export const mutations = {
     state.status = 1
   },
 
-  RESPONSES_ORDER(state, responses) {
-    state.responses = responses
-  },
-  RESPONSES_EQUIVALENTS(state, equivalents) {
-    state.equivalents = equivalents
+  RESPONSES_ORDER(state, data) {
+    state.responses[data.id] = {
+      equivalents: data.responses,
+      responses: shuffle(data.responses),
+    }
   },
 
   SET_STATUS(state, status) {
