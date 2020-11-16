@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { shuffle } from 'lodash'
 import { Remarkable } from 'remarkable'
 
 import { mapState } from 'vuex'
@@ -101,14 +100,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('quiz', [
-      'quiz',
-      'position',
-      'status',
-      'equivalents',
-      'responses',
-      'currentQuestion',
-    ]),
+    ...mapState('quiz', ['quiz', 'position', 'status', 'currentQuestion']),
+    responses() {
+      const question = this.$store.state.quiz.responses[this.currentQuestion.id]
+      return question ? question.responses : {}
+    },
   },
   watch: {
     status(status) {
@@ -140,11 +136,13 @@ export default {
         JSON.parse(this.currentQuestion.responses),
       )
 
-      this.$store.commit('quiz/RESPONSES_EQUIVALENTS', responses)
-      this.$store.commit('quiz/RESPONSES_ORDER', shuffle(responses))
+      this.$store.commit('quiz/RESPONSES_ORDER', {
+        id: this.currentQuestion.id,
+        responses,
+      })
     },
     getColor(index) {
-      return colors[this.equivalents.indexOf(this.responses[index])]
+      return colors[this.$store.getters['quiz/getRealIndex'](index)]
     },
     sendResponse(index) {
       this.response = index
