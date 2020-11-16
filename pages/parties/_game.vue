@@ -377,14 +377,26 @@ export default {
             color: white;
           }
           &.realy_wrong {
-            background-color: #f43434 !important;
-            border-color: #f43434;
+            background-color: #e01515 !important;
+            border-color: #e01515;
             color: white;
           }
           &.checked {
             background-color: #c5c5c5;
             border-color: #c5c5c5;
           }
+        }
+      }
+      .explication {
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+        color: #585858;
+        background-color: #f8f7f7;
+        padding: 16px;
+        margin-bottom: 16px;
+        border: 2px solid #bbe242;
+        border-radius: 4px;
+        a {
+          color: $green;
         }
       }
       // .appreciation {
