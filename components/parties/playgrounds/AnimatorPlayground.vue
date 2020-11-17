@@ -8,7 +8,7 @@
         <PartyWaitingState />
       </div>
     </div>
-    <Tabs v-else v-model="views">
+    <Tabs v-else v-model="views" :value="views">
       <Tab id="global" name="Vue général" :hidden="game.status === 3">
         <PartyQuestionState :interactive="false" />
       </Tab>
@@ -33,7 +33,7 @@ export default {
   name: 'AnimatorPlayground',
   data() {
     return {
-      views: 'stats',
+      views: null,
     }
   },
   computed: mapState('parties', ['game']),
