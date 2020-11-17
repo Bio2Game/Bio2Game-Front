@@ -71,7 +71,11 @@
               </div>
             </template>
             <div v-else class="questions">Pas de quiz selectionné</div>
-            <span class="count">{{ count }} questions séléctionnées</span>
+            <span class="count"
+              >{{ count }} questions séléctionnée{{
+                count > 1 ? 's' : ''
+              }}</span
+            >
           </div>
           <div class="buttons">
             <div class="button green md equal" @click="$emit('close')">
@@ -95,6 +99,12 @@ import { clone } from 'lodash'
 
 export default {
   name: 'QuestionsSelector',
+  props: {
+    questions: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       quizId: null,
@@ -105,7 +115,7 @@ export default {
     quizzes() {
       return this.$store.state.quizzes.quizzes
     },
-    questions() {
+    globalQuestions() {
       return this.$store.getters['quizzes/questions']
     },
     quiz() {
@@ -135,8 +145,13 @@ export default {
       return Object.values(this.selectedQuestions).filter(q => q).length
     },
     formatedQuestions() {
-      return this.questions.filter(q => !!this.selectedQuestions[q.id])
+      return this.globalQuestions.filter(q => !!this.selectedQuestions[q.id])
     },
+  },
+  mounted() {
+    this.questions.forEach(question => {
+      this.$set(this.selectedQuestions, question.id, question.active)
+    })
   },
 }
 </script>
