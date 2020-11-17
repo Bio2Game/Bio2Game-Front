@@ -65,7 +65,7 @@
               <FavoriteBorder class="favorite" />
             </template> 
             -->
-            <a :href="getURL(quiz)" class="jouer">Jouer</a>
+            <nuxt-link :to="getURL(quiz)" class="jouer">Jouer</nuxt-link>
           </div>
           <span class="quiz-id">#{{ quiz.id }}</span>
         </div>
