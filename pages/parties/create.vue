@@ -48,7 +48,7 @@
               class="button white_sky sm equal"
               @click="questionPanel = true"
             >
-              Créer une question
+              Séléction Avancé
             </div>
           </div>
           <div class="content">
@@ -106,7 +106,7 @@ export default {
   },
   async fetch({ store, error }) {
     try {
-      await store.dispatch('quizzes/fetchQuizzes')
+      await store.dispatch('quizzes/fetchQuestionsQuizzes')
     } catch (e) {
       error({
         statusCode: 503,

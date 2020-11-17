@@ -1,6 +1,7 @@
 export const state = () => ({
   quizzes: [],
   quizzesFetched: false,
+  quizzesQuestionsFetched: false,
   contributorQuizzes: [],
   contributorQuizzesFetched: false,
 })
@@ -39,6 +40,9 @@ export const mutations = {
 
   SET_QUIZZES_FETCHED(state) {
     state.quizzesFetched = true
+  },
+  SET_QUESTIONS_QUIZZES_FETCHED(state) {
+    state.quizzesQuestionsFetched = true
   },
   SET_CONTRIBUTOR_QUIZZES_FETCHED(state) {
     state.contributorQuizzesFetched = true
@@ -95,6 +99,16 @@ export const actions = {
     }
     const response = await this.$axios.$get('/api/quizzes')
     commit('SET_QUIZZES_FETCHED')
+    commit('SET_QUIZZES', response.quizzes)
+  },
+
+  async fetchQuestionsQuizzes({ state, commit }) {
+    if (state.quizzesFetched && state.quizzesQuestionsFetched) {
+      return
+    }
+    const response = await this.$axios.$get('/api/quizzes/questions')
+    commit('SET_QUIZZES_FETCHED')
+    commit('SET_QUESTIONS_QUIZZES_FETCHED')
     commit('SET_QUIZZES', response.quizzes)
   },
 
