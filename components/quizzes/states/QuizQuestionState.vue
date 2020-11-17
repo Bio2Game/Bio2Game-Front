@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentQuestion" class="question-interface">
+  <div v-if="currentQuestion" class="interface question-interface">
     <div class="infos">
       <div class="title">
         <h1>{{ currentQuestion.label }}</h1>
@@ -26,7 +26,7 @@
             checked: response === 0,
             [getColor(0)]: status === 2,
           }"
-          @click="sendResponse(0)"
+          @click="response = 0"
         >
           <div class="cover"></div>
           {{ responses[0] }}
@@ -37,7 +37,7 @@
             checked: response === 1,
             [getColor(1)]: status === 2,
           }"
-          @click="sendResponse(1)"
+          @click="response = 1"
         >
           <div class="cover"></div>
           {{ responses[1] }}
@@ -50,7 +50,7 @@
             checked: response === 2,
             [getColor(2)]: status === 2,
           }"
-          @click="sendResponse(2)"
+          @click="response = 2"
         >
           <div class="cover"></div>
           {{ responses[2] }}
@@ -61,22 +61,31 @@
             checked: response === 3,
             [getColor(3)]: status === 2,
           }"
-          @click="sendResponse(3)"
+          @click="response = 3"
         >
           <div class="cover"></div>
           {{ responses[3] }}
         </div>
       </div>
       <div v-if="status === 2" class="explication">
-        <p>
-          Explication:<br /><span
-            v-html="markdown.render(currentQuestion.explication)"
-          ></span>
-        </p>
+        <h6 class="explication-title">Explication:</h6>
+        <span v-html="markdown.render(currentQuestion.explication)"></span>
         <p v-if="currentQuestion.source" class="kown">
           <a :href="currentQuestion.source" target="black">En savoir plus</a>.
         </p>
       </div>
+      <a
+        v-if="status === 1"
+        class="submit-next button lg green"
+        @click="sendResponse()"
+        >Valider</a
+      >
+      <a
+        v-if="status === 2"
+        class="submit-next resp button lg green"
+        @click="skipResponses()"
+        >Question suivante</a
+      >
     </div>
   </div>
 </template>
@@ -84,7 +93,7 @@
 <script>
 import { Remarkable } from 'remarkable'
 
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
@@ -97,14 +106,12 @@ export default {
       left: 0,
       progress: '0%',
       markdown: new Remarkable(),
+      sended: false,
     }
   },
   computed: {
     ...mapState('quiz', ['quiz', 'position', 'status', 'currentQuestion']),
-    responses() {
-      const question = this.$store.state.quiz.responses[this.currentQuestion.id]
-      return question ? question.responses : {}
-    },
+    ...mapGetters('quiz', { responses: 'getResponses' }),
   },
   watch: {
     status(status) {
@@ -123,10 +130,8 @@ export default {
   methods: {
     skipResponses() {
       this.response = null
-      this.$store.commit(
-        'SET_CURRENT_QUESTION',
-        this.quiz.questions[this.position + 1],
-      )
+      this.sended = false
+      this.$store.dispatch('quiz/nextQuestion')
     },
     renderNumber(position, total) {
       return position < 10 && total > 9 ? `0${position}` : position
@@ -144,11 +149,19 @@ export default {
     getColor(index) {
       return colors[this.$store.getters['quiz/getRealIndex'](index)]
     },
-    sendResponse(index) {
-      this.response = index
+    async sendResponse() {
+      if (this.sended) return
+      this.sended = true
+
+      if (this.response === null) {
+        this.cancel()
+        this.response = this.$store.getters['quiz/getFakeIndex'](3)
+        await new Promise(resolve => setTimeout(() => resolve(), 1000))
+      }
+
       this.cancel()
       this.$store.dispatch('quiz/respond', {
-        index,
+        index: this.response,
         time: this.currentQuestion.time - this.left,
       })
     },
@@ -162,7 +175,7 @@ export default {
 
         if (left < 0) {
           this.cancel()
-          this.sendResponse(3)
+          this.sendResponse()
           return
         }
 
