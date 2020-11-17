@@ -10,11 +10,7 @@
       {{ score.text }}
     </div>
     <div class="questions">
-      <div
-        v-for="(question, index) of questions"
-        :key="question"
-        class="element"
-      >
+      <div v-for="(question, index) of questions" :key="index" class="element">
         <div class="question-name">
           <b>Question n°{{ index + 1 }} :</b> {{ question.label }}
         </div>
@@ -85,10 +81,8 @@
               </div>
             </div>
             <div class="explication">
-              <p>
-                Explication:<br />
-                <span v-html="markdown.render(question.explication)" />
-              </p>
+              <h6 class="explication-title">Explication:</h6>
+              <span v-html="markdown.render(question.explication)" />
               <a
                 v-if="question.source"
                 class="source"
@@ -100,6 +94,28 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="results">
+      <div class="head">Résultats</div>
+      <div class="content">
+        <div class="stats">
+          <div class="stat">
+            <span class="num good">1</span>
+            <span class="label">Bonne Réponse</span>
+          </div>
+          <div class="stat">
+            <span class="num bad">2</span>
+            <span class="label">Mauvaises Réponses</span>
+          </div>
+          <div class="stat">
+            <span class="num good">37</span>
+            <span class="label">Points Collectés</span>
+          </div>
+        </div>
+        <nuxt-link class="button green md submit-next" to="/quizzes">
+          Continuer
+        </nuxt-link>
       </div>
     </div>
   </div>
