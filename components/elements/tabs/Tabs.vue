@@ -49,8 +49,9 @@ export default {
     selectTab(selectedTabId, oldValue) {
       const selectedTab = this.tabs.find(tab => tab.id === selectedTabId)
       if (!selectedTab) {
-        if (!this.tabs.length) return
-        return this.selectTab(this.tabs[0].id)
+        const validtabs = this.tabs.filter(tab => !tab.hidden)
+        if (!validtabs.length) return
+        return this.selectTab(validtabs[0].id)
       }
       this.tabs.forEach(tab => {
         tab.active = tab.id === selectedTab.id
