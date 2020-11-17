@@ -19,14 +19,6 @@ export default {
    */
   loading: false,
 
-  // /*
-  //  ** Scroll top
-  //  ** See https://nuxtjs.org/api/configuration-router/#scrollbehavior
-  //  */
-  // scrollBehavior(to, from, savedPosition) {
-  //   return { x: 0, y: 0 }
-  // },
-
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -139,7 +131,7 @@ export default {
     classes: false,
     events: false,
     google: {
-      families: ['Montserrat:500,600,700,800&display=swap'],
+      families: ['Montserrat:500,600,700,800,900&display=swap'],
     },
     custom: {
       families: ['Material-Icons'],
