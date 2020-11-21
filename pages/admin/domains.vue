@@ -13,23 +13,29 @@
           :value="current_domain.name"
           type="text"
           placeholder="Nom du domaine"
+          :error="filtredErrors('name')"
         />
         <InputElement
           v-model="current_domain.icon_id"
           :value="current_domain.icon_id"
           type="number"
           placeholder="Icone Id"
+          :error="filtredErrors('icon_id')"
         />
         <FileSelectorElement
           v-model="current_domain.illustration"
           placeholder="Illustration"
+          :error="filtredErrors('illustration')"
         />
         <ChipsSelectorElement
           v-model="current_domain.keyswords"
           :value="current_domain.keyswords"
           placeholder="Mots clés"
+          :error="filtredErrors('keyswords')"
         />
-        <div class="button md green submit">Sauvegarder</div>
+        <div class="button md green submit" @click="saveDomain()">
+          Sauvegarder
+        </div>
       </div>
     </div>
     <div class="domains-list">
@@ -66,17 +72,60 @@ export default {
   },
   data() {
     return {
+      domain_id: false,
       current_domain: {
         name: '',
         icon_id: '',
         illustration: '',
         keyswords: '',
       },
+      errors: [],
     }
   },
   computed: {
     domains() {
       return this.$store.state.admin.domains
+    },
+  },
+  methods: {
+    filtredErrors(field) {
+      return this.errors.find(error => error.field === field)
+    },
+    async saveDomain() {
+      if (!this.domain_id) {
+        try {
+          await this.$store.dispatch('admin/createDomain', this.current_domain)
+          this.$notify({
+            type: 'success',
+            text: 'Votre domaine a bien été créé !',
+            duration: 3000,
+            width: 400,
+          })
+        } catch (err) {
+          const messages = err.response.data.messages
+          if (messages) {
+            this.errors = messages.errors
+          }
+        }
+      } else {
+        try {
+          await this.$store.dispatch('admin/updateDomain', {
+            id: this.domain_id,
+            ...this.current_domain,
+          })
+          this.$notify({
+            type: 'success',
+            text: 'Votre domaine a bien été mises à jour !',
+            duration: 3000,
+            width: 400,
+          })
+        } catch (err) {
+          const messages = err.response.data.messages
+          if (messages) {
+            this.errors = messages.errors
+          }
+        }
+      }
     },
   },
 }
@@ -90,7 +139,7 @@ export default {
     .content {
       display: flex;
       flex-direction: column;
-      min-height: 0;
+      min-height: 0 !important;
       .submit {
         max-width: 100%;
         width: 100%;
