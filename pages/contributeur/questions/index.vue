@@ -17,7 +17,7 @@
           :data="questions"
           @select-row="
             $router.push(
-              `/contributeur/quizzes/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
+              `/contributeur/quiz/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
             )
           "
         />
@@ -34,8 +34,8 @@
       </div>
     </div>
     <div class="buttons-bar">
-      <nuxt-link class="button green lg" to="/contributeur/quizzes">
-        Mes quizzes
+      <nuxt-link class="button green lg" to="/contributeur/quiz">
+        Mes quiz
       </nuxt-link>
       <nuxt-link class="button green lg" to="/contributeur/questions">
         Mes questions
@@ -60,7 +60,7 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'Unable to fetch your quizzes on the Bio2Game API',
+        message: 'Unable to fetch your quiz on the Bio2Game API',
       })
     }
   },

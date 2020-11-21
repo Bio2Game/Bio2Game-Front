@@ -119,7 +119,7 @@
     </div>
     <div class="buttons-bar">
       <nuxt-link class="button green lg" to="/contributeur/quiz">
-        Mes quizzes
+        Mes quiz
       </nuxt-link>
       <nuxt-link class="button green lg" to="/contributeur/questions">
         Mes questions

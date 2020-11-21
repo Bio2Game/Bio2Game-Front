@@ -12,9 +12,7 @@
         <div class="menu" :class="{ open: toggleUserMenu }">
           <div class="left-menu">
             <nuxt-link class="link" to="/"><HomeIcon /> Accueil</nuxt-link>
-            <nuxt-link class="link" to="/quizzes">
-              <GamesIcon /> Quizzes
-            </nuxt-link>
+            <nuxt-link class="link" to="/quiz"> <GamesIcon /> Quiz </nuxt-link>
             <nuxt-link class="link" to="/parties">
               <GroupIcon /> Parties
             </nuxt-link>
@@ -44,9 +42,9 @@
               <div class="user-menu">
                 <ul>
                   <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
-                  <!-- <nuxt-link to="/quizzes"><Favorite /> Mes favoris</nuxt-link> -->
-                  <nuxt-link to="/contributeur/quizzes">
-                    <Nature2Icon /> Mes quizzes
+                  <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
+                  <nuxt-link to="/contributeur/quiz">
+                    <Nature2Icon /> Mes quiz
                   </nuxt-link>
                   <nuxt-link v-if="$auth.user.status > 1" to="/admin">
                     <SettingsIcon /> Admin

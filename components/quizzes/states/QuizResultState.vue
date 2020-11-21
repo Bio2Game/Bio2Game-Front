@@ -113,7 +113,7 @@
             <span class="label">Points Collectés</span>
           </div>
         </div>
-        <nuxt-link class="button green md submit-next" to="/quizzes">
+        <nuxt-link class="button green md submit-next" to="/quiz">
           Continuer
         </nuxt-link>
       </div>

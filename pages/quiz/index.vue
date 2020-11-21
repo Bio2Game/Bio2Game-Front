@@ -93,7 +93,7 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'Unable to fetch quizzes on the Bio2Game API',
+        message: 'Unable to fetch quiz on the Bio2Game API',
       })
     }
   },
