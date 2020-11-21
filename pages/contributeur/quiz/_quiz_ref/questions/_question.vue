@@ -118,7 +118,7 @@
       </div>
     </div>
     <div class="buttons-bar">
-      <nuxt-link class="button green lg" to="/contributeur/quizzes">
+      <nuxt-link class="button green lg" to="/contributeur/quiz">
         Mes quizzes
       </nuxt-link>
       <nuxt-link class="button green lg" to="/contributeur/questions">
@@ -283,7 +283,7 @@ export default {
 
         await this.$nextTick()
 
-        return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
+        return this.$router.push(`/contributeur/quiz/${quiz.id}-${quiz.url}`)
       } catch (error) {
         console.log(error)
         const messages = error.response.data.messages
@@ -300,7 +300,7 @@ export default {
         })
 
         return this.$router.push(
-          `/contributeur/quizzes/${this.$route.params.quiz_ref}`,
+          `/contributeur/quiz/${this.$route.params.quiz_ref}`,
         )
       } catch (error) {
         console.log(error)

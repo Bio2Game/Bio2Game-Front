@@ -2,9 +2,9 @@
   <div class="container">
     <div class="block index">
       <div class="head">
-        <h5>Mes quizzes</h5>
+        <h5>Mes quiz</h5>
         <nuxt-link
-          to="/contributeur/quizzes/create"
+          to="/contributeur/quiz/create"
           class="button white_sky sm equal"
         >
           Créer un quizz
@@ -17,16 +17,16 @@
           :data="quizzes"
           @select-row="
             $router.push(
-              `/contributeur/quizzes/${$event.data.id}-${$event.data.url}`,
+              `/contributeur/quiz/${$event.data.id}-${$event.data.url}`,
             )
           "
         />
         <div v-else class="no-elements">
-          <h3>Aucuns quizzes</h3>
+          <h3>Aucun quiz</h3>
           <p>Votre profil ne contient pas le moindre quiz !</p>
           <nuxt-link
             class="button md green equal"
-            to="/contributeur/quizzes/create"
+            to="/contributeur/quiz/create"
           >
             Créer un quiz
           </nuxt-link>
@@ -34,8 +34,8 @@
       </div>
     </div>
     <div class="buttons-bar">
-      <nuxt-link class="button green lg" to="/contributeur/quizzes">
-        Mes quizzes
+      <nuxt-link class="button green lg" to="/contributeur/quiz">
+        Mes quiz
       </nuxt-link>
       <nuxt-link class="button green lg" to="/contributeur/questions">
         Mes questions
@@ -60,7 +60,7 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'Unable to fetch your quizzes on the Bio2Game API',
+        message: 'Unable to fetch your quiz on the Bio2Game API',
       })
     }
   },

@@ -59,7 +59,7 @@
           :data="quiz.questions"
           @select-row="
             $router.push(
-              `/contributeur/quizzes/${$route.params.quiz}/questions/${$event.data.id}`,
+              `/contributeur/quiz/${$route.params.quiz}/questions/${$event.data.id}`,
             )
           "
         />
@@ -73,8 +73,8 @@
       </div>
     </div>
     <div class="buttons-bar">
-      <nuxt-link class="button green lg" to="/contributeur/quizzes">
-        Mes quizzes
+      <nuxt-link class="button green lg" to="/contributeur/quiz">
+        Mes quiz
       </nuxt-link>
       <nuxt-link class="button green lg" to="/contributeur/questions">
         Mes questions
@@ -215,11 +215,11 @@ export default {
         if (questionCreation) {
           this.deleteData()
           return this.$router.push(
-            `/contributeur/quizzes/${quiz.id}-${quiz.url}/questions/create`,
+            `/contributeur/quiz/${quiz.id}-${quiz.url}/questions/create`,
           )
         }
 
-        return this.$router.push(`/contributeur/quizzes/${quiz.id}-${quiz.url}`)
+        return this.$router.push(`/contributeur/quiz/${quiz.id}-${quiz.url}`)
       } catch (error) {
         const messages = error.response.data.messages
         if (messages) {
@@ -250,7 +250,7 @@ export default {
 
         await this.$store.dispatch(`quizzes/deleteQuiz`, this.quiz.id)
 
-        return this.$router.push(`/contributeur/quizzes`)
+        return this.$router.push(`/contributeur/quiz`)
       } catch (error) {
         console.error(error)
         this.$notify({

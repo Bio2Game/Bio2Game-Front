@@ -2,8 +2,8 @@
   <div class="quiz-page">
     <NatureImage class="nature" />
     <div class="top">
-      <h1>QUIZZES</h1>
-      <p>Choisissez les quizzes succeptibles de vous intéresser.</p>
+      <h1>QUIZ</h1>
+      <p>Choisissez les quiz succeptibles de vous intéresser.</p>
     </div>
     <div class="levels">
       <div class="level_switch">
@@ -59,11 +59,11 @@
             <p class="creator"><b>Créateur :</b> {{ quiz.author.username }}</p>
           </div>
           <div class="buttons">
-            <!-- 
+            <!--
               <template v-if="$auth.loggedIn">
               <Favorite class="favorite" />
               <FavoriteBorder class="favorite" />
-            </template> 
+            </template>
             -->
             <nuxt-link :to="getURL(quiz)" class="jouer">Jouer</nuxt-link>
           </div>
@@ -82,7 +82,7 @@
 // import FavoriteBorder from '@/assets/icons/favorite_border.svg?inline'
 
 export default {
-  name: 'Quizzes',
+  name: 'Quiz',
   components: {
     // Favorite,
     // FavoriteBorder,

@@ -4,8 +4,7 @@
       <div class="infos">
         <h1>CRÉATION D’UNE PARTIE</h1>
         <p>
-          Créez des parties pour répondre simultanément à des quizzes
-          intéractifs !
+          Créez des parties pour répondre simultanément à des quiz intéractifs !
         </p>
       </div>
       <div class="blocks">
@@ -30,7 +29,7 @@
                 @input="loadQuiz($event)"
               />
               <nuxt-link
-                to="/contributeur/quizzes/create"
+                to="/contributeur/quiz/create"
                 class="button md green create-quiz"
               >
                 Créer un quiz
@@ -110,7 +109,7 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'Unable to fetch quizzes on the Bio2Game API',
+        message: 'Unable to fetch quiz on the Bio2Game API',
       })
     }
   },
