@@ -8,7 +8,9 @@
         <nuxt-link class="button green md" to="/admin/domains">
           Domaines
         </nuxt-link>
-        <nuxt-link class="button green md" to="/admin/icons">Icones</nuxt-link>
+        <nuxt-link class="button green md" to="/admin/formations">
+          Formations
+        </nuxt-link>
       </div>
       <nuxt-child :key="$route.fullPath" />
     </div>
