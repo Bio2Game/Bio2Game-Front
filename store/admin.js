@@ -46,6 +46,19 @@ export const mutations = {
     const index = state.users.findIndex(u => u.id === user.id)
     state.users[index] = user
   },
+
+  ADD_DOMAIN(state, domain) {
+    state.domains.push(domain)
+  },
+
+  UPDATE_DOMAIN(state, domain) {
+    const domainIndex = state.domains.findIndex(q => q.id === domain.id)
+    state.domains[domainIndex] = Object.assign(
+      {},
+      state.domains[domainIndex],
+      domain,
+    )
+  },
 }
 
 export const actions = {
@@ -83,5 +96,20 @@ export const actions = {
     )
     commit('UPDATE_USER', response.user)
     return response.user
+  },
+
+  async createDomain({ commit }, payload) {
+    const response = await this.$axios.$post(`/api/admin/domains`, payload)
+    commit('ADD_DOMAIN', response.domain)
+    return response.domain
+  },
+
+  async updateDomain({ commit }, payload) {
+    const response = await this.$axios.$patch(
+      `/api/admin/domains/${payload.id}`,
+      payload,
+    )
+    commit('UPDATE_DOMAIN', response.domain)
+    return response.domain
   },
 }
