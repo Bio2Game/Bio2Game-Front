@@ -120,13 +120,13 @@ export default {
       }
 
       const position = window.pageYOffset || document.documentElement.scrollTop
-      const isScrollingUp = this.isFixed ? position > 0 : position > 0
+      const isScrollingDown = position > 0
 
-      if (this.isFixed !== isScrollingUp) {
+      if (this.isFixed !== isScrollingDown) {
         this.transition = true
         await this.$nextTick()
-        this.isFixed = isScrollingUp
-        await this.$nextTick()
+        this.isFixed = isScrollingDown
+        await new Promise(resolve => setTimeout(() => resolve(), 300))
         this.transition = false
       }
     },

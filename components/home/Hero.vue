@@ -98,16 +98,25 @@ export default {
       z-index: -1;
     }
     .content-text {
-      padding-left: calc((100vw - 1280px) / 2 + 20px);
-      @media screen and (max-width: $xl) {
-        padding-left: calc((100vw - 1024px) / 2 + 20px);
+      padding-left: calc((100vw - 1620px) / 2 + 32px);
+
+      @media screen and (max-width: 1620px) {
+        padding-left: calc((100vw - 1480px) / 2 + 32px);
       }
 
-      @media screen and (max-width: $lg) {
-        padding-left: calc((100vw - 768px) / 2 + 20px);
+      @media screen and (max-width: 1480px) {
+        padding-left: calc((100vw - 1280px) / 2 + 32px);
       }
 
-      @media screen and (max-width: $md) {
+      @media screen and (max-width: 1280px) {
+        padding-left: calc((100vw - 1024px) / 2 + 32px);
+      }
+
+      @media screen and (max-width: 1024px) {
+        padding-left: calc((100vw - 768px) / 2 + 32px);
+      }
+
+      @media screen and (max-width: 768px) {
         padding-left: calc(max((100vw - 640px), 1px) / 2 + 20px);
       }
       h2 {
