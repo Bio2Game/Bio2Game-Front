@@ -204,6 +204,14 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    cache: true,
+    ssr: true,
+    friendlyErrors: true,
+    hotMiddleware: {
+      client: {
+        overlay: false,
+      },
+    },
     postcss: {
       preset: {
         stage: 2,
