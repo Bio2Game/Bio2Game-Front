@@ -1,17 +1,22 @@
 <template>
   <div class="stats">
-    <div
-      v-for="(question, index) of questions"
-      :key="index"
-      class="question-stats"
-    >
-      <div class="infos">
-        <h3>Question {{ index + 1 }}:</h3>
-        <p>{{ question.description }}</p>
+    <div v-if="room_responses.length" class="questions">
+      <div
+        v-for="(question, index) of questions"
+        :key="index"
+        class="question-stats"
+      >
+        <div class="infos">
+          <h3>Question {{ index + 1 }}:</h3>
+          <p>{{ question.description }}</p>
+        </div>
+        <client-only>
+          <DoughnutElement class="doughnut" :chartData="question.data" />
+        </client-only>
       </div>
-      <client-only>
-        <DoughnutElement class="doughnut" :chartData="question.data" />
-      </client-only>
+    </div>
+    <div v-else class="no-data">
+      <h4>Personne n'a encore répondu aux questions</h4>
     </div>
   </div>
 </template>
@@ -63,34 +68,36 @@ export default {
 
 <style lang="scss">
 .stats {
-  display: grid;
-  gap: 32px;
-  margin: 16px auto;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  .question-stats {
-    position: relative;
-    width: 250px;
-    margin: auto;
-    .infos {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 20%;
-      right: 20%;
-      bottom: 20%;
-      left: 20%;
-      text-align: center;
-      color: #585858;
-      user-select: none;
-      h3 {
-        font-size: 18px;
-        margin-bottom: 4px;
-      }
-      p {
-        font-size: 14px;
-        word-break: break-all;
+  .questions {
+    display: grid;
+    gap: 32px;
+    margin: 16px auto;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .question-stats {
+      position: relative;
+      width: 250px;
+      margin: 0 auto;
+      .infos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 20%;
+        right: 20%;
+        bottom: 20%;
+        left: 20%;
+        text-align: center;
+        color: #585858;
+        user-select: none;
+        h3 {
+          font-size: 18px;
+          margin-bottom: 4px;
+        }
+        p {
+          font-size: 14px;
+          word-break: break-all;
+        }
       }
     }
   }
