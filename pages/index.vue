@@ -4,7 +4,11 @@
       <div v-for="(feature, index) in features" :key="index" class="feature">
         <div class="container">
           <div class="image-container">
-            <img :src="feature.image" alt="feature.name" />
+            <Lottie
+              class="image"
+              :animationData="feature.data"
+              :play="true"
+            ></Lottie>
           </div>
           <div class="content">
             <h3>{{ feature.name }}</h3>
@@ -83,6 +87,12 @@
 </template>
 
 <script>
+import api from '@/assets/data/api.json'
+import book from '@/assets/data/book.json'
+import ergo from '@/assets/data/ergo.json'
+import couronne from '@/assets/data/couronne.json'
+import discu from '@/assets/data/discu.json'
+
 export default {
   name: 'Features',
   data() {
@@ -120,31 +130,31 @@ export default {
           name: 'Moderne et Ergonomique',
           description:
             'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
-          image: '/images/features/ui.svg',
+          data: ergo,
         },
         {
           name: 'Education',
           description:
             'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats et statistiques.',
-          image: '/images/features/education.svg',
+          data: couronne,
         },
         {
           name: 'Vie privée',
           description:
             'La nature est aussi importante que votre vie privée. C’est pour cela que vos informations privées resteront privées !',
-          image: '/images/features/private.svg',
+          data: book,
         },
         {
           name: 'Communautaire',
           description:
             "Un lieu de rencontre et de partage d'informations innovantes entre tous ceux qui cherchent des solutions au quotidien.",
-          image: '/images/features/community.svg',
+          data: discu,
         },
         {
           name: 'Une API',
           description:
             'Bio2Game vous propose une API pour pouvoir accéder à vos données depuis vos sites ou projets.',
-          image: '/images/features/api.svg',
+          data: api,
         },
       ],
     }
@@ -174,17 +184,17 @@ export default {
       }
       .container {
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
         height: 220px;
         @media screen and (max-width: $sm) {
           height: 200px;
         }
 
         .image-container {
-          margin: 0 64px;
           display: flex;
           height: 100%;
+          margin: 0 64px;
           @media screen and (max-width: $md) {
             display: none;
           }
@@ -194,26 +204,26 @@ export default {
           }
         }
         .content {
-          max-width: 450px;
           margin: 0 64px;
+          max-width: 450px;
           @media screen and (max-width: $sm) {
             margin: 0 24px;
           }
           h3 {
-            font-weight: 800;
+            color: $green;
             font-size: 36px;
+            font-weight: 800;
             line-height: 44px;
             margin-bottom: 16px;
-            color: $green;
             @media screen and (max-width: $sm) {
               font-size: 30px;
               line-height: 40px;
             }
           }
           p {
+            color: #414141;
             font-size: 18px;
             line-height: 26px;
-            color: #414141;
           }
         }
       }
@@ -232,34 +242,34 @@ export default {
     }
   }
   .contributors {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: white;
-    position: relative;
     .title {
+      position: relative;
       display: flex;
       justify-content: center;
-      position: relative;
       margin: 60px 0 50px;
       h2 {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        font-weight: 700;
-        font-size: 35px;
-        text-transform: uppercase;
         color: $green;
+        font-size: 35px;
+        font-weight: 700;
+        flex-direction: column;
+        text-transform: uppercase;
       }
     }
 
     .carousel {
       .contributor {
+        padding: 24px;
+        margin: 32px 16px;
         background: #ffffff;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
         border-radius: 12px;
-        padding: 24px;
-        margin: 32px 16px;
         &:last-child {
           margin-right: 32px 0;
         }
@@ -267,9 +277,9 @@ export default {
           display: flex;
           margin-bottom: 16px;
           .avatar {
-            min-width: 72px;
             width: 72px;
             height: 72px;
+            min-width: 72px;
             img {
               width: 100%;
               border-radius: 36px;
@@ -278,32 +288,32 @@ export default {
           .content-text {
             margin-left: 12px;
             .contributor-name {
-              font-weight: 600;
-              font-size: 20px;
-              line-height: 29px;
               color: #000000;
+              font-size: 20px;
+              font-weight: 600;
+              line-height: 29px;
             }
             .contributor-description {
+              color: #4d4d4d;
               font-size: 14px;
               line-height: 17px;
-              color: #4d4d4d;
             }
           }
         }
         .quizs-title {
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 22px;
           color: #000000;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 22px;
           margin-bottom: 12px;
         }
         .quizs-list {
           .quiz {
             display: flex;
+            padding: 8px 16px 8px 8px;
             background: #f1f1f1;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
             border-radius: 6px;
-            padding: 8px 16px 8px 8px;
             margin-bottom: 16px;
             .icon {
               width: 48px;
@@ -319,17 +329,17 @@ export default {
               display: flex;
               flex-direction: column;
               .quiz-name {
-                font-weight: 500;
+                color: #000000;
                 font-size: 16px;
+                font-weight: 500;
                 line-height: 18px;
                 margin-bottom: 5px;
-                color: #000000;
               }
               .quiz-description {
-                font-weight: 500;
-                font-size: 12px;
-                line-height: 14px;
                 color: #494949;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 14px;
               }
             }
           }
@@ -341,17 +351,17 @@ export default {
         margin-left: 16px;
       }
       .VueCarousel-navigation-button {
-        transform: none;
         position: relative;
-        font-size: 42px;
-        outline: 0;
-        cursor: pointer;
-        color: $green;
-        text-shadow: 0 2px 4px #00000040;
         height: 40px;
+        color: $green;
+        font-size: 42px;
+        cursor: pointer;
+        transform: none;
+        outline: 0;
+        text-shadow: 0 2px 4px #00000040;
         &.VueCarousel-navigation--disabled {
-          opacity: 1;
           color: #afafaf;
+          opacity: 1;
         }
       }
     }
