@@ -49,13 +49,13 @@ export default {
 
 <style lang="scss">
 .modal_overlay {
+  position: fixed;
+  z-index: 1002;
+  top: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1002;
-  position: fixed;
-  top: 0;
-  right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
@@ -71,8 +71,8 @@ export default {
     animation: backout 0.4s ease-in-out;
   }
   .modal {
-    opacity: 0;
     display: flex;
+    opacity: 0;
     flex-direction: column;
     @media screen and (max-width: 720px) {
       margin-top: 80px;

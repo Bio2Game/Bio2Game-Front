@@ -344,10 +344,10 @@ export default {
         margin-left: 24px;
       }
       .section-title {
-        user-select: none;
-        font-weight: 600;
-        font-size: 15px;
         margin: 8px 0 16px;
+        font-size: 15px;
+        font-weight: 600;
+        user-select: none;
       }
     }
   }

@@ -31,6 +31,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: String,
+      default: 'id',
+    },
     type: {
       type: String,
       default: 'text',
@@ -126,64 +130,64 @@ export default {
   }
   .error {
     position: absolute;
-    color: #c90a0a;
-    font-size: 12px;
     top: calc(100% + 6px);
     right: 1em;
+    color: #c90a0a;
+    font-size: 12px;
   }
   textarea {
-    color: #333333;
-    width: 100%;
+    position: relative;
+    z-index: 3;
     box-sizing: border-box;
-    letter-spacing: 1px;
+    width: 100%;
+    height: 112px;
     padding: 7px 15px;
     border: 1px solid #cccccc;
-    position: relative;
     background: transparent;
-    outline: none;
-    line-height: 28px;
+    color: #333333;
     font-size: 15px;
-    z-index: 3;
+    line-height: 28px;
+    letter-spacing: 1px;
+    outline: none;
     border-radius: 4px;
     resize: none;
-    height: 112px;
     &.date {
       padding: 6px 15px;
     }
     & ~ .focus-bg {
       position: absolute;
-      left: 0;
+      z-index: 1;
       top: 0;
-      bottom: 4px;
       width: 0;
+      left: 0;
+      bottom: 4px;
       background-color: transparent;
       transition: 0.4s;
-      z-index: 1;
       border-radius: 4px;
     }
     & ~ .placeholder {
       position: absolute;
-      left: 14px;
-      top: 15px;
-      color: #aaaaaa;
-      transition: 0.3s;
       z-index: 2;
-      letter-spacing: 0.5px;
-      font-size: 14px;
-      white-space: nowrap;
+      top: 15px;
       overflow: hidden;
-      text-overflow: ellipsis;
       width: calc(100% - 24px);
+      color: #aaaaaa;
+      font-size: 14px;
+      left: 14px;
+      transition: 0.3s;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     &:focus ~ .placeholder,
     &.has-content ~ .placeholder,
     &.date ~ .placeholder {
       top: -16px;
-      left: 0;
-      font-size: 12px;
-      color: $green;
-      transition: 0.3s;
       width: calc(100% - 12px);
+      color: $green;
+      font-size: 12px;
+      left: 0;
+      transition: 0.3s;
     }
     &:disabled {
       cursor: not-allowed;
@@ -208,6 +212,20 @@ export default {
   &.white_label input.has-content ~ .placeholder,
   &.white_label input.date ~ .placeholder {
     color: #ffffff !important;
+  }
+  .counter {
+    position: absolute;
+    z-index: 2;
+    right: 9px;
+    color: #4e4e4e;
+    font-size: 13px;
+    cursor: text;
+    user-select: none;
+    bottom: 12px;
+    span {
+      color: $green;
+      margin-right: 2px;
+    }
   }
 }
 
@@ -243,20 +261,6 @@ export default {
 //   .textarea {
 //     height: 150px;
 //     resize: none;
-//   }
-
-//   .counter {
-//     user-select: none;
-//     cursor: text;
-//     position: absolute;
-//     bottom: 24px;
-//     right: 9px;
-//     font-size: 13px;
-//     color: #4e4e4e;
-//     span {
-//       margin-right: 2px;
-//       color: #cd6e57;
-//     }
 //   }
 //   .input {
 //     & + .counter {

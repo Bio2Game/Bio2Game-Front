@@ -111,25 +111,25 @@ export default {
   justify-content: center;
   .infos {
     h1 {
-      font-weight: 700;
-      font-size: 40px;
-      text-transform: uppercase;
-      text-align: center;
       margin: 48px 0 24px;
       color: #414141;
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
       @media screen and (max-width: $md) {
-        font-size: 32px;
         margin: 32px 0 24px;
+        font-size: 32px;
       }
       @media screen and (max-width: $sm) {
-        font-size: 24px;
         margin: 24px 0;
+        font-size: 24px;
       }
     }
     p {
-      text-align: center;
-      font-weight: 500;
       font-size: 16px;
+      font-weight: 500;
+      text-align: center;
       margin-bottom: 16px;
     }
   }
@@ -146,15 +146,15 @@ export default {
     }
 
     .item {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      flex: 1 0;
-      margin: 0 32px;
       border: 6px solid #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      margin: 0 32px;
       cursor: pointer;
+      flex: 1 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
       transition: transform 0.3s;
       &.disabled {
         filter: grayscale(1);
@@ -162,13 +162,13 @@ export default {
       }
 
       @media screen and (max-width: 780px) {
-        max-width: 500px;
         margin: 0 24px 24px;
+        max-width: 500px;
       }
 
       @media screen and (max-width: 480px) {
-        max-width: 500px;
         margin: 0 16px 16px;
+        max-width: 500px;
       }
 
       &:hover {
@@ -183,24 +183,24 @@ export default {
       .item__content {
         position: absolute;
         top: 0;
-        bottom: 0;
-        left: 0;
         right: 0;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
         background: linear-gradient(
           0deg,
           rgba(187, 226, 66, 0.9) 0%,
           rgba(187, 226, 66, 0.65) 100%
         );
+        bottom: 0;
+        left: 0;
         transition: padding-top 0.3s;
 
         h2 {
           color: white;
-          text-transform: uppercase;
-          font-weight: bold;
           font-size: 45px;
+          font-weight: bold;
+          text-transform: uppercase;
           text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
           @media screen and (max-width: 480px) {
@@ -215,26 +215,26 @@ export default {
           .input-continer {
             display: flex;
             align-items: flex-end;
+            width: 100%;
             transition: opacity 0.3s;
             opacity: 0;
             margin-top: 24px;
-            width: 100%;
             max-width: 200px;
 
             .go {
               display: none;
-              color: #ffffff;
-              height: 37px;
-              max-width: 48px;
-              align-items: center;
               justify-content: center;
+              align-items: center;
               width: 100%;
+              height: 37px;
+              border: 3px solid #ffffff;
+              margin: 0 0 8px 10px;
+              color: #ffffff;
               font-size: 20px;
               font-weight: 600;
+              max-width: 48px;
               text-transform: uppercase;
-              border: 3px solid #ffffff;
               text-decoration: none;
-              margin: 0 0 8px 10px;
               background-color: transparent;
               transition: opacity 0.3s, background-color 0.3s, color 0.3s,
                 border-width 0.3s;
@@ -245,23 +245,23 @@ export default {
             }
 
             input {
+              width: 100%;
+              border: none;
+              margin: 0 0 8px 0;
               color: #ffffff;
-              font-weight: 600;
               font-size: 24px;
+              font-weight: 600;
+              text-align: center;
               padding-bottom: 5px;
               border-bottom: 3px solid white !important;
-              text-align: center;
               text-transform: uppercase;
               transition: border-bottom-width 0.3s;
               background-color: transparent;
-              border: none;
               outline: 0;
-              width: 100%;
-              margin: 0 0 8px 0;
 
               &::placeholder {
-                opacity: 0.6;
                 color: #ffffff;
+                opacity: 0.6;
               }
             }
           }
@@ -301,9 +301,9 @@ export default {
         text-align: center;
       }
       .trans {
+        margin: 0 1px !important;
         text-align: center;
         border-radius: 0 !important;
-        margin: 0 1px !important;
         border-right: 1px solid #bfbfbf;
         background-color: white;
         &.right_a {

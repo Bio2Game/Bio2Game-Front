@@ -74,58 +74,58 @@ export default {
 
 <style lang="scss">
 footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
+  display: flex;
+  align-items: center;
   background: url('../../assets/images/footer.jpg');
+  flex-direction: column;
   background-size: cover;
   background-position: center;
   .content {
     display: flex;
     justify-content: center;
-    background-color: #212522c9;
-    padding: 40px;
     width: 100%;
+    padding: 40px;
+    background-color: #212522c9;
     .items {
-      width: 100%;
-      max-width: 1150px;
-      margin: 0 auto;
       display: flex;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 1150px;
       .item {
         flex: 1;
         .title {
-          display: flex;
           position: relative;
+          display: flex;
           margin-bottom: 16px;
           h5 {
-            padding-left: 15px;
             margin: 0;
             color: white;
+            padding-left: 15px;
           }
         }
         p {
+          width: 80%;
           color: #ffffff;
           font-size: 12px;
           line-height: 20px;
-          width: 80%;
           margin-bottom: 10px;
         }
         &.a-propos a {
-          text-decoration: none;
           color: $green;
-          text-transform: uppercase;
-          font-weight: 600;
           font-size: 14px;
+          font-weight: 600;
+          text-decoration: none;
+          text-transform: uppercase;
         }
         &.contact {
           display: flex;
           flex-direction: column;
           a {
-            text-decoration: none;
-            color: #ffffff;
             padding: 6px 0;
+            color: #ffffff;
             font-size: 13px;
+            text-decoration: none;
             transition: color 0.3s ease-in-out;
             &:hover {
               color: $green;
@@ -136,19 +136,19 @@ footer {
           flex: none;
         }
         .contact-button {
-          color: $green;
-          line-height: 34px;
-          border: 2px solid $green;
-          border-radius: 30px;
           padding: 8px 14px;
+          border: 2px solid $green;
+          color: $green;
           font-size: 11px;
+          font-weight: 600;
+          line-height: 34px;
+          border-radius: 30px;
           text-transform: uppercase;
           text-decoration: none;
-          font-weight: 600;
           transition: all 0.3s ease-in-out;
           &:hover {
-            background-color: $green;
             color: #3b413e;
+            background-color: $green;
           }
         }
         @media screen and (max-width: 720px) {
@@ -165,15 +165,15 @@ footer {
   }
   .copyright {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #1a1d1be3;
+    align-items: center;
     width: 100%;
     height: 50px;
+    background-color: #1a1d1be3;
     .text {
+      padding: 0 20px;
       color: #757575;
       font-size: 14px;
-      padding: 0 20px;
       .author-link {
         color: $green;
         text-decoration: none;
@@ -184,19 +184,19 @@ footer {
     }
     .scroll-top {
       position: absolute;
-      bottom: 0;
       right: 0;
+      cursor: pointer;
+      bottom: 0;
       border-bottom: 90px solid $green;
       border-left: 90px solid transparent;
-      cursor: pointer;
       & + svg {
         position: absolute;
-        bottom: 20px;
-        right: 15px;
         z-index: 1;
+        right: 15px;
         color: #ffffff;
-        transition: opacity 0.3s;
         cursor: pointer;
+        bottom: 20px;
+        transition: opacity 0.3s;
       }
       &:hover + svg,
       & + svg:hover {

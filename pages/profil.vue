@@ -119,17 +119,17 @@ export default {
           justify-content: center;
           margin-bottom: 10px;
           .cover {
-            border: 3px solid #ffffff;
             position: absolute;
+            z-index: 2;
             top: 0;
+            width: 160px;
+            border: 3px solid #ffffff;
+            cursor: pointer;
             bottom: 0;
             background-color: #0000001f;
             border-radius: 80px;
-            z-index: 2;
-            width: 160px;
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
-            cursor: pointer;
             &:hover {
               opacity: 1;
             }
@@ -142,17 +142,17 @@ export default {
             }
           }
           .target {
-            padding: 6px 12px;
-            background-color: #3d3d3de6;
-            font-size: 14px;
-            border-radius: 4px;
-            color: white;
-            font-weight: 300;
             position: absolute;
+            z-index: 3;
+            padding: 6px 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 300;
+            cursor: pointer;
+            background-color: #3d3d3de6;
+            border-radius: 4px;
             bottom: -10px;
             box-shadow: 0 1px 3px #71717199;
-            cursor: pointer;
-            z-index: 3;
           }
           input {
             width: 0;
@@ -161,16 +161,16 @@ export default {
           }
         }
         .username {
+          color: #ffffff;
           font-size: 18px;
           font-weight: 600;
           text-align: center;
           margin-top: 24px;
-          color: #ffffff;
         }
         .fullname {
+          color: #4e4e4e;
           font-size: 12px;
           font-weight: 400;
-          color: #4e4e4e;
           text-align: center;
           margin-top: 8px;
         }
@@ -185,13 +185,13 @@ export default {
           flex-direction: column;
           margin-bottom: 16px;
           span {
-            font-size: 10px;
             color: #ababab;
+            font-size: 10px;
             margin-bottom: 4px;
           }
           p {
-            font-size: 14px;
             color: #717171;
+            font-size: 14px;
           }
           &:last-child {
             margin-bottom: 0;
@@ -210,14 +210,14 @@ export default {
       }
       .before {
         margin: auto 24px 24px;
-        font-size: 14px;
         color: white;
+        font-size: 14px;
       }
     }
   }
   .forms {
-    width: 100%;
     position: relative;
+    width: 100%;
     .animation-container {
       width: 100%;
       .content {
@@ -234,9 +234,9 @@ export default {
           flex-direction: column;
           flex: 1 0;
           .button {
+            height: 44px;
             margin-top: 8px;
             box-shadow: none;
-            height: 44px;
           }
         }
       }

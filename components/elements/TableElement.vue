@@ -96,17 +96,17 @@ export default {
     border-bottom: 1px solid #8b8b8b;
     margin: 0 -24px;
     th {
-      text-align: left;
+      position: relative;
       padding: 16px 0;
-      font-weight: 600;
       font-size: 15px;
+      font-weight: 600;
+      text-align: left;
       transition: 0.3s color ease-in-out;
       user-select: none;
-      position: relative;
       i {
-        font-size: 18px;
-        margin: -1px 0 0 5px;
         position: absolute;
+        margin: -1px 0 0 5px;
+        font-size: 18px;
       }
       &.sorted-asc,
       &.sorted-desc,
@@ -128,10 +128,12 @@ export default {
         background-color: #cecece26;
       }
       td {
-        cursor: pointer;
-        text-align: left;
-        font-size: 15px;
+        overflow: hidden;
         padding: 12px 24px 12px 0;
+        font-size: 15px;
+        text-align: left;
+        cursor: pointer;
+        text-overflow: ellipsisdden;
       }
     }
   }

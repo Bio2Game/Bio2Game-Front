@@ -5,20 +5,7 @@
       <h1>QUIZ</h1>
       <p>Choisissez les quiz succeptibles de vous intéresser.</p>
     </div>
-    <div class="levels">
-      <div class="level_switch">
-        <div
-          v-for="(level, index) of levels"
-          :key="index"
-          class="level"
-          :class="{ active: selectedLevels.includes(index) }"
-          @click="levelSelect(index)"
-        >
-          <img :src="level.icon" :alt="level.name" />
-          <span class="label">{{ level.name }}</span>
-        </div>
-      </div>
-    </div>
+    <LevelSelector v-model="selectedLevels" />
     <div class="filters">
       <InputElement
         v-model="search"
@@ -33,7 +20,7 @@
         placeholder="Lieux"
       />
     </div>
-    <transition-group tag="div" class="container quizzes" name="fade">
+    <div class="container quizzes">
       <div
         v-for="quiz of filtredQuizzes"
         :key="quiz.id"
@@ -73,7 +60,7 @@
           <h6 class="name">{{ quiz.label }}</h6>
         </div>
       </div>
-    </transition-group>
+    </div>
   </div>
 </template>
 
@@ -177,7 +164,7 @@ export default {
       }
     },
     getURL(quiz) {
-      return `/quizzes/${quiz.id}-${quiz.url}`
+      return `/quiz/${quiz.id}-${quiz.url}`
     },
   },
 }
@@ -193,73 +180,22 @@ export default {
   flex-direction: column;
   align-items: center;
   .nature {
-    margin: 24px 0 16px;
     width: 350px;
     height: 293.5px;
+    margin: 24px 0 16px;
   }
   .top {
     h1 {
+      margin: 32px 0 24px;
       color: #292929;
       font-size: 36px;
       font-weight: 700;
-      margin: 32px 0 24px;
       text-align: center;
     }
     p {
-      text-align: center;
-      font-size: 18px;
       color: #292929;
-    }
-  }
-  .levels {
-    display: flex;
-    justify-content: center;
-    max-width: 800px;
-    width: 100%;
-    padding: 32px;
-    .level_switch {
-      height: 64px;
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      padding: 0 16px;
-      width: 80%;
-      &::after {
-        content: '';
-        position: absolute;
-        top: 20px;
-        background-color: $green;
-        left: -8px;
-        right: -8px;
-        height: 24px;
-        border-radius: 12px;
-        z-index: 1;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-      }
-      .level {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        border-radius: 32px;
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-        z-index: 2;
-        cursor: pointer;
-        width: 64px;
-        height: 64px;
-        transition: 0.1s border ease;
-        img {
-          user-select: none;
-        }
-        &.active {
-          border: 4px solid $green;
-        }
-      }
-      .label {
-        position: absolute;
-        opacity: 0;
-      }
+      font-size: 18px;
+      text-align: center;
     }
   }
   .filters {
@@ -288,19 +224,19 @@ export default {
     gap: 32px;
     margin-top: 32px;
     .quiz {
-      height: 220px;
+      position: relative;
       display: flex;
-      flex-direction: column;
+      overflow: hidden;
+      height: 220px;
       margin: 0;
+      cursor: default;
+      flex-direction: column;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
         0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
       background-color: $green;
       user-select: none;
-      cursor: default;
-      position: relative;
       border-radius: 16px;
-      overflow: hidden;
       .top-part {
         display: flex;
         justify-content: center;
@@ -310,25 +246,25 @@ export default {
         .icon {
           position: relative;
           display: flex;
-          align-items: center;
           justify-content: center;
+          align-items: center;
           margin-left: 0;
           transition: 0.4s margin-left ease;
           img {
-            width: 106px;
-            height: 106px;
             position: relative;
             z-index: 2;
-            transition: 0.4s width ease, 0.4s height ease;
+            width: 106px;
+            height: 106px;
             margin: 4px;
+            transition: 0.4s width ease, 0.4s height ease;
           }
           &::after {
-            content: '';
             position: absolute;
-            background-color: white;
+            z-index: 1;
             width: 40px;
             height: 40px;
-            z-index: 1;
+            content: '';
+            background-color: white;
             border-radius: 20px;
           }
         }
@@ -337,11 +273,11 @@ export default {
         background-color: #ffffff;
         flex: 1;
         .text {
+          width: 80%;
+          margin: 11px 0 11px 16px;
           color: #484848;
           font-size: 15px;
-          margin: 11px 0 11px 16px;
           opacity: 0;
-          width: 80%;
           transition: opacity 0.3s;
 
           .creator {
@@ -365,32 +301,32 @@ export default {
         }
 
         .buttons {
+          position: absolute;
+          right: 16px;
           display: flex;
           justify-content: flex-end;
-          position: absolute;
           bottom: 16px;
-          right: 16px;
 
           &.two {
             justify-content: space-between;
           }
 
           .favorite {
-            color: $green;
             width: 30px;
             height: 30px;
+            color: $green;
+            cursor: pointer;
             margin-right: 10px;
             opacity: 0;
-            cursor: pointer;
           }
 
           .jouer {
+            padding: 6px 24px;
             color: #ffffff;
             font-size: 18px;
             font-weight: 600;
-            text-transform: uppercase;
-            padding: 6px 24px;
             cursor: pointer;
+            text-transform: uppercase;
             border-radius: 15px;
             text-decoration: none;
             background-color: $green;
@@ -402,22 +338,22 @@ export default {
       }
       .title {
         position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 50px;
+        padding: 0 16px;
+        color: $green;
+        font-size: 18px;
+        text-align: center;
         overflow-y: hidden;
         bottom: 0;
-        color: $green;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        font-size: 18px;
-        justify-content: center;
-        padding: 0 16px;
         h6 {
+          overflow: hidden;
           font-weight: 600;
           text-transform: uppercase;
           text-overflow: ellipsis;
-          overflow: hidden;
           white-space: nowrap;
         }
       }
@@ -459,82 +395,82 @@ export default {
       }
       @keyframes title_enter {
         0% {
-          margin-left: 0;
-          bottom: 0;
-          color: $green;
           justify-content: center;
-          font-size: 18px;
           height: 50px;
           padding: 0 16px;
+          color: $green;
+          font-size: 18px;
+          margin-left: 0;
+          bottom: 0;
         }
         49% {
-          bottom: 0;
-          margin-left: 110%;
-          color: $green;
           justify-content: center;
-          font-size: 18px;
           height: 50px;
           padding: 0 16px;
+          color: $green;
+          font-size: 18px;
+          bottom: 0;
+          margin-left: 110%;
         }
         50% {
-          bottom: auto;
           top: 0;
-          margin-left: -110%;
-          color: #ffffff;
           justify-content: flex-start;
-          font-size: 15px;
           height: 68px;
           padding: 0 56px 0 16px;
+          color: #ffffff;
+          font-size: 15px;
+          bottom: auto;
+          margin-left: -110%;
         }
         100% {
-          margin-left: 0;
-          color: #ffffff;
           top: 0;
-          bottom: auto;
           justify-content: flex-start;
-          font-size: 15px;
           height: 68px;
           padding: 0 56px 0 16px;
+          color: #ffffff;
+          font-size: 15px;
+          margin-left: 0;
+          bottom: auto;
         }
       }
       @keyframes title_leave {
         100% {
-          margin-left: 0;
-          bottom: 0;
-          color: $green;
           justify-content: center;
-          font-size: 18px;
           height: 50px;
           padding: 0 16px;
+          color: $green;
+          font-size: 18px;
+          margin-left: 0;
+          bottom: 0;
         }
         50% {
-          bottom: 0;
-          margin-left: 110%;
-          color: $green;
           justify-content: center;
-          font-size: 18px;
           height: 50px;
           padding: 0 16px;
+          color: $green;
+          font-size: 18px;
+          bottom: 0;
+          margin-left: 110%;
         }
         49% {
-          bottom: auto;
           top: 0;
-          margin-left: -110%;
-          color: #ffffff;
           justify-content: flex-start;
-          font-size: 15px;
           height: 68px;
           padding: 0 56px 0 16px;
+          color: #ffffff;
+          font-size: 15px;
+          bottom: auto;
+          margin-left: -110%;
         }
         0% {
-          margin-left: 0;
-          color: #ffffff;
           top: 0;
-          bottom: auto;
           justify-content: flex-start;
-          font-size: 15px;
           height: 68px;
           padding: 0 56px 0 16px;
+          color: #ffffff;
+          font-size: 15px;
+          margin-left: 0;
+          bottom: auto;
         }
       }
     }

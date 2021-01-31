@@ -67,8 +67,8 @@ export default {
 
 <style lang="scss">
 .file-input-container {
-  display: flex;
   position: relative;
+  display: flex;
   margin: 8px 0 16px;
 
   &:last-child {
@@ -76,79 +76,79 @@ export default {
   }
   .error {
     position: absolute;
-    color: #c90a0a;
-    font-size: 12px;
     top: calc(100% + 6px);
     right: 1em;
+    color: #c90a0a;
+    font-size: 12px;
   }
   .button {
     margin-right: 16px;
     .input-file {
       position: absolute;
+      z-index: 4;
       top: 0;
       right: 0;
-      left: 0;
-      bottom: 0;
       width: 100%;
-      margin: 0;
       padding: 0;
+      margin: 0;
       font-size: 20px;
       cursor: pointer;
+      left: 0;
+      bottom: 0;
       opacity: 0;
-      z-index: 4;
     }
   }
   .file-path {
     position: relative;
     width: 100%;
     .file-name {
-      color: #aaaaaa;
-      width: 100%;
+      position: relative;
+      z-index: 3;
       box-sizing: border-box;
-      letter-spacing: 1px;
+      width: 100%;
       padding: 7px 15px;
       border: 1px solid #cccccc;
-      position: relative;
       background: transparent;
-      outline: none;
-      line-height: 28px;
+      color: #aaaaaa;
       font-size: 15px;
-      z-index: 3;
+      line-height: 28px;
+      letter-spacing: 1px;
+      outline: none;
       border-radius: 4px;
       & ~ .focus-bg {
         position: absolute;
-        left: 0;
+        z-index: 1;
         top: 0;
         width: 0;
         height: 100%;
+        left: 0;
         background-color: transparent;
         transition: 0.4s;
-        z-index: 1;
         border-radius: 4px;
       }
       & ~ .placeholder {
         position: absolute;
-        left: 14px;
-        top: 15px;
-        color: #aaaaaa;
-        transition: 0.3s;
         z-index: 2;
-        letter-spacing: 0.5px;
-        font-size: 14px;
-        white-space: nowrap;
+        top: 15px;
         overflow: hidden;
-        text-overflow: ellipsis;
         width: calc(100% - 24px);
+        color: #aaaaaa;
+        font-size: 14px;
+        left: 14px;
+        transition: 0.3s;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       &:focus ~ .placeholder,
       &.has-content ~ .placeholder,
       &.date ~ .placeholder {
         top: -16px;
-        left: 0;
-        font-size: 12px;
-        color: $green;
-        transition: 0.3s;
         width: calc(100% - 12px);
+        color: $green;
+        font-size: 12px;
+        left: 0;
+        transition: 0.3s;
       }
       &:disabled {
         cursor: not-allowed;
@@ -156,8 +156,8 @@ export default {
     }
     input:focus ~ .focus-bg,
     .focus-bg.has-content {
-      transition: 0.4s;
       width: 100%;
+      transition: 0.4s;
       background-color: #ededed;
       &.disabled {
         background-color: #e2e2e2;

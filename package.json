@@ -30,11 +30,12 @@
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
     "core-js": "^3.6.5",
+    "lottie-web": "^5.7.6",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "nuxt": "^2.14.6",
     "nuxt-webfontloader": "^1.1.0",
-    "remarkable": "^2.0.1",
+    "simple-markdown": "^0.7.3",
     "simplemde": "^1.11.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
@@ -50,8 +51,8 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@nuxtjs/eslint-config": "^4.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
-    "@nuxtjs/stylelint-module": "^4.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
+    "@nuxtjs/stylelint-module": "^4.0.0",
     "@nuxtjs/svg": "^0.1.12",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.13.0",
@@ -61,10 +62,12 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
     "node-sass": "^5.0.0",
-    "sass-loader": "^10.1.0",
     "prettier": "^2.1.2",
+    "sass-loader": "^10.1.0",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "postcss-sorting": "^5.0.1",
+    "stylelint-order": "^4.1.0"
   }
 }

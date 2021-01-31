@@ -42,9 +42,9 @@ export default {
           align-items: center;
           width: 100%;
           h3 {
-            font-weight: 700;
-            font-size: 32px;
             color: $green;
+            font-size: 32px;
+            font-weight: 700;
             margin-bottom: 16px;
           }
           p {

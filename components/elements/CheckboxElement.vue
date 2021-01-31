@@ -33,43 +33,43 @@ export default {
 .checkbox {
   span {
     position: relative;
-    padding-left: 35px;
-    cursor: pointer;
     display: inline-block;
     height: 24px;
-    line-height: 24px;
-    font-size: 14px;
-    user-select: none;
     color: $green;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
+    padding-left: 35px;
+    user-select: none;
     &::before {
-      content: '';
       position: absolute;
-      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
-        height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
       z-index: 1;
+      top: 10px;
+      box-sizing: border-box;
       width: 0;
       height: 0;
       border: 3px solid transparent;
-      left: 6px;
-      top: 10px;
-      transform: rotateZ(37deg);
-      transform-origin: 100% 100%;
-      box-sizing: border-box;
-    }
-    &::after {
       content: '';
-      left: 0;
-      position: absolute;
       transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
         height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
+      left: 6px;
+      transform: rotateZ(37deg);
+      transform-origin: 100% 100%;
+    }
+    &::after {
+      position: absolute;
       z-index: 1;
-      height: 20px;
-      width: 20px;
-      background-color: transparent;
-      border: 2px solid #999999;
       top: 2px;
-      border-radius: 2px;
       box-sizing: border-box;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #999999;
+      content: '';
+      left: 0;
+      transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
+        height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
+      background-color: transparent;
+      border-radius: 2px;
     }
   }
   input {
@@ -90,12 +90,12 @@ export default {
         transform-origin: 100% 100%;
       }
       &::after {
+        z-index: 0;
         top: 2px;
         width: 20px;
         height: 20px;
         border: 2px solid $green;
         background-color: $green;
-        z-index: 0;
       }
     }
   }

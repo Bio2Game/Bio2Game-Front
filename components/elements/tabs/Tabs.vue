@@ -70,14 +70,14 @@ export default {
   .tabs-flags {
     display: flex;
     .tab-name {
+      padding: 16px 24px;
+      margin: 0 24px 24px 0;
+      color: white;
+      cursor: pointer;
       border-radius: 8px;
       transition: 0.2s background-color ease-in-out;
-      cursor: pointer;
       user-select: none;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-      padding: 16px 24px;
-      color: white;
-      margin: 0 24px 24px 0;
       background-color: $green;
       &.active {
         background-color: $green-light;

@@ -65,13 +65,13 @@ export default {
 <style lang="scss">
 .notif-container {
   position: absolute;
+  z-index: 1;
   top: 0;
   right: 0;
-  height: 100vh;
-  z-index: 1;
-  overflow: hidden;
   display: flex;
   align-items: flex-end;
+  overflow: hidden;
+  height: 100vh;
   @media screen and (max-width: 1024px) {
     top: calc(100vh - 190px);
   }
@@ -79,25 +79,25 @@ export default {
     display: none;
   }
   .notif {
-    max-width: 350px;
+    position: relative;
     overflow: hidden;
     width: 350px;
     height: 247px;
-    background-color: #f5f5f5;
-    border: 3px solid #bce342;
-    border-radius: 40px 40px 0 0;
-    position: relative;
     padding: 24px;
+    border: 3px solid #bce342;
+    cursor: pointer;
+    max-width: 350px;
+    background-color: #f5f5f5;
+    border-radius: 40px 40px 0 0;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     margin-right: 40px;
     transform: translateY(550px);
     animation: fadeUp 0.3s ease-out forwards 1s;
     transition: 0.2s width ease-out, 0.2s height ease-out, 0.3s padding ease;
-    cursor: pointer;
     @media screen and (max-width: 1024px) {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
+      flex-wrap: wrap;
       margin-left: 40px;
       max-width: 100%;
     }
@@ -130,12 +130,12 @@ export default {
       transition: 0.2s transform ease;
     }
     .title {
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 27px;
       color: #000000;
-      margin-bottom: 16px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 27px;
       text-align: center;
+      margin-bottom: 16px;
       min-width: 296px;
       @media screen and (max-width: 1024px) {
         width: 100%;
@@ -143,9 +143,9 @@ export default {
     }
     .wrapper {
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
       width: 100%;
+      flex-direction: column;
       transition: 0.1s opacity ease-in-out, 0.2s transform ease-in-out;
       min-width: 296px;
       @media screen and (max-width: 1024px) {
@@ -167,17 +167,17 @@ export default {
             margin-bottom: 0;
           }
           .name {
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 24px;
             color: $green;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 24px;
             margin-bottom: 4px;
           }
           .description {
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 17px;
             color: #494949;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 17px;
           }
         }
       }

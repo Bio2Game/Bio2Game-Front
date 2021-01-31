@@ -74,10 +74,10 @@ export default {
 <style lang="scss">
 .wating {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
+  flex-direction: column;
   min-height: 50vh;
   .loader {
     position: relative;
@@ -87,10 +87,10 @@ export default {
 
     &__bar {
       position: absolute;
-      bottom: 0;
       width: 10px;
       height: 50%;
       background: $green;
+      bottom: 0;
       transform-origin: center bottom;
 
       &:nth-child(1) {
@@ -122,33 +122,33 @@ export default {
 
     &__ball {
       position: absolute;
-      bottom: 10px;
-      left: 0;
       width: 10px;
       height: 10px;
       background: #44eaca;
+      bottom: 10px;
+      left: 0;
       border-radius: 50%;
       animation: ball 4s infinite;
     }
   }
 
   h4 {
+    margin: 24px 0 16px;
+    color: #585858;
     font-size: 20px;
     text-align: center;
-    color: #585858;
-    margin: 24px 0 16px;
   }
   .sharing {
     padding: 24px;
 
     input {
-      background-color: white;
-      border: 2px solid $green;
-      border-radius: 8px;
-      padding: 12px 16px;
       width: 435px;
-      text-align: center;
+      padding: 12px 16px;
+      border: 2px solid $green;
       font-size: 16px;
+      text-align: center;
+      background-color: white;
+      border-radius: 8px;
       transition: border-color 0.2s ease-out;
       box-shadow: 0 2px 8px #00000022;
       outline: none;
@@ -160,14 +160,14 @@ export default {
       justify-content: space-between;
       margin: 0 -12px 0;
       a {
-        border-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #19683b;
-        flex: 1;
         height: 50px;
         margin: 8px 12px 0;
+        border-radius: 8px;
+        background-color: #19683b;
+        flex: 1;
         transition: transform 0.1s ease-in, box-shadow 0.1s ease-out;
         box-shadow: 0 3px 6px #00000044;
         &:hover {

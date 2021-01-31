@@ -149,11 +149,11 @@ export default {
   width: 100%;
   .wrapper {
     position: relative;
+    z-index: 20;
     display: flex;
     align-items: center;
     width: 100%;
     height: 5rem;
-    z-index: 20;
     background-color: white;
     transition: 0.1s background-color linear;
     a {
@@ -172,11 +172,11 @@ export default {
         display: flex;
         align-items: center;
         .link {
-          font-weight: 500;
-          font-size: 1rem;
-          line-height: 24px;
-          color: #4f4f4f;
           margin: 0 12px;
+          color: #4f4f4f;
+          font-size: 1rem;
+          font-weight: 500;
+          line-height: 24px;
           text-decoration: none;
           svg {
             display: none;
@@ -187,9 +187,9 @@ export default {
         display: flex;
         @media screen and (max-width: $lg) and (min-width: $md) {
           .button.border_white {
-            background-color: transparent;
-            color: $green;
             border: 3px solid $green;
+            color: $green;
+            background-color: transparent;
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
 
             &:hover {
@@ -198,20 +198,20 @@ export default {
           }
         }
         .user {
+          position: relative;
           display: flex;
           align-items: center;
           padding: 18px 20px;
-          position: relative;
-          text-decoration: none;
           cursor: pointer;
+          text-decoration: none;
           user-select: none;
           min-width: 188px;
           .group {
             display: flex;
             align-items: center;
             .avatar {
-              height: 32px;
               width: 32px;
+              height: 32px;
               border: 2px solid $green;
               border-radius: 16px;
               margin-right: 8px;
@@ -236,37 +236,37 @@ export default {
             position: absolute;
             z-index: -1;
             top: -6px;
+            overflow: hidden;
             left: 0;
             background-color: $green;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.175);
             border-radius: 0 0 16px 16px;
             max-height: 0;
             transition: 0.6s max-height ease-out;
-            overflow: hidden;
 
             ul {
-              margin-top: 70px;
               padding: 24px;
+              margin-top: 70px;
               a {
-                padding: 16px;
                 position: relative;
-                transition: 0.3s background-color ease;
-                text-decoration: none;
-                color: #ffffff;
                 display: flex;
                 align-items: center;
+                padding: 16px;
+                color: #ffffff;
+                transition: 0.3s background-color ease;
+                text-decoration: none;
                 white-space: nowrap;
                 svg {
-                  margin-right: 5px;
                   font-size: 20px;
+                  margin-right: 5px;
                 }
               }
             }
           }
           &.active {
             .username {
-              transition: 0.2s color ease-out;
               color: #ffffff !important;
+              transition: 0.2s color ease-out;
             }
             svg.down path {
               transition: 0.2s fill ease-out;
@@ -279,26 +279,26 @@ export default {
         }
       }
       @media screen and (max-width: $md) {
-        flex-direction: column;
         position: fixed;
-        background-color: $green;
         top: 0;
         right: 0;
         overflow: hidden;
+        flex-direction: column;
+        background-color: $green;
         max-height: 0;
         border-bottom-left-radius: 24px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         transition: 0.4s max-height ease;
         .left-menu {
+          align-items: flex-start;
+          width: 100%;
           padding: 72px 24px 0;
           flex-direction: column;
-          width: 100%;
-          align-items: flex-start;
           .link {
-            color: white;
             padding: 16px;
-            font-size: 16px;
             margin: 0;
+            color: white;
+            font-size: 16px;
             svg {
               display: inline;
               margin-right: 5px;
@@ -306,14 +306,14 @@ export default {
           }
         }
         .right-menu {
-          flex-direction: column;
           padding: 0 24px 24px;
+          flex-direction: column;
           .button {
             margin-left: 0;
             margin-top: 16px;
             &.green {
-              background-color: white;
               color: $green;
+              background-color: white;
             }
           }
           .user {
@@ -328,8 +328,8 @@ export default {
               position: relative;
               box-shadow: none;
               ul {
-                margin: 0;
                 padding: 0;
+                margin: 0;
               }
             }
           }
@@ -340,26 +340,26 @@ export default {
       }
     }
     .hamburger {
+      position: fixed;
+      z-index: 5;
+      top: 21px;
+      right: 20px;
       display: none;
       width: 37px;
       height: 37px;
+      cursor: pointer;
       transform: rotate(0deg);
       transition: 0.5s ease-in-out;
-      cursor: pointer;
-      position: fixed;
-      right: 20px;
-      top: 21px;
-      z-index: 5;
 
       @media screen and (max-width: 768px) {
         display: flex;
       }
 
       span {
-        display: block;
         position: absolute;
-        height: 7px;
+        display: block;
         width: 100%;
+        height: 7px;
         background: $green;
         border-radius: 10px;
         opacity: 1;
@@ -385,8 +385,8 @@ export default {
         span {
           background-color: white;
           &:nth-child(1) {
-            transform: rotate(45deg) translate(-3px, -5px);
             width: 50px;
+            transform: rotate(45deg) translate(-3px, -5px);
           }
 
           &:nth-child(2) {
@@ -395,8 +395,8 @@ export default {
           }
 
           &:nth-child(3) {
-            transform: rotate(-45deg) translate(-3px, 4px);
             width: 50px;
+            transform: rotate(-45deg) translate(-3px, 4px);
           }
         }
       }
@@ -406,19 +406,19 @@ export default {
     height: 0;
     animation: fadeOutBigger 0.3s ease-out forwards;
     .wrapper {
-      transition: 0.1s background-color linear;
       position: fixed !important;
-      top: 0;
       z-index: 1000;
-      opacity: 0;
+      top: 0;
       height: 5rem;
+      transition: 0.1s background-color linear;
+      opacity: 0;
       animation: fadeIn 0.3s ease-out forwards;
       .right-menu {
         @media screen and (min-width: $md) {
           .button.border_white {
-            background-color: transparent;
-            color: $green;
             border: 3px solid $green;
+            color: $green;
+            background-color: transparent;
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
             &:hover {
               background-color: $gray-light;

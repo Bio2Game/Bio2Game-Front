@@ -47,17 +47,17 @@ export default {
           display: flex;
           align-items: flex-end;
           h1 {
-            font-weight: 600;
-            font-size: 35px;
-            text-transform: uppercase;
             margin: 10px 0 24px;
             color: #414141;
+            font-size: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
             flex: 1;
           }
           p {
             color: #484848;
-            text-align: center;
             font-size: 16px;
+            text-align: center;
             margin-top: -8px;
             margin-bottom: 8px;
           }
@@ -68,8 +68,8 @@ export default {
           }
         }
         .progress-bar {
-          height: 20px;
           overflow: hidden;
+          height: 20px;
           background-color: #eeeeee;
           border-radius: 10px;
           .bar {
@@ -93,21 +93,21 @@ export default {
         }
         .item,
         .response {
-          width: calc(50% - 8px);
+          position: relative;
+          display: flex;
           justify-content: center;
           align-items: center;
-          display: flex;
+          width: calc(50% - 8px);
           margin-bottom: 16px;
           padding: 16px 20px;
-          font-size: 16px;
+          border: 6px solid #f8f7f7;
+          background-color: #f8f7f7;
           color: #000000;
+          font-size: 16px;
           font-weight: 500;
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-          position: relative;
           user-select: none;
           border-radius: 3px;
-          background-color: #f8f7f7;
-          border: 6px solid #f8f7f7;
           transition: 0.3s background-color ease-out, 0.3s border-color ease-out;
           cursor: pointer;
           @media screen and (max-width: 480px) {
@@ -149,25 +149,25 @@ export default {
           font-weight: 600;
         }
         .source {
-          color: $green;
           margin: 12px auto 0;
+          color: $green;
         }
       }
       &.question-interface {
         .question {
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+          padding: 16px;
           color: #414141;
           background-color: #f8f7f7;
-          padding: 16px;
           margin-bottom: 24px;
           user-select: none;
           .question-content {
             width: calc(100% - 100px);
             p {
               margin: 0;
-              line-height: 25px;
               font-size: 18px;
               font-weight: 600;
+              line-height: 25px;
             }
             img {
               max-width: 100%;
@@ -175,8 +175,8 @@ export default {
           }
         }
         .explication {
-          background: #ffffff;
           padding: 16px;
+          background: #ffffff;
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
         }
         .submit-next {
@@ -227,10 +227,10 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                padding: 12px 16px;
                 color: white;
                 box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
                 border-radius: 3px 3px 0 0;
-                padding: 12px 16px;
                 &.right {
                   background-color: $green;
                 }
@@ -269,10 +269,10 @@ export default {
           .head {
             display: flex;
             justify-content: center;
+            padding: 12px 16px;
             color: white;
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
             border-radius: 3px 3px 0 0;
-            padding: 12px 16px;
             background-color: $green;
           }
           /* stylelint-disable-next-line */

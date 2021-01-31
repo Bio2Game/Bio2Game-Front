@@ -197,25 +197,25 @@ export default {
     flex-direction: column;
     .infos {
       h1 {
-        font-weight: 700;
-        font-size: 40px;
-        text-transform: uppercase;
-        text-align: center;
         margin: 48px 0 24px;
         color: #414141;
+        font-size: 40px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
         @media screen and (max-width: $md) {
-          font-size: 32px;
           margin: 32px 0 24px;
+          font-size: 32px;
         }
         @media screen and (max-width: $sm) {
-          font-size: 24px;
           margin: 24px 0;
+          font-size: 24px;
         }
       }
       p {
-        text-align: center;
-        font-weight: 500;
         font-size: 16px;
+        font-weight: 500;
+        text-align: center;
         margin-bottom: 16px;
       }
     }

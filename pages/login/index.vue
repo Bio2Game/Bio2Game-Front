@@ -209,18 +209,18 @@ export default {
     padding: 0 !important;
   }
   .modal {
-    width: 100%;
-    max-width: 850px;
+    position: relative;
     display: flex;
+    width: 100%;
     margin: 50px 0;
+    max-width: 850px;
     background-color: #ffffff;
     border-radius: 8px;
-    position: relative;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     @media screen and (max-width: $md) {
+      overflow: hidden;
       margin: 0;
       flex-direction: column;
-      overflow: hidden;
       border-radius: 0;
     }
     .parts {
@@ -235,18 +235,18 @@ export default {
       }
       .part {
         display: flex;
+        padding: 48px 32px;
         flex: 1 0;
         flex-direction: column;
-        padding: 48px 32px;
         transition: transform 0.3s ease-in-out;
         @media screen and (max-width: $md) {
           min-width: 100%;
         }
         h1 {
-          font-weight: bold;
-          font-size: 35px;
-          text-align: center;
           color: $green;
+          font-size: 35px;
+          font-weight: bold;
+          text-align: center;
           margin-bottom: 30px;
         }
         .input-field {
@@ -264,8 +264,8 @@ export default {
         }
         hr {
           width: 100%;
-          margin-top: 24px;
           border: 1px solid #999999;
+          margin-top: 24px;
         }
         .password {
           display: flex;
@@ -274,15 +274,15 @@ export default {
           a {
             color: #19683b;
             font-size: 14px;
-            text-decoration: none;
             font-weight: 500;
+            text-decoration: none;
           }
         }
         .description {
+          color: #999999;
+          font-size: 14px;
           text-align: center;
           margin-top: 16px;
-          font-size: 14px;
-          color: #999999;
         }
         .social {
           display: grid;
@@ -291,12 +291,12 @@ export default {
           margin-top: 26px;
           .social-link {
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex: 1;
-            color: #ffffff;
+            align-items: center;
             height: 52px;
+            color: #ffffff;
             font-size: 60px;
+            flex: 1;
             border-radius: 6px;
             svg {
               width: 28px;
@@ -319,22 +319,22 @@ export default {
     }
     .overlay {
       position: absolute;
-      width: calc(50% + 8px);
-      left: -8px;
+      z-index: 10;
       top: -8px;
-      bottom: -8px;
       display: flex;
       align-items: flex-end;
-      flex: 1 0;
+      width: calc(50% + 8px);
+      padding: 48px;
       background: linear-gradient(
           0deg,
           rgba(33, 37, 34, 0.85),
           rgba(33, 37, 34, 0.85)
         ),
         url('../../assets/images/login.jpg');
+      left: -8px;
+      bottom: -8px;
+      flex: 1 0;
       background-size: cover;
-      padding: 48px;
-      z-index: 10;
       border-radius: 16px;
       box-shadow: 0 3px 16px rgba(0, 0, 0, 0.5);
       transition: transform 0.3s ease-in-out;
@@ -342,9 +342,9 @@ export default {
       @media screen and (max-width: $md) {
         position: relative;
         top: 0;
-        left: 0;
         width: 100%;
         padding: 24px;
+        left: 0;
         border-radius: 0 0 16px 16px;
         br {
           display: none;
@@ -359,12 +359,12 @@ export default {
       }
       .content {
         display: flex;
-        flex-direction: column;
         align-items: flex-start;
+        flex-direction: column;
         h3 {
-          font-weight: 300;
-          font-size: 32px;
           color: #ffffff;
+          font-size: 32px;
+          font-weight: 300;
           line-height: 40px;
           margin-bottom: 10px;
           @media screen and (max-width: $md) {
@@ -373,9 +373,9 @@ export default {
           }
         }
         p {
+          color: #999999;
           font-size: 12px;
           line-height: 14px;
-          color: #999999;
           margin-bottom: 15px;
         }
       }

@@ -158,21 +158,21 @@ export default {
 
 <style lang="scss">
 .questions-creator {
-  background-color: #29292980;
   position: absolute;
   z-index: 500;
   top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
+  background-color: #29292980;
+  left: 0;
   .elements {
     display: flex;
-    flex-direction: row;
     width: 100%;
+    flex-direction: row;
     div.block {
       flex: 1;
       &:last-child {
@@ -185,63 +185,63 @@ export default {
         min-height: 40vh;
         .selected-quizzes {
           display: flex;
-          flex-direction: column;
           align-items: center;
+          flex-direction: column;
           .title {
+            margin: 8px 0 16px;
             color: #999999;
             font-size: 18px;
             font-weight: normal;
-            margin: 8px 0 16px;
           }
           .quiz-elements {
             display: grid;
+            width: 100%;
             grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
             gap: 16px;
-            width: 100%;
             .quiz-element {
               display: flex;
-              flex-direction: column;
               align-items: center;
               cursor: pointer;
+              flex-direction: column;
               .quiz-icon {
                 width: 48px;
                 height: 48px;
+                border: 2px solid transparent;
                 border-radius: 24px;
                 margin-bottom: 8px;
-                border: 2px solid transparent;
                 transition: 0.3s border-color ease-out;
                 &.active {
                   border-color: $green;
                 }
               }
               .quiz-label {
-                font-weight: 600;
-                font-size: 12px;
                 color: #414141;
+                font-size: 12px;
+                font-weight: 600;
               }
             }
           }
         }
         .questions-selection {
           display: flex;
-          flex-direction: column;
           align-items: center;
+          flex-direction: column;
           flex: 1;
           .quiz-name {
-            font-weight: 600;
-            font-size: 20px;
-            color: #4141414d;
-            text-transform: uppercase;
             margin: 16px 0 24px;
+            color: #4141414d;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
           }
           .questions {
             display: flex;
+            justify-content: center;
             width: 100%;
             flex: 1;
-            justify-content: center;
             .list {
-              flex: 1;
               display: flex;
+              flex: 1;
               flex-direction: column;
               .checkbox {
                 margin-bottom: 8px;
@@ -255,11 +255,11 @@ export default {
             }
           }
           .count {
-            font-weight: 500;
-            font-size: 15px;
-            line-height: 18px;
             margin: 24px 0 32px;
             color: #585858;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 18px;
           }
         }
         .buttons {

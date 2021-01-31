@@ -49,9 +49,9 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      color: $green;
       font-size: 160px;
       font-weight: 900;
-      color: $green;
       margin-bottom: 0;
       user-select: none;
 
@@ -70,9 +70,9 @@ export default {
       }
     }
     h4 {
-      font-size: 26px;
       margin: 5px 0 20px;
       color: #272727;
+      font-size: 26px;
       @media screen and (max-width: 720px) {
         font-size: 20px;
       }
