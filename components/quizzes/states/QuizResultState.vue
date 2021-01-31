@@ -23,10 +23,7 @@
               realy_wrong: question.user_response === 3,
             }"
           >
-            <div
-              class="question-text"
-              v-html="markdown.render(question.question)"
-            />
+            <div class="question-text" v-html="markdown(question.question)" />
             <ValidIcon
               v-if="question.user_response === 0"
               class="result-icon"
@@ -82,7 +79,7 @@
             </div>
             <div class="explication">
               <h6 class="explication-title">Explication:</h6>
-              <span v-html="markdown.render(question.explication)" />
+              <span v-html="markdown(question.explication)" />
               <a
                 v-if="question.source"
                 class="source"
@@ -122,7 +119,7 @@
 </template>
 
 <script>
-import { Remarkable } from 'remarkable'
+import { parse } from '@/utils/markdown'
 
 import { mapState } from 'vuex'
 
@@ -139,7 +136,7 @@ export default {
   },
   data() {
     return {
-      markdown: new Remarkable(),
+      markdown: parse,
     }
   },
   computed: {

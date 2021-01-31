@@ -78,17 +78,17 @@ export default {
       width: 250px;
       margin: 0 auto;
       .infos {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         position: absolute;
         top: 20%;
         right: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #585858;
+        text-align: center;
+        flex-direction: column;
         bottom: 20%;
         left: 20%;
-        text-align: center;
-        color: #585858;
         user-select: none;
         h3 {
           font-size: 18px;

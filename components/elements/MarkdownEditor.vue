@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { parse } from '@/utils/markdown'
+
 export default {
   props: {
     value: {
@@ -86,6 +88,7 @@ export default {
           },
         },
       ],
+      previewRender: parse,
       toolbar: [
         {
           name: 'undo',
@@ -137,12 +140,6 @@ export default {
           className: 'fa fa-list-ol',
           title: 'Liste à numéroté',
         },
-        // {
-        //   name: 'clean-block',
-        //   action: SimpleMDE.cleanBlock,
-        //   className: 'fa fa-eraser fa-clean-block',
-        //   title: 'Suppprimer la mise en forme',
-        // },
         '|',
         {
           name: 'link',
@@ -249,8 +246,8 @@ export default {
 
 <style lang="css">
 .markdown-editor {
-  width: 100%;
   position: relative;
+  width: 100%;
 }
 .CodeMirror-gutter-filler,
 .CodeMirror-scrollbar-filler {
@@ -258,9 +255,9 @@ export default {
 }
 .CodeMirror-linenumber {
   padding: 0 3px 0 5px;
-  min-width: 20px;
-  text-align: right;
   color: #999999;
+  text-align: right;
+  min-width: 20px;
   white-space: nowrap;
 }
 .CodeMirror-guttermarker {
@@ -428,8 +425,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   display: none;
 }
 .CodeMirror-vscrollbar {
-  right: 0;
   top: 0;
+  right: 0;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -449,40 +446,40 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 .CodeMirror-gutters {
   position: absolute;
-  left: 0;
-  top: 0;
-  min-height: 100%;
   z-index: 3;
+  top: 0;
+  left: 0;
+  min-height: 100%;
   border-right: 1px solid #dddddd;
   background-color: #f7f7f7;
   white-space: nowrap;
 }
 .CodeMirror-gutter {
-  white-space: normal;
-  height: 100%;
   display: inline-block;
+  height: 100%;
+  white-space: normal;
   vertical-align: top;
   margin-bottom: -30px;
 }
 .CodeMirror-gutter-wrapper {
   position: absolute;
   z-index: 4;
-  background: 0 0 !important;
   border: none !important;
+  background: 0 0 !important;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
 .CodeMirror-gutter-background {
   position: absolute;
+  z-index: 4;
   top: 0;
   bottom: 0;
-  z-index: 4;
 }
 .CodeMirror-gutter-elt {
   position: absolute;
-  cursor: default;
   z-index: 4;
+  cursor: default;
 }
 .CodeMirror-lines {
   padding: 4px 0;
@@ -490,22 +487,22 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   min-height: 1px;
 }
 .CodeMirror pre {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
   padding: 0 4px;
+  margin: 0;
+  background: 0 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: inherit;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
   border-width: 0;
-  background: 0 0;
-  font-family: inherit;
-  font-size: 14px;
-  margin: 0;
   white-space: pre;
   word-wrap: normal;
-  line-height: inherit;
-  color: inherit;
-  z-index: 2;
-  position: relative;
-  overflow: visible;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-variant-ligatures: none;
   font-variant-ligatures: none;
@@ -517,11 +514,11 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 .CodeMirror-linebackground {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 .CodeMirror-linewidget {
   position: relative;
@@ -541,9 +538,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 .CodeMirror-measure {
   position: absolute;
+  overflow: hidden;
   width: 100%;
   height: 0;
-  overflow: hidden;
   visibility: hidden;
 }
 .CodeMirror-measure pre {
@@ -594,38 +591,38 @@ span.CodeMirror-selectedtext {
   background: 0 0;
 }
 .CodeMirror {
-  height: auto;
-  min-height: 160px;
-  border: 1px solid #dddddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  padding: 10px;
-  font: inherit;
-  z-index: 1;
   position: relative;
+  z-index: 1;
   overflow: hidden;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #dddddd;
   background: #ffffff;
   color: #000000;
+  min-height: 160px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font: inherit;
 }
 .CodeMirror-scroll {
+  position: relative;
   overflow: scroll !important;
+  height: 100%;
   margin-bottom: -30px;
   margin-right: -30px;
   padding-bottom: 30px;
-  height: 100%;
   outline: 0;
-  position: relative;
   min-height: 160px;
 }
 .CodeMirror-fullscreen {
-  background: #ffffff;
   position: fixed !important;
-  top: 50px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: auto;
   z-index: 9;
+  top: 50px;
+  right: 0;
+  height: auto;
+  background: #ffffff;
+  left: 0;
+  bottom: 0;
 }
 .CodeMirror-sided {
   width: 50% !important;
@@ -655,61 +652,61 @@ span.CodeMirror-selectedtext {
   margin-top: 5px;
 }
 .editor-toolbar.fullscreen {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  box-sizing: border-box;
   width: 100%;
   height: 50px;
+  border: 0;
+  background: #ffffff;
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
   padding-top: 10px;
   padding-bottom: 10px;
-  box-sizing: border-box;
-  background: #ffffff;
-  border: 0;
-  position: fixed;
-  top: 0;
   left: 0;
   opacity: 1;
-  z-index: 9;
 }
 .editor-toolbar.fullscreen::before {
+  position: fixed;
+  top: 0;
   width: 20px;
   height: 50px;
+  padding: 0;
+  margin: 0;
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 1) 0,
     rgba(255, 255, 255, 0) 100%
   );
-  position: fixed;
-  top: 0;
   left: 0;
-  margin: 0;
-  padding: 0;
 }
 .editor-toolbar.fullscreen::after {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 20px;
   height: 50px;
+  padding: 0;
+  margin: 0;
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0,
     rgba(255, 255, 255, 1) 100%
   );
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin: 0;
-  padding: 0;
 }
 .editor-toolbar a {
   display: inline-block;
-  text-align: center;
-  text-decoration: none !important;
-  color: #2c3e50 !important;
   width: 30px;
   height: 30px;
-  margin: 0;
   border: 1px solid transparent;
-  border-radius: 3px;
+  margin: 0;
+  color: #2c3e50 !important;
+  text-align: center;
   cursor: pointer;
+  text-decoration: none !important;
+  border-radius: 3px;
   outline: none;
 }
 .editor-toolbar a.active,
@@ -723,18 +720,18 @@ span.CodeMirror-selectedtext {
 .editor-toolbar i.separator {
   display: inline-block;
   width: 0;
+  margin: 0 6px;
+  color: transparent;
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #ffffff;
-  color: transparent;
   text-indent: -10px;
-  margin: 0 6px;
 }
 .editor-toolbar a.fa-header-x::after {
+  position: relative;
+  top: 2px;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 65%;
   vertical-align: text-bottom;
-  position: relative;
-  top: 2px;
 }
 .editor-toolbar a.fa-header-1::after {
   content: '1';
@@ -763,23 +760,23 @@ span.CodeMirror-selectedtext {
   }
 }
 .editor-statusbar {
+  position: relative;
   padding: 8px 10px;
-  font-size: 12px;
   color: #959694;
+  font-size: 12px;
   text-align: right;
   margin-bottom: 11px;
-  position: relative;
 }
 .editor-statusbar:last-child {
   margin-bottom: 0;
 }
 .editor-preview,
 .editor-preview-side {
+  display: none;
+  overflow: auto;
+  box-sizing: border-box;
   padding: 10px;
   background: #fafafa;
-  overflow: auto;
-  display: none;
-  box-sizing: border-box;
 }
 .editor-statusbar .lines::before {
   content: 'lignes: ';
@@ -797,20 +794,20 @@ span.CodeMirror-selectedtext {
 }
 .editor-preview {
   position: absolute;
+  z-index: 7;
+  top: 0;
   width: 100%;
   height: 100%;
-  top: 0;
   left: 0;
-  z-index: 7;
 }
 .editor-preview-side {
   position: fixed;
-  bottom: 0;
-  width: 50%;
+  z-index: 9;
   top: 50px;
   right: 0;
-  z-index: 9;
+  width: 50%;
   border: 1px solid #dddddd;
+  bottom: 0;
 }
 .editor-preview-active,
 .editor-preview-active-side {
@@ -829,8 +826,8 @@ span.CodeMirror-selectedtext {
 .editor-preview table th,
 .editor-preview-side table td,
 .editor-preview-side table th {
-  border: 1px solid #dddddd;
   padding: 5px;
+  border: 1px solid #dddddd;
 }
 .CodeMirror .CodeMirror-code .cm-tag {
   color: #63a35c;

@@ -19,7 +19,7 @@
     <div class="question">
       <div
         class="question-content"
-        v-html="markdown.render(questionState.question)"
+        v-html="markdown(questionState.question)"
       ></div>
     </div>
     <div class="responses">
@@ -82,7 +82,7 @@
       <div v-if="game.status === 2 || forceAnswer" class="explication">
         <p>
           Explication:<br /><span
-            v-html="markdown.render(questionState.explication)"
+            v-html="markdown(questionState.explication)"
           ></span>
         </p>
         <p v-if="questionState.source" class="kown">
@@ -95,7 +95,7 @@
 
 <script>
 import { shuffle } from 'lodash'
-import { Remarkable } from 'remarkable'
+import { parse } from '@/utils/markdown'
 
 import { mapState } from 'vuex'
 
@@ -118,7 +118,7 @@ export default {
       response: null,
       timer: null,
       progress: '0%',
-      markdown: new Remarkable(),
+      markdown: parse,
     }
   },
   computed: {

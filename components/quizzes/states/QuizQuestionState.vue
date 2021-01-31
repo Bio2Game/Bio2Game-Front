@@ -15,7 +15,7 @@
     <div class="question">
       <div
         class="question-content"
-        v-html="markdown.render(currentQuestion.question)"
+        v-html="markdown(currentQuestion.question)"
       ></div>
     </div>
     <div class="responses">
@@ -69,7 +69,7 @@
       </div>
       <div v-if="status === 2" class="explication">
         <h6 class="explication-title">Explication:</h6>
-        <span v-html="markdown.render(currentQuestion.explication)"></span>
+        <span v-html="markdown(currentQuestion.explication)"></span>
         <p v-if="currentQuestion.source" class="kown">
           <a :href="currentQuestion.source" target="black">En savoir plus</a>.
         </p>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { Remarkable } from 'remarkable'
+import { parse } from '@/utils/markdown'
 
 import { mapState, mapGetters } from 'vuex'
 
@@ -105,7 +105,7 @@ export default {
       timer: null,
       left: 0,
       progress: '0%',
-      markdown: new Remarkable(),
+      markdown: parse,
       sended: false,
     }
   },
