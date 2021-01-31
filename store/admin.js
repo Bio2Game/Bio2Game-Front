@@ -5,6 +5,8 @@ const getDefaultState = () => ({
   domains_fetched: false,
   icons: [],
   icons_fetched: false,
+  formations: [],
+  formations_fetched: false,
 })
 
 export const state = getDefaultState
@@ -40,6 +42,14 @@ export const mutations = {
     state.icons_fetched = true
   },
 
+  SET_FORMATIONS(state, formations) {
+    state.formations = formations
+  },
+
+  SET_FORMATIONS_FETCHED(state) {
+    state.formations_fetched = true
+  },
+
   // Updates
 
   UPDATE_USER(state, user) {
@@ -59,9 +69,33 @@ export const mutations = {
       domain,
     )
   },
+
+  ADD_FORMATION(state, formation) {
+    state.formations.push(formation)
+  },
+
+  UPDATE_FORMATION(state, formation) {
+    const formationIndex = state.formations.findIndex(
+      q => q.id === formation.id,
+    )
+    state.formations[formationIndex] = Object.assign(
+      {},
+      state.formations[formationIndex],
+      formation,
+    )
+  },
 }
 
 export const actions = {
+  async fetchFormations({ state, commit }) {
+    if (state.formations_fetched) {
+      return
+    }
+    const response = await this.$axios.$get('/api/admin/formations')
+    commit('SET_FORMATIONS_FETCHED')
+    commit('SET_FORMATIONS', response.formations)
+  },
+
   async fetchUsers({ state, commit }) {
     if (state.users_fetched) {
       return
@@ -111,5 +145,20 @@ export const actions = {
     )
     commit('UPDATE_DOMAIN', response.domain)
     return response.domain
+  },
+
+  async createFormation({ commit }, payload) {
+    const response = await this.$axios.$post(`/api/admin/formations`, payload)
+    commit('ADD_FORMATION', response.formation)
+    return response.formation
+  },
+
+  async updateFormation({ commit }, payload) {
+    const response = await this.$axios.$patch(
+      `/api/admin/formations/${payload.id}`,
+      payload,
+    )
+    commit('UPDATE_FORMATION', response.formation)
+    return response.formation
   },
 }
