@@ -228,7 +228,7 @@ export default {
         }
       }
       &:nth-child(2n + 1) {
-        background-color: #bce443;
+        background-color: $green;
         .container {
           flex-direction: row-reverse;
           .content {

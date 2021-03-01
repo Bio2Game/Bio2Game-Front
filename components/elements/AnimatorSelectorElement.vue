@@ -33,7 +33,7 @@
         :key="item.id"
         class="element"
         :class="{ active: item.selected }"
-        @click="toggle(item.id, true)"
+        @click="toggle(item.id)"
       >
         {{ item.name || item.username }}
       </div>
@@ -107,38 +107,38 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
-  background: transparent;
+  height: 44px;
   border: 1px solid #cccccc;
-  border-radius: 3px;
+  margin: 8px 0 16px;
+  background: transparent;
+  color: #aaaaaa;
   font-size: 15px;
   font-weight: 400;
-  height: 44px;
+  border-radius: 3px;
   outline: none;
-  color: #aaaaaa;
-  box-sizing: border-box;
   transition: border 250ms ease-out;
-  margin: 8px 0 16px;
   user-select: none;
   .select_element {
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
     width: 100%;
+    height: 46px;
     border-radius: 3px;
     padding-left: 15px;
-    height: 46px;
     transition: border 0.25s ease-out;
     user-select: none;
     input {
-      background-color: transparent;
-      color: #aaaaaa;
-      font-weight: 400;
-      border: 0;
-      outline: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
+      border: 0;
+      color: #aaaaaa;
       font-size: 15px;
+      font-weight: 400;
+      background-color: transparent;
+      outline: 0;
       &::placeholder {
         color: #aaaaaa;
       }
@@ -156,23 +156,23 @@ export default {
   }
   .select_elements {
     position: absolute;
-    top: 43px;
-    left: -1px;
     z-index: 1000;
+    top: 43px;
+    box-sizing: border-box;
     width: calc(100% + 2px);
+    border: 1px solid #cccccc;
+    left: -1px;
     background-color: #f5f5f5;
     border-radius: 0 0 3px 3px;
-    border: 1px solid #cccccc;
-    box-sizing: border-box;
     visibility: hidden;
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.25);
     &::-webkit-scrollbar {
+      width: 10px;
       -webkit-appearance: none;
       background-color: rgb(238, 238, 238);
       border-radius: 5px;
-      width: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -181,12 +181,12 @@ export default {
       transition: background-color 0.1s ease;
     }
     .element {
-      padding-left: 15px;
-      cursor: pointer;
-      min-height: 46px;
+      position: relative;
       display: flex;
       align-items: center;
-      position: relative;
+      cursor: pointer;
+      padding-left: 15px;
+      min-height: 46px;
       &:hover {
         background-color: #e7e7e7;
       }

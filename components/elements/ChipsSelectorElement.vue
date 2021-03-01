@@ -87,13 +87,6 @@ export default {
     }
   },
   methods: {
-    update(event) {
-      if (this.max && this.caracters >= this.max) {
-        event.target.value = event.target.value.slice(0, this.max)
-      }
-
-      this.$emit('input', event.target.value || this.default)
-    },
     keyPress(event) {
       if (
         this.max &&
@@ -134,64 +127,64 @@ export default {
 
 <style lang="scss">
 .chips-input-container {
+  position: relative;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  position: relative;
+  border: 1px solid #cccccc;
   margin: 8px 0 16px;
+  flex-wrap: wrap;
   border-radius: 4px;
   background-color: white;
   padding-left: 8px;
-  border: 1px solid #cccccc;
 
   &:last-child {
     margin-bottom: 8px;
   }
   .error {
     position: absolute;
-    color: #c90a0a;
-    font-size: 12px;
     top: calc(100% + 6px);
     right: 1em;
+    color: #c90a0a;
+    font-size: 12px;
   }
   .chip {
+    z-index: 4;
     display: flex;
     align-items: center;
-    padding: 0 12px;
-    background-color: $green;
-    color: white;
-    border-radius: 14px;
-    z-index: 4;
-    margin: 7px 8px 7px 0;
     height: 28px;
+    padding: 0 12px;
+    margin: 7px 8px 7px 0;
+    color: white;
     font-size: 14px;
+    background-color: $green;
+    border-radius: 14px;
     user-select: none;
     &:last-of-type {
       margin-right: 4px;
     }
     svg {
-      margin-left: 8px;
       width: 12px;
       height: 12px;
       cursor: pointer;
+      margin-left: 8px;
       path {
         fill: white;
       }
     }
   }
   input {
-    color: #333333;
-    flex: 1;
-    box-sizing: border-box;
-    letter-spacing: 1px;
-    padding: 7px 16px 7px 8px;
-    background: transparent;
-    outline: none;
-    line-height: 28px;
-    font-size: 15px;
     z-index: 3;
-    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 7px 16px 7px 8px;
     border: 0;
+    background: transparent;
+    color: #333333;
+    font-size: 15px;
+    line-height: 28px;
+    flex: 1;
+    letter-spacing: 1px;
+    outline: none;
+    border-radius: 4px;
     opacity: 0;
     transition: 0.3s opacity ease;
   }
@@ -201,41 +194,41 @@ export default {
   }
   .focus-bg {
     position: absolute;
-    left: 0;
+    z-index: 1;
     top: 0;
     width: 0;
     height: 100%;
+    left: 0;
     background-color: transparent;
     transition: 0.4s;
-    z-index: 1;
     border-radius: 4px;
   }
   .placeholder {
     position: absolute;
-    left: 14px;
-    top: 15px;
-    color: #aaaaaa;
-    transition: 0.3s;
     z-index: 2;
-    letter-spacing: 0.5px;
-    font-size: 14px;
-    white-space: nowrap;
+    top: 15px;
     overflow: hidden;
-    text-overflow: ellipsis;
     width: calc(100% - 24px);
+    color: #aaaaaa;
+    font-size: 14px;
+    left: 14px;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   &.has-content .placeholder,
   input:focus ~ .placeholder {
     top: -16px;
-    left: 0;
-    font-size: 12px;
-    color: $green;
-    transition: 0.3s;
     width: calc(100% - 12px);
+    color: $green;
+    font-size: 12px;
+    left: 0;
+    transition: 0.3s;
   }
   &.has-content .focus-bg {
-    transition: 0.4s;
     width: 100%;
+    transition: 0.4s;
     background-color: #ededed;
   }
   &.has-error {

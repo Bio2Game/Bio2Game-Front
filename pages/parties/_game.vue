@@ -201,7 +201,10 @@ export default {
       this.$socket.client.open()
     }
 
-    if (!this.$auth.loggedIn) return (this.askAuth = true)
+    if (!this.$auth.loggedIn) {
+      this.askAuth = true
+      return
+    }
 
     this.$socket.client.emit('joinGame', {
       gameId: this.$route.params.game,
@@ -269,11 +272,11 @@ export default {
           display: flex;
           align-items: flex-end;
           h1 {
-            font-weight: 600;
-            font-size: 35px;
-            text-transform: uppercase;
             margin: 10px 0 24px;
             color: #414141;
+            font-size: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
             flex: 1;
           }
           .question-position {
@@ -286,13 +289,13 @@ export default {
           }
         }
         p {
-          text-align: center;
-          font-weight: 600;
           font-size: 16px;
+          font-weight: 600;
+          text-align: center;
         }
         .progress-bar {
-          height: 20px;
           overflow: hidden;
+          height: 20px;
           background-color: #eeeeee;
           border-radius: 10px;
           .bar {
@@ -305,19 +308,19 @@ export default {
         }
       }
       .question {
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-        color: #414141;
-        background-color: #f8f7f7;
         padding: 16px;
+        color: #414141;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f8f7f7;
         margin-bottom: 16px;
         user-select: none;
         .question-content {
           width: calc(100% - 100px);
           p {
             margin: 0;
-            line-height: 25px;
             font-size: 18px;
             font-weight: 600;
+            line-height: 25px;
           }
           img {
             max-width: 100%;
@@ -336,50 +339,50 @@ export default {
         }
         .item,
         .response {
-          width: calc(50% - 8px);
+          position: relative;
+          display: flex;
           justify-content: center;
           align-items: center;
-          display: flex;
-          margin-bottom: 16px;
+          width: calc(50% - 8px);
           padding: 16px 20px;
-          font-size: 16px;
           color: #000000;
+          font-size: 16px;
           font-weight: 500;
-          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-          position: relative;
           cursor: not-allowed;
+          margin-bottom: 16px;
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
           background-color: #dadada;
           user-select: none;
           border-radius: 3px;
           transition: 0.3s background-color ease-out, 0.3s border-color ease-out;
           &.interactive {
-            background-color: #f8f7f7;
             border: 5px solid #f8f7f7;
             cursor: pointer;
+            background-color: #f8f7f7;
           }
           @media screen and (max-width: 480px) {
             width: 100%;
           }
           &.animator {
-            background-color: #c7c7c7;
             color: #6d6d6d;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
             cursor: not-allowed;
+            background-color: #c7c7c7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
           }
           &.right {
+            color: white;
             background-color: $green !important;
             border-color: $green;
-            color: white;
           }
           &.wrong {
-            background-color: #ff6060 !important;
-            border-color: #ff6060;
             color: white;
+            background-color: #ff1d1d !important;
+            border-color: #ff1d1d;
           }
           &.realy_wrong {
+            color: white;
             background-color: #e01515 !important;
             border-color: #e01515;
-            color: white;
           }
           &.checked {
             background-color: #c5c5c5;
@@ -388,12 +391,12 @@ export default {
         }
       }
       .explication {
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-        color: #585858;
-        background-color: #f8f7f7;
         padding: 16px;
-        margin-bottom: 16px;
         border: 2px solid #bbe242;
+        color: #585858;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f8f7f7;
+        margin-bottom: 16px;
         border-radius: 4px;
         a {
           color: $green;
@@ -641,30 +644,30 @@ export default {
             margin-left: 20px;
           }
           &.animator {
-            padding: 20px 0 24px;
-            border-bottom: 1px solid #a9a9a9;
             justify-content: center;
             width: 100%;
+            padding: 20px 0 24px;
+            border-bottom: 1px solid #a9a9a9;
             .icon .crown {
               position: absolute;
               top: -20px;
             }
           }
           &.player {
-            margin: 8px 0;
             position: relative;
+            margin: 8px 0;
             .username {
+              overflow: hidden;
               max-width: calc(100% - 100px);
               text-overflow: ellipsis;
-              overflow: hidden;
               white-space: nowrap;
             }
             .close {
               position: absolute;
               right: 0;
-              cursor: pointer;
               width: 16px;
               height: 16px;
+              cursor: pointer;
             }
           }
         }
@@ -675,10 +678,10 @@ export default {
           flex: 1;
         }
         .players-counter {
-          font-weight: 500;
-          font-size: 15px;
-          line-height: 18px;
           color: #585858;
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 18px;
           text-align: center;
         }
       }

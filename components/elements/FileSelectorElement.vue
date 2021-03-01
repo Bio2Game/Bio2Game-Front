@@ -15,10 +15,7 @@
         type="text"
         :value="preview || 'Aucun fichier choisi'"
       />
-      <span
-        class="focus-bg"
-        :class="{ 'has-content': hasContent || disabled, disabled }"
-      />
+      <span class="focus-bg" :class="{ 'has-content': hasContent }" />
     </div>
     <div v-if="error" class="error">{{ error.message }}</div>
   </div>

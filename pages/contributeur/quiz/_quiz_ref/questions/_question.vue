@@ -248,7 +248,6 @@ export default {
     },
     async createQuestion() {
       try {
-        console.log(this.questionObj)
         const quiz = await this.$store.dispatch(
           `quizzes/${this.isCreationPage ? 'create' : 'update'}Question`,
           {

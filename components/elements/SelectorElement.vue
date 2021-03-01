@@ -5,6 +5,9 @@
     :class="{ active, 'has-error': !!error }"
     @click="active = !active"
   >
+    <label v-if="selected !== null" class="placeholder">{{
+      placeholder
+    }}</label>
     <div class="select_element">
       {{ selected !== null ? getSelectedName : noSelect }}
       <svg
@@ -44,7 +47,7 @@ export default {
   props: {
     noSelect: {
       type: String,
-      required: true,
+      default: '',
     },
     selected: {
       type: [String, Boolean, Number],
@@ -57,6 +60,10 @@ export default {
     toggle: {
       type: Boolean,
       default: false,
+    },
+    placeholder: {
+      type: String,
+      default: '',
     },
     defaultValue: {
       type: [String, Boolean, Number],
@@ -82,11 +89,18 @@ export default {
   },
   computed: {
     getSelectedName() {
-      return ([
-        ...this.items,
-        { [this.refKey]: this.defaultValue, [this.displayKey]: this.noSelect },
-        // eslint-disable-next-line eqeqeq
-      ].find(item => item[this.refKey] == this.selected) || {})[this.displayKey]
+      return (
+        ([
+          ...this.items,
+          {
+            [this.refKey]: this.defaultValue,
+            [this.displayKey]: this.noSelect,
+          },
+          // eslint-disable-next-line eqeqeq
+        ].find(item => item[this.refKey] == this.selected) || {})[
+          this.displayKey
+        ] || this.noSelect
+      )
     },
   },
   watch: {
@@ -127,30 +141,30 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   width: 100%;
-  background-color: white;
+  height: 44px;
+  padding: 7px 15px;
   border: 1px solid #cccccc;
-  border-radius: 3px;
+  margin: 8px 0 16px;
   color: #aaaaaa;
   font-size: 15px;
   font-weight: 400;
-  padding: 7px 15px;
-  height: 44px;
+  background-color: white;
+  border-radius: 3px;
   outline: none;
-  box-sizing: border-box;
   transition: border 250ms ease-out;
-  margin: 8px 0 16px;
   user-select: none;
   &.has-error {
-    margin-bottom: 32px;
     border: 1px solid #c90a0a;
+    margin-bottom: 32px;
   }
   .error {
     position: absolute;
-    color: #c90a0a;
-    font-size: 12px;
     top: calc(100% + 6px);
     right: 1em;
+    color: #c90a0a;
+    font-size: 12px;
   }
   .select_element {
     display: flex;
@@ -163,25 +177,39 @@ export default {
   &.active .down {
     transform: rotate(180deg);
   }
+  .placeholder {
+    position: absolute;
+    z-index: 2;
+    top: -16px;
+    left: 0;
+    overflow: hidden;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100% - 12px);
+    color: $green;
+    font-size: 12px;
+  }
   .select_elements {
     position: absolute;
-    top: 43px;
-    left: -1px;
     z-index: 1000;
+    top: 43px;
+    box-sizing: border-box;
     width: calc(100% + 2px);
+    border: 1px solid #cccccc;
+    left: -1px;
     background-color: #ffffff;
     border-radius: 0 0 3px 3px;
-    border: 1px solid #cccccc;
-    box-sizing: border-box;
     visibility: hidden;
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.25);
     &::-webkit-scrollbar {
+      width: 10px;
       -webkit-appearance: none;
       background-color: rgb(238, 238, 238);
       border-radius: 5px;
-      width: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -190,12 +218,12 @@ export default {
       transition: background-color 0.1s ease;
     }
     .element {
-      padding-left: 15px;
-      cursor: pointer;
-      min-height: 46px;
+      position: relative;
       display: flex;
       align-items: center;
-      position: relative;
+      cursor: pointer;
+      padding-left: 15px;
+      min-height: 46px;
       &:hover {
         background-color: #f5f5f5;
       }

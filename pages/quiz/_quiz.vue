@@ -125,13 +125,13 @@ export default {
             color: white;
           }
           &.wrong {
-            background-color: #ff6060 !important;
-            border-color: #ff6060;
+            background-color: #ff2c2c !important;
+            border-color: #ff2c2c;
             color: white;
           }
           &.realy_wrong {
-            background-color: #e01515 !important;
-            border-color: #e01515;
+            background-color: #c10d0d !important;
+            border-color: #c10d0d;
             color: white;
           }
           &.checked {
@@ -203,7 +203,7 @@ export default {
             background-color: $green;
           }
           &.wrong {
-            background-color: #ff6060;
+            background-color: #ff1d1d;
           }
           &.realy_wrong {
             background-color: #e01515;
@@ -235,7 +235,7 @@ export default {
                   background-color: $green;
                 }
                 &.wrong {
-                  background-color: #ff6060;
+                  background-color: #ff1d1d;
                 }
                 &.realy_wrong {
                   background-color: #e01515;

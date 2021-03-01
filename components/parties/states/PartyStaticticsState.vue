@@ -48,7 +48,7 @@ export default {
           ],
           datasets: [
             {
-              backgroundColor: ['#f43434', '#ff6060', '#BCE342'],
+              backgroundColor: ['#f43434', '#ff1d1d', '#BCE342'],
               borderColor: ['#ffffff', '#ffffff', '#ffffff'],
               data: [
                 question.really_wrong_answers,
@@ -56,7 +56,7 @@ export default {
                 question.right_answers,
               ],
               borderWidth: 2,
-              hoverBackgroundColor: ['#f43434', '#ff6060', '#BCE342'],
+              hoverBackgroundColor: ['#f43434', '#ff1d1d', '#BCE342'],
             },
           ],
         },
