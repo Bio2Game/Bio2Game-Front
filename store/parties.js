@@ -36,7 +36,7 @@ export const mutations = {
   },
 
   SET_PAUSE(state, status) {
-    if (!state.game && state.game.pause !== status) return
+    if (!state.game || state.game.pause === status) return
     state.game.pause = status
   },
 

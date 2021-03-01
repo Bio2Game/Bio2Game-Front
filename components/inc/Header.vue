@@ -20,40 +20,44 @@
               <GroupIcon /> Formations
             </nuxt-link>
           </div>
-          <div v-if="!$auth.loggedIn" class="right-menu">
-            <nuxt-link class="button md green" to="/">Créer un quiz</nuxt-link>
-            <nuxt-link class="button md border_white right" to="/login">
-              Se connecter
-            </nuxt-link>
-          </div>
-          <div v-else class="right-menu">
-            <div class="user" :class="{ active: toggleUserMenu, transition }">
-              <div class="group" @click="toggleUserMenu = !toggleUserMenu">
-                <AvatarElement
-                  class="avatar"
-                  :email="$auth.user.email"
-                  :path="$auth.user.path"
-                  :name="$auth.user.username"
-                  :size="32"
-                />
-                <span class="username">{{ $auth.user.username }}</span>
-                <DownIcon class="down" />
-              </div>
-              <div class="user-menu">
-                <ul>
-                  <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
-                  <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
-                  <nuxt-link to="/contributeur/quiz">
-                    <Nature2Icon /> Mes quiz
-                  </nuxt-link>
-                  <nuxt-link v-if="$auth.user.status > 1" to="/admin">
-                    <SettingsIcon /> Admin
-                  </nuxt-link>
-                  <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
-                </ul>
+          <client-only>
+            <div v-if="!$auth.loggedIn" class="right-menu">
+              <nuxt-link class="button md green" to="/">
+                Créer un quiz
+              </nuxt-link>
+              <nuxt-link class="button md border_white right" to="/login">
+                Se connecter
+              </nuxt-link>
+            </div>
+            <div v-else class="right-menu">
+              <div class="user" :class="{ active: toggleUserMenu, transition }">
+                <div class="group" @click="toggleUserMenu = !toggleUserMenu">
+                  <AvatarElement
+                    class="avatar"
+                    :email="$auth.user.email"
+                    :path="$auth.user.path"
+                    :name="$auth.user.username"
+                    :size="32"
+                  />
+                  <span class="username">{{ $auth.user.username }}</span>
+                  <DownIcon class="down" />
+                </div>
+                <div class="user-menu">
+                  <ul>
+                    <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
+                    <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
+                    <nuxt-link to="/contributeur/quiz">
+                      <Nature2Icon /> Mes quiz
+                    </nuxt-link>
+                    <nuxt-link v-if="$auth.user.status > 1" to="/admin">
+                      <SettingsIcon /> Admin
+                    </nuxt-link>
+                    <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          </client-only>
         </div>
         <a
           class="hamburger"

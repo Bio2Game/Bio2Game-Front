@@ -219,6 +219,9 @@ export default {
           flexbox: true,
         },
       },
+      plugins: {
+        'postcss-sorting': {},
+      },
     },
   },
 }
