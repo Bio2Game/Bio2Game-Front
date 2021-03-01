@@ -77,7 +77,7 @@
                 </div>
               </div>
             </div>
-            <div class="explication">
+            <div v-if="explications" class="explication">
               <h6 class="explication-title">Explication:</h6>
               <span v-html="markdown(question.explication)" />
               <a
@@ -133,6 +133,12 @@ export default {
   components: {
     ValidIcon,
     InvalidIcon,
+  },
+  props: {
+    explications: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {

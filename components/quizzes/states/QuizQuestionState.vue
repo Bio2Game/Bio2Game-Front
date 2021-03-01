@@ -67,7 +67,7 @@
           {{ responses[3] }}
         </div>
       </div>
-      <div v-if="status === 2" class="explication">
+      <div v-if="status === 2 && explications" class="explication">
         <h6 class="explication-title">Explication:</h6>
         <span v-html="markdown(currentQuestion.explication)"></span>
         <p v-if="currentQuestion.source" class="kown">
@@ -99,6 +99,12 @@ const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
 export default {
   name: 'QuestionState',
+  props: {
+    explications: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       response: null,
