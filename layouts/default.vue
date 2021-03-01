@@ -79,15 +79,133 @@ export default {
   }
 }
 
+.quiz-next {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  margin: 0;
+  cursor: default;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  background-color: $green;
+  user-select: none;
+  border-radius: 16px;
+  .left-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transition: 0.4s min-height ease;
+    .icon {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 0;
+      transition: 0.4s margin-left ease;
+      img {
+        position: relative;
+        z-index: 2;
+        width: 100px;
+        height: 100px;
+        margin: 42px;
+      }
+      &::after {
+        position: absolute;
+        z-index: 1;
+        width: 140px;
+        height: 140px;
+        content: '';
+        background-color: white;
+        border-radius: 70px;
+      }
+    }
+  }
+  .right-part {
+    display: flex;
+    background-color: #ffffff;
+    .text {
+      display: flex;
+      flex-direction: column;
+      margin: 16px;
+      color: #484848;
+      font-size: 15px;
+
+      .title {
+        overflow: hidden;
+        font-size: 20px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .creator {
+        margin: 16px 0 0;
+        color: $green;
+        b {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .buttons {
+      position: absolute;
+      right: 16px;
+      display: flex;
+      justify-content: flex-end;
+      bottom: 16px;
+
+      &.two {
+        justify-content: space-between;
+      }
+      .jouer {
+        padding: 6px 24px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        text-transform: uppercase;
+        border-radius: 15px;
+        text-decoration: none;
+        background-color: $green;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+      }
+    }
+  }
+}
+
+.quiz-iframe {
+  min-width: 60vw;
+  width: 100%;
+  height: 30vw;
+  margin: 20px auto 0;
+  border-radius: 16px;
+  background-color: #ffffff73;
+}
+
+.deleted-quiz {
+  display: table;
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  font-size: 14px;
+  cursor: not-allowed;
+  background-color: #bce342;
+  box-shadow: 0 0 6px #00000063;
+  user-select: none;
+}
+
 .vue-notification-group {
   top: 6rem !important;
   width: 400px !important;
   .notifications {
     padding: 16px;
     margin: 0 16px 8px;
-    font-size: 14px;
-    color: #636363;
     background: #ffffff;
+    color: #636363;
+    font-size: 14px;
     border-left: 5px solid $green;
     box-shadow: 0 3px 6px #00000033;
 
