@@ -93,38 +93,13 @@ import ergo from '@/assets/data/ergo.json'
 import couronne from '@/assets/data/couronne.json'
 import discu from '@/assets/data/discu.json'
 
+import meta from '@/mixins/meta.js'
+
 export default {
   name: 'Features',
   data() {
     return {
       contributors: [],
-      //       {
-      //   id: 5,
-      //   name: 'DraftMan',
-      //   description:
-      //     'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
-      //   avatar: 'https://www.draftman.fr/images/me.png',
-      //   quizs: [
-      //     {
-      //       id: 1,
-      //       name: 'Devoirs de vigilance',
-      //       description: `Qu'est ce que le devoir de vigilance des entreprises`,
-      //       icon: 'https://www.draftman.fr/images/me.png',
-      //     },
-      //     {
-      //       id: 2,
-      //       name: `Efficacité énergétique de l'aviation`,
-      //       description: `Baisse anticipée de la consommation des avions sur les terrains`,
-      //       icon: 'https://www.draftman.fr/images/me.png',
-      //     },
-      //     {
-      //       id: 3,
-      //       name: 'Climatoseptiques',
-      //       description: `Comment le DD est perçu par l'opinion publique en France`,
-      //       icon: 'https://www.draftman.fr/images/me.png',
-      //     },
-      //   ],
-      // },
       features: [
         {
           name: 'Moderne et Ergonomique',
@@ -162,6 +137,12 @@ export default {
   async mounted() {
     const { contributors } = await this.$axios.$get('/api/contributors')
     this.contributors = contributors
+  },
+  head() {
+    return meta.get({
+      description:
+        'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
+    })
   },
 }
 </script>

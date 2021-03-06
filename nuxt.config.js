@@ -24,17 +24,110 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'DraftBot',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || '',
+        // Windows
+        name: 'msapplication-navbutton-color',
+        content: '#ffffff',
+      },
+      {
+        // Windows
+        name: 'msapplication-TileColor',
+        content: '#ffffff',
+      },
+      {
+        // Windows
+        name: 'msapplication-TileImage',
+        content: process.env.BASE_URL + '/icons/ms-icon-144x144.png',
+      },
+      {
+        name: 'msapplication-square70x70logo',
+        content: process.env.BASE_URL + '/icons/ms-icon-70x70.png',
+      },
+      {
+        name: 'msapplication-square150x150logo',
+        content: process.env.BASE_URL + '/icons/ms-icon-150x150.png',
+      },
+      {
+        name: 'msapplication-wide310x150logo',
+        content: process.env.BASE_URL + '/icons/mstile-310x150.png',
+      },
+      {
+        name: 'msapplication-square310x310logo',
+        content: process.env.BASE_URL + '/icons/ms-icon-310x310.png',
+      },
+      {
+        // Pinned Sites
+        name: 'application-name',
+        content: 'Bio2Game',
+      },
+      {
+        // Pinned Sites
+        name: 'msapplication-tooltip',
+        content:
+          'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
+      },
+      {
+        // Pinned Sites
+        name: 'msapplication-starturl',
+        content: '/',
+      },
+      {
+        // Tap highlighting
+        name: 'msapplication-tap-highlight',
+        content: 'no',
+      },
+      {
+        // UC Mobile Browser
+        name: 'full-screen',
+        content: 'Yes',
+      },
+      {
+        // UC Mobile Browser
+        name: 'browsermode',
+        content: 'application',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+      // Pinned Tab
+      {
+        href: process.env.BASE_URL + '/icons/safari-pinned-tab.svg',
+        rel: 'mask-icon',
+        size: 'any',
+        color: '#ffffff',
+      },
+      // Android
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: process.env.BASE_URL + '/icons/android-icon-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '96x96',
+        href: process.env.BASE_URL + '/icons/favicon-96x96.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: process.env.BASE_URL + '/icons/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: process.env.BASE_URL + '/icons/favicon-16x16.png',
+      },
+    ],
   },
 
   /*
@@ -146,6 +239,10 @@ export default {
   proxy: {
     '/api': process.env.API_URL,
     '/socket': process.env.API_URL,
+    '/images': {
+      target: process.env.CDN_URL,
+      pathRewrite: { '^/images': '/' },
+    },
   },
 
   /*

@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import meta from '@/mixins/meta.js'
+
 export default {
   name: 'Profil',
   middleware: 'auth',
@@ -69,6 +71,14 @@ export default {
     isIndex() {
       return this.$route.name === 'profil'
     },
+  },
+  head() {
+    return meta.get({
+      name: 'Profil',
+      description:
+        'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
+      slug: 'profil',
+    })
   },
 }
 </script>
