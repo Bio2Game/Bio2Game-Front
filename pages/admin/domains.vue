@@ -47,7 +47,7 @@
       >
         <img
           class="icon"
-          :src="'https//www.bio2game.com/images/icons/' + domain.icon.reference"
+          :src="'https://cdn.bio2game.com/icons/' + domain.icon.reference"
           :alt="domain.label"
         />
         <span class="label">{{ domain.label }}</span>
