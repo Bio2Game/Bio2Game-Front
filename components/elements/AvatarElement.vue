@@ -28,7 +28,7 @@ export default {
   computed: {
     getImage() {
       return this.path
-        ? `https://www.bio2game.com/images/avatar_uploads/${this.path}`
+        ? `https://cdn.bio2game.com/images/avatar_uploads/${this.path}`
         : `https://www.gravatar.com/avatar/` +
             md5(this.email.trim().toLowerCase()) +
             `?s=${this.size}&d=mp`
