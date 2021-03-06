@@ -9,11 +9,11 @@
       </div>
       <div class="content">
         <InputElement
-          v-model="current_domain.name"
-          :value="current_domain.name"
+          v-model="current_domain.label"
+          :value="current_domain.label"
           type="text"
           placeholder="Nom du domaine"
-          :error="filtredErrors('name')"
+          :error="filtredErrors('label')"
         />
         <InputElement
           v-model="current_domain.icon_id"
@@ -39,7 +39,12 @@
       </div>
     </div>
     <div class="domains-list">
-      <li v-for="domain of domains" :key="domain.id" class="domain">
+      <li
+        v-for="domain of domains"
+        :key="domain.id"
+        class="domain"
+        @click="editDomain(domain)"
+      >
         <img
           class="icon"
           :src="'https//www.bio2game.com/images/icons/' + domain.icon.reference"
@@ -90,6 +95,10 @@ export default {
   methods: {
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)
+    },
+    editDomain(domain) {
+      this.domain_id = domain.id
+      this.current_domain = domain
     },
     async saveDomain() {
       if (!this.domain_id) {
@@ -181,6 +190,7 @@ export default {
       background-color: white;
       box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
+      cursor: pointer;
       &:last-child {
         margin-bottom: 0;
       }
