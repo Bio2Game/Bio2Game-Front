@@ -12,7 +12,7 @@
             :items="quizzes"
             displayKey="label"
             refKey="id"
-            noSelect="Quiz"
+            placeholder="Quiz"
           />
           <div class="selected-quizzes">
             <div class="title">Quizz selectionnés</div>

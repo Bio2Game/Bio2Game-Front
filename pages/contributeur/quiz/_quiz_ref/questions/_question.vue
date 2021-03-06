@@ -27,7 +27,7 @@
           :defaultValue="get('quiz_id')"
           refKey="id"
           displayKey="label"
-          noSelect="Quiz de la question"
+          placeholder="Quiz de la question"
           @input="quiz_id = $event"
         />
         <div class="button md equal border_white" @click="status = !status">
@@ -66,7 +66,7 @@
             :selected="get('profil')"
             :items="profils"
             :error="filtredErrors('profil')"
-            noSelect="Profil du joueur"
+            placeholder="Profil du joueur"
             @input="profil = $event"
           />
         </div>

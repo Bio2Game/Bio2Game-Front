@@ -16,7 +16,7 @@
           v-model="become.contributor_type"
           :selected="become.contributor_type"
           :items="types"
-          noSelect="Contributeur"
+          placeholder="Contributeur"
         />
         <InputElement
           v-model="become.contributor_mobile"

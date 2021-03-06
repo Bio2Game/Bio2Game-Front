@@ -23,7 +23,7 @@
                 class="select-quiz"
                 :selected="quizId || $route.query.autoselect"
                 :items="quizzes"
-                noSelect="Selectionner le quiz"
+                placeholder="Selectionner le quiz"
                 displayKey="label"
                 refKey="id"
                 @input="loadQuiz($event)"

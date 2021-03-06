@@ -70,7 +70,7 @@
             :selected="complete.sex"
             :items="sexes"
             :defaultValue="0"
-            noSelect="Sexe"
+            placeholder="Sexe"
           />
           <AnimatorSelectorElement
             v-model="animators"
@@ -81,7 +81,7 @@
             v-model="complete.contributor_type"
             :selected="complete.contributor_type"
             :items="types"
-            noSelect="Contributeur"
+            placeholder="Contributeur"
           />
         </div>
         <div class="part">
