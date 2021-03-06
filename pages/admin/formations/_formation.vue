@@ -12,6 +12,7 @@
           @input="label = $event"
         />
         <SelectorElement
+          class="white_label"
           :selected="get('level')"
           :items="profils"
           :error="filtredErrors('level')"
@@ -165,8 +166,10 @@ export default {
   },
   computed: {
     formation() {
-      return this.$store.state.admin.formations.find(
-        f => f.id === Number(this.$route.params.formation),
+      return (
+        this.$store.state.admin.formations.find(
+          f => f.id === Number(this.$route.params.formation),
+        ) || {}
       )
     },
     quizzes() {

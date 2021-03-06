@@ -11,6 +11,12 @@ const getDefaultState = () => ({
 
 export const state = getDefaultState
 
+export const getters = {
+  getNoAdminUsers: state => {
+    return state.users.filter(u => u.status < 2)
+  },
+}
+
 export const mutations = {
   RESET_STATE(state) {
     Object.assign(state, getDefaultState)

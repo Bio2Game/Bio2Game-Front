@@ -9,7 +9,7 @@
       placeholder
     }}</label>
     <div class="select_element">
-      {{ selected !== null ? getSelectedName : noSelect }}
+      {{ selected !== null ? getSelectedName : placeholder }}
       <svg
         class="down"
         width="11"
@@ -45,10 +45,6 @@
 export default {
   name: 'SelectorElement',
   props: {
-    noSelect: {
-      type: String,
-      default: '',
-    },
     selected: {
       type: [String, Boolean, Number],
       default: null,
@@ -94,12 +90,12 @@ export default {
           ...this.items,
           {
             [this.refKey]: this.defaultValue,
-            [this.displayKey]: this.noSelect,
+            [this.displayKey]: this.placeholder,
           },
           // eslint-disable-next-line eqeqeq
         ].find(item => item[this.refKey] == this.selected) || {})[
           this.displayKey
-        ] || this.noSelect
+        ] || this.placeholder
       )
     },
   },
@@ -190,6 +186,9 @@ export default {
     width: calc(100% - 12px);
     color: $green;
     font-size: 12px;
+  }
+  &.white_label .placeholder {
+    color: #ffffff !important;
   }
   .select_elements {
     position: absolute;
