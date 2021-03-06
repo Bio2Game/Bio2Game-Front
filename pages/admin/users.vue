@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     users() {
-      return this.$store.state.admin.users.filter(u => u.status < 2)
+      return this.$store.getters['admin/getNoAdminUsers']
     },
     filtredUsers() {
       /* eslint-disable indent */
