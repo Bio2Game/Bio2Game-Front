@@ -14,7 +14,7 @@
           environnemental de votre consommation et d'apprendre.
         </p>
         <div class="buttons">
-          <nuxt-link to="/quizs" class="button green lg">Jouer</nuxt-link>
+          <nuxt-link to="/quiz" class="button green lg">Jouer</nuxt-link>
           <nuxt-link to="/parties" class="button border_green lg right">
             Parties
           </nuxt-link>
