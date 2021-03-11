@@ -10,17 +10,19 @@
           Créer un quizz
         </nuxt-link>
       </div>
-      <div class="content">
-        <TableElement
-          v-if="quizzes.length"
-          :fields="tableFields"
-          :data="quizzes"
-          @select-row="
-            $router.push(
-              `/contributeur/quiz/${$event.data.id}-${$event.data.url}`,
-            )
-          "
-        />
+      <div class="content quizzes-list-creator">
+        <client-only v-if="quizzes.length">
+          <vuetable
+            :fields="tableFields"
+            :data="quizzes"
+            defaultSortBy="updated_at"
+            @row-clicked="
+              $router.push(
+                `/contributeur/quiz/${$event.data.id}-${$event.data.url}`,
+              )
+            "
+          />
+        </client-only>
         <div v-else class="no-elements">
           <h3>Aucun quiz</h3>
           <p>Votre profil ne contient pas le moindre quiz !</p>
@@ -48,11 +50,15 @@
 
 <script>
 import moment from 'moment'
+import vuetable from 'vuetable-2'
 
 moment.locale('fr')
 
 export default {
   name: 'MesQuizzes',
+  components: {
+    vuetable,
+  },
   middleware: ['auth', 'contributor'],
   async fetch({ store, error }) {
     try {
@@ -126,5 +132,11 @@ export default {
 <style lang="scss">
 .block.index .head {
   align-items: center;
+}
+.quizzes-list-creator {
+  .vuetable-td-id,
+  .vuetable-th-id {
+    padding-left: 16px !important;
+  }
 }
 </style>

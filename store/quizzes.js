@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => ({
   quizzes: [],
   quizzesFetched: false,
@@ -53,15 +55,27 @@ export const mutations = {
   },
   UPDATE_CONTRIBUTOR_QUIZZ(state, quiz) {
     const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quiz.id)
-    state.contributorQuizzes[quizIndex] = Object.assign(
-      {},
-      state.contributorQuizzes[quizIndex],
-      quiz,
+    Vue.set(
+      state.contributorQuizzes,
+      quizIndex,
+      Object.assign({}, state.contributorQuizzes[quizIndex], quiz),
+    )
+  },
+  UPDATE_CONTRIBUTOR_QUESTIONS(state, data) {
+    const quizIndex = state.contributorQuizzes.findIndex(
+      q => q.id === data.quiz_id,
+    )
+    Vue.set(
+      state.contributorQuizzes,
+      quizIndex,
+      Object.assign({}, state.contributorQuizzes[quizIndex], {
+        questions: data.questions,
+      }),
     )
   },
   DELETE_CONTRIBUTOR_QUIZZ(state, quizId) {
     const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quizId)
-    this.$delete(state.contributorQuizzes, quizIndex)
+    Vue.delete(state.contributorQuizzes, quizIndex)
   },
 
   ADD_CONTRIBUTOR_QUESTION(state, question) {
@@ -82,7 +96,7 @@ export const mutations = {
       return
     }
     const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
-    quiz.questions[questionIndex] = question
+    Vue.set(quiz.questions, questionIndex, question)
   },
   DELETE_CONTRIBUTOR_QUESTION(state, question) {
     const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
@@ -117,6 +131,7 @@ export const actions = {
       return
     }
     const response = await this.$axios.$get('/api/contributor/quizzes')
+    console.log(response.quizzes)
     commit('SET_CONTRIBUTOR_QUIZZES_FETCHED')
     commit('SET_CONTRIBUTOR_QUIZZES', response.quizzes)
   },
@@ -135,8 +150,16 @@ export const actions = {
       `/api/contributor/quizzes/${payload.id}`,
       payload,
     )
-    commit('UPDATE_CONTRIBUTOR_QUIZZ', response.quiz)
+    commit('UPDATE_CONTRIBUTOR_QUIZZ', response.questions)
     return response.quiz
+  },
+
+  async updateQuestionsOrder({ commit }, payload) {
+    const response = await this.$axios.$patch(
+      `/api/contributor/quizzes/${payload.quiz_id}/order`,
+      payload,
+    )
+    commit('UPDATE_CONTRIBUTOR_QUESTIONS', response)
   },
 
   async deleteQuiz({ commit }, quizId) {

@@ -23,12 +23,10 @@
           />
         </div>
         <div class="section">
-          <InputElement
-            :value="get('domain_id')"
-            type="number"
-            name="domain_id"
+          <DomainsSelector
+            :selected="get('domain_id')"
             class="white_label"
-            placeholder="domain_id"
+            placeholder="Domaine"
             :error="filtredErrors('domainId')"
             @input="value => (domain_id = value)"
           />
@@ -51,24 +49,44 @@
           </div>
         </div>
       </div>
-      <div class="content">
-        <TableElement
-          v-if="quiz.questions && quiz.questions.length"
-          class="questions"
-          :fields="tableFields"
-          :data="quiz.questions"
-          @select-row="
-            $router.push(
-              `/contributeur/quiz/${$route.params.quiz}/questions/${$event.data.id}`,
-            )
-          "
-        />
+      <div class="content questions-list-edit">
+        <client-only v-if="quiz.questions.length">
+          <vuetable
+            :fields="tableFields"
+            class="questions"
+            :data="quiz.questions"
+            :draggable="editOrder"
+            defaultSortBy="order"
+            @row-clicked="
+              !editOrder &&
+                $router.push(
+                  `/contributeur/quiz/${$route.params.quiz}/questions/${$event.data.id}`,
+                )
+            "
+            @input="saveTempQuestionsOrder"
+          />
+        </client-only>
         <div v-else class="no-elements">
           <h3>Aucunes questions</h3>
           <p>Ce quiz ne contient pas la moindre question !</p>
           <div class="button md green equal" @click="createQuiz(true)">
             Créer une question
           </div>
+        </div>
+        <div v-if="quiz.questions && quiz.questions.length" class="options-bar">
+          <div
+            v-if="!editOrder"
+            class="button green lg"
+            @click="editOrder = true"
+          >
+            Modifier l'ordre
+          </div>
+          <template v-else>
+            <div class="button green lg" @click="saveOrder()">Sauvegarder</div>
+            <div class="button white lg right" @click="cancelOrder()">
+              Annuler
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -87,11 +105,17 @@
 
 <script>
 import moment from 'moment'
+import vuetable from 'vuetable-2'
+
+import VuetableFieldHandle from 'vuetable-2/src/components/VuetableFieldHandle.vue'
 
 moment.locale('fr')
 
 export default {
   name: 'Quiz',
+  components: {
+    vuetable,
+  },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     if (params.quiz !== 'create') {
@@ -112,44 +136,9 @@ export default {
       domain_id: null,
       localisation: null,
       status: null,
+      questions: null,
+      editOrder: false,
       errors: [],
-      tableFields: [
-        {
-          name: 'id',
-          title: 'ID',
-          sortField: 'id',
-        },
-        {
-          name: 'label',
-          title: 'Libélé',
-          sortField: 'label',
-        },
-        {
-          name: 'question',
-          title: 'Question',
-          sortField: 'question',
-          titleClass: 'big',
-          dataClass: 'big',
-        },
-        {
-          name: 'status',
-          title: 'Status',
-          formatter: bool => (bool ? 'Publique' : 'Privé'),
-          sortField: 'status',
-        },
-        {
-          name: 'updated_at',
-          title: 'Edition',
-          formatter: date => moment(date).fromNow(),
-          sortField: 'updated_at',
-        },
-        {
-          name: 'created_at',
-          title: 'Création',
-          formatter: date => moment(date).fromNow(),
-          sortField: 'created_at',
-        },
-      ],
     }
   },
   computed: {
@@ -157,6 +146,51 @@ export default {
       return this.$store.getters['quizzes/getPersonnalQuiz'](
         this.$route.params.quiz,
       )
+    },
+    tableFields() {
+      return [
+        {
+          name: !this.editOrder ? 'order' : VuetableFieldHandle,
+          title: 'Ordre',
+          formatter: index => index + 1,
+          sortField: !this.editOrder ? 'order' : null,
+        },
+        {
+          name: 'id',
+          title: 'ID',
+          sortField: !this.editOrder ? 'id' : null,
+        },
+        {
+          name: 'label',
+          title: 'Libélé',
+          sortField: !this.editOrder ? 'label' : null,
+        },
+        {
+          name: 'question',
+          title: 'Question',
+          sortField: !this.editOrder ? 'question' : null,
+          titleClass: 'big',
+          dataClass: 'big',
+        },
+        {
+          name: 'status',
+          title: 'Status',
+          formatter: bool => (bool ? 'Publique' : 'Privé'),
+          sortField: !this.editOrder ? 'status' : null,
+        },
+        {
+          name: 'updated_at',
+          title: 'Edition',
+          formatter: date => moment(date).fromNow(),
+          sortField: !this.editOrder ? 'updated_at' : null,
+        },
+        {
+          name: 'created_at',
+          title: 'Création',
+          formatter: date => moment(date).fromNow(),
+          sortField: !this.editOrder ? 'created_at' : null,
+        },
+      ]
     },
     isCreationPage() {
       return this.$route.params.quiz === 'create'
@@ -194,6 +228,24 @@ export default {
       this.domain_id = null
       this.localisation = null
       this.status = null
+    },
+    saveTempQuestionsOrder(data) {
+      this.questions = data.map((d, index) => ({ ...d, order: index }))
+    },
+    cancelOrder() {
+      this.editOrder = false
+      this.questions = null
+    },
+    async saveOrder() {
+      this.editOrder = false
+
+      if (!this.questions) return
+
+      await this.$store.dispatch(`quizzes/updateQuestionsOrder`, {
+        quiz_id: this.quiz.id,
+        questions: this.questions,
+      })
+      this.questions = null
     },
     async createQuiz(questionCreation = false) {
       try {
@@ -286,6 +338,24 @@ export default {
           margin-top: 24px;
         }
       }
+    }
+  }
+  .questions-list-edit {
+    display: flex;
+    flex-direction: column;
+    .questions,
+    .no-elements {
+      flex: 1;
+    }
+    .vuetable-td-order,
+    .vuetable-th-order,
+    .vuetable-th-component-handle,
+    .vuetable-td-component-handle {
+      padding-left: 16px !important;
+    }
+    .options-bar {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

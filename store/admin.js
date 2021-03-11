@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const getDefaultState = () => ({
   users: [],
   users_fetched: false,
@@ -60,7 +62,7 @@ export const mutations = {
 
   UPDATE_USER(state, user) {
     const index = state.users.findIndex(u => u.id === user.id)
-    state.users[index] = user
+    Vue.set(state.users, index, user)
   },
 
   ADD_DOMAIN(state, domain) {
@@ -69,10 +71,10 @@ export const mutations = {
 
   UPDATE_DOMAIN(state, domain) {
     const domainIndex = state.domains.findIndex(q => q.id === domain.id)
-    state.domains[domainIndex] = Object.assign(
-      {},
-      state.domains[domainIndex],
-      domain,
+    Vue.set(
+      state.domains,
+      domainIndex,
+      Object.assign({}, state.domains[domainIndex], domain),
     )
   },
 
@@ -84,10 +86,10 @@ export const mutations = {
     const formationIndex = state.formations.findIndex(
       q => q.id === formation.id,
     )
-    state.formations[formationIndex] = Object.assign(
-      {},
-      state.formations[formationIndex],
-      formation,
+    Vue.set(
+      state.formations,
+      formationIndex,
+      Object.assign({}, state.formations[formationIndex], formation),
     )
   },
 }
