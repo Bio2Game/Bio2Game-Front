@@ -24,7 +24,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: 'DraftBot',
+    title: 'Bio2Game',
     meta: [
       {
         // Windows
@@ -35,27 +35,6 @@ export default {
         // Windows
         name: 'msapplication-TileColor',
         content: '#ffffff',
-      },
-      {
-        // Windows
-        name: 'msapplication-TileImage',
-        content: process.env.BASE_URL + '/icons/ms-icon-144x144.png',
-      },
-      {
-        name: 'msapplication-square70x70logo',
-        content: process.env.BASE_URL + '/icons/ms-icon-70x70.png',
-      },
-      {
-        name: 'msapplication-square150x150logo',
-        content: process.env.BASE_URL + '/icons/ms-icon-150x150.png',
-      },
-      {
-        name: 'msapplication-wide310x150logo',
-        content: process.env.BASE_URL + '/icons/mstile-310x150.png',
-      },
-      {
-        name: 'msapplication-square310x310logo',
-        content: process.env.BASE_URL + '/icons/ms-icon-310x310.png',
       },
       {
         // Pinned Sites
@@ -87,45 +66,6 @@ export default {
         // UC Mobile Browser
         name: 'browsermode',
         content: 'application',
-      },
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-      // Pinned Tab
-      {
-        href: process.env.BASE_URL + '/icons/safari-pinned-tab.svg',
-        rel: 'mask-icon',
-        size: 'any',
-        color: '#ffffff',
-      },
-      // Android
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '192x192',
-        href: process.env.BASE_URL + '/icons/android-icon-192x192.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '96x96',
-        href: process.env.BASE_URL + '/icons/favicon-96x96.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '32x32',
-        href: process.env.BASE_URL + '/icons/favicon-32x32.png',
-      },
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '16x16',
-        href: process.env.BASE_URL + '/icons/favicon-16x16.png',
       },
     ],
   },
@@ -293,6 +233,44 @@ export default {
       login: '/login',
       logout: '/',
       home: '/',
+    },
+  },
+
+  /*
+   ** PWA module configuration
+   ** See https://pwa.nuxtjs.org/manifest
+   */
+  pwa: {
+    icon: {
+      source: './assets/images/logo.png',
+      fileName: 'logo.png',
+    },
+    manifest: {
+      name: 'Bio2Game',
+      short_name: 'Bio2Game',
+      description:
+        'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
+      background_color: '#ffffff',
+      theme_color: '#9DCD09',
+      lang: 'fr',
+    },
+    meta: {
+      name: 'Bio2Game',
+      author: 'DraftMan',
+      description:
+        'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black-translucent',
+      favicon: true,
+      theme_color: '#9DCD09',
+      lang: 'fr',
+      ogSiteName: 'DraftBot.fr',
+      ogHost: 'https://www.draftbot.fr',
+      ogImage: true,
+      twitterCard: 'summary',
+      twitterCreator: '@DraftMan_Dev',
+      nativeUI: true,
     },
   },
 
