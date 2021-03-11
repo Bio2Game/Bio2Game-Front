@@ -47,7 +47,7 @@
               class="button white_sky sm equal"
               @click="questionPanel = true"
             >
-              Séléction Avancé
+              Séléction avancée
             </div>
           </div>
           <div class="content">
