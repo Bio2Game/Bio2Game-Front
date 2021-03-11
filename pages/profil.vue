@@ -40,13 +40,6 @@
           <p>{{ $auth.user.localisation || 'Aucune adresse' }}</p>
         </div>
       </div>
-      <hr />
-      <div class="badges">
-        <h3 class="title">Badges</h3>
-        <div class="elements">
-          <!-- badges -->
-        </div>
-      </div>
       <nuxt-link
         v-if="!$auth.user.status && isIndex"
         to="/profil/become"
