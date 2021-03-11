@@ -21,6 +21,7 @@
 import { parse } from '@/utils/markdown'
 
 export default {
+  name: 'MarkdownEditor',
   props: {
     value: {
       type: String,

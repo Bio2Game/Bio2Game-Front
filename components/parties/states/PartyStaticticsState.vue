@@ -25,6 +25,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'PartyStaticticsState',
   props: {
     name: {
       type: String,

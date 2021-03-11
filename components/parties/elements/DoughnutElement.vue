@@ -5,6 +5,7 @@ import { Doughnut, mixins } from 'vue-chartjs'
 import 'chartjs-plugin-labels'
 
 export default {
+  name: 'DoughnutElement',
   extends: Doughnut,
   mixins: [mixins.reactiveProp],
   data() {

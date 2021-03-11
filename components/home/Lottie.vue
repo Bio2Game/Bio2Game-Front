@@ -6,6 +6,7 @@
 import lottie from 'lottie-web'
 
 export default {
+  name: 'Lottie',
   props: {
     animationData: {
       type: Object,

@@ -129,7 +129,7 @@ import InvalidIcon from '@/assets/icons/invalid.svg?inline'
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
 export default {
-  name: 'ResultState',
+  name: 'QuizResultState',
   components: {
     ValidIcon,
     InvalidIcon,

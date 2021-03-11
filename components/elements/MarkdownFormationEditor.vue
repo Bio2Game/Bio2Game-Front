@@ -66,6 +66,7 @@
 import { parseFormations } from '@/utils/markdown'
 
 export default {
+  name: 'MarkdownFormationEditor',
   props: {
     value: {
       type: String,

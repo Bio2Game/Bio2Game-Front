@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'Notif',
+  name: 'NotifHandler',
   data() {
     return {
       hide: false,

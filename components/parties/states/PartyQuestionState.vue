@@ -102,7 +102,7 @@ import { mapState } from 'vuex'
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
 export default {
-  name: 'QuestionState',
+  name: 'PartyQuestionState',
   props: {
     interactive: {
       type: Boolean,

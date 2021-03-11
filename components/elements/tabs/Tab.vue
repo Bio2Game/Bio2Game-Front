@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'Tab',
   props: {
     id: {
       type: String,

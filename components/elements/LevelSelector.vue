@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'LevelSelector',
   props: {
     value: {
       type: Array,

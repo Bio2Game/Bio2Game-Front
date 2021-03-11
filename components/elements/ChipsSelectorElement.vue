@@ -31,6 +31,7 @@
 import CloseIcon from '@/assets/icons/close.svg?inline'
 
 export default {
+  name: 'ChipsSelectorElement',
   components: {
     CloseIcon,
   },

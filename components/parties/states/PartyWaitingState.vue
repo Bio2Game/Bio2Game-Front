@@ -39,7 +39,7 @@ import TwitterIcon from '@/assets/icons/socials/twitter.svg?inline'
 import MailIcon from '@/assets/icons/socials/mail.svg?inline'
 
 export default {
-  name: 'WaitingState',
+  name: 'PartyWaitingState',
   components: {
     FacebookIcon,
     GoogleIcon,

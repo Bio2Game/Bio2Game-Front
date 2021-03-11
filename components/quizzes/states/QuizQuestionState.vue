@@ -98,7 +98,7 @@ import { mapState, mapGetters } from 'vuex'
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
 export default {
-  name: 'QuestionState',
+  name: 'QuizQuestionState',
   props: {
     explications: {
       type: Boolean,

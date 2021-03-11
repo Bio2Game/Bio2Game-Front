@@ -83,6 +83,7 @@ import GamesIcon from '@/assets/icons/games.svg?inline'
 import GroupIcon from '@/assets/icons/group.svg?inline'
 
 export default {
+  name: 'Header',
   components: {
     DownIcon,
     // Favorite,

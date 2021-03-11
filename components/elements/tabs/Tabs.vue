@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: 'Tabs',
   props: {
     value: {
       type: [String, null],

@@ -6,7 +6,7 @@
 import md5 from 'md5'
 
 export default {
-  name: 'Avatar',
+  name: 'AvatarElement',
   props: {
     name: {
       type: String,

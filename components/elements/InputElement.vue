@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'InputElement',
   props: {
     type: {
       type: String,
