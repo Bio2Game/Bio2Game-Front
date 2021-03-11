@@ -20,6 +20,16 @@
 <script>
 export default {
   name: 'AdminPages',
+  head() {
+    return {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        },
+      ],
+    }
+  },
 }
 </script>
 
@@ -87,6 +97,63 @@ export default {
         max-width: none;
       }
     }
+  }
+}
+.vuetable {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  thead {
+    border-bottom: 1px solid #8b8b8b;
+    margin: 0 -24px;
+    th {
+      position: relative;
+      padding: 16px 0;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      transition: 0.3s color ease-in-out;
+      user-select: none;
+      i {
+        position: absolute;
+        margin: -1px 0 0 5px;
+        font-size: 18px;
+      }
+      &.sorted-asc,
+      &.sorted-desc,
+      &.sortable:hover {
+        color: $green;
+        cursor: pointer;
+        i {
+          color: $green;
+        }
+      }
+      &:first-child() {
+        padding-left: 16px;
+      }
+    }
+  }
+  .vuetable-body {
+    tr {
+      &:nth-child(2n + 1) {
+        background-color: #cecece26;
+      }
+      td {
+        overflow: hidden;
+        padding: 12px 24px 12px 0;
+        font-size: 15px;
+        text-align: left;
+        cursor: pointer;
+        text-overflow: ellipsisdden;
+      }
+    }
+  }
+  .vuetable-td-id,
+  .vuetable-th-id {
+    padding-left: 16px !important;
+  }
+  .vuetable-empty-result {
+    display: none;
   }
 }
 </style>
