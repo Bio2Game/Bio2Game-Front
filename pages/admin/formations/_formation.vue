@@ -19,12 +19,10 @@
           placeholder="Profil du public"
           @input="level = $event"
         />
-        <InputElement
-          :value="get('domain_id')"
-          type="number"
-          name="domain_id"
+        <DomainsSelector
+          :selected="get('domain_id')"
           class="white_label"
-          placeholder="domain_id"
+          placeholder="Domaine"
           :error="filtredErrors('domainId')"
           @input="domain_id = $event"
         />
