@@ -11,12 +11,14 @@
         </nuxt-link>
       </div>
       <div class="content">
-        <TableElement
-          v-if="formations.length"
-          :fields="tableFields"
-          :data="formations"
-          @select-row="$router.push(`/admin/formations/${$event.data.id}`)"
-        />
+        <client-only v-if="formations.length">
+          <vuetable
+            :fields="tableFields"
+            :data="formations"
+            defaultSortBy="updated_at"
+            @row-clicked="$router.push(`/admin/formations/${$event.data.id}`)"
+          />
+        </client-only>
         <div v-else class="no-elements">
           <h3>Aucune formation</h3>
           <p>Aucune formation n'a encore été créé !</p>
@@ -34,11 +36,15 @@
 
 <script>
 import moment from 'moment'
+import vuetable from 'vuetable-2'
 
 moment.locale('fr')
 
 export default {
   name: 'AdminFormations',
+  components: {
+    vuetable,
+  },
   middleware: ['auth', 'admin'],
   async fetch({ store, error }) {
     try {

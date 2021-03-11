@@ -13,30 +13,32 @@
       />
     </div>
     <div class="content">
-      <TableElement
-        v-if="filtredUsers.length"
-        class="users"
-        :fields="tableFields"
-        :data="filtredUsers"
-      >
-        <template slot="status-slot" slot-scope="props">
-          <span
-            class="button sm equal"
-            :class="[props.rowData.status ? 'red' : 'green']"
-            @click="changeType(props.rowData)"
-          >
-            {{ props.rowData.status ? 'Contributeur' : 'Joueur' }}
-          </span>
-        </template>
-        <template slot="actions-slot" slot-scope="props">
-          <nuxt-link
-            class="password"
-            :to="'/admin/users/password/' + props.rowData.id"
-          >
-            Changer le mot de passe
-          </nuxt-link>
-        </template>
-      </TableElement>
+      <client-only v-if="filtredUsers.length">
+        <vuetable
+          class="users"
+          :fields="tableFields"
+          :data="filtredUsers"
+          defaultSortBy="username"
+        >
+          <template slot="status-slot" slot-scope="props">
+            <span
+              class="button sm equal"
+              :class="[props.rowData.status ? 'red' : 'green']"
+              @click="changeType(props.rowData)"
+            >
+              {{ props.rowData.status ? 'Contributeur' : 'Joueur' }}
+            </span>
+          </template>
+          <template slot="actions-slot" slot-scope="props">
+            <nuxt-link
+              class="password"
+              :to="'/admin/users/password/' + props.rowData.id"
+            >
+              Changer le mot de passe
+            </nuxt-link>
+          </template>
+        </vuetable>
+      </client-only>
       <div v-else class="no-elements">
         <h3>Aucuns utilisateurs</h3>
         <p>Il n'a pas d'utilisateurs inscrits !</p>
@@ -50,11 +52,15 @@
 
 <script>
 import moment from 'moment'
+import vuetable from 'vuetable-2'
 
 moment.locale('fr')
 
 export default {
   name: 'Utilisateurs',
+  components: {
+    vuetable,
+  },
   transition: 'left',
   middleware: ['auth', 'admin'],
   async fetch({ store, error }) {
