@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'Modal',
+  name: 'ModalElement',
   props: {
     open: {
       type: Boolean,
