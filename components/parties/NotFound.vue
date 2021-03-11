@@ -54,6 +54,9 @@ export default {
       font-weight: 900;
       margin-bottom: 0;
       user-select: none;
+      div {
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 25%);
+      }
 
       span {
         color: #ffffff;
