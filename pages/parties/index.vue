@@ -99,6 +99,10 @@ export default {
   },
   methods: {
     redirectToParty(code) {
+      code = code.trim()
+      if (!code) {
+        this.code = ''
+      }
       this.$router.push(`/parties/${code}`)
     },
   },
