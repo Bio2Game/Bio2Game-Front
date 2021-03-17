@@ -162,6 +162,32 @@
         </div>
       </ModalElement>
     </template>
+    <section v-if="askAuth" class="simpleAuth">
+      <div class="block">
+        <div class="head">
+          <h5>Identification</h5>
+        </div>
+        <div class="content">
+          <p>
+            Afin de vous distainguer des autres joueurs dans la partie, veuillez
+            indiquer un pseudo ou vous
+            <nuxt-link class="b2glink" to="/login">
+              connecter avec votre compte
+            </nuxt-link>
+            .
+          </p>
+          <InputElement
+            :value="username"
+            type="text"
+            placeholder="Pseudo utilisateur"
+            @input="username = $event"
+          />
+          <div class="button green lg" @click="registerSimpleAuth()">
+            Rejoindre la partie !
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -182,7 +208,7 @@ export default {
     UnbanIcon,
   },
   validate({ params }) {
-    return /^[A-Z1-9]{8}$/i.test(params.game)
+    return /^[A-Za-z1-9]{8}$/.test(params.game)
   },
   data() {
     return {
@@ -193,36 +219,12 @@ export default {
       bannedWindow: false,
       banWindow: false,
       banPlayer: null,
+      username: '',
     }
   },
   computed: mapState('parties', ['game', 'you']),
   mounted() {
-    if (!this.$socket.connected) {
-      this.$socket.client.open()
-    }
-
-    if (!this.$auth.loggedIn) {
-      this.askAuth = true
-      return
-    }
-
-    this.$socket.client.emit('joinGame', {
-      gameId: this.$route.params.game,
-      auth: {
-        token: this.$auth.token.get('local'),
-        /* eslint-disable indent */
-        user: this.$auth.user
-          ? {
-              id: this.$auth.user.id,
-              username: this.$auth.user.username,
-              name: this.$auth.user.name,
-              email: this.$auth.user.email,
-              avatar_path: this.$auth.user.avatar_path,
-            }
-          : null,
-        /* eslint-enable indent */
-      },
-    })
+    this.startSession()
   },
   destroyed() {
     if (this.$socket.connected) {
@@ -231,6 +233,37 @@ export default {
     this.$store.commit('parties/RESET_STATE')
   },
   methods: {
+    startSession() {
+      if (!this.$socket.connected) {
+        this.$socket.client.open()
+      }
+      return this.$socket.client.emit('joinGame', {
+        gameId: this.$route.params.game,
+        auth: {
+          token: this.$auth.token.get('local'),
+          /* eslint-disable indent */
+          user: this.$auth.user
+            ? {
+                id: this.$auth.user.id,
+                username: this.$auth.user.username,
+                name: this.$auth.user.name,
+                email: this.$auth.user.email,
+                avatar_path: this.$auth.user.avatar_path,
+              }
+            : null,
+          /* eslint-enable indent */
+        },
+      })
+    },
+    async registerSimpleAuth() {
+      await this.$auth.loginWith('guest', {
+        data: { username: this.username },
+      })
+
+      this.askAuth = false
+
+      return this.startSession()
+    },
     executeBan(banPlayer) {
       if (!banPlayer) {
         return
@@ -249,6 +282,9 @@ export default {
     },
     gameError(data) {
       this.error = data
+    },
+    authError() {
+      this.askAuth = true
     },
   },
 }
@@ -712,6 +748,32 @@ export default {
         flex: 1;
         &:first-child {
           margin-right: 24px;
+        }
+      }
+    }
+  }
+  .simpleAuth {
+    max-width: 500px;
+    margin: auto;
+    .block {
+      margin-top: 0;
+      // stylelint-disable-next-line no-descending-specificity
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        // stylelint-disable-next-line no-descending-specificity
+        p {
+          line-height: 24px;
+          margin-bottom: 16px;
+        }
+        .input-container {
+          width: 100%;
+        }
+        // stylelint-disable-next-line no-descending-specificity
+        .button {
+          width: 100%;
+          max-width: 100%;
         }
       }
     }

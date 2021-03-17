@@ -97,6 +97,7 @@ export const actions = {
           response_id: equivalents.indexOf(responses[index]),
           response: responses[index],
           time,
+          strategy: this.$auth.strategy.name,
         },
       )
 

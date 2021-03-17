@@ -9,6 +9,32 @@
         <QuizResultState v-if="status === 3" :explications="explications" />
       </section>
     </div>
+    <section v-if="askAuth" class="simpleAuth">
+      <div class="block">
+        <div class="head">
+          <h5>Identification</h5>
+        </div>
+        <div class="content">
+          <p>
+            Afin de vous distainguer des autres joueurs dans la partie, veuillez
+            indiquer un pseudo ou vous
+            <nuxt-link class="b2glink" to="/login">
+              connecter avec votre compte
+            </nuxt-link>
+            .
+          </p>
+          <InputElement
+            :value="username"
+            type="text"
+            placeholder="Pseudo utilisateur"
+            @input="username = $event"
+          />
+          <div class="button green lg" @click="registerSimpleAuth()">
+            Lancer le quiz !
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -21,11 +47,19 @@ export default {
   validate({ params }) {
     return /^\d+$/.test(params.quiz)
   },
-  async fetch({ params, store, error }) {
+  async fetch({ params, $auth, store, error }) {
     try {
-      await store.dispatch('quiz/fetchQuiz', params.quiz)
+      if ($auth.loggedIn) {
+        await store.dispatch('quiz/fetchQuiz', params.quiz)
+      }
     } catch (e) {
       error({ statusCode: 404, message: e.message })
+    }
+  },
+  data() {
+    return {
+      username: '',
+      askAuth: false,
     }
   },
   computed: {
@@ -33,6 +67,25 @@ export default {
       return !{}.hasOwnProperty.call(this.$route.query, 'no-explication')
     },
     ...mapState('quiz', ['status']),
+  },
+  created() {
+    if (!this.$auth.loggedIn) {
+      this.askAuth = true
+    }
+  },
+  destroyed() {
+    this.$store.commit('quiz/RESET_STATE')
+  },
+  methods: {
+    async registerSimpleAuth() {
+      await this.$auth.loginWith('guest', {
+        data: { username: this.username },
+      })
+
+      this.askAuth = false
+
+      return this.$store.dispatch('quiz/fetchQuiz', this.$route.params.quiz)
+    },
   },
 }
 </script>
@@ -323,6 +376,32 @@ export default {
               }
             }
           }
+        }
+      }
+    }
+  }
+  .simpleAuth {
+    max-width: 500px;
+    margin: auto;
+    .block {
+      margin-top: 0;
+      // stylelint-disable-next-line no-descending-specificity
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        // stylelint-disable-next-line no-descending-specificity
+        p {
+          line-height: 24px;
+          margin-bottom: 16px;
+        }
+        .input-container {
+          width: 100%;
+        }
+        // stylelint-disable-next-line no-descending-specificity
+        .button {
+          width: 100%;
+          max-width: 100%;
         }
       }
     }

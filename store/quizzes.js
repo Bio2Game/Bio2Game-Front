@@ -131,7 +131,6 @@ export const actions = {
       return
     }
     const response = await this.$axios.$get('/api/contributor/quizzes')
-    console.log(response.quizzes)
     commit('SET_CONTRIBUTOR_QUIZZES_FETCHED')
     commit('SET_CONTRIBUTOR_QUIZZES', response.quizzes)
   },
