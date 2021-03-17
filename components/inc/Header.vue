@@ -34,8 +34,8 @@
                 <div class="group" @click="toggleUserMenu = !toggleUserMenu">
                   <AvatarElement
                     class="avatar"
-                    :email="$auth.user.email"
-                    :path="$auth.user.path"
+                    :email="$auth.user.email || ''"
+                    :path="$auth.user.path || ''"
                     :name="$auth.user.username"
                     :size="32"
                   />
@@ -43,7 +43,7 @@
                   <DownIcon class="down" />
                 </div>
                 <div class="user-menu">
-                  <ul>
+                  <ul v-if="$auth.strategy.name === 'user'">
                     <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
                     <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
                     <nuxt-link to="/contributeur/quiz">
@@ -52,6 +52,13 @@
                     <nuxt-link v-if="$auth.user.status > 1" to="/admin">
                       <SettingsIcon /> Admin
                     </nuxt-link>
+                    <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
+                  </ul>
+                  <ul v-else>
+                    <nuxt-link to="/login">
+                      <UserIcon /> Créer un compte
+                    </nuxt-link>
+                    <nuxt-link to="/parties"><Nature2Icon /> Parties</nuxt-link>
                     <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
                   </ul>
                 </div>
@@ -111,6 +118,10 @@ export default {
     },
   },
   mounted() {
+    setTimeout(() => {
+      console.log(this.$auth)
+    }, 5000)
+
     this.checkHeader()
     window.addEventListener('scroll', this.checkHeader)
   },

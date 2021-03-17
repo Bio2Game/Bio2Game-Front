@@ -14,7 +14,7 @@ export default {
     },
     email: {
       type: String,
-      required: true,
+      default: '',
     },
     path: {
       type: String,
