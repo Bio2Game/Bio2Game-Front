@@ -61,11 +61,11 @@ export default {
     },
   },
   methods: {
-    copy(el) {
-      el.toElement.select()
+    copy(event) {
+      event.target.select()
       document.execCommand('copy')
-      el.toElement.setAttribute('data-tooltip', 'Copié !')
-      el.toElement.setAttribute('data-tooltip', 'Cliquer pour copier')
+      event.target.setAttribute('data-tooltip', 'Copié !')
+      event.target.setAttribute('data-tooltip', 'Cliquer pour copier')
     },
   },
 }
