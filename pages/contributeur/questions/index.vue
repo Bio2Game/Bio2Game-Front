@@ -10,17 +10,19 @@
           Créer une question
         </nuxt-link>
       </div>
-      <div class="content">
-        <TableElement
-          v-if="questions.length"
-          :fields="tableFields"
-          :data="questions"
-          @select-row="
-            $router.push(
-              `/contributeur/quiz/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
-            )
-          "
-        />
+      <div class="content questions-list-creator">
+        <client-only v-if="questions.length">
+          <vuetable
+            :fields="tableFields"
+            :data="questions"
+            defaultSortBy="updated_at"
+            @row-clicked="
+              $router.push(
+                `/contributeur/quiz/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
+              )
+            "
+          />
+        </client-only>
         <div v-else class="no-elements">
           <h3>Aucunes questions</h3>
           <p>Ce quiz ne contient pas la moindre question !</p>
@@ -49,10 +51,15 @@
 <script>
 import moment from 'moment'
 
+import vuetable from 'vuetable-2'
+
 moment.locale('fr')
 
 export default {
   name: 'MesQuestions',
+  components: {
+    vuetable,
+  },
   middleware: ['auth', 'contributor'],
   async fetch({ store, error }) {
     try {
@@ -147,6 +154,12 @@ export default {
         }
       }
     }
+  }
+}
+.questions-list-creator {
+  .vuetable-td-id,
+  .vuetable-th-id {
+    padding-left: 16px !important;
   }
 }
 </style>
