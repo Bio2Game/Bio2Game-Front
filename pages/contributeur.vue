@@ -7,6 +7,7 @@
 <script>
 export default {
   name: 'Contributor',
+  middleware: ['auth', 'contributor'],
   head() {
     return {
       link: [

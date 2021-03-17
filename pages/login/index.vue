@@ -107,6 +107,7 @@ import Linkedin from '@/assets/icons/linkedin.svg?inline'
 
 export default {
   name: 'Login',
+  middleware: ['simple-auth'],
   components: {
     Facebook,
     Google,
@@ -133,7 +134,7 @@ export default {
     },
     async login() {
       try {
-        await this.$auth.login({
+        await this.$auth.loginWith('user', {
           data: {
             email: this.email,
             password: this.password,
@@ -163,7 +164,7 @@ export default {
           email: this.email,
           password: this.password,
         })
-        await this.$auth.login({
+        await this.$auth.loginWith('user', {
           data: {
             email: this.email,
             password: this.password,

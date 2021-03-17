@@ -13,6 +13,7 @@ import { parseFormations } from '@/utils/markdown'
 
 export default {
   name: 'Formation',
+  auth: 'auth',
   async fetch({ store, params, error }) {
     try {
       const [, id] = params.formation.match(/^(\d+)-\S+$/)

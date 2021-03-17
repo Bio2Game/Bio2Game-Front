@@ -59,7 +59,7 @@ import meta from '@/mixins/meta.js'
 
 export default {
   name: 'Profil',
-  middleware: 'auth',
+  middleware: ['auth', 'user'],
   computed: {
     isIndex() {
       return this.$route.name === 'profil'

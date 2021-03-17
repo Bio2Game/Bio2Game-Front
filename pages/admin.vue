@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'AdminPages',
+  middleware: ['auth', 'admin'],
   head() {
     return {
       link: [
