@@ -32,17 +32,18 @@
   justify-content: center;
   align-items: center;
   border: 0;
+  text-align: center;
+  cursor: pointer;
   outline: 0;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   text-decoration: none;
   transition: 0.2s background-color ease-in-out;
-  cursor: pointer;
   user-select: none;
 
   &.green {
-    background-color: $green;
     color: white;
+    background-color: $green;
 
     &:hover {
       background-color: $green-light;
@@ -50,8 +51,8 @@
   }
 
   &.red {
-    background-color: #ff2323;
     color: white;
+    background-color: #ff2323;
 
     &:hover {
       background-color: #ff6f6f;
@@ -59,8 +60,8 @@
   }
 
   &.gray {
-    background-color: $gray;
     color: $green;
+    background-color: $gray;
 
     &:hover {
       background-color: $gray-light;
@@ -68,9 +69,9 @@
   }
 
   &.white {
-    background-color: white;
     border: 3px solid #c8c8c8;
     color: #494949;
+    background-color: white;
     box-shadow: none;
 
     &:hover {
@@ -79,8 +80,8 @@
   }
 
   &.white_sky {
-    background-color: white;
     color: #bbe242;
+    background-color: white;
 
     &:hover {
       background-color: $gray-light;
@@ -88,15 +89,15 @@
   }
 
   &.border_white {
-    background-color: transparent;
     border: 3px solid white;
     color: white;
+    background-color: transparent;
   }
 
   &.border_green {
-    background-color: white;
     border: 3px solid $green;
     color: $green;
+    background-color: white;
 
     &:hover {
       background-color: $gray-light;
@@ -105,9 +106,9 @@
 
   &.lg {
     height: 48px;
+    font-size: 18px;
     min-width: 155px;
     max-width: 180px;
-    font-size: 18px;
 
     &.equal {
       padding: 18px;
@@ -145,8 +146,8 @@
   }
 
   &.disabled {
-    background-color: #cccccc !important;
     cursor: default;
+    background-color: #cccccc !important;
     pointer-events: none;
   }
 }

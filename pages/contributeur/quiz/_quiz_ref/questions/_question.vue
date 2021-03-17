@@ -217,7 +217,6 @@ export default {
     this.quiz_id = parseInt(this.$route.params.quiz_ref.split('-')[0])
   },
   beforeRouteLeave(to, from, next) {
-    console.log(to)
     if (
       !this.isDataEdited &&
       (!to.params.quiz_ref ||
