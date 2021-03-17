@@ -88,17 +88,6 @@ export default {
   },
 
   /*
-   ** Plugins to load before mounting the App
-   ** See https://nuxtjs.org/guide/plugins
-   */
-  plugins: [
-    { src: '~/plugins/vue-carousel.js', mode: 'client' },
-    { src: '~/plugins/vue-notification.js', mode: 'client' },
-    { src: '~/plugins/vue-closable.js', mode: 'client' },
-    { src: '~/plugins/vue-socket.io.js', mode: 'client' },
-  ],
-
-  /*
    ** Nuxt.js dev-modules
    ** See https://nuxtjs.org/api/configuration-modules
    */
@@ -137,6 +126,17 @@ export default {
 
     // Doc: https://github.com/nuxt-community/robots-module
     '@nuxtjs/robots',
+  ],
+
+  /*
+   ** Plugins to load before mounting the App
+   ** See https://nuxtjs.org/guide/plugins
+   */
+  plugins: [
+    { src: '~/plugins/vue-carousel.js', mode: 'client' },
+    { src: '~/plugins/vue-notification.js', mode: 'client' },
+    { src: '~/plugins/vue-closable.js', mode: 'client' },
+    { src: '~/plugins/vue-socket.io.js', mode: 'client' },
   ],
 
   /*
@@ -234,6 +234,7 @@ export default {
       logout: '/',
       home: '/',
     },
+    plugins: ['~/plugins/auth.js'],
   },
 
   /*
