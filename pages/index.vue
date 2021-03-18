@@ -62,7 +62,7 @@
                   <div class="icon">
                     <img
                       :src="
-                        'https://www.bio2game.com/images/icons/' +
+                        'https://cdn.bio2game.com/icons/' +
                         quiz.domain.icon.reference
                       "
                       :alt="quiz.label"

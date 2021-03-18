@@ -33,8 +33,7 @@
           <div class="icon">
             <img
               :src="
-                'https://www.bio2game.com/images/icons/' +
-                quiz.domain.icon.reference
+                'https://cdn.bio2game.com/icons/' + quiz.domain.icon.reference
               "
               :alt="quiz.domain.name"
             />
