@@ -136,7 +136,9 @@ export default {
   },
   async mounted() {
     const { contributors } = await this.$axios.$get('/api/contributors')
-    this.contributors = contributors
+    this.contributors = contributors.sort(
+      (a, b) => b.quizzes.length - a.quizzes.length,
+    )
   },
   head() {
     return meta.get({
