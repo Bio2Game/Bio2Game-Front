@@ -34,7 +34,7 @@
       >
         <img
           class="domain-icon"
-          :src="'/images/icons/' + domain.icon.reference"
+          :src="'https://cdn.bio2game.com/icons/' + domain.icon.reference"
           :alt="domain.label"
         />
         <span>
