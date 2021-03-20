@@ -22,7 +22,7 @@
           </div>
           <client-only>
             <div v-if="!$auth.loggedIn" class="right-menu">
-              <nuxt-link class="button md green" to="/">
+              <nuxt-link class="button md green" to="/contributeur/quiz">
                 Créer un quiz
               </nuxt-link>
               <nuxt-link class="button md border_white right" to="/login">
@@ -48,6 +48,12 @@
                     <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
                     <nuxt-link to="/contributeur/quiz">
                       <Nature2Icon /> Mes quiz
+                    </nuxt-link>
+                    <nuxt-link
+                      v-if="$auth.user.status > 1"
+                      to="/admin/formations"
+                    >
+                      <FormationsIcon /> Mes formations
                     </nuxt-link>
                     <nuxt-link v-if="$auth.user.status > 1" to="/admin">
                       <SettingsIcon /> Admin
@@ -82,6 +88,7 @@
 import DownIcon from '@/assets/icons/down.svg?inline'
 import UserIcon from '@/assets/icons/user.svg?inline'
 import Nature2Icon from '@/assets/icons/nature2.svg?inline'
+import FormationsIcon from '@/assets/icons/formations.svg?inline'
 // import Favorite from '@/assets/icons/favorite.svg?inline'
 import SettingsIcon from '@/assets/icons/settings.svg?inline'
 import PowerIcon from '@/assets/icons/power.svg?inline'
@@ -95,6 +102,7 @@ export default {
     DownIcon,
     // Favorite,
     Nature2Icon,
+    FormationsIcon,
     SettingsIcon,
     UserIcon,
     PowerIcon,
@@ -118,10 +126,6 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      console.log(this.$auth)
-    }, 5000)
-
     this.checkHeader()
     window.addEventListener('scroll', this.checkHeader)
   },
