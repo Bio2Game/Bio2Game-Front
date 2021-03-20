@@ -7,7 +7,7 @@
           type="text"
           name="label"
           class="white_label"
-          placeholder="Libélé de la question"
+          placeholder="Libélé"
           :error="filtredErrors('label')"
           @input="label = $event"
         />
@@ -65,12 +65,12 @@
           </div>
         </div>
         <client-only>
-          <MarkdownFormationEditor
+          <MarkdownEditor
             :value="get('content')"
             placeholder="Contenu de la formation"
-            :max="250"
             :error="filtredErrors('content')"
             :quizzes="quizzes"
+            :formations="true"
             @input="content = $event"
           />
         </client-only>
@@ -89,14 +89,14 @@
 <script>
 import moment from 'moment'
 
-import MarkdownFormationEditor from '@/components/elements/MarkdownFormationEditor'
+import MarkdownEditor from '@/components/elements/MarkdownEditor'
 
 moment.locale('fr')
 
 export default {
   name: 'AdminFormation',
   components: {
-    MarkdownFormationEditor,
+    MarkdownEditor,
   },
   middleware: ['auth', 'admin'],
   async asyncData({ store, error, params }) {
@@ -121,7 +121,6 @@ export default {
       description: null,
       content: null,
       level: null,
-      endDate: null,
       keyswords: null,
       duration: null,
       leaves: null,
@@ -178,7 +177,7 @@ export default {
     },
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'description', 'content', 'level', 'keyswords', 'status', 'duration', 'leaves', 'domain_id'
+      return [ 'label', 'description', 'content', 'level', 'status', 'duration', 'leaves', 'domain_id'
       ].some(v => this.get(v) !== this.formation[v])
     },
   },
@@ -204,8 +203,6 @@ export default {
       this.description = null
       this.content = null
       this.level = null
-      this.endDate = null
-      this.keyswords = null
       this.duration = null
       this.leaves = null
       this.domain_id = null
@@ -223,7 +220,6 @@ export default {
             description: this.get('description'),
             content: this.get('content'),
             level: this.get('level'),
-            keyswords: this.get('keyswords'),
             duration: this.get('duration'),
             leaves: this.get('leaves'),
             domain_id: this.get('domain_id'),
@@ -252,7 +248,7 @@ export default {
     },
     async deleteFormation() {
       try {
-        await this.$store.dispatch(`formations/delete`, this.formation.id)
+        await this.$store.dispatch(`admin/deleteFormation`, this.formation.id)
 
         return this.$router.push(`/admin/formations`)
       } catch (error) {
@@ -295,7 +291,8 @@ export default {
   .block.question {
     .head {
       .input-container,
-      .selector-container {
+      .selector-container,
+      .domains-selector-container {
         margin-bottom: 8px;
         flex: 2;
         margin-right: 16px;
@@ -328,6 +325,10 @@ export default {
         }
       }
     }
+  }
+  /* stylelint-disable-next-line no-descending-specificity */
+  .buttons-bar .button {
+    flex: 1;
   }
 }
 </style>
