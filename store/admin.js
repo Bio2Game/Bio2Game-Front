@@ -92,6 +92,12 @@ export const mutations = {
       Object.assign({}, state.formations[formationIndex], formation),
     )
   },
+  DELETE_FORMATION(state, formation) {
+    const formationIndex = state.formations.findIndex(
+      q => q.id === formation.id,
+    )
+    Vue.delete(state.formations, formationIndex)
+  },
 }
 
 export const actions = {
@@ -167,6 +173,12 @@ export const actions = {
       payload,
     )
     commit('UPDATE_FORMATION', response.formation)
+    return response.formation
+  },
+
+  async deleteFormation({ commit }, id) {
+    const response = await this.$axios.$delete(`/api/admin/formations/${id}`)
+    commit('DELETE_FORMATION', response.formation)
     return response.formation
   },
 }
