@@ -263,7 +263,7 @@ export default {
       theme_color: '#9DCD09',
       lang: 'fr',
       ogSiteName: 'Bio2Game.com',
-      ogHost: 'https://www.bio2game.com',
+      ogHost: process.env.BASE_URL,
       ogImage: true,
       twitterCard: 'summary',
       twitterCreator: '@DraftMan_Dev',
