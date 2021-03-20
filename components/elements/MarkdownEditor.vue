@@ -14,11 +14,58 @@
       @input="handleInput($event.target.value)"
     />
     <div v-if="error" class="error">{{ error.message }}</div>
+    <template v-if="formations">
+      <ModalElement :open="quizzesSelector === 1" @close="quizzesSelector = 0">
+        <div class="block modal-block">
+          <div class="head">
+            <h5>Sélection du quiz à incruster</h5>
+          </div>
+          <div class="content">
+            <SelectorElement
+              class="select-quiz"
+              :selected="quizId"
+              :items="quizzes"
+              placeholder="Selectionner le quiz"
+              displayKey="label"
+              refKey="id"
+              @input="quizId = $event"
+            />
+            <CheckboxElement
+              id="explication"
+              style="margin-bottom: 14px"
+              :checked="quizExplication"
+              label="Afficher les explications"
+              @input="quizExplication = $event"
+            />
+            <div class="button md green" @click="waiter()">Sélectionner</div>
+          </div>
+        </div>
+      </ModalElement>
+      <ModalElement :open="quizzesSelector === 2" @close="quizzesSelector = 0">
+        <div class="block modal-block">
+          <div class="head">
+            <h5>Sélection du quiz d'approfondissement à incruster</h5>
+          </div>
+          <div class="content">
+            <SelectorElement
+              class="select-quiz"
+              :selected="quizId"
+              :items="quizzes"
+              placeholder="Selectionner le quiz"
+              displayKey="label"
+              refKey="id"
+              @input="quizId = $event"
+            />
+            <div class="button md green" @click="waiter()">Sélectionner</div>
+          </div>
+        </div>
+      </ModalElement>
+    </template>
   </div>
 </template>
 
 <script>
-import { parse } from '@/utils/markdown'
+import { parseFormations } from '@/utils/markdown'
 
 export default {
   name: 'MarkdownEditor',
@@ -39,11 +86,23 @@ export default {
       type: Object,
       default: () => null,
     },
+    quizzes: {
+      type: Array,
+      default: () => [],
+    },
+    formations: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       simplemde: null,
       isValueUpdateFromInner: false,
+      quizzesSelector: 0,
+      quizId: null,
+      quizExplication: true,
+      waiter: null,
     }
   },
   computed: {
@@ -65,7 +124,7 @@ export default {
     if (process.client) {
       window.SimpleMDE = require('simplemde')
     }
-    const max = this.max
+    const self = this
     /* eslint-disable no-undef */
     this.simplemde = new SimpleMDE({
       element: this.$refs.editor,
@@ -84,12 +143,12 @@ export default {
           },
           onUpdate: el => {
             el.innerHTML = `${this.simplemde.codemirror.getValue().length}${
-              max ? ` /${max}` : ''
+              self.max ? ` /${self.max}` : ''
             }`
           },
         },
       ],
-      previewRender: parse,
+      previewRender: this.formations ? parseFormations(this.quizzes) : parse,
       toolbar: [
         {
           name: 'undo',
@@ -194,6 +253,77 @@ export default {
           className: 'fa fa-question-circle',
           title: 'Guide Markdown',
         },
+        ...(this.formations
+          ? [
+              '|',
+              {
+                name: 'quiz',
+                action: async editor => {
+                  const cm = editor.codemirror
+
+                  self.quizId = cm.getSelection() || null
+                  self.quizzesSelector = 1
+
+                  await new Promise(resolve => {
+                    self.waiter = resolve
+                  })
+                  self.quizzesSelector = 0
+                  self.waiter = null
+
+                  const start = self.quizExplication ? '{{' : '@{{'
+                  const end = '}}'
+                  const startPoint = cm.getCursor('start')
+                  const endPoint = cm.getCursor('end')
+                  if (!self.quizId || isNaN(self.quizId)) {
+                    return
+                  }
+                  cm.replaceSelection(start + self.quizId + end)
+
+                  startPoint.ch += start.length
+                  if (startPoint !== endPoint) {
+                    endPoint.ch += start.length
+                  }
+                  cm.setSelection(startPoint, endPoint)
+                  cm.focus()
+                },
+                className: 'fa fa-list-alt',
+                title: 'Insérer un quiz',
+              },
+              {
+                name: 'quiz-next',
+                action: async editor => {
+                  const cm = editor.codemirror
+
+                  self.quizId = cm.getSelection() || null
+                  self.quizzesSelector = 2
+
+                  await new Promise(resolve => {
+                    self.waiter = resolve
+                  })
+                  self.quizzesSelector = 0
+                  self.waiter = null
+
+                  const start = '${{'
+                  const end = '}}'
+                  const startPoint = cm.getCursor('start')
+                  const endPoint = cm.getCursor('end')
+                  if (!self.quizId || isNaN(self.quizId)) {
+                    return
+                  }
+                  cm.replaceSelection(start + self.quizId + end)
+
+                  startPoint.ch += start.length
+                  if (startPoint !== endPoint) {
+                    endPoint.ch += start.length
+                  }
+                  cm.setSelection(startPoint, endPoint)
+                  cm.focus()
+                },
+                className: 'fa fa-window-maximize',
+                title: "Insérer un quiz d'approfondissement",
+              },
+            ]
+          : []),
       ],
     })
 
@@ -245,7 +375,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 .markdown-editor {
   position: relative;
   width: 100%;
@@ -618,7 +748,7 @@ span.CodeMirror-selectedtext {
 .CodeMirror-fullscreen {
   position: fixed !important;
   z-index: 9;
-  top: 50px;
+  top: calc(50px + 81px);
   right: 0;
   height: auto;
   background: #ffffff;
@@ -655,11 +785,12 @@ span.CodeMirror-selectedtext {
 .editor-toolbar.fullscreen {
   position: fixed;
   z-index: 9;
-  top: 0;
+  top: 81px;
   box-sizing: border-box;
   width: 100%;
   height: 50px;
   border: 0;
+  margin: 0;
   background: #ffffff;
   overflow-x: auto;
   overflow-y: hidden;
@@ -804,7 +935,7 @@ span.CodeMirror-selectedtext {
 .editor-preview-side {
   position: fixed;
   z-index: 9;
-  top: 50px;
+  top: calc(50px + 81px);
   right: 0;
   width: 50%;
   border: 1px solid #dddddd;
@@ -877,5 +1008,11 @@ span.CodeMirror-selectedtext {
 .CodeMirror
   .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
   background: rgba(255, 0, 0, 0.15);
+}
+.modal-block {
+  width: 300px;
+}
+.modal-block .head {
+  height: auto;
 }
 </style>
