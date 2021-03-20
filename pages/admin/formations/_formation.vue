@@ -114,6 +114,7 @@ export default {
         })
       }
     }
+    await store.dispatch('quizzes/fetchQuizzes')
   },
   data() {
     return {
