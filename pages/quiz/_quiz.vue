@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-page">
-    <div v-if="status" class="container">
+    <div v-if="status && !askAuth" class="container">
       <section class="playground">
         <QuizQuestionState v-if="[1, 2].includes(status)" />
         <QuizResultState v-if="status === 3" />
@@ -154,7 +154,7 @@ export default {
           width: calc(50% - 8px);
           margin-bottom: 16px;
           padding: 16px 20px;
-          border: 6px solid #f8f7f7;
+          border: 6px solid transparent;
           background-color: #f8f7f7;
           color: #000000;
           font-size: 16px;
@@ -167,6 +167,9 @@ export default {
           @media screen and (max-width: 480px) {
             width: 100%;
           }
+          &.checked {
+            border-color: $green;
+          }
           &.animator {
             background-color: #c7c7c7;
             color: #6d6d6d;
@@ -175,22 +178,24 @@ export default {
           }
           &.right {
             background-color: $green !important;
-            border-color: $green;
             color: white;
+            &.checked {
+              border-color: white;
+            }
           }
           &.wrong {
             background-color: #ff2c2c !important;
-            border-color: #ff2c2c;
             color: white;
+            &.checked {
+              border-color: white;
+            }
           }
           &.realy_wrong {
             background-color: #c10d0d !important;
-            border-color: #c10d0d;
             color: white;
-          }
-          &.checked {
-            background-color: #c5c5c5;
-            border-color: #ffffff;
+            &.checked {
+              border-color: white;
+            }
           }
         }
       }

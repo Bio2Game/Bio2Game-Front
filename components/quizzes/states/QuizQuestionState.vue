@@ -29,7 +29,7 @@
           @click="response = 0"
         >
           <div class="cover"></div>
-          {{ responses[0] }}
+          {{ getResponses()[0] }}
         </div>
         <div
           class="item"
@@ -40,7 +40,7 @@
           @click="response = 1"
         >
           <div class="cover"></div>
-          {{ responses[1] }}
+          {{ getResponses()[1] }}
         </div>
       </div>
       <div class="separator">
@@ -53,7 +53,7 @@
           @click="response = 2"
         >
           <div class="cover"></div>
-          {{ responses[2] }}
+          {{ getResponses()[2] }}
         </div>
         <div
           class="item"
@@ -64,7 +64,7 @@
           @click="response = 3"
         >
           <div class="cover"></div>
-          {{ responses[3] }}
+          {{ getResponses()[3] }}
         </div>
       </div>
       <div v-if="status === 2 && explications" class="explication">
@@ -117,7 +117,7 @@ export default {
   },
   computed: {
     ...mapState('quiz', ['quiz', 'position', 'status', 'currentQuestion']),
-    ...mapGetters('quiz', { responses: 'getResponses' }),
+    ...mapGetters('quiz', ['getResponses']),
   },
   watch: {
     status(status) {
@@ -142,6 +142,7 @@ export default {
     renderNumber(position, total) {
       return position < 10 && total > 9 ? `0${position}` : position
     },
+
     shuffleResponses() {
       const responses = Object.values(
         JSON.parse(this.currentQuestion.responses),

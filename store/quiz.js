@@ -12,26 +12,37 @@ export const state = getDefaultState
 
 export const getters = {
   getRealIndex: state => (index, questionIndex = null) => {
-    const question = questionIndex
-      ? state.quiz.questions[questionIndex]
-      : state.currentQuestion
+    const question =
+      questionIndex !== null
+        ? state.quiz.questions[questionIndex]
+        : state.currentQuestion
     const { responses, equivalents } = state.responses[question.id] || {}
     return responses ? equivalents.indexOf(responses[index]) : index
   },
 
   getFakeIndex: state => (index, questionIndex = null) => {
-    const question = questionIndex
-      ? state.quiz.questions[questionIndex]
-      : state.currentQuestion
+    const question =
+      questionIndex !== null
+        ? state.quiz.questions[questionIndex]
+        : state.currentQuestion
     const { responses, equivalents } = state.responses[question.id] || {}
     return responses ? responses.indexOf(equivalents[index]) : index
   },
 
-  getResponses: state => {
-    const question = state.responses[state.currentQuestion.id]
+  getResponses: state => (questionId = null) => {
+    const question =
+      state.responses[
+        questionId === null ? state.currentQuestion.id : questionId
+      ]
     return question
       ? question.responses
-      : Object.values(JSON.parse(state.currentQuestion.responses))
+      : Object.values(
+          JSON.parse(
+            questionId === null
+              ? state.currentQuestion.responses
+              : state.quiz.questions.find(q => q.id === questionId).responses,
+          ),
+        )
   },
 }
 

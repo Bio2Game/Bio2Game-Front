@@ -36,44 +36,52 @@
                 <div
                   class="item"
                   :class="[
-                    question.user_response === 0 ? 'checked' : '',
-                    question.responses[0].color,
+                    question.user_response === getRealIndex(0, index)
+                      ? 'checked'
+                      : '',
+                    colors[getRealIndex(0, index)],
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ question.responses[0].text }}
+                  {{ getResponses(question.id)[0] }}
                 </div>
                 <div
                   class="item"
                   :class="[
-                    question.user_response === 1 ? 'checked' : '',
-                    question.responses[1].color,
+                    question.user_response === getRealIndex(1, index)
+                      ? 'checked'
+                      : '',
+                    colors[getRealIndex(1, index)],
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ question.responses[1].text }}
+                  {{ getResponses(question.id)[1] }}
                 </div>
               </div>
               <div class="separator">
                 <div
                   class="item"
                   :class="[
-                    question.user_response === 2 ? 'checked' : '',
-                    question.responses[2].color,
+                    question.user_response === getRealIndex(2, index)
+                      ? 'checked'
+                      : '',
+                    colors[getRealIndex(2, index)],
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ question.responses[2].text }}
+                  {{ getResponses(question.id)[2] }}
                 </div>
                 <div
                   class="item"
                   :class="[
-                    question.user_response === 3 ? 'checked' : '',
-                    question.responses[3].color,
+                    question.user_response === getRealIndex(3, index)
+                      ? 'checked'
+                      : '',
+                    colors[getRealIndex(3, index)],
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ question.responses[3].text }}
+                  {{ getResponses(question.id)[3] }}
                 </div>
               </div>
             </div>
@@ -98,16 +106,14 @@
       <div class="content">
         <div class="stats">
           <div class="stat">
-            <span class="num good">1</span>
+            <span class="num good">{{ validCount }}</span>
             <span class="label">Bonne Réponse</span>
           </div>
           <div class="stat">
-            <span class="num bad">2</span>
+            <span class="num bad">{{
+              quiz.questions.length - validCount
+            }}</span>
             <span class="label">Mauvaises Réponses</span>
-          </div>
-          <div class="stat">
-            <span class="num good">37</span>
-            <span class="label">Points Collectés</span>
           </div>
         </div>
         <nuxt-link class="button green md submit-next" to="/quiz">
@@ -121,12 +127,10 @@
 <script>
 import { parse } from '@/utils/markdown'
 
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import ValidIcon from '@/assets/icons/valid.svg?inline'
 import InvalidIcon from '@/assets/icons/invalid.svg?inline'
-
-const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
 export default {
   name: 'QuizResultState',
@@ -143,17 +147,21 @@ export default {
   data() {
     return {
       markdown: parse,
+      colors: ['right', 'wrong', 'wrong', 'realy_wrong'],
     }
   },
   computed: {
     ...mapState('quiz', ['quiz', 'responses']),
-    score() {
-      const valides = this.quiz.questions.reduce(
+    ...mapGetters('quiz', ['getResponses', 'getRealIndex']),
+    validCount() {
+      return this.quiz.questions.reduce(
         (acc, curr) =>
           acc + (curr.user_response && !curr.user_response.repons_nb ? 1 : 0),
         0,
       )
-      const result = valides / this.quiz.questions.length
+    },
+    score() {
+      const result = this.validCount / this.quiz.questions.length
       if (result > 0.8) {
         return {
           color: 'right',
@@ -186,11 +194,11 @@ export default {
           responses: responses
             ? responses.map(text => ({
                 text,
-                color: colors[equivalents.indexOf(text)],
+                color: this.colors[equivalents.indexOf(text)],
               }))
             : Object.values(JSON.parse(question.responses)).map((text, i) => ({
                 text,
-                color: colors[i],
+                color: this.colors[i],
               })),
           explication: question.explication,
           source: question.source,
