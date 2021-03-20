@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="block">
+    <div class="block right-data" :right-data="'Quiz N°' + quiz.id">
       <div class="head">
         <div class="section">
           <InputElement
@@ -356,6 +356,18 @@ export default {
     .options-bar {
       display: flex;
       justify-content: flex-end;
+      margin-top: 16px;
+    }
+  }
+  &.right-data {
+    position: relative;
+    &::after {
+      position: absolute;
+      top: -24px;
+      right: 10px;
+      color: #353535;
+      font-weight: 600;
+      content: attr(right-data);
     }
   }
 }
