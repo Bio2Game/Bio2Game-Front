@@ -22,7 +22,9 @@
       >
         <div class="image">
           <img
-            src="/images/191826ed9f498b3471701273d1587820.jpg"
+            :src="
+              'https://cdn.bio2game.com/illustrations/' + formation.domain.image
+            "
             :alt="formation.label"
           />
         </div>
