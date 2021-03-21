@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { parseFormations } from '@/utils/markdown'
+import { parseFormations, parse } from '@/utils/markdown'
 
 export default {
   name: 'MarkdownEditor',
