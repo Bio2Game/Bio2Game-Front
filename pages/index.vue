@@ -110,7 +110,7 @@ export default {
         {
           name: 'Education',
           description:
-            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats et statistiques.',
+            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats.',
           data: couronne,
         },
         {
@@ -128,7 +128,7 @@ export default {
         {
           name: 'Une API',
           description:
-            'Bio2Game vous propose une API pour pouvoir accéder à vos données depuis vos sites ou projets.',
+            'Bio2Game vous propose une API pour pouvoir accéder au quiz depuis vos sites ou projets.',
           data: api,
         },
       ],
