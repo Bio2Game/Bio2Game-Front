@@ -33,7 +33,10 @@
           placeholder="Quiz de la question"
           @input="quiz_id = $event"
         />
-        <div class="button md equal border_white" @click="status = !status">
+        <div
+          class="button md equal border_white"
+          @click="status = !get('status')"
+        >
           {{ get('status') ? 'Publique' : 'Privé' }}
         </div>
       </div>
@@ -249,7 +252,7 @@ export default {
       )
     },
     get(key) {
-      return this[key] || this.questionObj[key]
+      return this[key] !== null ? this[key] : this.questionObj[key]
     },
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)

@@ -44,7 +44,10 @@
           />
         </div>
         <div class="section top-buttons">
-          <div class="button md equal border_white" @click="status = !status">
+          <div
+            class="button md equal border_white"
+            @click="status = !get('status')"
+          >
             {{ get('status') ? 'Publique' : 'Privé' }}
           </div>
           <div class="button white_sky sm equal" @click="createQuiz(true)">
@@ -226,7 +229,7 @@ export default {
   },
   methods: {
     get(key) {
-      return this[key] ? this[key] : this.quiz[key]
+      return this[key] !== null ? this[key] : this.quiz[key]
     },
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)
