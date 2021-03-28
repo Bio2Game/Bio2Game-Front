@@ -1,6 +1,5 @@
 <template>
   <div class="quiz-page">
-    <NatureImage class="nature" />
     <div class="top">
       <h1>QUIZ</h1>
       <p>Choisissez les quiz succeptibles de vous intéresser.</p>
