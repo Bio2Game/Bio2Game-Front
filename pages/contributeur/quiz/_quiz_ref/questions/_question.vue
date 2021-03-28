@@ -125,7 +125,13 @@
         Mes questions
       </nuxt-link>
       <div class="button green lg" @click="createQuestion()">Sauvegarder</div>
-      <div class="button green lg" @click="deleteQuestion()">Supprimer</div>
+      <div
+        class="button green lg"
+        :class="{ disabled: isCreationPage }"
+        @click="deleteQuestion()"
+      >
+        Supprimer
+      </div>
     </div>
   </div>
 </template>
@@ -291,6 +297,7 @@ export default {
       }
     },
     async deleteQuestion() {
+      if (this.isCreationPage) return
       try {
         await this.$store.dispatch(`quizzes/deleteQuestion`, {
           quiz_id: this.questionObj.quiz_id,
