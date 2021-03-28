@@ -431,7 +431,7 @@ export default {
           rgba(33, 37, 34, 0.85),
           rgba(33, 37, 34, 0.85)
         ),
-        url('../../assets/images/login.jpg');
+        url('../assets/images/login.jpg');
       left: -8px;
       bottom: -8px;
       flex: 1 0;
