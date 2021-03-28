@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="buttons-bar">
-      <nuxt-link class="button green lg" to="/admin/formations">
+      <nuxt-link class="button green lg" to="/contributeur/formations">
         Mes formations
       </nuxt-link>
       <div class="button green lg" @click="createFormation()">Sauvegarder</div>
@@ -98,14 +98,14 @@ export default {
   components: {
     MarkdownEditor,
   },
-  middleware: ['auth', 'admin'],
+  middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     if (params.formation !== 'create') {
       try {
         if (!/\d/.test(params.formation)) {
           throw new Error('Match failed')
         }
-        await store.dispatch('admin/fetchFormations')
+        await store.dispatch('formations/fetchFormations')
         await store.dispatch('quizzes/fetchQuizzes')
       } catch (e) {
         error({
@@ -165,7 +165,7 @@ export default {
   computed: {
     formation() {
       return (
-        this.$store.state.admin.formations.find(
+        this.$store.state.formations.formations.find(
           f => f.id === Number(this.$route.params.formation),
         ) || {}
       )
@@ -213,7 +213,7 @@ export default {
     async createFormation() {
       try {
         await this.$store.dispatch(
-          `admin/${this.isCreationPage ? 'create' : 'update'}Formation`,
+          `formations/${this.isCreationPage ? 'create' : 'update'}Formation`,
           {
             id: this.formation.id,
             label: this.get('label'),
@@ -249,9 +249,12 @@ export default {
     },
     async deleteFormation() {
       try {
-        await this.$store.dispatch(`admin/deleteFormation`, this.formation.id)
+        await this.$store.dispatch(
+          `formations/deleteFormation`,
+          this.formation.id,
+        )
 
-        return this.$router.push(`/admin/formations`)
+        return this.$router.push(`/contributeur/formations`)
       } catch (error) {
         console.log(error)
         this.$notify({

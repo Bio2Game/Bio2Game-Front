@@ -46,12 +46,12 @@
                   <ul v-if="$auth.strategy.name === 'user'">
                     <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
                     <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
-                    <nuxt-link to="/contributeur/quiz">
+                    <nuxt-link v-if="$auth.user.status" to="/contributeur/quiz">
                       <Nature2Icon /> Mes quiz
                     </nuxt-link>
                     <nuxt-link
-                      v-if="$auth.user.status > 1"
-                      to="/admin/formations"
+                      v-if="$auth.user.status"
+                      to="/contributeur/formations"
                     >
                       <FormationsIcon /> Mes formations
                     </nuxt-link>

@@ -4,7 +4,7 @@
       <div class="head">
         <h5>Formations</h5>
         <nuxt-link
-          to="/admin/formations/create"
+          to="/contributeur/formations/create"
           class="button white_sky sm equal"
         >
           Créer une formation
@@ -16,7 +16,9 @@
             :fields="tableFields"
             :data="formations"
             defaultSortBy="updated_at"
-            @row-clicked="$router.push(`/admin/formations/${$event.data.id}`)"
+            @row-clicked="
+              $router.push(`/contributeur/formations/${$event.data.id}`)
+            "
           />
         </client-only>
         <div v-else class="no-elements">
@@ -24,7 +26,7 @@
           <p>Aucune formation n'a encore été créé !</p>
           <nuxt-link
             class="button md green equal"
-            to="/admin/formations/create"
+            to="/contributeur/formations/create"
           >
             Créer une formation
           </nuxt-link>
@@ -45,10 +47,10 @@ export default {
   components: {
     vuetable,
   },
-  middleware: ['auth', 'admin'],
+  middleware: ['auth', 'contributor'],
   async fetch({ store, error }) {
     try {
-      await store.dispatch('admin/fetchFormations')
+      await store.dispatch('formations/fetchFormations')
     } catch (e) {
       error({
         statusCode: 503,
@@ -103,7 +105,7 @@ export default {
   },
   computed: {
     formations() {
-      return this.$store.state.admin.formations
+      return this.$store.state.formations.contributorFormations
     },
   },
 }
