@@ -111,7 +111,7 @@ export default {
         user-select: none;
       }
       &.active {
-        border: 4px solid $green;
+        border: 4px solid #797979;
       }
       .label {
         position: absolute;
