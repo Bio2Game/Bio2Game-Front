@@ -50,35 +50,55 @@
           >
         </div>
         <div class="part login-part">
-          <h1>Connectez vous</h1>
-          <InputElement
-            v-model="email"
-            type="email"
-            placeholder="Email"
-            :error="filtredErrors('email')"
-          />
-          <InputElement
-            v-model="password"
-            type="password"
-            placeholder="Mot de passe"
-            :error="filtredErrors('password')"
-            @keydown.enter.native="login()"
-          />
-          <div class="password">
-            <nuxt-link to="/login/forgot">Mot de passe oublié ?</nuxt-link>
-          </div>
-
-          <div class="group">
-            <CheckboxElement
-              id="remember"
-              :checked="remember"
-              label="Se souvenir de moi"
+          <template v-if="!noPassword">
+            <h1>Connectez vous</h1>
+            <InputElement
+              v-model="email"
+              type="email"
+              placeholder="Email"
+              :error="filtredErrors('email')"
             />
-            <a class="button green sm" @click="login()">Connexion</a>
-          </div>
+            <InputElement
+              v-model="password"
+              type="password"
+              placeholder="Mot de passe"
+              :error="filtredErrors('password')"
+              @keydown.enter.native="login()"
+            />
+            <div class="password">
+              <span @click="noPassword = true">Mot de passe oublié ?</span>
+            </div>
+
+            <div class="group">
+              <CheckboxElement
+                id="remember"
+                :checked="remember"
+                label="Se souvenir de moi"
+              />
+              <a class="button green sm" @click="login()">Connexion</a>
+            </div>
+          </template>
+          <template v-else>
+            <h1>Mot de passe ?</h1>
+            <p class="description reversed">
+              Aucun soucis vous pouvez le modifier depuis votre adresse email
+            </p>
+            <InputElement
+              v-model="email"
+              type="email"
+              placeholder="Email"
+              :error="filtredErrors('email')"
+            />
+            <div class="password">
+              <span @click="noPassword = false">Je m'en souviens !</span>
+            </div>
+
+            <a class="button green sm full" @click="resetPassword()"
+              >Récupérer</a
+            >
+          </template>
           <hr />
           <p class="description">Connectez vous avez vos réseaux sociaux</p>
-
           <div class="social">
             <a class="social-link facebook" href="/login/facebook">
               <Facebook />
@@ -122,6 +142,7 @@ export default {
       errors: [],
       isRegister: false,
       remember: true,
+      noPassword: false,
     }
   },
   methods: {
@@ -179,6 +200,26 @@ export default {
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect)
         }
+      } catch (err) {
+        const messages = err.response.data.messages
+        if (messages) {
+          this.errors = messages.errors
+        }
+      }
+    },
+    async resetPassword() {
+      try {
+        await this.$axios.post('/api/auth/user/reset-password', {
+          email: this.email,
+        })
+        this.$notify({
+          type: 'success',
+          text:
+            'Un email vous a été envoyé sur votre adresse email afin de réinitialiser votre mot de passe !',
+          duration: 3000,
+          width: 400,
+        })
+        this.errors = []
       } catch (err) {
         const messages = err.response.data.messages
         if (messages) {
@@ -272,11 +313,12 @@ export default {
           display: flex;
           justify-content: flex-end;
           margin: -6px 0 16px;
-          a {
+          span {
             color: #19683b;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
+            cursor: pointer;
           }
         }
         .description {
@@ -284,6 +326,9 @@ export default {
           font-size: 14px;
           text-align: center;
           margin-top: 16px;
+          &.reversed {
+            margin: 0 0 16px;
+          }
         }
         .social {
           display: grid;
