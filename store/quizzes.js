@@ -149,7 +149,7 @@ export const actions = {
       `/api/contributor/quizzes/${payload.id}`,
       payload,
     )
-    commit('UPDATE_CONTRIBUTOR_QUIZZ', response.questions)
+    commit('UPDATE_CONTRIBUTOR_QUIZZ', response.quiz)
     return response.quiz
   },
 
