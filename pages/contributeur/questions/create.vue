@@ -76,6 +76,7 @@
             type="text"
             name="response0"
             placeholder="Bonne réponse"
+            :max="30"
             :error="filtredErrors('responses.response0')"
             @input="response0 = $event"
           />
@@ -84,6 +85,7 @@
             type="text"
             name="response1"
             placeholder="Mauvaise réponse n°1"
+            :max="30"
             :error="filtredErrors('responses.response1')"
             @input="response1 = $event"
           />
@@ -92,6 +94,7 @@
             type="text"
             name="response2"
             placeholder="Mauvaise réponse n°2"
+            :max="30"
             :error="filtredErrors('responses.response2')"
             @input="response2 = $event"
           />
@@ -100,6 +103,7 @@
             type="text"
             name="response3"
             placeholder="Réponse improbable"
+            :max="30"
             :error="filtredErrors('responses.response3')"
             @input="response3 = $event"
           />
