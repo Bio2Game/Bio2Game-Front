@@ -53,7 +53,7 @@ const formationRules = quizzes => ({
         : `<div class="quiz-next">
         <div class="left-part">
           <div class="icon">
-            <img src="icon" src="" />
+            <img src="https://cdn.bio2game.com/icons/${node.content.domain.icon.reference}" src="" />
           </div>
         </div>
         <div class="right-part">
