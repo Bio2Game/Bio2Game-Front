@@ -50,7 +50,7 @@
           >
         </div>
         <div class="part login-part">
-          <template v-if="!noPassword">
+          <template v-if="status === 'login'">
             <h1>Connectez vous</h1>
             <InputElement
               v-model="email"
@@ -66,7 +66,7 @@
               @keydown.enter.native="login()"
             />
             <div class="password">
-              <span @click="noPassword = true">Mot de passe oublié ?</span>
+              <span @click="status = 'reset'">Mot de passe oublié ?</span>
             </div>
 
             <div class="group">
@@ -78,7 +78,7 @@
               <a class="button green sm" @click="login()">Connexion</a>
             </div>
           </template>
-          <template v-else>
+          <template v-if="status === 'reset'">
             <h1>Mot de passe ?</h1>
             <p class="description reversed">
               Aucun soucis vous pouvez le modifier depuis votre adresse email
@@ -90,11 +90,36 @@
               :error="filtredErrors('email')"
             />
             <div class="password">
-              <span @click="noPassword = false">Je m'en souviens !</span>
+              <span @click="status = 'login'">Je m'en souviens !</span>
             </div>
 
             <a class="button green sm full" @click="resetPassword()"
               >Récupérer</a
+            >
+          </template>
+          <template v-if="status === 'recovery'">
+            <h1>Mot de passe !</h1>
+            <p class="description reversed">
+              Choisissez votre nouveau mot de passe !
+            </p>
+            <InputElement
+              v-model="password"
+              type="password"
+              placeholder="Mot de passe"
+              :error="filtredErrors('password')"
+            />
+            <InputElement
+              v-model="password_confirmation"
+              type="password"
+              placeholder="Confirmation du mot de passe"
+              :error="filtredErrors('password_confirmation')"
+            />
+            <div class="password">
+              <span @click="status = 'login'">Je m'en souviens !</span>
+            </div>
+
+            <a class="button green sm full" @click="setPassword()"
+              >Enregister</a
             >
           </template>
           <hr />
@@ -139,10 +164,18 @@ export default {
       username: '',
       email: '',
       password: '',
+      password_confirmation: '',
       errors: [],
       isRegister: false,
       remember: true,
+      restore: true,
       noPassword: false,
+      status: 'login',
+    }
+  },
+  mounted() {
+    if (this.$route.query.token) {
+      this.status = 'recovery'
     }
   },
   methods: {
@@ -219,6 +252,28 @@ export default {
           duration: 3000,
           width: 400,
         })
+        this.errors = []
+      } catch (err) {
+        const messages = err.response.data.messages
+        if (messages) {
+          this.errors = messages.errors
+        }
+      }
+    },
+    async setPassword() {
+      try {
+        await this.$axios.post('/api/auth/user/change-password', {
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+          token: this.$route.query.token,
+        })
+        this.$notify({
+          type: 'success',
+          text: 'Votre mot de passe a bien été changé !',
+          duration: 3000,
+          width: 400,
+        })
+        this.status = 'login'
         this.errors = []
       } catch (err) {
         const messages = err.response.data.messages
