@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="quizs">
-              <div class="quizs-title">Quiz créés</div>
+              <div class="quizs-title">Derniers quizs créés</div>
               <div class="quizs-list">
                 <div
                   v-for="quiz in contributor.quizzes"
@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import api from '@/assets/data/api.json'
+// import api from '@/assets/data/api.json'
 import book from '@/assets/data/book.json'
 import ergo from '@/assets/data/ergo.json'
 import couronne from '@/assets/data/couronne.json'
-import discu from '@/assets/data/discu.json'
+// import discu from '@/assets/data/discu.json'
 
 import meta from '@/mixins/meta.js'
 
@@ -102,16 +102,16 @@ export default {
       contributors: [],
       features: [
         {
-          name: 'Moderne et Ergonomique',
-          description:
-            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
-          data: ergo,
-        },
-        {
           name: 'Education',
           description:
             'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats.',
           data: couronne,
+        },
+        {
+          name: 'Moderne et Ergonomique',
+          description:
+            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
+          data: ergo,
         },
         {
           name: 'Vie privée',
@@ -119,18 +119,18 @@ export default {
             'La nature est aussi importante que votre vie privée. C’est pour cela que vos informations privées resteront privées !',
           data: book,
         },
-        {
-          name: 'Communautaire',
-          description:
-            "Un lieu de rencontre et de partage d'informations innovantes entre tous ceux qui cherchent des solutions au quotidien.",
-          data: discu,
-        },
-        {
-          name: 'Une API',
-          description:
-            'Bio2Game vous propose une API pour pouvoir accéder au quiz depuis vos sites ou projets.',
-          data: api,
-        },
+        // {
+        //   name: 'Communautaire',
+        //   description:
+        //     "Un lieu de rencontre et de partage d'informations innovantes entre tous ceux qui cherchent des solutions au quotidien.",
+        //   data: discu,
+        // },
+        // {
+        //   name: 'Une API',
+        //   description:
+        //     'Bio2Game vous propose une API pour pouvoir accéder au quiz depuis vos sites ou projets.',
+        //   data: api,
+        // },
       ],
     }
   },
