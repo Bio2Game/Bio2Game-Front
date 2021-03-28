@@ -19,6 +19,11 @@
             Parties
           </nuxt-link>
         </div>
+        <div class="buttons">
+          <nuxt-link to="/formations" class="button border_black lg xxl">
+            Formations
+          </nuxt-link>
+        </div>
       </div>
     </div>
     <div class="background">
@@ -152,6 +157,7 @@ export default {
       }
       .buttons {
         display: flex;
+        margin-bottom: 16px;
         @media screen and (max-width: $sm) {
           flex-direction: column;
           .right {
