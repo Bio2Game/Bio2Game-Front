@@ -11,6 +11,7 @@
           name="label"
           class="white_label"
           placeholder="Libélé"
+          :max="30"
           :error="filtredErrors('label')"
           @input="label = $event"
         />

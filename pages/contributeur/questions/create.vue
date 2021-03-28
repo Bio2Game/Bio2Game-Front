@@ -8,6 +8,7 @@
           name="label"
           class="white_label"
           placeholder="Libélé de la question"
+          :max="30"
           :error="filtredErrors('label')"
           @input="label = $event"
         />

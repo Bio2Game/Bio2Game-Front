@@ -10,6 +10,7 @@
           type="text"
           name="label"
           class="white_label"
+          :max="30"
           placeholder="Libélé de la question"
           :error="filtredErrors('label')"
           @input="value => (label = value)"

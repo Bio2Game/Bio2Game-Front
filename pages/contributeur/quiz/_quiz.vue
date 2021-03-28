@@ -12,6 +12,7 @@
             name="label"
             class="white_label"
             placeholder="Libélé du quizz"
+            :max="30"
             :error="filtredErrors('label')"
             @input="value => (label = value)"
           />
