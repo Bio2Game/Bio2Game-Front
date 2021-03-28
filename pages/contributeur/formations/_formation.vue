@@ -1,6 +1,9 @@
 <template>
   <div class="container formations">
-    <div class="block question">
+    <div
+      class="block question right-data"
+      :right-data="formation.id ? 'Formation N°' + formation.id : ''"
+    >
       <div class="head">
         <InputElement
           :value="get('label')"

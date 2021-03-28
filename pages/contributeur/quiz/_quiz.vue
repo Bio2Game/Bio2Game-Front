@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="block right-data" :right-data="'Quiz N°' + quiz.id">
+    <div
+      class="block right-data"
+      :right-data="quiz.id ? 'Quiz N°' + quiz.id : ''"
+    >
       <div class="head">
         <div class="section">
           <InputElement
@@ -50,7 +53,7 @@
         </div>
       </div>
       <div class="content questions-list-edit">
-        <client-only v-if="quiz.questions.length">
+        <client-only v-if="quiz.questions && quiz.questions.length">
           <vuetable
             :fields="tableFields"
             class="questions"
@@ -98,7 +101,13 @@
         Mes questions
       </nuxt-link>
       <div class="button green lg" @click="createQuiz()">Sauvegarder</div>
-      <div class="button green lg" @click="deleteQuiz()">Supprimer</div>
+      <div
+        class="button green lg"
+        :class="{ disabled: isCreationPage }"
+        @click="deleteQuiz()"
+      >
+        Supprimer
+      </div>
     </div>
   </div>
 </template>
@@ -273,6 +282,7 @@ export default {
 
         return this.$router.push(`/contributeur/quiz/${quiz.id}-${quiz.url}`)
       } catch (error) {
+        console.log(error)
         const messages = error.response.data.messages
         if (messages) {
           this.errors = messages.errors
@@ -289,6 +299,7 @@ export default {
       }
     },
     async deleteQuiz() {
+      if (this.isCreationPage) return
       try {
         if (!(this.quiz && !this.quiz.questions.length)) {
           return this.$notify({

@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="block question">
+    <div
+      class="block question right-data"
+      :right-data="questionObj.id ? 'Question N°' + questionObj.id : ''"
+    >
       <div class="head">
         <InputElement
           :value="get('label')"
