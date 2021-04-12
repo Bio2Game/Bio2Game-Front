@@ -83,7 +83,7 @@ export const actions = {
     if (state.domainsFetched) {
       return
     }
-    const response = await this.$axios.$get('/api/admin/domains')
+    const response = await this.$axios.$get('/api/contributor/domains')
     commit('SET_DOMAINS_FETCHED')
     commit('SET_DOMAINS', response.domains)
   },
