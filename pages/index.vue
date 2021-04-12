@@ -102,16 +102,16 @@ export default {
       contributors: [],
       features: [
         {
-          name: 'Education',
-          description:
-            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats.',
-          data: couronne,
-        },
-        {
           name: 'Moderne et Ergonomique',
           description:
             'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
           data: ergo,
+        },
+        {
+          name: 'Education',
+          description:
+            'Utilisez Bio2Game dans l’éducation afin de tester, créer des quizzs adaptés aux profil de vos élèves et étudiez leurs résultats.',
+          data: couronne,
         },
         {
           name: 'Vie privée',
