@@ -27,13 +27,26 @@
           />
         </div>
         <div class="section">
-          <DomainsSelector
-            :selected="get('domain_id')"
-            class="white_label"
-            placeholder="Domaine"
-            :error="filtredErrors('domainId')"
-            @input="value => (domain_id = value)"
-          />
+          <div class="section-zones">
+            <div class="section">
+              <DomainsSelector
+                :selected="get('domain_id')"
+                class="white_label"
+                placeholder="Domaine"
+                :error="filtredErrors('domainId')"
+                @input="value => (domain_id = value)"
+              />
+            </div>
+            <div class="section">
+              <SelectorElement
+                :selected="get('level')"
+                :items="levels"
+                :error="filtredErrors('level')"
+                placeholder="Niveau du public"
+                @input="level = $event"
+              />
+            </div>
+          </div>
           <InputElement
             :value="get('localisation')"
             type="text"
@@ -146,12 +159,35 @@ export default {
     return {
       label: null,
       description: null,
+      level: null,
       domain_id: null,
       localisation: null,
       status: null,
       questions: null,
       editOrder: false,
       errors: [],
+      levels: [
+        {
+          name: 'Non validé',
+          ref: 0,
+        },
+        {
+          name: 'Niveau primaire',
+          ref: 1,
+        },
+        {
+          name: 'Niveau secondaire',
+          ref: 2,
+        },
+        {
+          name: 'Niveau universitaire',
+          ref: 3,
+        },
+        {
+          name: 'Niveau expert',
+          ref: 4,
+        },
+      ],
     }
   },
   computed: {
@@ -212,6 +248,7 @@ export default {
       return !!(
         this.label !== null ||
         this.description !== null ||
+        this.level !== null ||
         this.domain_id !== null ||
         this.localisation !== null ||
         this.status !== null
@@ -238,6 +275,7 @@ export default {
     deleteData() {
       this.label = null
       this.description = null
+      this.level = null
       this.domain_id = null
       this.localisation = null
       this.status = null
@@ -269,6 +307,7 @@ export default {
             label: this.get('label'),
             url: this.generateURL(this.get('label')),
             description: this.get('description'),
+            level: this.get('level'),
             localisation: this.get('localisation'),
             language: 'fr',
             contributorId: this.$auth.user.id,
@@ -283,6 +322,15 @@ export default {
             `/contributeur/quiz/${quiz.id}-${quiz.url}/questions/create`,
           )
         }
+
+        this.$notify({
+          type: 'success',
+          text: `Votre quiz a été ${
+            this.quiz.id ? 'sauvegardé' : 'créée'
+          } avec succès`,
+          duration: 3000,
+          width: 400,
+        })
 
         return this.$router.push(`/contributeur/quiz/${quiz.id}-${quiz.url}`)
       } catch (error) {
@@ -343,6 +391,9 @@ export default {
 <style lang="scss">
 .block {
   .head {
+    .section-zones {
+      display: flex;
+    }
     .top-buttons {
       flex: 0 !important;
       .button {
