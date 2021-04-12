@@ -1,5 +1,5 @@
 export default function ({ $auth, redirect }) {
-  if ($auth.user.status < 2) {
+  if ($auth.user.status < 1000) {
     return redirect('/')
   }
 }
