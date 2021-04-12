@@ -50,7 +50,7 @@ export default {
   middleware: ['auth', 'contributor'],
   async fetch({ store, error }) {
     try {
-      await store.dispatch('formations/fetchFormations')
+      await store.dispatch('formations/fetchPeronnalFormations')
     } catch (e) {
       error({
         statusCode: 503,
