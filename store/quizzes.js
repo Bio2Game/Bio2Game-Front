@@ -81,6 +81,7 @@ export const mutations = {
   ADD_CONTRIBUTOR_QUESTION(state, question) {
     const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
     if (!quiz) return
+    if (!quiz.questions) quiz.questions = []
     quiz.questions.push(question)
   },
   UPDATE_CONTRIBUTOR_QUESTION(state, question) {
