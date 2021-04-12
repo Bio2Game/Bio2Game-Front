@@ -97,6 +97,10 @@ export default {
     }
   }
 }
+.vuetable-body-wrapper {
+  max-height: 50vh;
+  overflow-y: auto;
+}
 .vuetable {
   display: table;
   table-layout: fixed;
