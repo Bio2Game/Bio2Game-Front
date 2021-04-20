@@ -54,9 +54,10 @@
             <div class="quizs">
               <div class="quizs-title">Derniers quizs créés</div>
               <div class="quizs-list">
-                <div
+                <nuxt-link
                   v-for="quiz in contributor.quizzes"
                   :key="quiz.id"
+                  :to="`/quiz/${quiz.id}-${quiz.url}`"
                   class="quiz"
                 >
                   <div class="icon">
@@ -76,7 +77,7 @@
                       {{ quiz.description }}
                     </div>
                   </div>
-                </div>
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -298,6 +299,7 @@ export default {
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
             border-radius: 6px;
             margin-bottom: 16px;
+            text-decoration: none;
             .icon {
               width: 48px;
               min-width: 48px;
