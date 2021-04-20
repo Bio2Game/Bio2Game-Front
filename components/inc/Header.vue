@@ -55,7 +55,7 @@
                     >
                       <FormationsIcon /> Mes formations
                     </nuxt-link>
-                    <nuxt-link v-if="$auth.user.status > 1" to="/admin">
+                    <nuxt-link v-if="$auth.user.status > 999" to="/admin">
                       <SettingsIcon /> Admin
                     </nuxt-link>
                     <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
