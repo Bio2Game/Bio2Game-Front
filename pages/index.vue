@@ -24,7 +24,7 @@
 
       <carousel
         :perPage="3"
-        :autoplay="true"
+        :autoplay="false"
         :navigationEnabled="true"
         paginationPosition="top"
         :navigationClickTargetSize="0"
