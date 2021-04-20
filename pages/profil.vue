@@ -40,13 +40,18 @@
           <p>{{ $auth.user.localisation || 'Aucune adresse' }}</p>
         </div>
       </div>
-      <nuxt-link
-        v-if="!$auth.user.status && isIndex"
-        to="/profil/become"
-        class="before button md green"
-      >
-        Devenir contributeur
-      </nuxt-link>
+      <template v-if="!$auth.user.status">
+        <nuxt-link
+          v-if="isIndex"
+          to="/profil/become"
+          class="before button md green"
+        >
+          Devenir contributeur
+        </nuxt-link>
+        <nuxt-link v-else to="/profil" class="before button md green">
+          Revenir au profil
+        </nuxt-link>
+      </template>
     </div>
     <div class="forms ml-3">
       <nuxt-child />
