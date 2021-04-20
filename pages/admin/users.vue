@@ -23,10 +23,10 @@
           <template slot="status-slot" slot-scope="props">
             <span
               class="button sm equal"
-              :class="[props.rowData.status ? 'red' : 'green']"
+              :class="`level_${props.rowData.status}`"
               @click="changeType(props.rowData)"
             >
-              {{ props.rowData.status ? 'Contributeur' : 'Joueur' }}
+              {{ levelsLabels[props.rowData.status] }}
             </span>
           </template>
           <template slot="actions-slot" slot-scope="props">
@@ -102,6 +102,14 @@ export default {
           title: 'Actions',
         },
       ],
+      levelsLabels: [
+        'Joueur',
+        'Contributeur',
+        'Primaire',
+        'Secondaire',
+        'Universitaire',
+        'Expert',
+      ],
     }
   },
   computed: {
@@ -125,7 +133,7 @@ export default {
     changeType(user) {
       this.$store.dispatch('admin/updateUser', {
         id: user.id,
-        status: user.status ? 0 : 1,
+        status: user.status < 5 ? user.status + 1 : 0,
       })
     },
   },
@@ -137,6 +145,30 @@ export default {
   .password {
     color: $green;
     text-decoration: none;
+  }
+  .level_0 {
+    background-color: #9dcd09;
+    color: #ffffff;
+  }
+  .level_1 {
+    background-color: #82ab07;
+    color: #ffffff;
+  }
+  .level_2 {
+    background-color: #709306;
+    color: #ffffff;
+  }
+  .level_3 {
+    background-color: #ff3333;
+    color: #ffffff;
+  }
+  .level_4 {
+    background-color: #cc0000;
+    color: #ffffff;
+  }
+  .level_5 {
+    background-color: #810000;
+    color: #ffffff;
   }
 }
 </style>

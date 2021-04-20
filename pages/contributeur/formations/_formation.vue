@@ -142,28 +142,6 @@ export default {
           ref: 1,
         },
       ],
-      profils: [
-        {
-          name: 'Non validé',
-          ref: 0,
-        },
-        {
-          name: 'Niveau primaire',
-          ref: 1,
-        },
-        {
-          name: 'Niveau secondaire',
-          ref: 2,
-        },
-        {
-          name: 'Niveau universitaire',
-          ref: 3,
-        },
-        {
-          name: 'Niveau expert',
-          ref: 4,
-        },
-      ],
     }
   },
   computed: {
@@ -184,6 +162,30 @@ export default {
       // eslint-disable-next-line prettier/prettier
       return [ 'label', 'description', 'content', 'level', 'status', 'duration', 'leaves', 'domain_id'
       ].some(v => this.get(v) !== this.formation[v])
+    },
+    profils() {
+      return [
+        {
+          name: 'Non validé',
+          ref: 0,
+        },
+        {
+          name: 'Niveau primaire',
+          ref: 1,
+        },
+        {
+          name: 'Niveau secondaire',
+          ref: 2,
+        },
+        {
+          name: 'Niveau universitaire',
+          ref: 3,
+        },
+        {
+          name: 'Niveau expert',
+          ref: 4,
+        },
+      ].filter((_, index) => index < this.$auth.user.status)
     },
   },
   beforeRouteLeave(to, from, next) {
