@@ -367,5 +367,16 @@ export default {
       }
     }
   }
+  &.right-data {
+    position: relative;
+    &::after {
+      position: absolute;
+      top: -24px;
+      right: 10px;
+      color: #353535;
+      font-weight: 600;
+      content: attr(right-data);
+    }
+  }
 }
 </style>

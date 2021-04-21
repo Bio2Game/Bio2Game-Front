@@ -1,7 +1,7 @@
 <template>
   <div class="container formations">
     <div
-      class="block question right-data"
+      class="block formation right-data"
       :right-data="formation.id ? 'Formation N°' + formation.id : ''"
     >
       <div class="head">
@@ -298,7 +298,7 @@ export default {
 
 <style lang="scss">
 .formations {
-  .block.question {
+  .block.formation {
     .head {
       .input-container,
       .selector-container,
@@ -333,6 +333,17 @@ export default {
             margin-left: 24px;
           }
         }
+      }
+    }
+    &.right-data {
+      position: relative;
+      &::after {
+        position: absolute;
+        top: -24px;
+        right: 10px;
+        color: #353535;
+        font-weight: 600;
+        content: attr(right-data);
       }
     }
   }
