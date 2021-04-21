@@ -65,8 +65,8 @@ export const actions = {
     commit('SET_FORMATION', response.formation)
   },
 
-  async fetchPeronnalFormations({ state, commit }) {
-    if (state.formations_fetched) {
+  async fetchPersonnalFormations({ state, commit }) {
+    if (state.contributorFormationsFetched) {
       return
     }
     const response = await this.$axios.$get('/api/contributor/formations')
