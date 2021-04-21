@@ -281,7 +281,7 @@ export default {
         .replace(/[^a-zA-Z0-9]+/g, '-')
     },
     findContentQuizzes(content) {
-      const regex = /{{\s*([\d])+?\s*}}/gm
+      const regex = /[@$]?{{\s*([\d])+?\s*}}/gm
       const quizzes = []
       let temp
       do {
