@@ -227,7 +227,13 @@ export default {
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
       return [ 'label', 'time', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
-      ].some(v => this.get(v) !== this.questionObj[v])
+      ].some(
+        v =>
+          this.get(v) !==
+          (v.startsWith('response')
+            ? JSON.parse(this.questionObj.responses)
+            : this.questionObj)[v],
+      )
     },
   },
   mounted() {
@@ -257,7 +263,11 @@ export default {
       )
     },
     get(key) {
-      return this[key] !== null ? this[key] : this.questionObj[key]
+      return this[key] !== null
+        ? this[key]
+        : (key.startsWith('response')
+            ? JSON.parse(this.questionObj.responses)
+            : this.questionObj)[key]
     },
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)
