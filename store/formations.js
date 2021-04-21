@@ -21,11 +21,11 @@ export const mutations = {
   },
 
   SET_CONTRIBUTOR_FORMATIONS(state, formations) {
-    state.formations = formations
+    state.contributorFormations = formations
   },
 
   SET_CONTRIBUTOR_FORMATIONS_FETCHED(state) {
-    state.formations_fetched = true
+    state.contributorFormationsFetched = true
   },
 
   ADD_CONTRIBUTOR_FORMATION(state, formation) {
