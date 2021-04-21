@@ -99,7 +99,7 @@ export default {
           name: 'author.username',
           title: 'Contributeur',
           sortField: 'author.username',
-          visible: this.$auth.user.status > 1,
+          visible: this.$auth.user.status > 999,
         },
         {
           name: 'questions',

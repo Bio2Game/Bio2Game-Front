@@ -84,6 +84,12 @@ export default {
           sortField: 'status',
         },
         {
+          name: 'author.username',
+          title: 'Contributeur',
+          sortField: 'author.username',
+          visible: this.$auth.user.status > 999,
+        },
+        {
           name: 'quizzes',
           title: 'Quizzes',
           formatter: quizzes => (quizzes ? quizzes.length : 0),
