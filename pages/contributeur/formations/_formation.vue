@@ -109,7 +109,7 @@ export default {
         if (!/\d/.test(params.formation)) {
           throw new Error('Match failed')
         }
-        await store.dispatch('formations/fetchFormations')
+        await store.dispatch('formations/fetchPersonnalFormations')
         await store.dispatch('quizzes/fetchQuizzes')
       } catch (e) {
         error({
@@ -147,7 +147,7 @@ export default {
   computed: {
     formation() {
       return (
-        this.$store.state.formations.formations.find(
+        this.$store.state.formations.contributorFormations.find(
           f => f.id === Number(this.$route.params.formation),
         ) || {}
       )
