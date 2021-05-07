@@ -40,7 +40,7 @@
             <div class="section">
               <SelectorElement
                 :selected="get('level')"
-                :items="levels"
+                :items="profils"
                 :error="filtredErrors('level')"
                 placeholder="Niveau du public"
                 @input="level = $event"
@@ -166,7 +166,11 @@ export default {
       questions: null,
       editOrder: false,
       errors: [],
-      levels: [
+    }
+  },
+  computed: {
+    profils() {
+      return [
         {
           name: 'Non validé',
           ref: 0,
@@ -187,10 +191,8 @@ export default {
           name: 'Niveau expert',
           ref: 4,
         },
-      ],
-    }
-  },
-  computed: {
+      ].filter((_, index) => index < this.$auth.user.status)
+    },
     quiz() {
       return this.$store.getters['quizzes/getPersonnalQuiz'](
         this.$route.params.quiz,
