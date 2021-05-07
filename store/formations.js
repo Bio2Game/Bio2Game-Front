@@ -29,24 +29,24 @@ export const mutations = {
   },
 
   ADD_CONTRIBUTOR_FORMATION(state, formation) {
-    state.formations.push(formation)
+    state.contributorFormations.push(formation)
   },
 
   UPDATE_CONTRIBUTOR_FORMATION(state, formation) {
-    const formationIndex = state.formations.findIndex(
+    const formationIndex = state.contributorFormations.findIndex(
       q => q.id === formation.id,
     )
     Vue.set(
-      state.formations,
+      state.contributorFormations,
       formationIndex,
-      Object.assign({}, state.formations[formationIndex], formation),
+      Object.assign({}, state.contributorFormations[formationIndex], formation),
     )
   },
   DELETE_CONTRIBUTOR_FORMATION(state, formation) {
-    const formationIndex = state.formations.findIndex(
+    const formationIndex = state.contributorFormations.findIndex(
       q => q.id === formation.id,
     )
-    Vue.delete(state.formations, formationIndex)
+    Vue.delete(state.contributorFormations, formationIndex)
   },
 }
 
