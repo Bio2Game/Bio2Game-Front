@@ -29,7 +29,7 @@
           />
         </div>
         <div class="content-part">
-          <span class="domain">{{ 'Polution' }}</span>
+          <span class="domain">{{ formation.domain.label }}</span>
           <h6 class="title">{{ formation.label }}</h6>
           <div class="labels">
             <div class="duration label">
