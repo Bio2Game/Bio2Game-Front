@@ -126,11 +126,20 @@ export default {
   }
   .top {
     h1 {
-      margin: 32px 0 24px;
-      color: #292929;
-      font-size: 36px;
+      margin: 48px 0 24px;
+      color: #414141;
+      font-size: 40px;
       font-weight: 700;
       text-align: center;
+      text-transform: uppercase;
+      @media screen and (max-width: $md) {
+        margin: 32px 0 24px;
+        font-size: 32px;
+      }
+      @media screen and (max-width: $sm) {
+        margin: 24px 0;
+        font-size: 24px;
+      }
     }
     p {
       color: #292929;
