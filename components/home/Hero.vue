@@ -79,15 +79,6 @@ export default {
 
     &.isFromIndex {
       height: 100vh;
-      animation: fadeOutBiggerPage 0.3s ease-out forwards 0.6s;
-      @keyframes fadeOutBiggerPage {
-        0% {
-          height: 100vh;
-        }
-        100% {
-          height: calc(100vh - 5rem);
-        }
-      }
     }
     .doted {
       position: absolute;

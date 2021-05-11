@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="{ 'fixed-header': isFixed, stage }">
+  <div class="header" :class="{ isTransparent }">
     <div class="wrapper">
       <div class="container">
         <nuxt-link to="/" class="logo-link">
@@ -112,8 +112,7 @@ export default {
   },
   data() {
     return {
-      isFixed: false,
-      stage: false,
+      isTransparent: false,
       toggleUserMenu: false,
       transition: false,
     }
@@ -121,7 +120,6 @@ export default {
   watch: {
     $route(newRoute, oldRoute) {
       this.toggleUserMenu = false
-      this.stage = newRoute.name !== 'index' && oldRoute.name === 'index'
       this.checkHeader()
     },
   },
@@ -135,17 +133,17 @@ export default {
   methods: {
     async checkHeader() {
       if (this.$route.name !== 'index') {
-        this.isFixed = true
+        this.isTransparent = false
         return
       }
 
       const position = window.pageYOffset || document.documentElement.scrollTop
       const isScrollingDown = position > 0
 
-      if (this.isFixed !== isScrollingDown) {
+      if (this.isTransparent === isScrollingDown) {
         this.transition = true
         await this.$nextTick()
-        this.isFixed = isScrollingDown
+        this.isTransparent = !isScrollingDown
         await new Promise(resolve => setTimeout(() => resolve(), 300))
         this.transition = false
       }
@@ -167,15 +165,17 @@ export default {
 <style lang="scss">
 .header {
   width: 100%;
+  height: 5rem;
   .wrapper {
-    position: relative;
-    z-index: 20;
+    position: fixed !important;
+    z-index: 1000;
+    top: 0;
     display: flex;
     align-items: center;
     width: 100%;
     height: 5rem;
     background-color: white;
-    transition: 0.1s background-color linear;
+    transition: 0.3s background-color ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     a {
       display: flex;
@@ -423,85 +423,34 @@ export default {
       }
     }
   }
-  &.fixed-header {
-    height: 0;
-    animation: fadeOutBigger 0.3s ease-out forwards;
-    .wrapper {
-      position: fixed !important;
-      z-index: 1000;
-      top: 0;
-      height: 5rem;
-      transition: 0.1s background-color linear;
-      opacity: 0;
-      animation: fadeIn 0.3s ease-out forwards;
-      .right-menu {
-        @media screen and (min-width: $md) {
-          .button.border_white {
-            border: 3px solid $green;
-            color: $green;
-            background-color: transparent;
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-            &:hover {
-              background-color: $gray-light;
-            }
-          }
-        }
-      }
-    }
-    &.stage {
-      animation: fadeOutBigger 0.3s ease-out forwards 0.4s;
-      .wrapper {
-        animation: fadeIn 0.3s ease-out forwards 0.4s;
-        transition: 0.1s background-color linear 0.3s;
-      }
-    }
-    @keyframes fadeOutBigger {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 5rem;
-      }
-    }
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-100px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
+  @media screen and (min-width: $md) {
+    &:not(.isTransparent) .wrapper .right-menu .button.border_white {
+      border: 3px solid $green;
+      color: $green;
+      background-color: transparent;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+      &:hover {
+        background-color: $gray-light;
       }
     }
   }
 }
 .route.index {
   .header {
-    .wrapper {
-      background-color: transparent;
-      position: absolute;
-      .menu .right-menu .user {
-        .username {
-          color: white;
-          @media screen and (max-width: $lg) {
-            color: #4f4f4f;
-          }
-        }
-        &.transition .username {
-          transition: 0.2s color ease-out;
-        }
-      }
-    }
-    &.fixed-header {
-      height: 0;
-      animation: none;
+    height: 0;
+    &.isTransparent {
       .wrapper {
-        background-color: white;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        background-color: transparent;
+        box-shadow: none;
         .menu .right-menu .user {
           .username {
-            color: #4f4f4f;
+            color: white;
+            @media screen and (max-width: $lg) {
+              color: #4f4f4f;
+            }
+          }
+          &.transition .username {
+            transition: 0.2s color ease-out;
           }
         }
       }
