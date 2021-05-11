@@ -1,10 +1,12 @@
 <template>
   <div class="formation-page">
-    <div class="top">
-      <h1>{{ formation.label }}</h1>
-      <p>{{ formation.description }}</p>
+    <div class="container">
+      <div class="top">
+        <h1>{{ formation.label }}</h1>
+        <p>{{ formation.description }}</p>
+      </div>
+      <div class="content" v-html="content" />
     </div>
-    <div class="container" v-html="content"></div>
   </div>
 </template>
 
@@ -67,7 +69,18 @@ export default {
     flex: 1;
     white-space: break-spaces;
     flex-direction: column;
-    align-items: center;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    .content {
+      margin-top: 24px;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    padding: 0 !important;
+    .container {
+      border-radius: 0;
+    }
   }
 }
 </style>
