@@ -176,6 +176,7 @@ export default {
     height: 5rem;
     background-color: white;
     transition: 0.1s background-color linear;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     a {
       display: flex;
       align-items: center;
