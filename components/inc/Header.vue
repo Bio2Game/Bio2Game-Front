@@ -343,7 +343,7 @@ export default {
             .avatar,
             .username,
             .down {
-              display: none;
+              display: none !important;
             }
             .user-menu {
               position: relative;

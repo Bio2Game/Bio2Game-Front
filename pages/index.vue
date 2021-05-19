@@ -344,6 +344,7 @@ export default {
         transform: none;
         outline: 0;
         text-shadow: 0 2px 4px #00000040;
+        user-select: none;
         &.VueCarousel-navigation--disabled {
           color: #afafaf;
           opacity: 1;
