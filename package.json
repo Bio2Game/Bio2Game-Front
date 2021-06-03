@@ -33,7 +33,7 @@
     "lottie-web": "^5.7.6",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
-    "nuxt": "^2.14.6",
+    "nuxt": "^2.15.6",
     "nuxt-webfontloader": "^1.1.0",
     "simple-markdown": "^0.7.3",
     "simplemde": "^1.11.2",
@@ -62,12 +62,12 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
     "node-sass": "^5.0.0",
+    "postcss-sorting": "^5.0.1",
     "prettier": "^2.1.2",
     "sass-loader": "^10.1.0",
-    "stylelint": "^13.7.2",
+    "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
-    "postcss-sorting": "^5.0.1",
     "stylelint-order": "^4.1.0"
   }
 }
