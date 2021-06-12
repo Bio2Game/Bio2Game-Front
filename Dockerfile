@@ -2,8 +2,8 @@ FROM node:14
 WORKDIR /app
 COPY . .
 
-RUN yarn
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 EXPOSE 6001
 
