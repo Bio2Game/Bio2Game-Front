@@ -47,7 +47,8 @@ export default {
     try {
       const [, id] = params.quiz.match(/^(\d+)-\S+$/)
       if ($auth.loggedIn) {
-        await store.dispatch('quiz/fetchQuiz', id)
+        await store.dispatch('quiz/fetchQuiz', { id, type: 'quiz' })
+        await store.dispatch('nextQuestion')
       }
     } catch (e) {
       error({ statusCode: 404, message: e.message })
@@ -77,7 +78,8 @@ export default {
       this.askAuth = false
 
       const [, id] = this.$route.params.quiz.match(/^(\d+)-\S+$/)
-      return this.$store.dispatch('quiz/fetchQuiz', id)
+      await this.$store.dispatch('quiz/fetchQuiz', { id, type: 'quiz' })
+      await this.$store.dispatch('nextQuestion')
     },
   },
 }
