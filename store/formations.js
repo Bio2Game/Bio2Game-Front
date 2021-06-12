@@ -9,6 +9,13 @@ export const state = () => ({
   contributorFormationsFetched: false,
 })
 
+export const getters = {
+  quizzesFormation: state => {
+    if (!state.formation) return []
+    return state.formation.quizzes || []
+  },
+}
+
 export const mutations = {
   SET_FORMATIONS(state, formations) {
     state.formations = formations
