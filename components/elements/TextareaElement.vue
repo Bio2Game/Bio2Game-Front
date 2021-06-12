@@ -94,16 +94,17 @@ export default {
       return !!this.value.match(this.validate)
     },
     update(event) {
-      if (this.max && this.caracters >= this.max) {
-        event.target.value = event.target.value.slice(0, this.max)
+      let value = event.target.value
+      if (this.max && value.length >= this.max) {
+        value = value.slice(0, this.max)
       }
 
-      this.$emit('input', event.target.value || this.default)
+      this.$emit('input', value || this.default)
     },
     checkMax(event) {
       return !(
         this.max &&
-        this.value.length >= this.max &&
+        event.target.value.length >= this.max &&
         ![
           'Backspace',
           'Delete',
@@ -112,7 +113,7 @@ export default {
           'ArrowLeft',
           'ArrowRight',
         ].includes(event.key) &&
-        (!event.ctrlKey || (event.ctrlKey && event.code === 'KeyV'))
+        (event.ctrlKey || event.metaKey ? event.code === 'KeyV' : true)
       )
     },
   },

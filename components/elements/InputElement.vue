@@ -99,7 +99,7 @@ export default {
     checkMax(event) {
       return !(
         this.max &&
-        this.value.length >= this.max &&
+        event.target.value.length >= this.max &&
         ![
           'Backspace',
           'Delete',
@@ -108,7 +108,7 @@ export default {
           'ArrowLeft',
           'ArrowRight',
         ].includes(event.key) &&
-        (!event.ctrlKey || (event.ctrlKey && event.code === 'KeyV'))
+        (event.ctrlKey || event.metaKey ? event.code === 'KeyV' : true)
       )
     },
   },
