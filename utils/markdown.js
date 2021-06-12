@@ -37,35 +37,20 @@ const formationRules = quizzes => ({
     match: SimpleMarkdown.inlineRegex(/^(@)?(\$)?{{\s*(\d+)?\s*}}/),
     parse(capture) {
       return {
-        content: quizzes.find(q => q.id === Number(capture[3])) || 'deleted',
+        id: quizzes.some(q => q.id === Number(capture[3]))
+          ? capture[3]
+          : 'deleted',
         exp: !!capture[1],
         next: !!capture[2],
       }
     },
-    html(node) {
-      if (node.content === 'deleted') {
+    html({ id, exp, next }) {
+      if (id === 'deleted') {
         return '<p class="deleted-quiz">Quiz Supprimé</p>'
       }
-      return !node.next
-        ? `<iframe class="quiz-iframe" src="/iframe/quiz/${node.content.id}${
-            node.exp ? '?no-explication' : ''
-          }"></iframe><br/>`
-        : `<div class="quiz-next">
-        <div class="left-part">
-          <div class="icon">
-            <img src="https://cdn.bio2game.com/icons/${node.content.domain.icon.reference}" src="" />
-          </div>
-        </div>
-        <div class="right-part">
-          <div class="text">
-            <h6 class="title">${node.content.label}</h6>
-            <p>${node.content.description}</p>
-          </div>
-          <div class="buttons">
-            <a href="/quiz/${node.content.id}-${node.content.url}" class="jouer">Jouer</a>
-          </div>
-        </div>
-      </div>`
+      return !next
+        ? `<QuizInterface class="quiz-iframe" :id="${id}" :explications="${exp}" /><br/>`
+        : `<QuizNext :id="${id}" />`
     },
   },
 })
