@@ -1,21 +1,25 @@
 <template>
   <div class="formation-page">
-    <div class="container">
+    <div class="container container-formation">
       <div class="top">
         <h1>{{ formation.label }}</h1>
         <p>{{ formation.description }}</p>
       </div>
-      <div class="content" v-html="content" />
+      <StringToVue class="content" :value="content" />
     </div>
   </div>
 </template>
 
 <script>
 import { parseFormations } from '@/utils/markdown'
+import StringToVue from 'string-to-vue'
 
 export default {
   name: 'Formation',
   auth: 'auth',
+  components: {
+    StringToVue,
+  },
   async fetch({ store, params, error }) {
     try {
       const [, id] = params.formation.match(/^(\d+)-\S+$/)
@@ -65,7 +69,7 @@ export default {
       text-align: center;
     }
   }
-  .container {
+  .container-formation {
     flex: 1;
     white-space: break-spaces;
     flex-direction: column;
