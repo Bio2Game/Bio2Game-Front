@@ -1,39 +1,23 @@
 <template>
-  <div class="quiz-page">
-    <div class="container">
+  <div class="quiz-interface">
+    <div v-if="started" class="container">
       <section class="playground">
         <QuizQuestionState
           v-if="[1, 2].includes(status)"
+          :key="refKey"
           :explications="explications"
+          type="formation"
         />
-        <QuizResultState v-if="status === 3" :explications="explications" />
+        <QuizResultState
+          v-if="status === 3"
+          :key="refKey"
+          :explications="explications"
+          type="formation"
+        />
       </section>
     </div>
-    <section v-if="askAuth" class="simpleAuth">
-      <div class="block">
-        <div class="head">
-          <h5>Identification</h5>
-        </div>
-        <div class="content">
-          <p>
-            Afin de vous distainguer des autres joueurs dans la partie, veuillez
-            indiquer un pseudo ou vous
-            <nuxt-link class="b2glink" to="/login">
-              connecter avec votre compte
-            </nuxt-link>
-            .
-          </p>
-          <InputElement
-            :value="username"
-            type="text"
-            placeholder="Pseudo utilisateur"
-            @input="username = $event"
-          />
-          <div class="button green lg" @click="registerSimpleAuth()">
-            Lancer le quiz !
-          </div>
-        </div>
-      </div>
+    <section v-if="!started" class="get-started">
+      <PlayIcon class="play" @click.once="startQuiz()" />
     </section>
   </div>
 </template>
@@ -41,59 +25,65 @@
 <script>
 import { mapState } from 'vuex'
 
+import PlayIcon from '@/assets/icons/play.svg?inline'
+
 export default {
-  name: 'IframeQuiz',
-  layout: 'iframe',
-  validate({ params }) {
-    return /^\d+$/.test(params.quiz)
+  name: 'QuizInterface',
+  components: {
+    PlayIcon,
   },
-  async fetch({ params, $auth, store, error }) {
-    try {
-      if ($auth.loggedIn) {
-        await store.dispatch('quiz/fetchQuiz', params.quiz)
-      }
-    } catch (e) {
-      error({ statusCode: 404, message: e.message })
-    }
+  props: {
+    id: {
+      type: [Number, String],
+      required: true,
+    },
+    explications: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
-      username: '',
-      askAuth: false,
+      refKey: null,
+      started: false,
     }
   },
   computed: {
-    explications() {
-      return !{}.hasOwnProperty.call(this.$route.query, 'no-explication')
+    ...mapState('quiz', ['status', 'quiz']),
+  },
+  watch: {
+    quiz(value) {
+      this.started = value.id === this.id
+      if (value.id !== this.id) {
+        this.generateKey()
+      }
     },
-    ...mapState('quiz', ['status']),
   },
-  created() {
-    if (!this.$auth.loggedIn) {
-      this.askAuth = true
-    }
-  },
-  destroyed() {
-    this.$store.commit('quiz/RESET_STATE')
+  mounted() {
+    this.generateKey()
   },
   methods: {
-    async registerSimpleAuth() {
-      await this.$auth.loginWith('guest', {
-        data: { username: this.username },
+    generateKey() {
+      this.refKey = Math.random().toString().substring(2)
+    },
+    async startQuiz() {
+      await this.$store.dispatch('quiz/fetchQuiz', {
+        id: this.id,
+        type: 'formation',
       })
-
-      this.askAuth = false
-
-      return this.$store.dispatch('quiz/fetchQuiz', this.$route.params.quiz)
     },
   },
 }
 </script>
 
 <style lang="scss">
-.quiz-page {
+.quiz-interface {
   display: flex;
-  min-height: 0;
+  padding: 20px 024px;
+  border-radius: 16px;
+  background-color: #d9d9d973;
+  min-height: 200px;
+
   .playground {
     width: 100%;
     .interface {
@@ -380,29 +370,21 @@ export default {
       }
     }
   }
-  .simpleAuth {
-    max-width: 500px;
-    margin: auto;
-    .block {
-      margin-top: 0;
-      // stylelint-disable-next-line no-descending-specificity
-      .content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        // stylelint-disable-next-line no-descending-specificity
-        p {
-          line-height: 24px;
-          margin-bottom: 16px;
-        }
-        .input-container {
-          width: 100%;
-        }
-        // stylelint-disable-next-line no-descending-specificity
-        .button {
-          width: 100%;
-          max-width: 100%;
-        }
+  .get-started {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .play {
+      width: 90px;
+      height: 90px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.1);
+      }
+      &:focus {
+        transform: scale(0.9);
       }
     }
   }
