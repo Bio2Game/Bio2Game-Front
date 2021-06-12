@@ -160,7 +160,15 @@ export default {
     },
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'description', 'content', 'level', 'status', 'duration', 'leaves', 'domain_id'
+      return [
+        'label',
+        'description',
+        'content',
+        'level',
+        'status',
+        'duration',
+        'leaves',
+        'domain_id',
       ].some(v => this.get(v) !== this.formation[v])
     },
     profils() {
@@ -265,8 +273,7 @@ export default {
         console.log(error)
         this.$notify({
           type: 'error',
-          text:
-            "Une erreur s'est produite lors de la suppression de la question.",
+          text: "Une erreur s'est produite lors de la suppression de la question.",
           duration: 3000,
           width: 400,
         })
@@ -281,7 +288,7 @@ export default {
         .replace(/[^a-zA-Z0-9]+/g, '-')
     },
     findContentQuizzes(content) {
-      const regex = /[@$]?{{\s*([\d])+?\s*}}/gm
+      const regex = /[@$]?{{\s*(\d+)?\s*}}/gm
       const quizzes = []
       let temp
       do {
