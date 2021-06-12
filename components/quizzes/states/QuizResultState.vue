@@ -116,7 +116,11 @@
             <span class="label">Mauvaises Réponses</span>
           </div>
         </div>
-        <nuxt-link class="button green md submit-next" to="/quiz">
+        <nuxt-link
+          v-if="type !== 'formation'"
+          class="button green md submit-next"
+          to="/quiz"
+        >
           Continuer
         </nuxt-link>
       </div>
@@ -142,6 +146,10 @@ export default {
     explications: {
       type: Boolean,
       default: true,
+    },
+    type: {
+      type: String,
+      default: 'quiz',
     },
   },
   data() {
@@ -171,8 +179,7 @@ export default {
       if (result > 0.5) {
         return {
           color: 'wrong',
-          text:
-            'Bravo vous connaissez le sujet mais vous pouvez encore progresser',
+          text: 'Bravo vous connaissez le sujet mais vous pouvez encore progresser',
         }
       }
       return {

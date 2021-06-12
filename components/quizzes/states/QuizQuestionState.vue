@@ -104,6 +104,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    type: {
+      type: String,
+      default: 'quiz',
+    },
   },
   data() {
     return {
@@ -170,6 +174,7 @@ export default {
       this.$store.dispatch('quiz/respond', {
         index: this.response,
         time: this.currentQuestion.time - this.left,
+        type: this.type,
       })
     },
     async startTimer() {

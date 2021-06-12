@@ -1,4 +1,4 @@
-import shuffle from 'lodash/fp/shuffle'
+import shuffle from 'lodash/shuffle'
 
 const getDefaultState = () => ({
   quiz: null,
@@ -11,39 +11,45 @@ const getDefaultState = () => ({
 export const state = getDefaultState
 
 export const getters = {
-  getRealIndex: state => (index, questionIndex = null) => {
-    const question =
-      questionIndex !== null
-        ? state.quiz.questions[questionIndex]
-        : state.currentQuestion
-    const { responses, equivalents } = state.responses[question.id] || {}
-    return responses ? equivalents.indexOf(responses[index]) : index
-  },
+  getRealIndex:
+    state =>
+    (index, questionIndex = null) => {
+      const question =
+        questionIndex !== null
+          ? state.quiz.questions[questionIndex]
+          : state.currentQuestion
+      const { responses, equivalents } = state.responses[question.id] || {}
+      return responses ? equivalents.indexOf(responses[index]) : index
+    },
 
-  getFakeIndex: state => (index, questionIndex = null) => {
-    const question =
-      questionIndex !== null
-        ? state.quiz.questions[questionIndex]
-        : state.currentQuestion
-    const { responses, equivalents } = state.responses[question.id] || {}
-    return responses ? responses.indexOf(equivalents[index]) : index
-  },
+  getFakeIndex:
+    state =>
+    (index, questionIndex = null) => {
+      const question =
+        questionIndex !== null
+          ? state.quiz.questions[questionIndex]
+          : state.currentQuestion
+      const { responses, equivalents } = state.responses[question.id] || {}
+      return responses ? responses.indexOf(equivalents[index]) : index
+    },
 
-  getResponses: state => (questionId = null) => {
-    const question =
-      state.responses[
-        questionId === null ? state.currentQuestion.id : questionId
-      ]
-    return question
-      ? question.responses
-      : Object.values(
-          JSON.parse(
-            questionId === null
-              ? state.currentQuestion.responses
-              : state.quiz.questions.find(q => q.id === questionId).responses,
-          ),
-        )
-  },
+  getResponses:
+    state =>
+    (questionId = null) => {
+      const question =
+        state.responses[
+          questionId === null ? state.currentQuestion.id : questionId
+        ]
+      return question
+        ? question.responses
+        : Object.values(
+            JSON.parse(
+              questionId === null
+                ? state.currentQuestion.responses
+                : state.quiz.questions.find(q => q.id === questionId).responses,
+            ),
+          )
+    },
 }
 
 export const mutations = {
@@ -79,8 +85,8 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchQuiz({ commit, dispatch }, id) {
-    const response = await this.$axios.$get('/api/quiz/' + id)
+  async fetchQuiz({ commit, dispatch }, { id, type }) {
+    const response = await this.$axios.$get(`/api/quiz/${id}/${type}`)
     if (!response.quiz) {
       throw new Error("Ce quiz n'existe pas")
     }
@@ -91,18 +97,17 @@ export const actions = {
     dispatch('nextQuestion')
   },
 
-  async respond({ state, commit }, { index, time }) {
+  async respond({ state, commit }, { index, time, type }) {
     if (!state.quiz || state.status !== 1) {
       return
     }
 
     try {
-      const { responses, equivalents } = state.responses[
-        state.currentQuestion.id
-      ]
+      const { responses, equivalents } =
+        state.responses[state.currentQuestion.id]
 
       const { response } = await this.$axios.$post(
-        '/api/quiz/' + state.quiz.id,
+        `/api/quiz/${state.quiz.id}/${type}`,
         {
           question_id: state.currentQuestion.id,
           response_id: equivalents.indexOf(responses[index]),
