@@ -83,6 +83,7 @@ export default {
   position: relative;
   display: flex;
   overflow: hidden;
+  width: calc(50% - 32px);
   margin: 0;
   cursor: default;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -91,6 +92,7 @@ export default {
   background-color: $green;
   user-select: none;
   border-radius: 16px;
+  margin-right: 32px;
   .left-part {
     display: flex;
     justify-content: center;
@@ -125,12 +127,13 @@ export default {
   .right-part {
     display: flex;
     background-color: #ffffff;
+    flex: 1;
     .text {
       display: flex;
-      flex-direction: column;
       margin: 16px;
       color: #484848;
       font-size: 15px;
+      flex-direction: column;
 
       .title {
         overflow: hidden;
@@ -174,15 +177,18 @@ export default {
       }
     }
   }
-}
-
-.quiz-iframe {
-  min-width: 60vw;
-  width: 100%;
-  height: 30vw;
-  margin: 20px auto 0;
-  border-radius: 16px;
-  background-color: #ffffff73;
+  @media screen and (max-width: 1200px) {
+    .left-part .icon img {
+      width: 80px;
+      height: 80px;
+      margin: 30px;
+      &::after {
+        width: 110px;
+        height: 110px;
+        border-radius: 55px;
+      }
+    }
+  }
 }
 
 .deleted-quiz {

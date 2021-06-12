@@ -247,8 +247,7 @@ export default {
         })
         this.$notify({
           type: 'success',
-          text:
-            'Un email vous a été envoyé sur votre adresse email afin de réinitialiser votre mot de passe !',
+          text: 'Un email vous a été envoyé sur votre adresse email afin de réinitialiser votre mot de passe !',
           duration: 3000,
           width: 400,
         })

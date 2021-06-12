@@ -344,8 +344,7 @@ export default {
         if (questionCreation) {
           this.$notify({
             type: 'error',
-            text:
-              'Veuillez résoudre les erreurs au niveau du quiz avant de vouloir créer une question.',
+            text: 'Veuillez résoudre les erreurs au niveau du quiz avant de vouloir créer une question.',
             duration: 3000,
             width: 400,
           })
@@ -358,8 +357,7 @@ export default {
         if (!(this.quiz && !this.quiz.questions.length)) {
           return this.$notify({
             type: 'error',
-            text:
-              'Vous ne pouvez pas supprimer ce quiz car il contient des questions.',
+            text: 'Vous ne pouvez pas supprimer ce quiz car il contient des questions.',
             duration: 3000,
             width: 400,
           })

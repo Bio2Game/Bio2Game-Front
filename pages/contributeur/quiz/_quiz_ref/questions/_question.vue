@@ -226,7 +226,19 @@ export default {
     },
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'time', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
+      return [
+        'label',
+        'time',
+        'question',
+        'source',
+        'endDate',
+        'profil',
+        'response0',
+        'response1',
+        'response2',
+        'response3',
+        'explication',
+        'status',
       ].some(
         v =>
           this.get(v) !==
@@ -332,8 +344,7 @@ export default {
         console.log(error)
         this.$notify({
           type: 'error',
-          text:
-            "Une erreur s'est produite lors de la suppression de la question.",
+          text: "Une erreur s'est produite lors de la suppression de la question.",
           duration: 3000,
           width: 400,
         })
