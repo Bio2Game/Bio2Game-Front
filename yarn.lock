@@ -9920,10 +9920,12 @@ string-argv@0.3.1:
   resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.3.1.tgz#95e2fbec0427ae19184935f816d74aaa4c5c19da"
   integrity sha512-a1uQGz7IyVy9YwhqjZIZu1c8JO8dNIe20xBmSS6qu9kv++k3JGzCVmprbNN5Kn+BgzD5E7YYwg1CcjuJMRNsvg==
 
-string-to-vue@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/string-to-vue/-/string-to-vue-1.0.1.tgz#ce5cb02ccba6a596e6b2b99c9a281c5bea20f731"
-  integrity sha512-cEBbDJervkSv2/13cFtgrKOvGsgXt2ju8EanFzNWpIvLm5MBdrMMQJaD2EOB7kFOeVfpllZ3VBMpCryLen1giw==
+string-to-vue@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/string-to-vue/-/string-to-vue-1.1.2.tgz#616fdfd27b0865568be7ca597d666749b41ba863"
+  integrity sha512-4lObZiYKL2Dw6/bFKg5t4oOYUjI2pBaCwlII2TMK/ty8LL/TaGAPwpMve7Yx9Pu5ID6Pdejr2G1oQb/xgDvyPA==
+  dependencies:
+    vue-template-compiler "^2.6.12"
 
 string-width@^1.0.1:
   version "1.0.2"
@@ -10989,7 +10991,7 @@ vue-svg-loader@^0.16.0:
     loader-utils "^1.2.3"
     svg-to-vue "^0.7.0"
 
-vue-template-compiler@^2.6.12, vue-template-compiler@^2.6.13:
+vue-template-compiler@^2.6.12:
   version "2.6.13"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.13.tgz#a735b8974e013ce829e7f77e08e4ee5aecbd3005"
   integrity sha512-latKAqpUjCkovB8XppW5gnZbSdYQzkf8pavsMBZYZrQcG6lAnj0EH4Ty7jMwAwFw5Cf4mybKBHlp1UTjnLPOWw==
