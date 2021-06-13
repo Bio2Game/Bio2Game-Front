@@ -93,9 +93,8 @@
                 class="source"
                 :href="question.source"
                 target="black"
+                >En savoir plus</a
               >
-                En savoir plus
-              </a>
             </div>
           </div>
         </div>
