@@ -16,7 +16,7 @@ import StringToVue from 'string-to-vue'
 
 export default {
   name: 'Formation',
-  auth: 'auth',
+  middleware: 'auth',
   components: {
     StringToVue,
   },

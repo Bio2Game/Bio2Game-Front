@@ -64,6 +64,7 @@ import ClockIcon from '@/assets/icons/clock.svg?inline'
 
 export default {
   name: 'Formations',
+  middleware: 'auth',
   components: {
     LeafIcon,
     ClockIcon,
@@ -189,6 +190,7 @@ export default {
         }
       }
       .content-part {
+        flex: 1;
         .domain {
           color: #484848;
           font-size: 14px;
