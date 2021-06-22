@@ -243,6 +243,7 @@ export default {
               color: #4f4f4f;
               font-size: 19px;
               transition: 0.2s color 0.5s ease-out;
+              user-select: none;
             }
             svg.down {
               width: 16px;
