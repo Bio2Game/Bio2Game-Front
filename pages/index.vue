@@ -105,7 +105,7 @@ export default {
         {
           name: 'Moderne et Ergonomique',
           description:
-            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure experience !',
+            'Nous vous proposons une interface moderne et intéractive afin de proposer la meilleure expérience !',
           data: ergo,
         },
         {
