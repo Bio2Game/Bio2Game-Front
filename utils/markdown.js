@@ -40,7 +40,7 @@ const formationRules = quizzes => ({
         id: quizzes.some(q => q.id === Number(capture[3]))
           ? capture[3]
           : 'deleted',
-        exp: !!capture[1],
+        exp: !capture[1],
         next: !!capture[2],
       }
     },
