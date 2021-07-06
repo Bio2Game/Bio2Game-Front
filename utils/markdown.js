@@ -1,6 +1,7 @@
 import SimpleMarkdown from 'simple-markdown'
+import lodash from 'lodash'
 
-// designed for Bio2Game custom SimpleMDE configuration
+// custom SimpleMDE configuration designed for Bio2Game
 const rules = {
   heading: SimpleMarkdown.defaultRules.heading,
   hr: SimpleMarkdown.defaultRules.hr,
@@ -22,38 +23,36 @@ const rules = {
 
 const parserFor = rules => {
   const parser = SimpleMarkdown.parserFor(rules)
-  const renderer = SimpleMarkdown.htmlFor(
-    SimpleMarkdown.ruleOutput(rules, 'html'),
-  )
+  const htmlOutput = SimpleMarkdown.outputFor(rules, 'html')
   return function (input = '') {
-    return renderer(parser(input, { inline: true }))
+    return htmlOutput(parser(input + '\n\n', { inline: false }))
   }
 }
 
-const formationRules = quizzes => ({
-  ...rules,
-  quiz: {
-    order: SimpleMarkdown.defaultRules.text.order,
-    match: SimpleMarkdown.inlineRegex(/^(@)?(\$)?{{\s*(\d+)?\s*}}/),
-    parse(capture) {
-      return {
-        id: quizzes.some(q => q.id === Number(capture[3]))
-          ? capture[3]
-          : 'deleted',
-        exp: !capture[1],
-        next: !!capture[2],
-      }
+const formationRules = quizzes =>
+  lodash.extend({}, rules, {
+    quiz: {
+      order: SimpleMarkdown.defaultRules.text.order,
+      match: SimpleMarkdown.inlineRegex(/^(@)?(\$)?{{\s*(\d+)?\s*}}/),
+      parse(capture) {
+        return {
+          id: quizzes.some(q => q.id === Number(capture[3]))
+            ? capture[3]
+            : 'deleted',
+          exp: !capture[1],
+          next: !!capture[2],
+        }
+      },
+      html({ id, exp, next }) {
+        if (id === 'deleted') {
+          return '<p class="deleted-quiz">Quiz Supprimé</p>'
+        }
+        return !next
+          ? `<quiz-interface class="quiz-iframe" :id="${id}" :explications="${exp}"></quiz-interface><br/>`
+          : `<quiz-next :id="${id}"></quiz-next>`
+      },
     },
-    html({ id, exp, next }) {
-      if (id === 'deleted') {
-        return '<p class="deleted-quiz">Quiz Supprimé</p>'
-      }
-      return !next
-        ? `<QuizInterface class="quiz-iframe" :id="${id}" :explications="${exp}" /><br/>`
-        : `<QuizNext :id="${id}" />`
-    },
-  },
-})
+  })
 
 // used in:
 //  quizzes questions
