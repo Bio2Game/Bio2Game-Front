@@ -26,11 +26,11 @@ export default {
   head: {
     meta: [
       // OpenGraph data (Most widely used)
-      {
-        hid: 'robots',
-        name: 'robots',
-        content: 'noindex',
-      },
+      // {
+      //   hid: 'robots',
+      //   name: 'robots',
+      //   content: 'noindex',
+      // },
     ],
   },
 }
