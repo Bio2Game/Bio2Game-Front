@@ -226,7 +226,7 @@ export default {
     },
     async createFormation() {
       try {
-        await this.$store.dispatch(
+        const formation = await this.$store.dispatch(
           `formations/${this.isCreationPage ? 'create' : 'update'}Formation`,
           {
             id: this.formation.id,
@@ -252,7 +252,9 @@ export default {
           duration: 3000,
           width: 400,
         })
-        this.deleteData()
+        if (this.isCreationPage) {
+          return this.$router.push(`/contributeur/formations/${formation.id}`)
+        }
       } catch (error) {
         console.log(error)
         const messages = error.response.data.messages
