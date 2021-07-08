@@ -79,6 +79,53 @@ export default {
   }
 }
 
+.markdown-reset,
+.editor-preview.editor-preview-active {
+  blockquote {
+    padding: 10px 16px;
+    margin: 8px 0;
+    color: #828282;
+    line-height: normal;
+    border-left: 5px solid $green;
+  }
+  ul {
+    list-style: disc;
+    padding-left: 32px;
+    margin: 8px 0;
+  }
+  ol {
+    list-style: decimal;
+    padding-left: 32px;
+    margin: 8px 0;
+  }
+  a {
+    color: $green;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: revert;
+    font-size: revert;
+  }
+  .quiz-sample {
+    padding: 16px;
+    margin: 16px 0;
+    color: #2c2c2c;
+    background-color: #a7a7a7;
+    border-radius: 4px;
+  }
+  table {
+    margin: 8px 0;
+  }
+  img {
+    display: flex;
+    margin: 8px 0;
+  }
+}
+
 .quiz-next {
   position: relative;
   display: flex;

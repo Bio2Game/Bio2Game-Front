@@ -5,7 +5,7 @@
         <h1>{{ formation.label }}</h1>
         <p>{{ formation.description }}</p>
       </div>
-      <StringToVue class="content" :value="content" />
+      <StringToVue class="content markdown-reset" :value="content" />
     </div>
   </div>
 </template>
