@@ -83,6 +83,7 @@ export default {
   border-radius: 16px;
   background-color: #d9d9d973;
   min-height: 200px;
+  margin: 16px 0;
 
   .playground {
     width: 100%;
