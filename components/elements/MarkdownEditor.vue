@@ -148,7 +148,9 @@ export default {
           },
         },
       ],
-      previewRender: this.formations ? parseFormations(this.quizzes) : parse,
+      previewRender: this.formations
+        ? parseFormations(this.quizzes, true)
+        : parse,
       toolbar: [
         {
           name: 'undo',
@@ -364,7 +366,7 @@ export default {
         })
         .then(data => {
           this.simplemde.codemirror.replaceSelection(
-            "![Nom de l'image Image](" + data + ')',
+            "![Nom de l'image](" + data + ')',
           )
         })
         .catch(function (error) {
