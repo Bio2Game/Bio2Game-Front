@@ -184,6 +184,7 @@ export default {
 
       .title {
         overflow: hidden;
+        margin: 0 0 8px 0;
         font-size: 20px;
         font-weight: 600;
         text-overflow: ellipsis;

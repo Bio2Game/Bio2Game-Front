@@ -35,6 +35,7 @@ export default {
 .admin-pages {
   .container {
     flex-direction: column;
+    align-items: center;
     .block {
       .head {
         align-items: center;
