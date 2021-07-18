@@ -76,6 +76,7 @@ export default {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+    padding: 32px;
     .content {
       margin-top: 24px;
     }
