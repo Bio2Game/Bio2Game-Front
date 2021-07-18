@@ -52,6 +52,7 @@
           <div class="description">
             <p>{{ formation.description }}</p>
           </div>
+          <span class="formation-id">#{{ formation.id }}</span>
         </div>
       </nuxt-link>
     </div>
@@ -191,6 +192,7 @@ export default {
       }
       .content-part {
         flex: 1;
+        position: relative;
         .domain {
           color: #484848;
           font-size: 14px;
@@ -234,6 +236,19 @@ export default {
           line-height: 20px;
           margin-top: auto;
         }
+        .formation-id {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          color: #dedede;
+          font-size: 20px;
+          font-weight: 600;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+      }
+      &:hover .formation-id {
+        opacity: 1;
       }
     }
   }
