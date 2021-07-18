@@ -29,7 +29,7 @@
           @click="response = 0"
         >
           <div class="cover"></div>
-          {{ getResponses()[0] }}
+          <span>{{ getResponses()[0] }}</span>
         </div>
         <div
           class="item"
@@ -40,7 +40,7 @@
           @click="response = 1"
         >
           <div class="cover"></div>
-          {{ getResponses()[1] }}
+          <span>{{ getResponses()[1] }}</span>
         </div>
       </div>
       <div class="separator">
@@ -53,7 +53,7 @@
           @click="response = 2"
         >
           <div class="cover"></div>
-          {{ getResponses()[2] }}
+          <span>{{ getResponses()[2] }}</span>
         </div>
         <div
           class="item"
@@ -64,7 +64,7 @@
           @click="response = 3"
         >
           <div class="cover"></div>
-          {{ getResponses()[3] }}
+          <span>{{ getResponses()[3] }}</span>
         </div>
       </div>
       <div v-if="status === 2 && explications" class="explication">

@@ -43,7 +43,7 @@
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ getResponses(question.id)[0] }}
+                  <span>{{ getResponses(question.id)[0] }}</span>
                 </div>
                 <div
                   class="item"
@@ -55,7 +55,7 @@
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ getResponses(question.id)[1] }}
+                  <span>{{ getResponses(question.id)[1] }}</span>
                 </div>
               </div>
               <div class="separator">
@@ -69,7 +69,7 @@
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ getResponses(question.id)[2] }}
+                  <span>{{ getResponses(question.id)[2] }}</span>
                 </div>
                 <div
                   class="item"
@@ -81,7 +81,7 @@
                   ]"
                 >
                   <div class="cover"></div>
-                  {{ getResponses(question.id)[3] }}
+                  <span>{{ getResponses(question.id)[3] }}</span>
                 </div>
               </div>
             </div>
