@@ -52,6 +52,9 @@
           <div class="description">
             <p>{{ formation.description }}</p>
           </div>
+          <p class="creator">
+            <b>Créateur :</b> {{ formation.author.username }}
+          </p>
           <span class="formation-id">#{{ formation.id }}</span>
         </div>
       </nuxt-link>
@@ -246,8 +249,21 @@ export default {
           opacity: 0;
           transition: opacity 0.3s;
         }
+        .creator {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin: 16px 0 0;
+          color: $green;
+          opacity: 0;
+          transition: opacity 0.3s;
+          b {
+            font-weight: 600;
+          }
+        }
       }
-      &:hover .formation-id {
+      &:hover .formation-id,
+      &:hover .creator {
         opacity: 1;
       }
     }
