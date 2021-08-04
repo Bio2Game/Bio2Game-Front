@@ -240,7 +240,7 @@ export default {
       return this.$socket.client.emit('joinGame', {
         gameId: this.$route.params.game,
         auth: {
-          token: this.$auth.token.get('local'),
+          token: this.$auth.token ? this.$auth.token.get('local') : null,
           /* eslint-disable indent */
           user: this.$auth.user
             ? {
