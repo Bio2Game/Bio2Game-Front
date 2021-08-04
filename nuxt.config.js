@@ -179,6 +179,7 @@ export default {
   proxy: {
     '/api': process.env.API_URL,
     '/socket': process.env.API_URL,
+    '/images': process.env.CDN_URL,
   },
 
   /*
