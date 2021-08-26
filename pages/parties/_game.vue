@@ -169,7 +169,7 @@
         </div>
         <div class="content">
           <p>
-            Afin de vous distainguer des autres joueurs dans la partie, veuillez
+            Afin de vous distinguer des autres joueurs dans la partie, veuillez
             indiquer un pseudo ou vous
             <nuxt-link class="b2glink" to="/login">
               connecter avec votre compte
