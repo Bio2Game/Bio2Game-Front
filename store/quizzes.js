@@ -14,13 +14,15 @@ export const getters = {
       typeof query === 'string' ? parseInt(query.split('-')[0]) : query
     return state.contributorQuizzes.find(quiz => quiz.id === quizId) || {}
   },
-  getPersonnalQuestion: ({ contributorQuizzes }) => (quizQ, questionQ) => {
-    const quizId = parseInt(quizQ.split('-')[0])
-    const questionId = parseInt(questionQ)
-    const quiz = contributorQuizzes.find(quiz => quiz.id === quizId) || {}
-    if (!quiz.questions) return {}
-    return quiz.questions.find(question => question.id === questionId) || {}
-  },
+  getPersonnalQuestion:
+    ({ contributorQuizzes }) =>
+    (quizQ, questionQ) => {
+      const quizId = parseInt(quizQ.split('-')[0])
+      const questionId = parseInt(questionQ)
+      const quiz = contributorQuizzes.find(quiz => quiz.id === quizId) || {}
+      if (!quiz.questions) return {}
+      return quiz.questions.find(question => question.id === questionId) || {}
+    },
   questions: ({ contributorQuizzes }) => {
     return contributorQuizzes
       .map(quiz =>
