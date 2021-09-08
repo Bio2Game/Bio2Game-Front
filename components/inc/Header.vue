@@ -4,6 +4,7 @@
       <div class="container">
         <nuxt-link to="/" class="logo-link">
           <img
+            id="logo"
             class="logo"
             src="@/assets/images/logo.png"
             alt="Logo Bio2Game"

@@ -1,5 +1,5 @@
 <template>
-  <div class="wating">
+  <div class="watting">
     <div class="loader">
       <div class="loader__bar"></div>
       <div class="loader__bar"></div>
@@ -22,29 +22,42 @@
         <a :href="facebooklink" class="facebook" target="blank"
           ><FacebookIcon
         /></a>
-        <a href="" class="google"><GoogleIcon /></a>
+        <a class="qr-code" @click="toggleQRCode()"><QRCodeIcon /></a>
         <a :href="twitterlink" class="twitter" target="blank"
           ><TwitterIcon
         /></a>
         <a :href="mailtolink" class="email" target="blank"><MailIcon /></a>
       </div>
+      <transition name="fade" @before-enter="generateQRCode()">
+        <div v-show="qrCode" class="qrcode-container">
+          <canvas ref="qrcode" width="200px" height="200px"></canvas>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
 import FacebookIcon from '@/assets/icons/socials/facebook.svg?inline'
-import GoogleIcon from '@/assets/icons/socials/google.svg?inline'
 import TwitterIcon from '@/assets/icons/socials/twitter.svg?inline'
 import MailIcon from '@/assets/icons/socials/mail.svg?inline'
+import QRCodeIcon from '@/assets/icons/socials/qr-code.svg?inline'
+
+import QRCode from '@/utils/qrcode'
 
 export default {
   name: 'PartyWaitingState',
   components: {
     FacebookIcon,
-    GoogleIcon,
     TwitterIcon,
+    QRCodeIcon,
     MailIcon,
+  },
+  data() {
+    return {
+      generated: false,
+      qrCode: null,
+    }
   },
   computed: {
     gamelink() {
@@ -54,10 +67,10 @@ export default {
       return `https://www.facebook.com/sharer/sharer.php?u=https://www.bio2game.com${this.$route.path}`
     },
     twitterlink() {
-      return `https://twitter.com/intent/tweet?text=Rejoignez%20dès%20maintenant%20mon%20quiz%20sur%20Bio2Game:%0Ahttps%3A%2F%2Fbio2game.com${this.$route.path}&via:bio2game`
+      return `https://twitter.com/intent/tweet?text=Rejoignez%20dès%20maintenant%20ma%20partie%20sur%20Bio2Game:%0Ahttps%3A%2F%2Fbio2game.com${this.$route.path}&via:bio2game`
     },
     mailtolink() {
-      return `mailto:?subject=Rejoint%20mon%20quiz%20sur%20Bio2Game&body=Rejoint%20dès%20maintenant%20mon%20quiz%20sur%20Bio2Game%20:%0Ahttps%3A%2F%2Fbio2game.com${this.$route.path}`
+      return `mailto:?subject=Rejoint%20mon%20quiz%20sur%20Bio2Game&body=Rejoint%20dès%20maintenant%20ma%20partie%20sur%20Bio2Game%20:%0Ahttps%3A%2F%2Fbio2game.com${this.$route.path}`
     },
   },
   methods: {
@@ -67,18 +80,37 @@ export default {
       event.target.setAttribute('data-tooltip', 'Copié !')
       event.target.setAttribute('data-tooltip', 'Cliquer pour copier')
     },
+    toggleQRCode() {
+      this.qrCode = !this.qrCode
+    },
+    generateQRCode() {
+      if (this.generated) return
+      const canvas = this.$refs.qrcode
+      if (!canvas) return
+
+      new QRCode(canvas, this.gamelink).draw()
+
+      this.generated = true
+    },
   },
 }
 </script>
 
 <style lang="scss">
-.wating {
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.watting {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  min-height: 50vh;
+  min-height: 70vh;
   .loader {
     position: relative;
     width: 75px;
@@ -177,8 +209,9 @@ export default {
         &.facebook {
           background-color: #4267b2;
         }
-        &.google {
-          background-color: #dd4b39;
+        &.qr-code {
+          background-color: #282828;
+          cursor: pointer;
         }
         &.twitter {
           background-color: #1da1f2;
@@ -191,6 +224,12 @@ export default {
           font-size: 40px;
         }
       }
+    }
+    .qrcode-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0 0 0;
     }
   }
 }
