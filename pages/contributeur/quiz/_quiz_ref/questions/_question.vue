@@ -243,7 +243,9 @@ export default {
         v =>
           this.get(v) !==
           (v.startsWith('response')
-            ? JSON.parse(this.questionObj.responses)
+            ? this.questionObj.responses
+              ? JSON.parse(this.questionObj.responses)
+              : {}
             : this.questionObj)[v],
       )
     },
@@ -253,7 +255,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (
-      !this.isDataEdited &&
+      (!this.isDataEdited || this.created) &&
       (!to.params.quiz_ref ||
         this.get('quiz_id') === to.params.quiz_ref.split('-')[0])
     ) {
@@ -266,6 +268,20 @@ export default {
     )
   },
   methods: {
+    deleteData() {
+      this.label = null
+      this.time = null
+      this.question = null
+      this.source = null
+      this.endDate = null
+      this.profil = null
+      this.response0 = null
+      this.response1 = null
+      this.response2 = null
+      this.response3 = null
+      this.explication = null
+      this.status = null
+    },
     getResponse(key) {
       return (
         this[key] ||
@@ -278,7 +294,9 @@ export default {
       return this[key] !== null
         ? this[key]
         : (key.startsWith('response')
-            ? JSON.parse(this.questionObj.responses)
+            ? this.questionObj.responses
+              ? JSON.parse(this.questionObj.responses)
+              : {}
             : this.questionObj)[key]
     },
     filtredErrors(field) {
@@ -292,7 +310,7 @@ export default {
             id: this.questionObj.id,
             label: this.get('label'),
             time: this.get('time'),
-            quiz_id: this.get('quiz_id'),
+            quizId: this.get('quiz_id'),
             question: this.get('question'),
             source: this.get('source'),
             endDate: this.get('endDate'),
@@ -308,6 +326,10 @@ export default {
             status: !!this.get('status') + 0,
           },
         )
+
+        if (this.isCreationPage) {
+          this.deleteData()
+        }
 
         this.$notify({
           type: 'success',

@@ -22,13 +22,13 @@
           @input="time = $event"
         />
         <SelectorElement
-          :selected="quiz_id"
+          :selected="quizId"
           :items="quizzes"
-          :error="filtredErrors('quiz_id')"
+          :error="filtredErrors('quizId')"
           refKey="id"
           displayKey="label"
           placeholder="Quiz de la question"
-          @input="quiz_id = $event"
+          @input="quizId = $event"
         />
         <div class="button md equal border_white" @click="status = !status">
           {{ status ? 'Publique' : 'Privé' }}
@@ -161,7 +161,7 @@ export default {
     return {
       label: '',
       time: '',
-      quiz_id: '',
+      quizId: '',
       question: '',
       source: '',
       endDate: '',
@@ -199,7 +199,7 @@ export default {
     },
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'time', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
+      return [ 'label', 'time', 'quizId', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
       ].some(v => this[v])
     },
   },
@@ -214,6 +214,21 @@ export default {
     )
   },
   methods: {
+    deleteData() {
+      this.label = ''
+      this.time = ''
+      this.quizId = ''
+      this.question = ''
+      this.source = ''
+      this.endDate = ''
+      this.profil = ''
+      this.response0 = ''
+      this.response1 = ''
+      this.response2 = ''
+      this.response3 = ''
+      this.explication = ''
+      this.status = ''
+    },
     filtredErrors(field) {
       return this.errors.find(error => error.field === field)
     },
@@ -222,7 +237,7 @@ export default {
         const quiz = await this.$store.dispatch(`quizzes/createQuestion`, {
           label: this.label,
           time: this.time,
-          quiz_id: this.quiz_id,
+          quizId: this.quizId,
           question: this.question,
           source: this.source,
           endDate: this.endDate,
