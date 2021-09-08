@@ -75,8 +75,8 @@ export const mutations = {
       }),
     )
   },
-  DELETE_CONTRIBUTOR_QUIZZ(state, quizId) {
-    const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quizId)
+  DELETE_CONTRIBUTOR_QUIZZ(state, quiz) {
+    const quizIndex = state.contributorQuizzes.findIndex(q => q.id === quiz.id)
     Vue.delete(state.contributorQuizzes, quizIndex)
   },
 
@@ -158,15 +158,17 @@ export const actions = {
 
   async updateQuestionsOrder({ commit }, payload) {
     const response = await this.$axios.$patch(
-      `/api/contributor/quizzes/${payload.quiz_id}/order`,
+      `/api/contributor/quizzes/${payload.quizId}/order`,
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_QUESTIONS', response)
   },
 
   async deleteQuiz({ commit }, quizId) {
-    await this.$axios.$delete(`/api/contributor/quizzes/${quizId}`)
-    commit('DELETE_CONTRIBUTOR_QUIZZ', quizId)
+    const response = await this.$axios.$delete(
+      `/api/contributor/quizzes/${quizId}`,
+    )
+    commit('DELETE_CONTRIBUTOR_QUIZZ', response.quiz)
   },
 
   async createQuestion({ commit, getters }, payload) {
@@ -188,9 +190,9 @@ export const actions = {
   },
 
   async deleteQuestion({ commit }, payload) {
-    await this.$axios.$delete(
-      `/api/contributor/questions/${payload.question_id}`,
+    const response = await this.$axios.$delete(
+      `/api/contributor/questions/${payload.questionId}`,
     )
-    commit('DELETE_CONTRIBUTOR_QUESTION', payload)
+    commit('DELETE_CONTRIBUTOR_QUESTION', response.question)
   },
 }
