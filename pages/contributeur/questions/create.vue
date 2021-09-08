@@ -22,13 +22,13 @@
           @input="time = $event"
         />
         <SelectorElement
-          :selected="quizId"
+          :selected="quiz_id"
           :items="quizzes"
-          :error="filtredErrors('quizId')"
+          :error="filtredErrors('quiz_id')"
           refKey="id"
           displayKey="label"
           placeholder="Quiz de la question"
-          @input="quizId = $event"
+          @input="quiz_id = $event"
         />
         <div class="button md equal border_white" @click="status = !status">
           {{ status ? 'Publique' : 'Privé' }}
@@ -161,7 +161,7 @@ export default {
     return {
       label: '',
       time: '',
-      quizId: '',
+      quiz_id: '',
       question: '',
       source: '',
       endDate: '',
@@ -199,7 +199,7 @@ export default {
     },
     isDataEdited() {
       // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'time', 'quizId', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
+      return [ 'label', 'time', 'quiz_id', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
       ].some(v => this[v])
     },
   },
@@ -217,7 +217,7 @@ export default {
     deleteData() {
       this.label = ''
       this.time = ''
-      this.quizId = ''
+      this.quiz_id = ''
       this.question = ''
       this.source = ''
       this.endDate = ''
@@ -237,7 +237,7 @@ export default {
         const quiz = await this.$store.dispatch(`quizzes/createQuestion`, {
           label: this.label,
           time: this.time,
-          quizId: this.quizId,
+          quizId: this.quiz_id,
           question: this.question,
           source: this.source,
           endDate: this.endDate,

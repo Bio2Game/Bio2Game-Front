@@ -295,7 +295,7 @@ export default {
       if (!this.questions) return
 
       await this.$store.dispatch(`quizzes/updateQuestionsOrder`, {
-        quiz_id: this.quiz.id,
+        quizId: this.quiz.id,
         questions: this.questions,
       })
       this.questions = null
@@ -353,6 +353,7 @@ export default {
     },
     async deleteQuiz() {
       if (this.isCreationPage) return
+
       try {
         if (!(this.quiz && !this.quiz.questions.length)) {
           return this.$notify({

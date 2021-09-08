@@ -353,10 +353,11 @@ export default {
     },
     async deleteQuestion() {
       if (this.isCreationPage) return
+
       try {
         await this.$store.dispatch(`quizzes/deleteQuestion`, {
-          quiz_id: this.questionObj.quiz_id,
-          question_id: this.questionObj.id,
+          quizId: this.questionObj.quiz_id,
+          questionId: this.questionObj.id,
         })
 
         return this.$router.push(
