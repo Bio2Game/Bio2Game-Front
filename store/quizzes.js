@@ -93,8 +93,10 @@ export const mutations = {
       const oldQuiz = state.contributorQuizzes.find(quiz =>
         quiz.questions.some(q => q.id === question.id),
       )
-      const oldQuestion = oldQuiz.questions.findIndex(q => q.id === question.id)
-      oldQuiz.questions.splice(oldQuestion, 1)
+      const oldQuestionIndex = oldQuiz.questions.findIndex(
+        q => q.id === question.id,
+      )
+      oldQuiz.questions.splice(oldQuestionIndex, 1)
       quiz.questions.push(question)
       return
     }
@@ -105,7 +107,7 @@ export const mutations = {
     const quiz = state.contributorQuizzes.find(q => q.id === question.quiz_id)
     if (!quiz) return
     const questionIndex = quiz.questions.findIndex(q => q.id === question.id)
-    quiz.questions.splice(quiz.questions, questionIndex)
+    quiz.questions.splice(questionIndex, 1)
   },
 }
 
