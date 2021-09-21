@@ -41,7 +41,6 @@
             <MarkdownEditor
               :value="question"
               placeholder="Intitulé de la question"
-              :max="250"
               :error="filtredErrors('question')"
               @input="question = $event"
             />
@@ -113,7 +112,6 @@
             <MarkdownEditor
               :value="explication"
               placeholder="Explication de la réponse"
-              :max="250"
               :error="filtredErrors('explication')"
               @input="explication = $event"
             />

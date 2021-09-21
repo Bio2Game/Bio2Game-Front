@@ -48,7 +48,6 @@
             <MarkdownEditor
               :value="get('question')"
               placeholder="Intitulé de la question"
-              :max="250"
               :error="filtredErrors('question')"
               @input="value => (question = value)"
             />
@@ -120,7 +119,6 @@
             <MarkdownEditor
               :value="get('explication')"
               placeholder="Explication de la réponse"
-              :max="250"
               :error="filtredErrors('explication')"
               @input="value => (explication = value)"
             />
