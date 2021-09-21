@@ -18,11 +18,14 @@
             <Nature />
             <h5>CONTACT</h5>
           </div>
-          <nuxt-link to="/charte-bio2game">La Charte Bio2Game</nuxt-link>
-          <nuxt-link to="/donnees-personnelles">
+          <nuxt-link to="/annexes/a-propos">À Propos</nuxt-link>
+          <nuxt-link to="/annexes/charte-bio2game">
+            La Charte Bio2Game
+          </nuxt-link>
+          <nuxt-link to="/annexes/donnees-personnelles">
             Politique de protection des données personnelles
           </nuxt-link>
-          <nuxt-link to="/cookies">Utilisation des cookies</nuxt-link>
+          <nuxt-link to="/annexes/cookies">Utilisation des cookies</nuxt-link>
         </div>
         <div class="item social">
           <div class="title">
@@ -35,7 +38,8 @@
     </div>
     <div class="copyright">
       <p class="text">
-        Copyright Bio2Game 2018 © - All rights reserved - Développé par
+        Copyright Bio2Game 2018 - {{ new Date().getFullYear() }} © - All rights
+        reserved - Développé par
         <a class="author-link" href="https://www.draftman.fr">DraftMan</a>
       </p>
       <div class="scroll-top" @click="scrollToTop()"></div>
