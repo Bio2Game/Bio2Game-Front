@@ -100,6 +100,9 @@ export default {
 
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
+
+    // Doc: https://github.com/nuxt-community/style-resources-module
+    '@nuxtjs/style-resources',
   ],
 
   /*
@@ -114,9 +117,6 @@ export default {
 
     // Doc: https://dev.auth.nuxtjs.org/
     '@nuxtjs/auth',
-
-    // Doc: https://github.com/nuxt-community/style-resources-module
-    '@nuxtjs/style-resources',
 
     // Doc: https://github.com/nuxt-community/proxy-module
     '@nuxtjs/proxy',
