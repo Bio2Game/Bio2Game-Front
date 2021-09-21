@@ -1,12 +1,14 @@
 import Vue from 'vue'
 
-export const state = () => ({
+const getDefaultState = () => ({
   quizzes: [],
   quizzesFetched: false,
   quizzesQuestionsFetched: false,
   contributorQuizzes: [],
   contributorQuizzesFetched: false,
 })
+
+export const state = getDefaultState
 
 export const getters = {
   getPersonnalQuiz: state => query => {
@@ -35,6 +37,10 @@ export const getters = {
 }
 
 export const mutations = {
+  RESET_STATE(state) {
+    Object.assign(state, getDefaultState)
+  },
+
   SET_QUIZZES(state, quizzes) {
     state.quizzes = quizzes
   },
@@ -155,6 +161,7 @@ export const actions = {
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_QUIZZ', response.quiz)
+    commit('SET_QUIZZES', [])
     return response.quiz
   },
 
@@ -164,6 +171,7 @@ export const actions = {
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_QUESTIONS', response)
+    commit('SET_QUIZZES', [])
   },
 
   async deleteQuiz({ commit }, quizId) {
@@ -171,6 +179,7 @@ export const actions = {
       `/api/contributor/quizzes/${quizId}`,
     )
     commit('DELETE_CONTRIBUTOR_QUIZZ', response.quiz)
+    commit('SET_QUIZZES', [])
   },
 
   async createQuestion({ commit, getters }, payload) {
@@ -179,6 +188,7 @@ export const actions = {
       payload,
     )
     commit('ADD_CONTRIBUTOR_QUESTION', response.question)
+    commit('SET_QUIZZES', [])
     return getters.getPersonnalQuiz(response.question.quiz_id)
   },
 
@@ -188,6 +198,7 @@ export const actions = {
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_QUESTION', response.question)
+    commit('SET_QUIZZES', [])
     return getters.getPersonnalQuiz(response.question.quiz_id)
   },
 
@@ -196,5 +207,6 @@ export const actions = {
       `/api/contributor/questions/${payload.questionId}`,
     )
     commit('DELETE_CONTRIBUTOR_QUESTION', response.question)
+    commit('SET_QUIZZES', [])
   },
 }

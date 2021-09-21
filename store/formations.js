@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export const state = () => ({
+const getDefaultState = () => ({
   formations: [],
   formationsFetched: false,
   formation: null,
@@ -8,6 +8,8 @@ export const state = () => ({
   contributorFormations: [],
   contributorFormationsFetched: false,
 })
+
+export const state = getDefaultState
 
 export const getters = {
   quizzesFormation: state => {
@@ -17,6 +19,10 @@ export const getters = {
 }
 
 export const mutations = {
+  RESET_STATE(state) {
+    Object.assign(state, getDefaultState)
+  },
+
   SET_FORMATIONS(state, formations) {
     state.formations = formations
   },
@@ -87,6 +93,7 @@ export const actions = {
       payload,
     )
     commit('ADD_CONTRIBUTOR_FORMATION', response.formation)
+    commit('SET_FORMATIONS', [])
     return response.formation
   },
 
@@ -96,6 +103,7 @@ export const actions = {
       payload,
     )
     commit('UPDATE_CONTRIBUTOR_FORMATION', response.formation)
+    commit('SET_FORMATIONS', [])
     return response.formation
   },
 
@@ -104,6 +112,7 @@ export const actions = {
       `/api/contributor/formations/${id}`,
     )
     commit('DELETE_CONTRIBUTOR_FORMATION', response.formation)
+    commit('SET_FORMATIONS', [])
     return response.formation
   },
 }
