@@ -29,7 +29,7 @@
     "@nuxtjs/robots": "^2.4.2",
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.18.0",
     "lottie-web": "^5.7.6",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
