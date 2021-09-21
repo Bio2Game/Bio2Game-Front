@@ -368,7 +368,7 @@ export default {
           justify-content: flex-end;
           margin: -6px 0 16px;
           span {
-            color: #19683b;
+            color: $green;
             font-size: 14px;
             font-weight: 500;
             text-decoration: none;
