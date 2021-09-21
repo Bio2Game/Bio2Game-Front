@@ -151,6 +151,9 @@ export default {
     },
     async logout() {
       await this.$auth.logout()
+      this.$store.commit('admin/RESET_STATE')
+      this.$store.commit('formations/RESET_STATE')
+      this.$store.commit('quizzes/RESET_STATE')
       this.$notify({
         group: 'auth',
         type: 'success',
