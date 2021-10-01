@@ -48,7 +48,7 @@
     "vuetable-2": "git://github.com/Bio2Game/vuetable-2.git#8e31172288787144a0fe092383217da144821dda"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
+    "@commitlint/cli": "^13.2.0",
     "@commitlint/config-conventional": "^13.2.0",
     "@nuxtjs/eslint-config": "^4.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
