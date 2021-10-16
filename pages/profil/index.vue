@@ -185,6 +185,7 @@ export default {
     this.basics = {
       username: this.$auth.user.username,
       name: this.$auth.user.name || '',
+      description: this.$auth.user.description || '',
       email: this.$auth.user.email,
       password: '',
       password_confirmation: '',
