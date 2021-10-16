@@ -15,7 +15,7 @@
           <vuetable
             :fields="tableFields"
             :data="formations"
-            defaultSortBy="updated_at"
+            :defaultSortBy="{ field: 'updated_at', direction: 'desc' }"
             @row-clicked="
               $router.push(`/contributeur/formations/${$event.data.id}`)
             "

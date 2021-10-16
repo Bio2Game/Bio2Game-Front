@@ -18,7 +18,7 @@
           class="users"
           :fields="tableFields"
           :data="filtredUsers"
-          defaultSortBy="username"
+          :defaultSortBy="{ field: 'username', direction: 'asc' }"
         >
           <template slot="status-slot" slot-scope="props">
             <span

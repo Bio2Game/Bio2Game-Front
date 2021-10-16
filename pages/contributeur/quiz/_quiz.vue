@@ -76,7 +76,7 @@
             class="questions"
             :data="quiz.questions"
             :draggable="editOrder"
-            defaultSortBy="order"
+            :defaultSortBy="{ field: 'updated_at', direction: 'asc' }"
             @row-clicked="
               !editOrder &&
                 $router.push(
