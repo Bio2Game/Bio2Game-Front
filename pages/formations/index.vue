@@ -97,7 +97,7 @@ export default {
       const search = this.search.toLowerCase()
       return this.formations.filter(
         formation =>
-          this.selectedLevels.includes(formation.level) &&
+          this.selectedLevels.includes(Number(formation.level)) &&
           (!search ||
             formation.label.toLowerCase().includes(search) ||
             formation.description.toLowerCase().includes(search) ||

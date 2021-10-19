@@ -122,7 +122,7 @@ export default {
       const places = this.places.toLowerCase()
       return this.quizzes.filter(
         quiz =>
-          this.selectedLevels.includes(quiz.level) &&
+          this.selectedLevels.includes(Number(quiz.level)) &&
           (!search ||
             quiz.label.toLowerCase().includes(search) ||
             quiz.description.toLowerCase().includes(search) ||
