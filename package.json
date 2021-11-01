@@ -38,7 +38,7 @@
     "simple-markdown": "^0.7.3",
     "simplemde": "^1.11.2",
     "socket.io": "^4.2.0",
-    "socket.io-client": "^4.2.0",
+    "socket.io-client": "^4.3.2",
     "string-to-vue": "^1.1.2",
     "vue-carousel": "^0.18.0",
     "vue-chartjs": "^3.5.1",
