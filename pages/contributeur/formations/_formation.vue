@@ -315,37 +315,46 @@ export default {
         margin-bottom: 8px;
         flex: 2;
         margin-right: 16px;
+
         &:first-child {
           flex: 3;
         }
       }
+
       .button {
         min-width: 120px;
       }
     }
+
     .content {
       display: flex;
       padding-top: 16px;
       flex-direction: column;
       min-height: 0;
+
       .CodeMirror,
       .CodeMirror-scroll {
         min-height: 500px;
       }
+
       .parts {
         display: flex;
+
         .part {
           flex: 1;
           display: flex;
           flex-direction: column;
+
           &:last-child {
             margin-left: 24px;
           }
         }
       }
     }
+
     &.right-data {
       position: relative;
+
       &::after {
         position: absolute;
         top: -24px;

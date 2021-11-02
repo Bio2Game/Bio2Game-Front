@@ -294,19 +294,24 @@ export default {
 .party-page {
   display: flex;
   min-height: 0;
+
   .playground {
     width: 100%;
+
     .question-interface {
       display: flex;
       flex-direction: column;
       width: 100%;
       max-width: 700px;
       margin: 0 auto;
+
       .infos {
         margin-bottom: 25px;
+
         .title {
           display: flex;
           align-items: flex-end;
+
           h1 {
             margin: 10px 0 24px;
             color: #414141;
@@ -315,25 +320,30 @@ export default {
             text-transform: uppercase;
             flex: 1;
           }
+
           .question-position {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 24px;
+
             .total {
               color: $green;
             }
           }
         }
+
         p {
           font-size: 16px;
           font-weight: 600;
           text-align: center;
         }
+
         .progress-bar {
           overflow: hidden;
           height: 20px;
           background-color: #eeeeee;
           border-radius: 10px;
+
           .bar {
             width: 0%;
             height: 100%;
@@ -343,6 +353,7 @@ export default {
           }
         }
       }
+
       .question {
         padding: 16px;
         color: #414141;
@@ -350,29 +361,35 @@ export default {
         background-color: #f8f7f7;
         margin-bottom: 16px;
         user-select: none;
+
         .question-content {
           width: calc(100% - 100px);
+
           p {
             margin: 0;
             font-size: 18px;
             font-weight: 600;
             line-height: 25px;
           }
+
           img {
             max-width: 100%;
           }
         }
       }
+
       .responses {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         flex-direction: column;
+
         .separator {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
         }
+
         .item,
         .response {
           position: relative;
@@ -391,6 +408,7 @@ export default {
           user-select: none;
           border-radius: 3px;
           transition: 0.3s background-color ease-out, 0.3s border-color ease-out;
+
           &.interactive {
             border: 5px solid #f8f7f7;
             cursor: pointer;
@@ -399,33 +417,39 @@ export default {
           @media screen and (max-width: 480px) {
             width: 100%;
           }
+
           &.animator {
             color: #6d6d6d;
             cursor: not-allowed;
             background-color: #c7c7c7;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
           }
+
           &.right {
             color: white;
             background-color: $green !important;
             border-color: $green;
           }
+
           &.wrong {
             color: white;
             background-color: #ff1d1d !important;
             border-color: #ff1d1d;
           }
+
           &.realy_wrong {
             color: white;
             background-color: #e01515 !important;
             border-color: #e01515;
           }
+
           &.checked {
             background-color: #c5c5c5;
             border-color: #c5c5c5;
           }
         }
       }
+
       .explication {
         padding: 16px;
         border: 2px solid #bbe242;
@@ -434,6 +458,7 @@ export default {
         background-color: #f8f7f7;
         margin-bottom: 16px;
         border-radius: 4px;
+
         a {
           color: $green;
         }
@@ -630,25 +655,30 @@ export default {
       // }
     }
   }
+
   .side-bar {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 320px;
     margin-left: 24px;
+
     .admin-buttons {
       display: flex;
       flex-direction: column;
+
       .button {
         height: 48px;
         font-size: 18px;
         margin-top: 24px;
       }
     }
+
     .block {
       display: flex;
       flex-direction: column;
       flex: 1;
+
       .head {
         .ban_icon {
           width: 24px;
@@ -664,40 +694,49 @@ export default {
         flex-direction: column;
         height: 100%;
         align-content: center;
+
         .user {
           display: flex;
           align-items: center;
+
           .icon {
             position: relative;
             display: flex;
             justify-content: center;
+
             .avatar {
               border-radius: 16px;
               user-select: none;
             }
           }
+
           .username {
             margin-left: 20px;
           }
+
           &.animator {
             justify-content: center;
             width: 100%;
             padding: 20px 0 24px;
             border-bottom: 1px solid #a9a9a9;
+
             .icon .crown {
               position: absolute;
               top: -20px;
             }
           }
+
           &.player {
             position: relative;
             margin: 8px 0;
+
             .username {
               overflow: hidden;
               max-width: calc(100% - 100px);
               text-overflow: ellipsis;
               white-space: nowrap;
             }
+
             .close {
               position: absolute;
               right: 0;
@@ -707,12 +746,14 @@ export default {
             }
           }
         }
+
         .players {
           display: flex;
           flex-direction: column;
           padding: 16px 8px 16px;
           flex: 1;
         }
+
         .players-counter {
           color: #585858;
           font-size: 15px;
@@ -723,9 +764,11 @@ export default {
       }
     }
   }
+
   .ban-window .element {
     display: flex;
     flex-direction: column;
+
     .player {
       display: flex;
       align-items: center;
@@ -741,20 +784,25 @@ export default {
         margin-left: 16px;
       }
     }
+
     .buttons {
       display: flex;
       justify-content: space-between;
+
       .button {
         flex: 1;
+
         &:first-child {
           margin-right: 24px;
         }
       }
     }
   }
+
   .simpleAuth {
     max-width: 500px;
     margin: auto;
+
     .block {
       margin-top: 0;
       // stylelint-disable-next-line no-descending-specificity
@@ -767,6 +815,7 @@ export default {
           line-height: 24px;
           margin-bottom: 16px;
         }
+
         .input-container {
           width: 100%;
         }

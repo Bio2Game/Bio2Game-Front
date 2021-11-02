@@ -141,6 +141,7 @@ export default {
   &:last-child {
     margin-bottom: 8px;
   }
+
   .error {
     position: absolute;
     top: calc(100% + 6px);
@@ -148,6 +149,7 @@ export default {
     color: #c90a0a;
     font-size: 12px;
   }
+
   .chip {
     z-index: 4;
     display: flex;
@@ -160,19 +162,23 @@ export default {
     background-color: $green;
     border-radius: 14px;
     user-select: none;
+
     &:last-of-type {
       margin-right: 4px;
     }
+
     svg {
       width: 12px;
       height: 12px;
       cursor: pointer;
       margin-left: 8px;
+
       path {
         fill: white;
       }
     }
   }
+
   input {
     z-index: 3;
     box-sizing: border-box;
@@ -189,10 +195,12 @@ export default {
     opacity: 0;
     transition: 0.3s opacity ease;
   }
+
   &.has-content input,
   input:focus {
     opacity: 1;
   }
+
   .focus-bg {
     position: absolute;
     z-index: 1;
@@ -204,6 +212,7 @@ export default {
     transition: 0.4s;
     border-radius: 4px;
   }
+
   .placeholder {
     position: absolute;
     z-index: 2;
@@ -218,6 +227,7 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
   &.has-content .placeholder,
   input:focus ~ .placeholder {
     top: -16px;
@@ -227,13 +237,16 @@ export default {
     left: 0;
     transition: 0.3s;
   }
+
   &.has-content .focus-bg {
     width: 100%;
     transition: 0.4s;
     background-color: #ededed;
   }
+
   &.has-error {
     margin-bottom: 32px;
+
     input {
       border: 1px solid #c90a0a;
     }

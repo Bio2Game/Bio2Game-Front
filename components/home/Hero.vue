@@ -61,6 +61,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
+
   .content-part {
     position: relative;
     z-index: 10;
@@ -80,6 +81,7 @@ export default {
     &.isFromIndex {
       height: 100vh;
     }
+
     .doted {
       position: absolute;
       z-index: -1;
@@ -93,6 +95,7 @@ export default {
       left: 0;
       bottom: 4px;
     }
+
     .content-text {
       padding-left: calc((100vw - 1620px) / 2 + 32px);
 
@@ -115,6 +118,7 @@ export default {
       @media screen and (max-width: 768px) {
         padding-left: calc(max((100vw - 640px), 1px) / 2 + 20px);
       }
+
       h2 {
         color: #161e2e;
         font-size: 64px;
@@ -136,6 +140,7 @@ export default {
           color: $green;
         }
       }
+
       p {
         color: #6b7280;
         font-size: 16px;
@@ -146,11 +151,13 @@ export default {
           max-width: 80%;
         }
       }
+
       .buttons {
         display: flex;
         margin-bottom: 16px;
         @media screen and (max-width: $sm) {
           flex-direction: column;
+
           .right {
             margin-left: 0;
             margin-top: 16px;
@@ -159,6 +166,7 @@ export default {
       }
     }
   }
+
   .background {
     position: fixed;
     top: 0;
@@ -178,6 +186,7 @@ export default {
       backdrop-filter: blur(16px);
       transition: 0.6s backdrop-filter ease, 0.6s background-color ease;
     }
+
     .back {
       position: relative;
       z-index: 1;
@@ -190,6 +199,7 @@ export default {
     }
   }
 }
+
 .route.index {
   .content-part {
     transform: translateX(0) translateY(0);
@@ -214,6 +224,7 @@ export default {
       clip-path: ellipse(137vw 169vh at 25vw -76vh);
     }
   }
+
   .background {
     width: 50vw;
     min-height: 100vh;
@@ -221,6 +232,7 @@ export default {
       width: 100vw;
       min-height: auto;
     }
+
     .cover {
       backdrop-filter: blur(0);
       background: rgba(59, 59, 59, 0.5);

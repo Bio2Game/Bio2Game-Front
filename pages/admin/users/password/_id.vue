@@ -108,8 +108,10 @@ export default {
 .password-change {
   max-width: 500px;
   width: 100%;
+
   .content {
     min-height: 0 !important;
+
     .user {
       display: flex;
       flex-direction: column;

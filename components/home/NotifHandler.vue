@@ -78,6 +78,7 @@ export default {
   @media screen and (max-width: 768px) {
     display: none;
   }
+
   .notif {
     position: relative;
     overflow: hidden;
@@ -106,11 +107,13 @@ export default {
         opacity: 0;
         transform: translateY(550px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
     &.hide {
       animation: fadeInRight 0.3s ease-out forwards;
       @keyframes fadeInRight {
@@ -118,17 +121,20 @@ export default {
           opacity: 1;
           transform: translateX(0);
         }
+
         100% {
           opacity: 0;
           transform: translateX(500px);
         }
       }
     }
+
     .notif-icon {
       position: absolute;
       transform: translateY(600px);
       transition: 0.2s transform ease;
     }
+
     .title {
       color: #000000;
       font-size: 20px;
@@ -141,6 +147,7 @@ export default {
         width: 100%;
       }
     }
+
     .wrapper {
       display: flex;
       justify-content: space-between;
@@ -151,14 +158,17 @@ export default {
       @media screen and (max-width: 1024px) {
         flex-direction: row;
       }
+
       .quiz {
         display: flex;
+
         .icon {
           width: 48px;
           min-width: 48px;
           min-height: 48px;
           margin-right: 16px;
         }
+
         .quiz-content {
           display: flex;
           flex-direction: column;
@@ -166,6 +176,7 @@ export default {
           @media screen and (max-width: 1024px) {
             margin-bottom: 0;
           }
+
           .name {
             color: $green;
             font-size: 20px;
@@ -173,6 +184,7 @@ export default {
             line-height: 24px;
             margin-bottom: 4px;
           }
+
           .description {
             color: #494949;
             font-size: 15px;
@@ -181,24 +193,29 @@ export default {
           }
         }
       }
+
       .buttons {
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
       }
+
       .close {
         position: absolute;
         top: 0;
         right: 0;
       }
     }
+
     &.small {
       width: 72px;
       height: 64px;
       padding: 11px 16px;
+
       .notif-icon {
         transform: translateY(0);
       }
+
       .wrapper,
       .title {
         opacity: 0;

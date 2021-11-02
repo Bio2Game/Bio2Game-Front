@@ -50,11 +50,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .nature {
     width: 350px;
     height: 293.5px;
     margin: 24px 0 16px;
   }
+
   .top {
     h1 {
       margin: 32px 0 24px;
@@ -63,12 +65,14 @@ export default {
       font-weight: 700;
       text-align: center;
     }
+
     p {
       color: #292929;
       font-size: 18px;
       text-align: center;
     }
   }
+
   .container-formation {
     flex: 1;
     white-space: break-spaces;
@@ -77,12 +81,14 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     padding: 32px;
+
     .content {
       margin-top: 24px;
     }
   }
   @media screen and (max-width: 640px) {
     padding: 0 !important;
+
     .container {
       border-radius: 0;
     }

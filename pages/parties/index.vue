@@ -113,6 +113,7 @@ export default {
 .parties-page {
   display: flex;
   justify-content: center;
+
   .infos {
     h1 {
       margin: 48px 0 24px;
@@ -130,6 +131,7 @@ export default {
         font-size: 24px;
       }
     }
+
     p {
       font-size: 16px;
       font-weight: 500;
@@ -160,6 +162,7 @@ export default {
       flex: 1 0;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
       transition: transform 0.3s;
+
       &.disabled {
         filter: grayscale(1);
         transform: none !important;
@@ -291,12 +294,15 @@ export default {
       }
     }
   }
+
   .scores {
     margin-top: 40px;
+
     table {
       max-width: 500px;
     }
   }
+
   .players {
     min-width: 80vw;
 
@@ -304,24 +310,29 @@ export default {
       .title {
         text-align: center;
       }
+
       .trans {
         margin: 0 1px !important;
         text-align: center;
         border-radius: 0 !important;
         border-right: 1px solid #bfbfbf;
         background-color: white;
+
         &.right_a {
           color: white;
           background-color: #2e7d32;
         }
+
         &.wrong {
           color: white;
           background-color: #d32f2f;
         }
+
         &.realy_wrong {
           color: white;
           background-color: #b71c1c;
         }
+
         &.no {
           color: white;
           background-color: #868686;

@@ -85,29 +85,35 @@ footer {
   flex-direction: column;
   background-size: cover;
   background-position: center;
+
   .content {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 40px;
     background-color: #212522c9;
+
     .items {
       display: flex;
       width: 100%;
       margin: 0 auto;
       max-width: 1150px;
+
       .item {
         flex: 1;
+
         .title {
           position: relative;
           display: flex;
           margin-bottom: 16px;
+
           h5 {
             margin: 0;
             color: white;
             padding-left: 15px;
           }
         }
+
         p {
           width: 80%;
           color: #ffffff;
@@ -115,6 +121,7 @@ footer {
           line-height: 20px;
           margin-bottom: 10px;
         }
+
         &.a-propos a {
           color: $green;
           font-size: 14px;
@@ -122,23 +129,28 @@ footer {
           text-decoration: none;
           text-transform: uppercase;
         }
+
         &.contact {
           display: flex;
           flex-direction: column;
+
           a {
             padding: 6px 0;
             color: #ffffff;
             font-size: 13px;
             text-decoration: none;
             transition: color 0.3s ease-in-out;
+
             &:hover {
               color: $green;
             }
           }
         }
+
         &.social {
           flex: none;
         }
+
         .contact-button {
           padding: 8px 14px;
           border: 2px solid $green;
@@ -150,6 +162,7 @@ footer {
           text-transform: uppercase;
           text-decoration: none;
           transition: all 0.3s ease-in-out;
+
           &:hover {
             color: #3b413e;
             background-color: $green;
@@ -157,6 +170,7 @@ footer {
         }
         @media screen and (max-width: 720px) {
           margin-bottom: 40px;
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -167,6 +181,7 @@ footer {
       }
     }
   }
+
   .copyright {
     display: flex;
     justify-content: center;
@@ -174,18 +189,22 @@ footer {
     width: 100%;
     height: 50px;
     background-color: #1a1d1be3;
+
     .text {
       padding: 0 20px;
       color: #757575;
       font-size: 14px;
+
       .author-link {
         color: $green;
         text-decoration: none;
+
         &:hover {
           text-decoration: underline;
         }
       }
     }
+
     .scroll-top {
       position: absolute;
       right: 0;
@@ -193,6 +212,7 @@ footer {
       bottom: 0;
       border-bottom: 90px solid $green;
       border-left: 90px solid transparent;
+
       & + svg {
         position: absolute;
         z-index: 1;
@@ -202,6 +222,7 @@ footer {
         bottom: 20px;
         transition: opacity 0.3s;
       }
+
       &:hover + svg,
       & + svg:hover {
         opacity: 0.6;

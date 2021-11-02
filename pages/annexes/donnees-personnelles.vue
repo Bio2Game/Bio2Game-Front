@@ -336,6 +336,7 @@ export default {
   align-items: center;
   padding: 50px 40px;
   flex-direction: column;
+
   .context {
     display: flex;
     padding: 32px;
@@ -350,38 +351,47 @@ export default {
       margin: 1rem 0 1rem 0;
       font-size: 2rem;
     }
+
     h4 {
       margin: 1.5rem 0 0.5rem;
       font-size: 1.4rem;
     }
+
     h6 {
       margin: 1rem 0 0.5rem;
       font-size: 1.2rem;
     }
+
     p {
       margin: 0.3rem 0 0;
       line-height: 20px;
     }
+
     ul {
       list-style: disc;
       padding-left: 32px;
       margin-top: 8px;
+
       li {
         margin-bottom: 4px;
       }
     }
+
     a {
       color: $green;
     }
+
     table {
       margin-top: 1rem;
     }
+
     table,
     th,
     td {
       padding: 0.5rem;
       border: 1px solid black;
     }
+
     thead td {
       text-align: center;
       vertical-align: middle;

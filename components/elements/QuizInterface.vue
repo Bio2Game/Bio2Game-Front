@@ -87,17 +87,21 @@ export default {
 
   .playground {
     width: 100%;
+
     .interface {
       display: flex;
       flex-direction: column;
       width: 100%;
       max-width: 700px;
       margin: 0 auto;
+
       .infos {
         margin-bottom: 32px;
+
         .title {
           display: flex;
           align-items: flex-end;
+
           h1 {
             margin: 10px 0 24px;
             color: #414141;
@@ -106,6 +110,7 @@ export default {
             text-transform: uppercase;
             flex: 1;
           }
+
           p {
             color: #484848;
             font-size: 16px;
@@ -113,17 +118,20 @@ export default {
             margin-top: -8px;
             margin-bottom: 8px;
           }
+
           .question-position {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 24px;
           }
         }
+
         .progress-bar {
           overflow: hidden;
           height: 20px;
           background-color: #eeeeee;
           border-radius: 10px;
+
           .bar {
             width: 0%;
             height: 100%;
@@ -133,17 +141,21 @@ export default {
           }
         }
       }
+
       .responses {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         flex-direction: column;
+
         .separator {
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
         }
+
         .item,
+
         .response {
           position: relative;
           display: flex;
@@ -165,46 +177,55 @@ export default {
           @media screen and (max-width: 480px) {
             width: 100%;
           }
+
           &.animator {
             background-color: #c7c7c7;
             color: #6d6d6d;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
             cursor: not-allowed;
           }
+
           &.right {
             background-color: $green !important;
             border-color: $green;
             color: white;
           }
+
           &.wrong {
             background-color: #ff1d1d !important;
             border-color: #ff1d1d;
             color: white;
           }
+
           &.realy_wrong {
             background-color: #e01515 !important;
             border-color: #e01515;
             color: white;
           }
+
           &.checked {
             background-color: #c5c5c5;
             border-color: #ffffff;
           }
         }
       }
+
       .explication {
         margin-top: 8px;
         color: #585858;
         font-size: 15px;
+
         .explication-title {
           margin-bottom: 4px;
           font-weight: 600;
         }
+
         .source {
           margin: 12px auto 0;
           color: $green;
         }
       }
+
       &.question-interface {
         .question {
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
@@ -213,68 +234,84 @@ export default {
           background-color: #f8f7f7;
           margin-bottom: 24px;
           user-select: none;
+
           .question-content {
             width: calc(100% - 100px);
+
             p {
               margin: 0;
               font-size: 18px;
               font-weight: 600;
               line-height: 25px;
             }
+
             img {
               max-width: 100%;
             }
           }
         }
+
         .explication {
           padding: 16px;
           background: #ffffff;
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
         }
+
         .submit-next {
           margin-top: 8px;
           width: 100%;
           max-width: 100%;
+
           &.resp {
             margin-top: 24px;
           }
         }
       }
+
       &.result-interface {
         .infos .title {
           flex-direction: column;
           justify-content: center;
           align-items: center;
         }
+
         .appreciation {
           padding: 14px;
           color: white;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
           text-align: center;
+
           &.right {
             background-color: $green;
           }
+
           &.wrong {
             background-color: #ff1d1d;
           }
+
           &.realy_wrong {
             background-color: #e01515;
           }
         }
+
         .questions {
           display: flex;
           flex-direction: column;
+
           .element {
             margin-top: 32px;
+
             .question-name {
               color: #292929;
               font-size: 18px;
             }
+
             .question {
               background: #ffffff;
               box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
               border-radius: 4px;
               margin-top: 16px;
+
               .head {
                 display: flex;
                 justify-content: space-between;
@@ -283,27 +320,35 @@ export default {
                 color: white;
                 box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
                 border-radius: 3px 3px 0 0;
+
                 &.right {
                   background-color: $green;
                 }
+
                 &.wrong {
                   background-color: #ff1d1d;
                 }
+
                 &.realy_wrong {
                   background-color: #e01515;
                 }
+
                 .question-text {
                   max-width: calc(100% - 64px);
                 }
+
                 .result-icon {
                   width: 32px;
                   height: 32px;
                 }
               }
+
               .content {
                 padding: 24px;
+
                 .responses .item {
                   cursor: default;
+
                   &.checked {
                     border-color: #c5c5c5;
                   }
@@ -312,11 +357,13 @@ export default {
             }
           }
         }
+
         .results {
           background: #ffffff;
           box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
           border-radius: 4px;
           margin-top: 16px;
+
           /* stylelint-disable-next-line */
           .head {
             display: flex;
@@ -327,41 +374,50 @@ export default {
             border-radius: 3px 3px 0 0;
             background-color: $green;
           }
+
           /* stylelint-disable-next-line */
           .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 24px;
+
             .stats {
               display: flex;
               width: 100%;
               padding: 8px 0 32px;
+
               .stat {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
                 flex: 1;
+
                 .num {
                   font-size: 64px;
                   font-weight: 900;
                   margin-bottom: 8px;
+
                   &.good {
                     color: $green;
                   }
+
                   &.bad {
                     color: #f43434;
                   }
                 }
+
                 .label {
                   font-size: 16px;
                 }
               }
             }
+
             .submit-next {
               margin-top: 8px;
               width: 100%;
               max-width: 400px;
+
               &.resp {
                 margin-top: 24px;
               }
@@ -371,19 +427,23 @@ export default {
       }
     }
   }
+
   .get-started {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+
     .play {
       width: 90px;
       height: 90px;
       transition: transform 0.3s ease;
       cursor: pointer;
+
       &:hover {
         transform: scale(1.1);
       }
+
       &:focus {
         transform: scale(0.9);
       }

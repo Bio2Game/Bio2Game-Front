@@ -130,6 +130,7 @@ export default {
   &:last-child {
     margin-bottom: 8px;
   }
+
   .error {
     position: absolute;
     top: calc(100% + 6px);
@@ -137,6 +138,7 @@ export default {
     color: #c90a0a;
     font-size: 12px;
   }
+
   textarea {
     position: relative;
     z-index: 3;
@@ -153,9 +155,11 @@ export default {
     outline: none;
     border-radius: 4px;
     resize: none;
+
     &.date {
       padding: 6px 15px;
     }
+
     & ~ .focus-bg {
       position: absolute;
       z-index: 1;
@@ -167,6 +171,7 @@ export default {
       transition: 0.4s;
       border-radius: 4px;
     }
+
     & ~ .placeholder {
       position: absolute;
       z-index: 2;
@@ -181,6 +186,7 @@ export default {
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
     &:focus ~ .placeholder,
     &.has-content ~ .placeholder,
     &.date ~ .placeholder {
@@ -191,30 +197,37 @@ export default {
       left: 0;
       transition: 0.3s;
     }
+
     &:disabled {
       cursor: not-allowed;
     }
   }
+
   textarea:focus ~ .focus-bg,
   .focus-bg.has-content {
     transition: 0.4s;
     width: 100%;
     background-color: #ededed;
+
     &.disabled {
       background-color: #e2e2e2;
     }
   }
+
   &.has-error {
     margin-bottom: 32px;
+
     input {
       border: 1px solid #c90a0a;
     }
   }
+
   &.white_label input:focus ~ .placeholder,
   &.white_label input.has-content ~ .placeholder,
   &.white_label input.date ~ .placeholder {
     color: #ffffff !important;
   }
+
   .counter {
     position: absolute;
     z-index: 2;
@@ -224,6 +237,7 @@ export default {
     cursor: text;
     user-select: none;
     bottom: 12px;
+
     span {
       color: $green;
       margin-right: 2px;

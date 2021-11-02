@@ -74,10 +74,12 @@ export default {
     gap: 32px;
     margin: 16px auto;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
     .question-stats {
       position: relative;
       width: 250px;
       margin: 0 auto;
+
       .infos {
         position: absolute;
         top: 20%;
@@ -91,10 +93,12 @@ export default {
         bottom: 20%;
         left: 20%;
         user-select: none;
+
         h3 {
           font-size: 18px;
           margin-bottom: 4px;
         }
+
         p {
           font-size: 14px;
           word-break: break-all;

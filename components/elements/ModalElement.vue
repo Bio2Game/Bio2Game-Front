@@ -63,13 +63,16 @@ export default {
   @media screen and (max-width: 400px) {
     top: 80px;
   }
+
   &.open {
     animation: backin 0.4s ease-in-out;
     opacity: 1;
   }
+
   &.close {
     animation: backout 0.4s ease-in-out;
   }
+
   .modal {
     display: flex;
     opacity: 0;
@@ -77,10 +80,12 @@ export default {
     @media screen and (max-width: 720px) {
       margin-top: 80px;
     }
+
     &.open {
       animation: popup 0.4s ease-in-out;
       opacity: 1;
     }
+
     &.close {
       animation: popout 0.4s ease-in-out;
     }
@@ -91,9 +96,11 @@ export default {
     opacity: 0;
     transform: translateY(-100px);
   }
+
   90% {
     transform: translateY(0);
   }
+
   100% {
     opacity: 1;
   }
@@ -102,9 +109,11 @@ export default {
   0% {
     opacity: 1;
   }
+
   10% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-100px);
     opacity: 0;
@@ -114,6 +123,7 @@ export default {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -122,6 +132,7 @@ export default {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }

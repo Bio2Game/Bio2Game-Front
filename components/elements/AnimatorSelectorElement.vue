@@ -120,6 +120,7 @@ export default {
   outline: none;
   transition: border 250ms ease-out;
   user-select: none;
+
   .select_element {
     position: relative;
     display: flex;
@@ -130,6 +131,7 @@ export default {
     padding-left: 15px;
     transition: border 0.25s ease-out;
     user-select: none;
+
     input {
       width: 100%;
       height: 100%;
@@ -139,21 +141,26 @@ export default {
       font-weight: 400;
       background-color: transparent;
       outline: 0;
+
       &::placeholder {
         color: #aaaaaa;
       }
+
       &:focus::placeholder {
         color: #c7c7c7;
       }
     }
   }
+
   .down {
     position: absolute;
     right: 16px;
   }
+
   &.active .down {
     transform: rotate(180deg);
   }
+
   .select_elements {
     position: absolute;
     z-index: 1000;
@@ -168,6 +175,7 @@ export default {
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.25);
+
     &::-webkit-scrollbar {
       width: 10px;
       -webkit-appearance: none;
@@ -180,6 +188,7 @@ export default {
       background-color: $green;
       transition: background-color 0.1s ease;
     }
+
     .element {
       position: relative;
       display: flex;
@@ -187,17 +196,21 @@ export default {
       cursor: pointer;
       padding-left: 15px;
       min-height: 46px;
+
       &:hover {
         background-color: #e7e7e7;
       }
+
       &.active {
         background-color: #dbdbdb;
       }
     }
   }
+
   &.active .select_elements {
     visibility: visible;
   }
+
   &.select_elements::-webkit-scrollbar-thumb:hover {
     background-color: #a45b44;
   }

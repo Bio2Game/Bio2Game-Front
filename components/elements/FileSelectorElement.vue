@@ -72,6 +72,7 @@ export default {
   &:last-child {
     margin-bottom: 8px;
   }
+
   .error {
     position: absolute;
     top: calc(100% + 6px);
@@ -79,8 +80,10 @@ export default {
     color: #c90a0a;
     font-size: 12px;
   }
+
   .button {
     margin-right: 16px;
+
     .input-file {
       position: absolute;
       z-index: 4;
@@ -96,9 +99,11 @@ export default {
       opacity: 0;
     }
   }
+
   .file-path {
     position: relative;
     width: 100%;
+
     .file-name {
       position: relative;
       z-index: 3;
@@ -113,6 +118,7 @@ export default {
       letter-spacing: 1px;
       outline: none;
       border-radius: 4px;
+
       & ~ .focus-bg {
         position: absolute;
         z-index: 1;
@@ -124,6 +130,7 @@ export default {
         transition: 0.4s;
         border-radius: 4px;
       }
+
       & ~ .placeholder {
         position: absolute;
         z-index: 2;
@@ -138,6 +145,7 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+
       &:focus ~ .placeholder,
       &.has-content ~ .placeholder,
       &.date ~ .placeholder {
@@ -148,15 +156,18 @@ export default {
         left: 0;
         transition: 0.3s;
       }
+
       &:disabled {
         cursor: not-allowed;
       }
     }
+
     input:focus ~ .focus-bg,
     .focus-bg.has-content {
       width: 100%;
       transition: 0.4s;
       background-color: #ededed;
+
       &.disabled {
         background-color: #e2e2e2;
       }
@@ -165,6 +176,7 @@ export default {
 
   &.has-error {
     margin-bottom: 32px;
+
     input {
       border: 1px solid #c90a0a;
     }

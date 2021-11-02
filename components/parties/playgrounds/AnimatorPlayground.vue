@@ -44,9 +44,11 @@ export default {
 .animator-playground {
   display: flex;
   flex-direction: column;
+
   .waiting-animator {
     flex: 1;
   }
+
   .tabs {
     width: 100%;
   }

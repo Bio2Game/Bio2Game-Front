@@ -42,6 +42,7 @@ export default {
     cursor: pointer;
     padding-left: 35px;
     user-select: none;
+
     &::before {
       position: absolute;
       z-index: 1;
@@ -57,6 +58,7 @@ export default {
       transform: rotateZ(37deg);
       transform-origin: 100% 100%;
     }
+
     &::after {
       position: absolute;
       z-index: 1;
@@ -73,10 +75,12 @@ export default {
       border-radius: 2px;
     }
   }
+
   input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
+
     &:checked + span {
       &::before {
         top: 4px;
@@ -90,6 +94,7 @@ export default {
         transform: rotateZ(37deg);
         transform-origin: 100% 100%;
       }
+
       &::after {
         z-index: 0;
         top: 2px;

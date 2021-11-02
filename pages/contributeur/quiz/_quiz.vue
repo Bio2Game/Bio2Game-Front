@@ -395,39 +395,48 @@ export default {
     .section-zones {
       display: flex;
     }
+
     .top-buttons {
       flex: 0 !important;
+
       .button {
         margin-left: 0 !important;
         white-space: nowrap;
         height: 43px;
+
         &:last-child {
           margin-top: 24px;
         }
       }
     }
   }
+
   .questions-list-edit {
     display: flex;
     flex-direction: column;
+
     .questions,
     .no-elements {
       flex: 1;
     }
+
     .vuetable-td-order,
     .vuetable-th-order,
     .vuetable-th-component-handle,
     .vuetable-td-component-handle {
       padding-left: 16px !important;
     }
+
     .options-bar {
       display: flex;
       justify-content: flex-end;
       margin-top: 16px;
     }
   }
+
   &.right-data {
     position: relative;
+
     &::after {
       position: absolute;
       top: -24px;

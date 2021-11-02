@@ -338,16 +338,20 @@ export default {
   .cloud1 {
     animation: cloud 11s linear infinite 1s;
   }
+
   .cloud2 {
     animation: cloud 9s linear infinite;
   }
+
   .cloud3 {
     animation: cloud 7s linear infinite 3s;
   }
+
   .wide1 {
     transform-origin: 429.3px 259px;
     animation: wide 3s linear infinite;
   }
+
   .wide2 {
     transform-origin: 268.9px 207.9px;
     animation: wide 3s linear infinite;
@@ -356,6 +360,7 @@ export default {
     from {
       transform: translateX(0%);
     }
+
     to {
       transform: translateX(calc(100% + 200px));
     }
@@ -364,6 +369,7 @@ export default {
     from {
       transform: rotate(0deg);
     }
+
     to {
       transform: rotate(360deg);
     }

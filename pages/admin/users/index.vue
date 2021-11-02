@@ -146,26 +146,32 @@ export default {
     color: $green;
     text-decoration: none;
   }
+
   .level_0 {
     background-color: #9dcd09;
     color: #ffffff;
   }
+
   .level_1 {
     background-color: #82ab07;
     color: #ffffff;
   }
+
   .level_2 {
     background-color: #709306;
     color: #ffffff;
   }
+
   .level_3 {
     background-color: #ff3333;
     color: #ffffff;
   }
+
   .level_4 {
     background-color: #cc0000;
     color: #ffffff;
   }
+
   .level_5 {
     background-color: #810000;
     color: #ffffff;

@@ -195,6 +195,7 @@ export default {
 .party-creation {
   .container {
     flex-direction: column;
+
     .infos {
       h1 {
         margin: 48px 0 24px;
@@ -212,6 +213,7 @@ export default {
           font-size: 24px;
         }
       }
+
       p {
         font-size: 16px;
         font-weight: 500;
@@ -219,20 +221,27 @@ export default {
         margin-bottom: 16px;
       }
     }
+
     .blocks {
       display: flex;
+
       .block {
         flex: 1;
+
         &:first-child {
           margin-right: 24px;
+
           .quizcreator {
             display: flex;
+
             .select-quiz {
               flex: 1;
               margin-right: 16px;
             }
+
             .button {
               margin: 8px 0 16px;
+
               &:last-child {
                 margin-bottom: 0;
               }
@@ -241,43 +250,53 @@ export default {
               .select-quiz {
                 margin-right: 0;
               }
+
               .create-quiz {
                 display: none;
               }
             }
           }
         }
+
         .questions-selector {
           display: flex;
           flex-direction: column;
+
           .question-element {
             display: flex;
             padding: 4px 0;
             cursor: move;
+
             svg {
               margin-left: -8px;
               margin-right: 8px;
               opacity: 0.6;
               transition: opacity 0.5s ease;
+
               &:hover {
                 opacity: 0.8;
               }
             }
+
             .checkbox {
               margin-bottom: 8px;
             }
+
             &.flip-list-move {
               transition: transform 0.5s;
             }
+
             &.no-move {
               transition: transform 0s;
             }
           }
         }
+
         .head {
           min-height: 70px;
           align-items: center;
         }
+
         .content {
           min-height: 0;
           display: flex;

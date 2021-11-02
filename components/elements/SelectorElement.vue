@@ -151,10 +151,12 @@ export default {
   outline: none;
   transition: border 250ms ease-out;
   user-select: none;
+
   &.has-error {
     border: 1px solid #c90a0a;
     margin-bottom: 32px;
   }
+
   .error {
     position: absolute;
     top: calc(100% + 6px);
@@ -162,17 +164,21 @@ export default {
     color: #c90a0a;
     font-size: 12px;
   }
+
   .select_element {
     display: flex;
     align-items: center;
   }
+
   .down {
     position: absolute;
     right: 16px;
   }
+
   &.active .down {
     transform: rotate(180deg);
   }
+
   .placeholder {
     position: absolute;
     z-index: 2;
@@ -187,9 +193,11 @@ export default {
     color: $green;
     font-size: 12px;
   }
+
   &.white_label .placeholder {
     color: #ffffff !important;
   }
+
   .select_elements {
     position: absolute;
     z-index: 1000;
@@ -204,6 +212,7 @@ export default {
     max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.25);
+
     &::-webkit-scrollbar {
       width: 10px;
       -webkit-appearance: none;
@@ -216,6 +225,7 @@ export default {
       background-color: $green;
       transition: background-color 0.1s ease;
     }
+
     .element {
       position: relative;
       display: flex;
@@ -223,17 +233,21 @@ export default {
       cursor: pointer;
       padding-left: 15px;
       min-height: 46px;
+
       &:hover {
         background-color: #f5f5f5;
       }
+
       &.active {
         background-color: #e7e7e7;
       }
     }
   }
+
   &.active .select_elements {
     visibility: visible;
   }
+
   &.select_elements::-webkit-scrollbar-thumb:hover {
     background-color: #a45b44;
   }

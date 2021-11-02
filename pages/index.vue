@@ -157,6 +157,7 @@ export default {
   .features {
     display: flex;
     flex-direction: column;
+
     .feature {
       background-color: #ffffff;
       padding: 80px 0;
@@ -166,6 +167,7 @@ export default {
       @media screen and (max-width: $sm) {
         padding: 24px 0;
       }
+
       .container {
         display: flex;
         justify-content: space-between;
@@ -182,17 +184,20 @@ export default {
           @media screen and (max-width: $md) {
             display: none;
           }
+
           img {
             display: flex;
             width: 100%;
           }
         }
+
         .content {
           margin: 0 64px;
           max-width: 450px;
           @media screen and (max-width: $sm) {
             margin: 0 24px;
           }
+
           h3 {
             color: $green;
             font-size: 36px;
@@ -204,6 +209,7 @@ export default {
               line-height: 40px;
             }
           }
+
           p {
             color: #414141;
             font-size: 18px;
@@ -211,12 +217,16 @@ export default {
           }
         }
       }
+
       &:nth-child(2n + 1) {
         background-color: $green;
+
         .container {
           flex-direction: row-reverse;
+
           .content {
             text-align: right;
+
             h3 {
               color: white;
             }
@@ -225,17 +235,20 @@ export default {
       }
     }
   }
+
   .contributors {
     position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: white;
+
     .title {
       position: relative;
       display: flex;
       justify-content: center;
       margin: 60px 0 50px;
+
       h2 {
         display: flex;
         align-items: center;
@@ -254,29 +267,36 @@ export default {
         background: #ffffff;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
         border-radius: 12px;
+
         &:last-child {
           margin-right: 32px 0;
         }
+
         .content-contributor {
           display: flex;
           margin-bottom: 16px;
+
           .avatar {
             width: 72px;
             height: 72px;
             min-width: 72px;
+
             img {
               width: 100%;
               border-radius: 36px;
             }
           }
+
           .content-text {
             margin-left: 12px;
+
             .contributor-name {
               color: #000000;
               font-size: 20px;
               font-weight: 600;
               line-height: 29px;
             }
+
             .contributor-description {
               color: #4d4d4d;
               font-size: 14px;
@@ -284,6 +304,7 @@ export default {
             }
           }
         }
+
         .quizs-title {
           color: #000000;
           font-size: 18px;
@@ -291,6 +312,7 @@ export default {
           line-height: 22px;
           margin-bottom: 12px;
         }
+
         .quizs-list {
           .quiz {
             display: flex;
@@ -300,19 +322,23 @@ export default {
             border-radius: 6px;
             margin-bottom: 16px;
             text-decoration: none;
+
             .icon {
               width: 48px;
               min-width: 48px;
               min-height: 48px;
               margin-right: 16px;
+
               img {
                 width: 100%;
                 border-radius: 24px;
               }
             }
+
             .quiz-content {
               display: flex;
               flex-direction: column;
+
               .quiz-name {
                 color: #000000;
                 font-size: 16px;
@@ -320,6 +346,7 @@ export default {
                 line-height: 18px;
                 margin-bottom: 5px;
               }
+
               .quiz-description {
                 color: #494949;
                 font-size: 12px;
@@ -330,11 +357,13 @@ export default {
           }
         }
       }
+
       .VueCarousel-navigation {
         position: absolute;
         bottom: 100%;
         margin-left: 16px;
       }
+
       .VueCarousel-navigation-button {
         position: relative;
         height: 40px;
@@ -345,6 +374,7 @@ export default {
         outline: 0;
         text-shadow: 0 2px 4px #00000040;
         user-select: none;
+
         &.VueCarousel-navigation--disabled {
           color: #afafaf;
           opacity: 1;

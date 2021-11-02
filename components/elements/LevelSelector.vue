@@ -75,6 +75,7 @@ export default {
   max-width: 800px;
   width: 100%;
   padding: 32px;
+
   .level_switch {
     position: relative;
     display: flex;
@@ -82,6 +83,7 @@ export default {
     width: 80%;
     height: 64px;
     padding: 0 16px;
+
     &::after {
       position: absolute;
       z-index: 1;
@@ -94,6 +96,7 @@ export default {
       border-radius: 12px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     }
+
     .level {
       position: relative;
       z-index: 2;
@@ -107,12 +110,15 @@ export default {
       background-color: white;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
       transition: 0.1s border ease;
+
       img {
         user-select: none;
       }
+
       &.active {
         border: 4px solid #797979;
       }
+
       .label {
         position: absolute;
         z-index: 1;
@@ -130,6 +136,7 @@ export default {
         box-shadow: 0 1px 3px hsla(0, 0%, 19%, 0.5);
         white-space: nowrap;
       }
+
       &:hover .label,
       .label:hover {
         visibility: visible;

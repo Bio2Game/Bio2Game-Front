@@ -383,24 +383,30 @@ export default {
       margin-bottom: 8px;
       flex: 2;
       margin-right: 16px;
+
       &:first-child {
         flex: 3;
       }
     }
+
     .button {
       min-width: 120px;
     }
   }
+
   .content {
     display: flex;
     padding-top: 16px;
+
     .section {
       flex: 1;
       display: flex;
       flex-direction: column;
+
       &:last-child {
         margin-left: 24px;
       }
+
       .section-title {
         margin: 8px 0 16px;
         font-size: 15px;
@@ -409,8 +415,10 @@ export default {
       }
     }
   }
+
   &.right-data {
     position: relative;
+
     &::after {
       position: absolute;
       top: -24px;

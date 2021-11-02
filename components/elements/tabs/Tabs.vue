@@ -68,8 +68,10 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 24px;
+
   .tabs-flags {
     display: flex;
+
     .tab-name {
       padding: 16px 24px;
       margin: 0 24px 24px 0;
@@ -80,11 +82,13 @@ export default {
       user-select: none;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
       background-color: $green;
+
       &.active {
         background-color: $green-light;
       }
     }
   }
+
   .tabs-contents {
     background-color: white;
     border-radius: 8px;

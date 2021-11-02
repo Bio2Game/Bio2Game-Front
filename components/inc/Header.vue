@@ -170,6 +170,7 @@ export default {
 .header {
   width: 100%;
   height: 5rem;
+
   .wrapper {
     position: fixed !important;
     z-index: 1000;
@@ -181,21 +182,26 @@ export default {
     background-color: white;
     transition: 0.3s background-color ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+
     a {
       display: flex;
       align-items: center;
+
       .logo {
         height: 4rem;
       }
     }
+
     .menu {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex: 1;
+
       .left-menu {
         display: flex;
         align-items: center;
+
         .link {
           margin: 0 12px;
           color: #4f4f4f;
@@ -203,11 +209,13 @@ export default {
           font-weight: 500;
           line-height: 24px;
           text-decoration: none;
+
           svg {
             display: none;
           }
         }
       }
+
       .right-menu {
         display: flex;
         @media screen and (max-width: $lg) and (min-width: $md) {
@@ -222,6 +230,7 @@ export default {
             }
           }
         }
+
         .user {
           position: relative;
           display: flex;
@@ -231,9 +240,11 @@ export default {
           text-decoration: none;
           user-select: none;
           min-width: 188px;
+
           .group {
             display: flex;
             align-items: center;
+
             .avatar {
               width: 32px;
               height: 32px;
@@ -241,6 +252,7 @@ export default {
               border-radius: 16px;
               margin-right: 8px;
             }
+
             .username {
               display: flex;
               align-items: center;
@@ -249,15 +261,18 @@ export default {
               transition: 0.2s color 0.5s ease-out;
               user-select: none;
             }
+
             svg.down {
               width: 16px;
               margin-left: 6px;
               margin-top: 2px;
+
               path {
                 transition: 0.2s fill 0.5s ease-out;
               }
             }
           }
+
           .user-menu {
             position: absolute;
             z-index: -1;
@@ -273,6 +288,7 @@ export default {
             ul {
               padding: 24px;
               margin-top: 70px;
+
               a {
                 position: relative;
                 display: flex;
@@ -282,6 +298,7 @@ export default {
                 transition: 0.3s background-color ease;
                 text-decoration: none;
                 white-space: nowrap;
+
                 svg {
                   font-size: 20px;
                   margin-right: 5px;
@@ -289,15 +306,18 @@ export default {
               }
             }
           }
+
           &.active {
             .username {
               color: #ffffff !important;
               transition: 0.2s color ease-out;
             }
+
             svg.down path {
               transition: 0.2s fill ease-out;
               fill: #ffffff;
             }
+
             .user-menu {
               max-height: 100vh;
             }
@@ -315,44 +335,54 @@ export default {
         border-bottom-left-radius: 24px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         transition: 0.4s max-height ease;
+
         .left-menu {
           align-items: flex-start;
           width: 100%;
           padding: 72px 24px 0;
           flex-direction: column;
+
           .link {
             padding: 16px;
             margin: 0;
             color: white;
             font-size: 16px;
+
             svg {
               display: inline;
               margin-right: 5px;
             }
           }
         }
+
         .right-menu {
           padding: 0 24px 24px;
           flex-direction: column;
+
           .button {
             margin-left: 0;
             margin-top: 16px;
+
             &.green {
               color: $green;
               background-color: white;
             }
           }
+
           .user {
             padding: 0;
             min-width: 0;
+
             .avatar,
             .username,
             .down {
               display: none !important;
             }
+
             .user-menu {
               position: relative;
               box-shadow: none;
+
               ul {
                 padding: 0;
                 margin: 0;
@@ -360,11 +390,13 @@ export default {
             }
           }
         }
+
         &.open {
           max-height: 100vh;
         }
       }
     }
+
     .hamburger {
       position: fixed;
       z-index: 5;
@@ -410,6 +442,7 @@ export default {
       &.open {
         span {
           background-color: white;
+
           &:nth-child(1) {
             width: 50px;
             transform: rotate(45deg) translate(-3px, -5px);
@@ -434,19 +467,23 @@ export default {
       color: $green;
       background-color: transparent;
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+
       &:hover {
         background-color: $gray-light;
       }
     }
   }
 }
+
 .route.index {
   .header {
     height: 0;
+
     &.isTransparent {
       .wrapper {
         background-color: transparent;
         box-shadow: none;
+
         .menu .right-menu .user {
           .username {
             color: white;
@@ -454,6 +491,7 @@ export default {
               color: #4f4f4f;
             }
           }
+
           &.transition .username {
             transition: 0.2s color ease-out;
           }

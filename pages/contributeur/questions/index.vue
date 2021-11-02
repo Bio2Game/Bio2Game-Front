@@ -130,9 +130,11 @@ export default {
 .quiz-creation.index {
   .block {
     flex-direction: column;
+
     .head {
       align-items: center;
     }
+
     .content {
       .no-questions {
         display: flex;
@@ -140,12 +142,14 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
+
         h3 {
           color: $green;
           font-size: 32px;
           font-weight: 700;
           margin-bottom: 16px;
         }
+
         p {
           color: #777777;
           font-size: 16px;
@@ -156,6 +160,7 @@ export default {
     }
   }
 }
+
 .questions-list-creator {
   .vuetable-td-id,
   .vuetable-th-id {

@@ -143,12 +143,15 @@ export default {
 <style lang="scss">
 .blocks {
   display: flex;
+
   .block {
     flex: 1;
+
     .content {
       display: flex;
       flex-direction: column;
       min-height: 0 !important;
+
       .submit {
         max-width: 100%;
         width: 100%;
@@ -157,6 +160,7 @@ export default {
       }
     }
   }
+
   .domains-list {
     display: flex;
     flex-direction: column;
@@ -166,6 +170,7 @@ export default {
     margin-left: 24px;
     margin-top: 24px;
     padding-right: 12px;
+
     &::-webkit-scrollbar {
       -webkit-appearance: none;
       background-color: #e7e7e7;
@@ -182,6 +187,7 @@ export default {
     &::-webkit-scrollbar-thumb:hover {
       background-color: $green-light;
     }
+
     .domain {
       display: flex;
       align-items: center;
@@ -191,14 +197,17 @@ export default {
       box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       cursor: pointer;
+
       &:last-child {
         margin-bottom: 0;
       }
+
       .icon {
         width: 48px;
         height: 48px;
         border-radius: 24px;
       }
+
       .label {
         margin-left: 16px;
         color: #a0a0a0;

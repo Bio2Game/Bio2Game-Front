@@ -295,14 +295,17 @@ export default {
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }
+
 .slide-fade-leave-active {
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
+
 .slide-fade-enter,
 .slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
+
 .login-page {
   display: flex;
   justify-content: center;
@@ -310,6 +313,7 @@ export default {
   @media screen and (max-width: $md) {
     padding: 0 !important;
   }
+
   .modal {
     position: relative;
     display: flex;
@@ -325,16 +329,19 @@ export default {
       flex-direction: column;
       border-radius: 0;
     }
+
     .parts {
       display: flex;
       width: 100%;
       max-width: 100%;
       @media screen and (max-width: $md) {
         overflow: hidden;
+
         &.wrap .part {
           transform: translateX(-100%);
         }
       }
+
       .part {
         display: flex;
         padding: 48px 32px;
@@ -344,6 +351,7 @@ export default {
         @media screen and (max-width: $md) {
           min-width: 100%;
         }
+
         h1 {
           color: $green;
           font-size: 35px;
@@ -351,28 +359,35 @@ export default {
           text-align: center;
           margin-bottom: 30px;
         }
+
         .input-field {
           margin: 7px 0;
         }
+
         .group {
           display: flex;
+
           label {
             margin: auto 0;
             flex: 1;
           }
+
           input[type='submit'] {
             padding: 10px 14px;
           }
         }
+
         hr {
           width: 100%;
           border: 1px solid #999999;
           margin-top: 24px;
         }
+
         .password {
           display: flex;
           justify-content: flex-end;
           margin: -6px 0 16px;
+
           span {
             color: $green;
             font-size: 14px;
@@ -381,20 +396,24 @@ export default {
             cursor: pointer;
           }
         }
+
         .description {
           color: #999999;
           font-size: 14px;
           text-align: center;
           margin-top: 16px;
+
           &.reversed {
             margin: 0 0 16px;
           }
         }
+
         .social {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
           gap: 12px;
           margin-top: 26px;
+
           .social-link {
             display: flex;
             justify-content: center;
@@ -404,25 +423,31 @@ export default {
             font-size: 60px;
             flex: 1;
             border-radius: 6px;
+
             svg {
               width: 28px;
             }
           }
+
           .facebook {
             background-color: #3b5998;
           }
+
           .google {
             background-color: #dd4b39;
           }
+
           .twitter {
             background-color: #00acee;
           }
+
           .likedin {
             background-color: #0e76a8;
           }
         }
       }
     }
+
     .overlay {
       position: absolute;
       z-index: 10;
@@ -452,6 +477,7 @@ export default {
         padding: 24px;
         left: 0;
         border-radius: 0 0 16px 16px;
+
         br {
           display: none;
         }
@@ -463,10 +489,12 @@ export default {
           transform: translate(0);
         }
       }
+
       .content {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+
         h3 {
           color: #ffffff;
           font-size: 32px;
@@ -478,6 +506,7 @@ export default {
             line-height: 32px;
           }
         }
+
         p {
           color: #999999;
           font-size: 12px;
@@ -487,6 +516,7 @@ export default {
       }
     }
   }
+
   &.register .model {
     @media screen and (max-width: 600px) {
       flex-flow: column;

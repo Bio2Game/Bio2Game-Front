@@ -133,6 +133,7 @@ export default {
 .block.index .head {
   align-items: center;
 }
+
 .quizzes-list-creator {
   .vuetable-td-id,
   .vuetable-th-id {

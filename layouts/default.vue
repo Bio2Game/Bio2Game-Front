@@ -41,10 +41,12 @@ export default {
 .slide-leave-to {
   opacity: 0;
 }
+
 .slide-leave,
 .slide-enter-to {
   opacity: 1;
 }
+
 .slide-enter-active {
   position: absolute;
 }
@@ -57,10 +59,12 @@ export default {
 .db-container {
   position: relative;
   min-height: calc(100vh - 5rem);
+
   .cover-hero {
     height: 0;
     transition: all 0.3s;
   }
+
   .page {
     position: relative;
     z-index: 3;
@@ -69,10 +73,12 @@ export default {
     min-height: calc(100vh - 5rem);
   }
 }
+
 .route.index .db-container {
   .page {
     background-color: white;
   }
+
   .cover-hero {
     height: 100vh;
     transition: all 0.1s;
@@ -88,19 +94,23 @@ export default {
     line-height: normal;
     border-left: 5px solid $green;
   }
+
   ul {
     list-style: disc;
     padding-left: 32px;
     margin: 8px 0;
   }
+
   ol {
     list-style: decimal;
     padding-left: 32px;
     margin: 8px 0;
   }
+
   a {
     color: $green;
   }
+
   h1,
   h2,
   h3,
@@ -110,6 +120,7 @@ export default {
     margin: revert;
     font-size: revert;
   }
+
   .quiz-sample {
     padding: 16px;
     margin: 16px 0;
@@ -117,9 +128,11 @@ export default {
     background-color: #a7a7a7;
     border-radius: 4px;
   }
+
   table {
     margin: 8px 0;
   }
+
   img {
     display: flex;
     margin: 8px 0;
@@ -140,12 +153,14 @@ export default {
   user-select: none;
   border-radius: 16px;
   margin-right: 32px;
+
   .left-part {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     transition: 0.4s min-height ease;
+
     .icon {
       position: relative;
       display: flex;
@@ -153,6 +168,7 @@ export default {
       align-items: center;
       margin-left: 0;
       transition: 0.4s margin-left ease;
+
       img {
         position: relative;
         z-index: 2;
@@ -160,6 +176,7 @@ export default {
         height: 100px;
         margin: 42px;
       }
+
       &::after {
         position: absolute;
         z-index: 1;
@@ -171,10 +188,12 @@ export default {
       }
     }
   }
+
   .right-part {
     display: flex;
     background-color: #ffffff;
     flex: 1;
+
     .text {
       display: flex;
       margin: 16px;
@@ -194,6 +213,7 @@ export default {
       .creator {
         margin: 16px 0 0;
         color: $green;
+
         b {
           font-weight: 600;
         }
@@ -210,6 +230,7 @@ export default {
       &.two {
         justify-content: space-between;
       }
+
       .jouer {
         padding: 6px 24px;
         color: #ffffff;
@@ -230,6 +251,7 @@ export default {
       width: 80px;
       height: 80px;
       margin: 30px;
+
       &::after {
         width: 110px;
         height: 110px;
@@ -254,6 +276,7 @@ export default {
 .vue-notification-group {
   top: 6rem !important;
   width: 400px !important;
+
   .notifications {
     padding: 16px;
     margin: 0 16px 8px;

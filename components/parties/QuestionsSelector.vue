@@ -169,40 +169,49 @@ export default {
   cursor: pointer;
   background-color: #29292980;
   left: 0;
+
   .elements {
     display: flex;
     width: 100%;
     flex-direction: row;
+
     div.block {
       flex: 1;
+
       &:last-child {
         margin-left: 24px;
         flex: 2;
       }
+
       .content {
         display: flex;
         flex-direction: column;
         min-height: 40vh;
+
         .selected-quizzes {
           display: flex;
           align-items: center;
           flex-direction: column;
+
           .title {
             margin: 8px 0 16px;
             color: #999999;
             font-size: 18px;
             font-weight: normal;
           }
+
           .quiz-elements {
             display: grid;
             width: 100%;
             grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
             gap: 16px;
+
             .quiz-element {
               display: flex;
               align-items: center;
               cursor: pointer;
               flex-direction: column;
+
               .quiz-icon {
                 width: 48px;
                 height: 48px;
@@ -210,10 +219,12 @@ export default {
                 border-radius: 24px;
                 margin-bottom: 8px;
                 transition: 0.3s border-color ease-out;
+
                 &.active {
                   border-color: $green;
                 }
               }
+
               .quiz-label {
                 color: #414141;
                 font-size: 12px;
@@ -222,11 +233,13 @@ export default {
             }
           }
         }
+
         .questions-selection {
           display: flex;
           align-items: center;
           flex-direction: column;
           flex: 1;
+
           .quiz-name {
             margin: 16px 0 24px;
             color: #4141414d;
@@ -234,19 +247,24 @@ export default {
             font-weight: 600;
             text-transform: uppercase;
           }
+
           .questions {
             display: flex;
             justify-content: center;
             width: 100%;
             flex: 1;
+
             .list {
               display: flex;
               flex: 1;
               flex-direction: column;
+
               .checkbox {
                 margin-bottom: 8px;
+
                 span {
                   color: #adadad;
+
                   b {
                     font-weight: 600;
                   }
@@ -254,6 +272,7 @@ export default {
               }
             }
           }
+
           .count {
             margin: 24px 0 32px;
             color: #585858;
@@ -262,6 +281,7 @@ export default {
             line-height: 18px;
           }
         }
+
         .buttons {
           display: flex;
           width: 100%;
@@ -269,6 +289,7 @@ export default {
           .button {
             flex: 1;
             max-width: none;
+
             &:last-child {
               margin-left: 24px;
             }

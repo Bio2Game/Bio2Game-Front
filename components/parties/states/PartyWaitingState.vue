@@ -101,9 +101,11 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
 .watting {
   display: flex;
   justify-content: center;
@@ -111,6 +113,7 @@ export default {
   width: 100%;
   flex-direction: column;
   min-height: 70vh;
+
   .loader {
     position: relative;
     width: 75px;
@@ -130,21 +133,25 @@ export default {
         transform: scale(1, 1 * 0.2);
         animation: barUp1 4s infinite;
       }
+
       &:nth-child(2) {
         left: (2 - 1) * 15px;
         transform: scale(1, 2 * 0.2);
         animation: barUp2 4s infinite;
       }
+
       &:nth-child(3) {
         left: (3 - 1) * 15px;
         transform: scale(1, 3 * 0.2);
         animation: barUp3 4s infinite;
       }
+
       &:nth-child(4) {
         left: (4 - 1) * 15px;
         transform: scale(1, 4 * 0.2);
         animation: barUp4 4s infinite;
       }
+
       &:nth-child(5) {
         left: (5 - 1) * 15px;
         transform: scale(1, 5 * 0.2);
@@ -170,6 +177,7 @@ export default {
     font-size: 20px;
     text-align: center;
   }
+
   .sharing {
     padding: 24px;
 
@@ -191,6 +199,7 @@ export default {
       display: flex;
       justify-content: space-between;
       margin: 0 -12px 0;
+
       a {
         display: flex;
         justify-content: center;
@@ -202,29 +211,36 @@ export default {
         flex: 1;
         transition: transform 0.1s ease-in, box-shadow 0.1s ease-out;
         box-shadow: 0 3px 6px #00000044;
+
         &:hover {
           transform: translateY(-2px);
           box-shadow: 0 5px 6px #00000044;
         }
+
         &.facebook {
           background-color: #4267b2;
         }
+
         &.qr-code {
           background-color: #282828;
           cursor: pointer;
         }
+
         &.twitter {
           background-color: #1da1f2;
         }
+
         &.email {
           background-color: #858585;
         }
+
         i {
           color: white;
           font-size: 40px;
         }
       }
     }
+
     .qrcode-container {
       display: flex;
       justify-content: center;
@@ -238,57 +254,75 @@ export default {
   0% {
     transform: translate(0, 0);
   }
+
   5% {
     transform: translate(8px, -14px);
   }
+
   10% {
     transform: translate(15px, -10px);
   }
+
   17% {
     transform: translate(23px, -24px);
   }
+
   20% {
     transform: translate(30px, -20px);
   }
+
   27% {
     transform: translate(38px, -34px);
   }
+
   30% {
     transform: translate(45px, -30px);
   }
+
   37% {
     transform: translate(53px, -44px);
   }
+
   40% {
     transform: translate(60px, -40px);
   }
+
   50% {
     transform: translate(60px, 0);
   }
+
   57% {
     transform: translate(53px, -14px);
   }
+
   60% {
     transform: translate(45px, -10px);
   }
+
   67% {
     transform: translate(37px, -24px);
   }
+
   70% {
     transform: translate(30px, -20px);
   }
+
   77% {
     transform: translate(22px, -34px);
   }
+
   80% {
     transform: translate(15px, -30px);
   }
+
   87% {
     transform: translate(7px, -44px);
   }
+
   90% {
     transform: translate(0, -40px);
   }
+
   100% {
     transform: translate(0, 0);
   }
@@ -298,15 +332,19 @@ export default {
   0% {
     transform: scale(1, 0.2);
   }
+
   40% {
     transform: scale(1, 0.2);
   }
+
   50% {
     transform: scale(1, 1);
   }
+
   90% {
     transform: scale(1, 1);
   }
+
   100% {
     transform: scale(1, 0.2);
   }
@@ -315,15 +353,19 @@ export default {
   0% {
     transform: scale(1, 0.4);
   }
+
   40% {
     transform: scale(1, 0.4);
   }
+
   50% {
     transform: scale(1, 0.8);
   }
+
   90% {
     transform: scale(1, 0.8);
   }
+
   100% {
     transform: scale(1, 0.4);
   }
@@ -332,6 +374,7 @@ export default {
   0% {
     transform: scale(1, 0.6);
   }
+
   100% {
     transform: scale(1, 0.6);
   }
@@ -340,15 +383,19 @@ export default {
   0% {
     transform: scale(1, 0.8);
   }
+
   40% {
     transform: scale(1, 0.8);
   }
+
   50% {
     transform: scale(1, 0.4);
   }
+
   90% {
     transform: scale(1, 0.4);
   }
+
   100% {
     transform: scale(1, 0.8);
   }
@@ -357,15 +404,19 @@ export default {
   0% {
     transform: scale(1, 1);
   }
+
   40% {
     transform: scale(1, 1);
   }
+
   50% {
     transform: scale(1, 0.2);
   }
+
   90% {
     transform: scale(1, 0.2);
   }
+
   100% {
     transform: scale(1, 1);
   }

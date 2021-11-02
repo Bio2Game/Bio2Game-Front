@@ -124,11 +124,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .nature {
     width: 350px;
     height: 293.5px;
     margin: 24px 0 16px;
   }
+
   .top {
     h1 {
       margin: 48px 0 24px;
@@ -146,36 +148,44 @@ export default {
         font-size: 24px;
       }
     }
+
     p {
       color: #292929;
       font-size: 18px;
       text-align: center;
     }
   }
+
   .filters {
     display: flex;
     max-width: 400px;
     width: 100%;
+
     .input-container {
       width: 100%;
       border-radius: 22px;
+
       input {
         border-radius: 22px;
+
         &:focus ~ .placeholder,
         &.has-content ~ .placeholder {
           left: 14px;
         }
       }
+
       .focus-bg {
         border-radius: 22px;
       }
     }
   }
+
   .formations {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
     gap: 32px;
     margin-top: 32px;
+
     .formation {
       display: flex;
       padding: 16px;
@@ -184,18 +194,22 @@ export default {
       border-radius: 12px;
       cursor: pointer;
       text-decoration: none;
+
       .image {
         max-width: 300px;
         margin-right: 16px;
+
         img {
           display: flex;
           width: 100%;
           border-radius: 7px;
         }
       }
+
       .content-part {
         flex: 1;
         position: relative;
+
         .domain {
           color: #484848;
           font-size: 14px;
@@ -203,6 +217,7 @@ export default {
           text-transform: uppercase;
           margin-bottom: 24px;
         }
+
         .title {
           margin: 8px 0 12px;
           color: #bbe242;
@@ -210,28 +225,34 @@ export default {
           font-weight: bold;
           line-height: 24px;
         }
+
         .labels {
           display: flex;
           margin-right: 32px;
           margin-bottom: 16px;
+
           .icon {
             width: 16px;
             height: 16px;
           }
+
           .label {
             display: flex;
             align-items: center;
             color: #484848;
             font-size: 16px;
             margin-right: 16px;
+
             span {
               margin-right: 8px;
             }
+
             svg {
               margin-right: 4px;
             }
           }
         }
+
         .description {
           display: flex;
           color: #484848;
@@ -239,6 +260,7 @@ export default {
           line-height: 20px;
           margin-top: auto;
         }
+
         .formation-id {
           position: absolute;
           right: 0;
@@ -249,6 +271,7 @@ export default {
           opacity: 0;
           transition: opacity 0.3s;
         }
+
         .creator {
           position: absolute;
           bottom: 0;
@@ -257,11 +280,13 @@ export default {
           color: $green;
           opacity: 0;
           transition: opacity 0.3s;
+
           b {
             font-weight: 600;
           }
         }
       }
+
       &:hover .formation-id,
       &:hover .creator {
         opacity: 1;

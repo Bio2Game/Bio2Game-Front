@@ -177,11 +177,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .nature {
     width: 350px;
     height: 293.5px;
     margin: 24px 0 16px;
   }
+
   .top {
     h1 {
       margin: 48px 0 24px;
@@ -199,37 +201,46 @@ export default {
         font-size: 24px;
       }
     }
+
     p {
       color: #292929;
       font-size: 18px;
       text-align: center;
     }
   }
+
   .filters {
     display: flex;
+
     .input-container {
       border-radius: 22px;
+
       input {
         border-radius: 22px;
+
         &:focus ~ .placeholder,
         &.has-content ~ .placeholder {
           left: 14px;
         }
       }
+
       .focus-bg {
         border-radius: 22px;
       }
+
       &:last-child {
         margin-left: 32px;
         margin-bottom: auto;
       }
     }
   }
+
   .quizzes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 32px;
     margin-top: 32px;
+
     .quiz {
       position: relative;
       display: flex;
@@ -244,12 +255,14 @@ export default {
       background-color: $green;
       user-select: none;
       border-radius: 16px;
+
       .top-part {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: calc(100% - 50px);
         transition: 0.4s min-height ease;
+
         .icon {
           position: relative;
           display: flex;
@@ -257,6 +270,7 @@ export default {
           align-items: center;
           margin-left: 0;
           transition: 0.4s margin-left ease;
+
           img {
             position: relative;
             z-index: 2;
@@ -265,6 +279,7 @@ export default {
             margin: 4px;
             transition: 0.4s width ease, 0.4s height ease;
           }
+
           &::after {
             position: absolute;
             z-index: 1;
@@ -276,9 +291,11 @@ export default {
           }
         }
       }
+
       .bottom-part {
         background-color: #ffffff;
         flex: 1;
+
         .text {
           width: 80%;
           margin: 11px 0 11px 16px;
@@ -290,6 +307,7 @@ export default {
           .creator {
             margin: 16px 0 0;
             color: $green;
+
             b {
               font-weight: 600;
             }
@@ -343,6 +361,7 @@ export default {
           }
         }
       }
+
       .title {
         position: absolute;
         display: flex;
@@ -356,6 +375,7 @@ export default {
         text-align: center;
         overflow-y: hidden;
         bottom: 0;
+
         h6 {
           overflow: hidden;
           font-weight: 600;
@@ -368,14 +388,17 @@ export default {
       &.enter {
         .top-part {
           min-height: 68px;
+
           .icon {
             margin-left: calc(100% - 64px);
+
             img {
               width: 32px;
               height: 32px;
             }
           }
         }
+
         .title {
           animation: 0.4s title_enter ease forwards;
         }
@@ -385,6 +408,7 @@ export default {
           opacity: 1;
           transition: opacity 0.6s 0.3s;
         }
+
         .quiz-id {
           opacity: 1;
           transition: opacity 0.6s 0.3s;
@@ -395,6 +419,7 @@ export default {
           transition: opacity 0.6s 0.3s;
         }
       }
+
       &.leave {
         .title {
           animation: 0.4s title_leave ease forwards;
@@ -410,6 +435,7 @@ export default {
           margin-left: 0;
           bottom: 0;
         }
+
         49% {
           justify-content: center;
           height: 50px;
@@ -419,6 +445,7 @@ export default {
           bottom: 0;
           margin-left: 110%;
         }
+
         50% {
           top: 0;
           justify-content: flex-start;
@@ -429,6 +456,7 @@ export default {
           bottom: auto;
           margin-left: -110%;
         }
+
         100% {
           top: 0;
           justify-content: flex-start;
@@ -450,6 +478,7 @@ export default {
           margin-left: 0;
           bottom: 0;
         }
+
         50% {
           justify-content: center;
           height: 50px;
@@ -459,6 +488,7 @@ export default {
           bottom: 0;
           margin-left: 110%;
         }
+
         49% {
           top: 0;
           justify-content: flex-start;
@@ -469,6 +499,7 @@ export default {
           bottom: auto;
           margin-left: -110%;
         }
+
         0% {
           top: 0;
           justify-content: flex-start;

@@ -25,39 +25,48 @@ export default {
 .quiz-creation {
   .container {
     flex-direction: column;
+
     .block {
       .head {
         align-items: center;
+
         .section {
           display: flex;
           flex-direction: column;
           flex: 1 0;
           margin-left: 24px;
+
           &:first-child {
             margin-left: 0;
           }
         }
+
         .button {
           margin-left: 24px;
         }
       }
+
       .content {
         min-height: calc(50vh);
+
         .big {
           width: 40%;
         }
+
         .no-elements {
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           width: 100%;
+
           h3 {
             color: $green;
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 16px;
           }
+
           p {
             color: #777777;
             font-size: 16px;
@@ -67,10 +76,12 @@ export default {
         }
       }
     }
+
     .buttons-bar {
       display: flex;
       justify-content: space-between;
       margin: 24px -12px 0;
+
       /* stylelint-disable-next-line  */
       .button {
         flex: 1;
@@ -80,17 +91,21 @@ export default {
     }
   }
 }
+
 .vuetable-body-wrapper {
   max-height: 50vh;
   overflow-y: auto;
 }
+
 .vuetable {
   display: table;
   table-layout: fixed;
   width: 100%;
+
   thead {
     border-bottom: 1px solid #8b8b8b;
     margin: 0 -24px;
+
     th {
       position: relative;
       padding: 16px 0;
@@ -99,30 +114,36 @@ export default {
       text-align: left;
       transition: 0.3s color ease-in-out;
       user-select: none;
+
       i {
         position: absolute;
         margin: -1px 0 0 5px;
         font-size: 18px;
       }
+
       &.sorted-asc,
       &.sorted-desc,
       &.sortable:hover {
         color: $green;
         cursor: pointer;
+
         i {
           color: $green;
         }
       }
+
       &:first-child() {
         padding-left: 16px;
       }
     }
   }
+
   .vuetable-body {
     tr {
       &:nth-child(2n + 1) {
         background-color: #cecece26;
       }
+
       td {
         overflow: hidden;
         height: 20px;
@@ -136,6 +157,7 @@ export default {
       }
     }
   }
+
   .vuetable-empty-result {
     display: none;
   }

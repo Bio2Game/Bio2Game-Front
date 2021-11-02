@@ -43,8 +43,10 @@ export default {
 .not-found {
   margin: 20vh auto 0;
   max-width: 600px;
+
   .head {
     text-align: center;
+
     h1 {
       display: flex;
       justify-content: center;
@@ -54,6 +56,7 @@ export default {
       font-weight: 900;
       margin-bottom: 0;
       user-select: none;
+
       div {
         text-shadow: 0 1px 6px #00000040;
       }
@@ -61,17 +64,20 @@ export default {
       span {
         color: #ffffff;
       }
+
       img {
         height: 150px;
       }
 
       @media screen and (max-width: 720px) {
         font-size: 120px;
+
         img {
           height: 130px;
         }
       }
     }
+
     h4 {
       margin: 5px 0 20px;
       color: #272727;
@@ -81,9 +87,11 @@ export default {
       }
     }
   }
+
   .buttons {
     display: flex;
     justify-content: center;
+
     .button {
       max-width: 100%;
       width: 100%;
