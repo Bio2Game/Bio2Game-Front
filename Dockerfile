@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16.6.1
 WORKDIR /app
 COPY . .
 
@@ -7,4 +7,4 @@ RUN npm run build
 
 EXPOSE 6001
 
-CMD yarn start
+CMD npm run start
