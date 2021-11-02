@@ -30,17 +30,20 @@
             v-model="username"
             type="text"
             placeholder="Pseudonyme"
+            name="username"
             :error="filtredErrors('username')"
           />
           <InputElement
             v-model="email"
             type="email"
             placeholder="Email"
+            name="email"
             :error="filtredErrors('email')"
           />
           <InputElement
             v-model="password"
             type="password"
+            name="password"
             placeholder="Mot de passe"
             :error="filtredErrors('password')"
             @keydown.enter.native="register()"
@@ -86,6 +89,7 @@
             <InputElement
               v-model="email"
               type="email"
+              name="email"
               placeholder="Email"
               :error="filtredErrors('email')"
             />
@@ -105,12 +109,14 @@
             <InputElement
               v-model="password"
               type="password"
+              name="password"
               placeholder="Mot de passe"
               :error="filtredErrors('password')"
             />
             <InputElement
               v-model="password_confirmation"
               type="password"
+              name="password_confirmation"
               placeholder="Confirmation du mot de passe"
               :error="filtredErrors('password_confirmation')"
             />
