@@ -102,6 +102,16 @@ export default {
   components: {
     MarkdownEditor,
   },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isDataEdited) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
+      ),
+    )
+  },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     if (params.formation !== 'create') {
@@ -195,16 +205,6 @@ export default {
         },
       ].filter((_, index) => index < this.$auth.user.status)
     },
-  },
-  beforeRouteLeave(to, from, next) {
-    if (!this.isDataEdited) {
-      return next()
-    }
-    next(
-      window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
-    )
   },
   methods: {
     get(key) {

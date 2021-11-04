@@ -68,10 +68,16 @@ import ClockIcon from '@/assets/icons/clock.svg?inline'
 
 export default {
   name: 'Formations',
-  middleware: 'auth',
   components: {
     LeafIcon,
     ClockIcon,
+  },
+  middleware: 'auth',
+  data() {
+    return {
+      selectedLevels: [0, 1, 2, 3, 4],
+      search: '',
+    }
   },
   async fetch({ store, error }) {
     try {
@@ -81,12 +87,6 @@ export default {
         statusCode: 503,
         message: 'Unable to fetch quiz on the Bio2Game API',
       })
-    }
-  },
-  data() {
-    return {
-      selectedLevels: [0, 1, 2, 3, 4],
-      search: '',
     }
   },
   computed: {
