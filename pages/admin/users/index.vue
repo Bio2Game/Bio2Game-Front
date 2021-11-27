@@ -61,18 +61,8 @@ export default {
   components: {
     vuetable,
   },
-  transition: 'left',
   middleware: ['auth', 'admin'],
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('admin/fetchUsers')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch users on the Bio2Game API',
-      })
-    }
-  },
+  transition: 'left',
   data() {
     return {
       search: '',
@@ -110,6 +100,16 @@ export default {
         'Universitaire',
         'Expert',
       ],
+    }
+  },
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('admin/fetchUsers')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch users on the Bio2Game API',
+      })
     }
   },
   computed: {

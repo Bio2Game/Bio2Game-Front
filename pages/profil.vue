@@ -65,11 +65,6 @@ import meta from '@/mixins/meta.js'
 export default {
   name: 'Profil',
   middleware: ['auth', 'user'],
-  computed: {
-    isIndex() {
-      return this.$route.name === 'profil'
-    },
-  },
   head() {
     return meta.get({
       name: 'Profil',
@@ -78,29 +73,15 @@ export default {
       slug: 'profil',
     })
   },
+  computed: {
+    isIndex() {
+      return this.$route.name === 'profil'
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.slide-enter,
-.slide-leave-to {
-  opacity: 0;
-}
-
-.slide-leave,
-.slide-enter-to {
-  opacity: 1;
-}
-
-.slide-enter-active {
-  position: absolute;
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.6s ease-in-out;
-}
-
 .profil-page {
   display: flex;
   @media screen and (max-width: $sm) {

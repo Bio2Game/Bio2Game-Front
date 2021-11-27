@@ -98,10 +98,20 @@ import DragIcon from '@/assets/icons/drag.svg?inline'
 
 export default {
   name: 'Create',
-  middleware: ['auth', 'contributor'],
   components: {
     draggable,
     DragIcon,
+  },
+  middleware: ['auth', 'contributor'],
+  data() {
+    return {
+      name: '',
+      questions: [],
+      quizId: null,
+      autoselect: null,
+      questionPanel: false,
+      drag: false,
+    }
   },
   async fetch({ store, error }) {
     try {
@@ -111,16 +121,6 @@ export default {
         statusCode: 503,
         message: 'Unable to fetch quiz on the Bio2Game API',
       })
-    }
-  },
-  data() {
-    return {
-      name: '',
-      questions: [],
-      quizId: null,
-      autoselect: null,
-      questionPanel: false,
-      drag: false,
     }
   },
   computed: {

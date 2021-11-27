@@ -48,16 +48,6 @@ export default {
     vuetable,
   },
   middleware: ['auth', 'contributor'],
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('formations/fetchPersonnalFormations')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch your formations on the Bio2Game API',
-      })
-    }
-  },
   data() {
     return {
       tableFields: [
@@ -107,6 +97,16 @@ export default {
           sortField: 'created_at',
         },
       ],
+    }
+  },
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('formations/fetchPersonnalFormations')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch your formations on the Bio2Game API',
+      })
     }
   },
   computed: {

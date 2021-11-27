@@ -192,12 +192,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import BanIcon from '@/assets/icons/ban.svg?inline'
 import CrownIcon from '@/assets/icons/crown.svg?inline'
 import CloseIcon from '@/assets/icons/close.svg?inline'
 import UnbanIcon from '@/assets/icons/unban.svg?inline'
-
-import { mapState } from 'vuex'
 
 export default {
   name: 'Game',

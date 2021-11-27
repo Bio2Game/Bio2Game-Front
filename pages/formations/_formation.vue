@@ -11,15 +11,15 @@
 </template>
 
 <script>
-import { parseFormations } from '@/utils/markdown'
 import StringToVue from 'string-to-vue'
+import { parseFormations } from '@/utils/markdown'
 
 export default {
   name: 'Formation',
-  middleware: 'auth',
   components: {
     StringToVue,
   },
+  middleware: 'auth',
   async fetch({ store, params, error }) {
     try {
       const [, id] = params.formation.match(/^(\d+)-\S+$/)

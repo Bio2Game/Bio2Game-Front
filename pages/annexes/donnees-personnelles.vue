@@ -299,7 +299,7 @@
         Les analyses réalisées afin d’optimiser la navigation dans le jeu du
         joueur, sélection des meilleures questions, ordre de proposition de
         quiz, suggestions de nouveaux domaines,… ne sont utilisés que dans le
-        cadre de l’activité du joueur. Les rapports présentant la position du
+        cadre de l'activité du joueur. Les rapports présentant la position du
         joueur et son rang ne sont accessibles que uniquement par le joueur et
         lui-seul.
       </p>
