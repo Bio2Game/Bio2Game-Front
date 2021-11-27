@@ -72,11 +72,7 @@
             :defaultValue="0"
             placeholder="Sexe"
           />
-          <AnimatorSelectorElement
-            v-model="animators"
-            :selectedAnimators="animators"
-            :animators="all_animators"
-          />
+          <AnimatorSelectorElement @input="complete.animators = $event" />
           <SelectorElement
             v-model="complete.contributor_type"
             :selected="complete.contributor_type"
@@ -132,17 +128,10 @@ export default {
       complete: {
         sex: '',
         birth_date: '',
-        current_animators_ids: [],
         contributor_mobile: '',
         website: '',
       },
-      animators: [1, 2],
       errors: [],
-      all_animators: [
-        { id: 1, name: 'Thomas' },
-        { id: 2, name: 'François' },
-        { id: 3, username: 'Bigboss' },
-      ],
       sexes: [
         {
           ref: 1,
