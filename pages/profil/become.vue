@@ -32,6 +32,12 @@
           placeholder="Site web"
           :error="filtredErrors('website')"
         />
+        <CheckboxElement
+          class="is_animator"
+          :checked="become.is_animator"
+          label="Animateur ?"
+          @input="become.is_animator = $event"
+        />
         <a class="button md green" @click="register(become)">Sauvegarder</a>
       </div>
     </div>
@@ -48,7 +54,7 @@ export default {
         name: '',
         contributor_type: null,
         contributor_mobile: '',
-        is_animator: true,
+        is_animator: false,
         website: '',
         status: 1,
       },
@@ -106,5 +112,9 @@ export default {
 <style lang="scss">
 .content.column {
   flex-direction: column;
+}
+
+.is_animator {
+  margin-bottom: 16px;
 }
 </style>
