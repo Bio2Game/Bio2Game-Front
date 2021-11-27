@@ -6,6 +6,7 @@
         :class="{ 'has-content': hasContent }"
         type="file"
         class="input-file"
+        :accept="accept"
         @change="update"
       />
     </div>
@@ -25,16 +26,16 @@
 export default {
   name: 'FileSelectorElement',
   props: {
-    value: {
-      type: [Number, String],
-      default: '',
-    },
     placeholder: {
       type: String,
       required: true,
     },
     default: {
       type: [Number, String],
+      default: '',
+    },
+    accept: {
+      type: String,
       default: '',
     },
     error: {
@@ -109,12 +110,12 @@ export default {
       z-index: 3;
       box-sizing: border-box;
       width: 100%;
-      padding: 7px 15px;
+      padding: 8px 15px;
       border: 1px solid #cccccc;
       background: transparent;
       color: #aaaaaa;
-      font-size: 15px;
-      line-height: 28px;
+      font-size: 14px;
+      line-height: 25px;
       letter-spacing: 1px;
       outline: none;
       border-radius: 4px;
