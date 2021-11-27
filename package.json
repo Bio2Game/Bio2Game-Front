@@ -37,7 +37,6 @@
     "nuxt-webfontloader": "^1.1.0",
     "simple-markdown": "^0.7.3",
     "simplemde": "^1.11.2",
-    "socket.io": "^4.2.0",
     "socket.io-client": "^4.2.0",
     "string-to-vue": "^1.1.2",
     "vue-carousel": "^0.18.0",
