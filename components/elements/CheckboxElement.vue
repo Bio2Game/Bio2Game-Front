@@ -4,7 +4,7 @@
       :id="id"
       type="checkbox"
       :checked="checked"
-      @change="$emit('input', $event.target.checked)"
+      @change="$emit('input', !!$event.target.checked)"
     />
     <span v-html="label"></span>
   </label>
