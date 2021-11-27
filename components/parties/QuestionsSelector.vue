@@ -25,7 +25,10 @@
               >
                 <img
                   class="quiz-icon"
-                  :src="selectedQuiz.domain.icon.reference"
+                  :src="
+                    'https://cdn.bio2game.com/icons/' +
+                    selectedQuiz.domain.icon.reference
+                  "
                   :alt="selectedQuiz.label"
                   :title="selectedQuiz.label"
                   :class="{ active: selectedQuiz.id === quizId }"
