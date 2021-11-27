@@ -25,8 +25,8 @@ export const getters = {
       if (!quiz.questions) return {}
       return quiz.questions.find(question => question.id === questionId) || {}
     },
-  questions: ({ contributorQuizzes }) => {
-    return contributorQuizzes
+  questions: ({ quizzes }) => {
+    return quizzes
       .map(quiz =>
         quiz.questions
           ? quiz.questions.map(question => ({ ...question, quiz }))
