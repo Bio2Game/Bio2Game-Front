@@ -44,20 +44,12 @@
 <script>
 export default {
   name: 'AnimatorSelectorElement',
-  props: {
-    selectedAnimators: {
-      type: Array,
-      default: () => [],
-    },
-    animators: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       active: false,
       search: '',
+      animators: [],
+      selectedAnimators: [],
     }
   },
   computed: {
@@ -77,18 +69,27 @@ export default {
       if (!this.selectedAnimators.length) {
         return 'Animateurs à suivre'
       }
-      return `${this.selectedAnimators.length} animateurs selectionnés`
+      return `${this.selectedAnimators.length} ${
+        this.selectedAnimators.length > 1
+          ? 'animateurs selectionnés'
+          : 'animateur selectionné'
+      }`
     },
+  },
+  async mounted() {
+    const data = await this.$axios.$get('/api/user/animators')
+    this.animators = data.all_animators
+    this.selectedAnimators = data.current_animators_ids
   },
   methods: {
     toggle(animatorId) {
       const index = this.selectedAnimators.indexOf(animatorId)
-      this.$emit(
-        'input',
-        index === -1
-          ? [...this.selectedAnimators, animatorId]
-          : this.selectedAnimators.filter(a => a !== animatorId),
-      )
+      if (index === -1) {
+        this.selectedAnimators.push(animatorId)
+      } else {
+        this.selectedAnimators.splice(index, 1)
+      }
+      this.$emit('input', this.selectedAnimators)
     },
     closeAnimatorSelector() {
       if (this.active) this.active = false
