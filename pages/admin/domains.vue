@@ -16,16 +16,16 @@
           :error="filtredErrors('label')"
         />
         <InputElement
-          v-model="current_domain.icon_id"
-          :value="current_domain.icon_id"
+          v-model="current_domain.iconId"
+          :value="current_domain.iconId"
           type="number"
           placeholder="Icone Id"
-          :error="filtredErrors('icon_id')"
+          :error="filtredErrors('iconId')"
         />
         <FileSelectorElement
-          v-model="current_domain.illustration"
+          v-model="current_domain.image"
           placeholder="Illustration"
-          :error="filtredErrors('illustration')"
+          :error="filtredErrors('image')"
         />
         <ChipsSelectorElement
           v-model="current_domain.keyswords"
@@ -63,8 +63,20 @@ moment.locale('fr')
 
 export default {
   name: 'Domaines',
-  transition: 'left',
   middleware: ['auth', 'admin'],
+  transition: 'left',
+  data() {
+    return {
+      domain_id: false,
+      current_domain: {
+        name: '',
+        iconId: '',
+        image: '',
+        keyswords: '',
+      },
+      errors: [],
+    }
+  },
   async fetch({ store, error }) {
     try {
       await store.dispatch('admin/fetchDomains')
@@ -73,18 +85,6 @@ export default {
         statusCode: 503,
         message: 'Unable to fetch users on the Bio2Game API',
       })
-    }
-  },
-  data() {
-    return {
-      domain_id: false,
-      current_domain: {
-        name: '',
-        icon_id: '',
-        illustration: '',
-        keyswords: '',
-      },
-      errors: [],
     }
   },
   computed: {
