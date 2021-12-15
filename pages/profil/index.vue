@@ -73,20 +73,22 @@
             placeholder="Sexe"
           />
           <AnimatorSelectorElement @input="complete.animators = $event" />
-          <SelectorElement
-            v-model="complete.contributor_type"
-            :selected="complete.contributor_type"
-            :items="types"
-            placeholder="Contributeur"
-          />
-        </div>
-        <div class="part">
+
           <InputElement
             v-model="complete.localisation"
             :value="complete.localisation"
             type="text"
             placeholder="Localisation"
             :error="filtredErrors('localisation')"
+          />
+        </div>
+        <div class="part">
+          <SelectorElement
+            v-model="complete.contributor_type"
+            :selected="complete.contributor_type"
+            :items="types"
+            placeholder="Contributeur"
+            :disabled="!$auth.user.status"
           />
           <InputElement
             v-model="complete.contributor_mobile"
@@ -103,6 +105,12 @@
             placeholder="Site web (Contributeur)"
             :error="filtredErrors('website')"
             :disabled="!$auth.user.status"
+          />
+          <CheckboxElement
+            class="is_animator"
+            :checked="complete.is_animator"
+            label="Animateur ?"
+            @input="complete.is_animator = $event"
           />
           <a class="button md green" @click="update(complete)">Sauvegarder</a>
         </div>
@@ -190,6 +198,9 @@ export default {
         ? this.$auth.user.contributor_type
         : '',
       website: this.$auth.user.status ? this.$auth.user.website : '',
+      is_animator: this.$auth.user.is_animator
+        ? this.$auth.user.is_animator
+        : '',
     }
   },
   methods: {
