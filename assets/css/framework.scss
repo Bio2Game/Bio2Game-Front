@@ -367,17 +367,17 @@ a.b2glink:hover {
 
 .left-enter-active,
 .left-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 
 .left-enter {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateX(-50px);
 }
 
 .left-leave-to {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateX(50px);
 }
 
 .block {
