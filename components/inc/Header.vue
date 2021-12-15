@@ -56,17 +56,17 @@
                     >
                       <FormationsIcon /> Mes formations
                     </nuxt-link>
-                    <nuxt-link v-if="$auth.user.status > 999" to="/admin">
+                    <nuxt-link v-if="$auth.user.status === 1000" to="/admin">
                       <SettingsIcon /> Admin
                     </nuxt-link>
-                    <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
+                    <a @click="logout()"><PowerIcon /> Déconnexion</a>
                   </ul>
                   <ul v-else>
                     <nuxt-link to="/login">
                       <UserIcon /> Créer un compte
                     </nuxt-link>
                     <nuxt-link to="/parties"><Nature2Icon /> Parties</nuxt-link>
-                    <a @click.prevent="logout()"><PowerIcon /> Déconnexion</a>
+                    <a @click="logout()"><PowerIcon /> Déconnexion</a>
                   </ul>
                 </div>
               </div>
@@ -150,6 +150,7 @@ export default {
       }
     },
     async logout() {
+      console.log('cc')
       await this.$auth.logout()
       this.$store.commit('admin/RESET_STATE')
       this.$store.commit('formations/RESET_STATE')
@@ -381,6 +382,7 @@ export default {
 
             .user-menu {
               position: relative;
+              z-index: 1;
               box-shadow: none;
 
               ul {
