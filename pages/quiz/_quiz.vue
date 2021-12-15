@@ -43,6 +43,12 @@ export default {
   validate({ params }) {
     return /^\d+-\S+$/.test(params.quiz)
   },
+  data() {
+    return {
+      username: '',
+      askAuth: false,
+    }
+  },
   async fetch({ params, $auth, store, error }) {
     try {
       const [, id] = params.quiz.match(/^(\d+)-\S+$/)
@@ -52,12 +58,6 @@ export default {
       }
     } catch (e) {
       error({ statusCode: 404, message: e.message })
-    }
-  },
-  data() {
-    return {
-      username: '',
-      askAuth: false,
     }
   },
   computed: mapState('quiz', ['status']),
@@ -182,11 +182,9 @@ export default {
             width: 100%;
           }
 
-
           &.checked {
             border-color: $green;
           }
-
 
           &.animator {
             background-color: #c7c7c7;
@@ -194,7 +192,6 @@ export default {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
             cursor: not-allowed;
           }
-
 
           &.right {
             background-color: $green !important;
@@ -262,6 +259,7 @@ export default {
 
             img {
               max-width: 100%;
+              margin-top: 8px;
             }
           }
         }
@@ -315,7 +313,6 @@ export default {
 
           .element {
             margin-top: 32px;
-
 
             .question-name {
               color: #292929;

@@ -155,7 +155,6 @@ export default {
         }
 
         .item,
-
         .response {
           position: relative;
           display: flex;
@@ -247,6 +246,7 @@ export default {
 
             img {
               max-width: 100%;
+              margin-top: 8px;
             }
           }
         }
