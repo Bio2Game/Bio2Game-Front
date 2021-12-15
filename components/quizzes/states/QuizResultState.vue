@@ -91,7 +91,7 @@
               <a
                 v-if="question.source"
                 class="source"
-                :href="question.source"
+                :href="formatSource(question.source)"
                 target="black"
                 >En savoir plus</a
               >
@@ -128,9 +128,8 @@
 </template>
 
 <script>
-import { parse } from '@/utils/markdown'
-
 import { mapState, mapGetters } from 'vuex'
+import { parse } from '@/utils/markdown'
 
 import ValidIcon from '@/assets/icons/valid.svg?inline'
 import InvalidIcon from '@/assets/icons/invalid.svg?inline'
@@ -210,6 +209,11 @@ export default {
           source: question.source,
         }
       })
+    },
+  },
+  methods: {
+    formatSource(source) {
+      return source.startsWith('http') ? source : `https://${source}`
     },
   },
 }
