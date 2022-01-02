@@ -109,7 +109,8 @@
           <CheckboxElement
             class="is_animator"
             :checked="complete.is_animator"
-            label="Animateur ?"
+            label="Enseignant ?"
+            :disabled="!$auth.user.status"
             @input="complete.is_animator = $event"
           />
           <a class="button md green" @click="update(complete)">Sauvegarder</a>
@@ -200,7 +201,7 @@ export default {
       website: this.$auth.user.status ? this.$auth.user.website : '',
       is_animator: this.$auth.user.is_animator
         ? this.$auth.user.is_animator
-        : '',
+        : false,
     }
   },
   methods: {

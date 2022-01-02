@@ -35,7 +35,7 @@
         <CheckboxElement
           class="is_animator"
           :checked="become.is_animator"
-          label="Animateur ?"
+          label="Enseignant ?"
           @input="become.is_animator = $event"
         />
         <a class="button md green" @click="register(become)">Sauvegarder</a>
