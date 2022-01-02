@@ -43,11 +43,9 @@ export const getters = {
       return question
         ? question.responses
         : Object.values(
-            JSON.parse(
-              questionId === null
-                ? state.currentQuestion.responses
-                : state.quiz.questions.find(q => q.id === questionId).responses,
-            ),
+            questionId === null
+              ? state.currentQuestion.responses
+              : state.quiz.questions.find(q => q.id === questionId).responses,
           )
     },
 }

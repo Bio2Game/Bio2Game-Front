@@ -91,9 +91,8 @@
 </template>
 
 <script>
-import { parse } from '@/utils/markdown'
-
 import { mapState, mapGetters } from 'vuex'
+import { parse } from '@/utils/markdown'
 
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
@@ -148,9 +147,7 @@ export default {
     },
 
     shuffleResponses() {
-      const responses = Object.values(
-        JSON.parse(this.currentQuestion.responses),
-      )
+      const responses = Object.values(this.currentQuestion.responses)
 
       this.$store.commit('quiz/RESPONSES_ORDER', {
         id: this.currentQuestion.id,

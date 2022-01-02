@@ -95,9 +95,8 @@
 
 <script>
 import { shuffle } from 'lodash'
-import { parse } from '@/utils/markdown'
-
 import { mapState } from 'vuex'
+import { parse } from '@/utils/markdown'
 
 const colors = ['right', 'wrong', 'wrong', 'realy_wrong']
 
@@ -168,7 +167,7 @@ export default {
       return position < 10 && total > 9 ? `0${position}` : position
     },
     shuffleResponses() {
-      const responses = Object.values(JSON.parse(this.questionState.responses))
+      const responses = Object.values(this.questionState.responses)
 
       this.$store.commit('parties/RESPONSES_EQUIVALENTS', responses)
       this.$store.commit('parties/RESPONSES_ORDER', shuffle(responses))

@@ -95,6 +95,12 @@
                 target="black"
                 >En savoir plus</a
               >
+              <a
+                class="source"
+                :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com`"
+                target="black"
+                >Contacter le créateur</a
+              >
             </div>
           </div>
         </div>
@@ -201,7 +207,7 @@ export default {
                 text,
                 color: this.colors[equivalents.indexOf(text)],
               }))
-            : Object.values(JSON.parse(question.responses)).map((text, i) => ({
+            : Object.values(question.responses).map((text, i) => ({
                 text,
                 color: this.colors[i],
               })),

@@ -45,7 +45,7 @@
                 <AvatarElement
                   class="avatar"
                   :email="game.animator.email"
-                  :path="game.animator.avatar_path"
+                  :path="game.animator.avatar"
                   :name="game.animator.name || game.animator.username"
                   :size="32"
                 />
@@ -64,7 +64,7 @@
                   <AvatarElement
                     class="avatar"
                     :email="player.email"
-                    :path="player.icon_url"
+                    :path="player.avatar"
                     :name="player.name || player.username"
                     :size="32"
                   />
@@ -248,7 +248,7 @@ export default {
                 username: this.$auth.user.username,
                 name: this.$auth.user.name,
                 email: this.$auth.user.email,
-                avatar_path: this.$auth.user.avatar_path,
+                avatar: this.$auth.user.avatar_path,
               }
             : null,
           /* eslint-enable indent */

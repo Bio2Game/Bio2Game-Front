@@ -157,6 +157,20 @@ export default {
   components: {
     MarkdownEditor,
   },
+  beforeRouteLeave(to, from, next) {
+    if (
+      (!this.isDataEdited || this.created) &&
+      (!to.params.quiz_ref ||
+        this.get('quiz_id') === to.params.quiz_ref.split('-')[0])
+    ) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
+      ),
+    )
+  },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     if (params.quiz_ref !== 'create') {
@@ -241,29 +255,13 @@ export default {
         v =>
           this.get(v) !==
           (v.startsWith('response')
-            ? this.questionObj.responses
-              ? JSON.parse(this.questionObj.responses)
-              : {}
+            ? this.questionObj.responses || {}
             : this.questionObj)[v],
       )
     },
   },
   mounted() {
     this.quiz_id = parseInt(this.$route.params.quiz_ref.split('-')[0])
-  },
-  beforeRouteLeave(to, from, next) {
-    if (
-      (!this.isDataEdited || this.created) &&
-      (!to.params.quiz_ref ||
-        this.get('quiz_id') === to.params.quiz_ref.split('-')[0])
-    ) {
-      return next()
-    }
-    next(
-      window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
-    )
   },
   methods: {
     deleteData() {
@@ -281,20 +279,13 @@ export default {
       this.status = null
     },
     getResponse(key) {
-      return (
-        this[key] ||
-        (this.questionObj.responses
-          ? JSON.parse(this.questionObj.responses)[key]
-          : '')
-      )
+      return this[key] || this.questionObj.responses[key] || ''
     },
     get(key) {
       return this[key] !== null
         ? this[key]
         : (key.startsWith('response')
-            ? this.questionObj.responses
-              ? JSON.parse(this.questionObj.responses)
-              : {}
+            ? this.questionObj.responses || {}
             : this.questionObj)[key]
     },
     filtredErrors(field) {
