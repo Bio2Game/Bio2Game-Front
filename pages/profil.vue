@@ -234,6 +234,16 @@ export default {
     position: relative;
     width: 100%;
 
+    .is_animator {
+      margin: 6px 0 16px;
+    }
+
+    .additional-info {
+      margin: -8px 0 0 2px;
+      color: #939393;
+      font-size: 10px;
+    }
+
     .animation-container {
       width: 100%;
 

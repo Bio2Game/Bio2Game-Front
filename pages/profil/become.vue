@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     async register(payload) {
       try {
@@ -112,9 +112,5 @@ export default {
 <style lang="scss">
 .content.column {
   flex-direction: column;
-}
-
-.is_animator {
-  margin-bottom: 16px;
 }
 </style>

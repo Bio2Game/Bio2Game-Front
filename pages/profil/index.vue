@@ -69,10 +69,9 @@
             v-model="complete.sex"
             :selected="complete.sex"
             :items="sexes"
-            :defaultValue="0"
+            :default-value="0"
             placeholder="Sexe"
           />
-          <AnimatorSelectorElement @input="complete.animators = $event" />
 
           <InputElement
             v-model="complete.localisation"
@@ -81,6 +80,12 @@
             placeholder="Localisation"
             :error="filtredErrors('localisation')"
           />
+          <AnimatorSelectorElement @input="complete.animators = $event" />
+
+          <p class="additional-info">
+            En sélectionnant un animateur, vous acceptez qu'il ai accès à vos
+            résultats.
+          </p>
         </div>
         <div class="part">
           <SelectorElement
@@ -209,7 +214,7 @@ export default {
       return date
     },
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     async update(payload) {
       try {
