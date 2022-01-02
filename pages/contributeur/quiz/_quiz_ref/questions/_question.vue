@@ -13,7 +13,7 @@
           :max="30"
           placeholder="Libélé de la question"
           :error="filtredErrors('label')"
-          @input="value => (label = value)"
+          @input="(value) => (label = value)"
         />
         <InputElement
           :value="get('time')"
@@ -22,15 +22,15 @@
           class="white_label"
           placeholder="Temps autorisé(s)"
           :error="filtredErrors('time')"
-          @input="value => (time = value)"
+          @input="(value) => (time = value)"
         />
         <SelectorElement
           :selected="get('quiz_id')"
           :items="quizzes"
           :error="filtredErrors('quiz_id')"
-          :defaultValue="get('quiz_id')"
-          refKey="id"
-          displayKey="label"
+          :default-value="get('quiz_id')"
+          ref-key="id"
+          display-key="label"
           placeholder="Quiz de la question"
           @input="quiz_id = $event"
         />
@@ -49,7 +49,7 @@
               :value="get('question')"
               placeholder="Intitulé de la question"
               :error="filtredErrors('question')"
-              @input="value => (question = value)"
+              @input="(value) => (question = value)"
             />
           </client-only>
           <InputElement
@@ -58,7 +58,7 @@
             name="source"
             placeholder="Source"
             :error="filtredErrors('source')"
-            @input="value => (source = value)"
+            @input="(value) => (source = value)"
           />
           <InputElement
             :value="get('endDate')"
@@ -66,7 +66,7 @@
             name="endDate"
             placeholder="Date d’expiration (optionnel)"
             :error="filtredErrors('endDate')"
-            @input="value => (endDate = value)"
+            @input="(value) => (endDate = value)"
           />
           <SelectorElement
             :selected="get('profil')"
@@ -85,7 +85,7 @@
             placeholder="Bonne réponse"
             :max="30"
             :error="filtredErrors('responses.response0')"
-            @input="value => (response0 = value)"
+            @input="(value) => (response0 = value)"
           />
           <InputElement
             :value="getResponse('response1')"
@@ -94,7 +94,7 @@
             placeholder="Mauvaise réponse n°1"
             :max="30"
             :error="filtredErrors('responses.response1')"
-            @input="value => (response1 = value)"
+            @input="(value) => (response1 = value)"
           />
           <InputElement
             :value="getResponse('response2')"
@@ -103,7 +103,7 @@
             placeholder="Mauvaise réponse n°2"
             :max="30"
             :error="filtredErrors('responses.response2')"
-            @input="value => (response2 = value)"
+            @input="(value) => (response2 = value)"
           />
           <InputElement
             :value="getResponse('response3')"
@@ -112,7 +112,7 @@
             placeholder="Réponse improbable"
             :max="30"
             :error="filtredErrors('responses.response3')"
-            @input="value => (response3 = value)"
+            @input="(value) => (response3 = value)"
           />
           <h5 class="section-title">Explications</h5>
           <client-only>
@@ -120,7 +120,7 @@
               :value="get('explication')"
               placeholder="Explication de la réponse"
               :error="filtredErrors('explication')"
-              @input="value => (explication = value)"
+              @input="(value) => (explication = value)"
             />
           </client-only>
         </div>
@@ -167,8 +167,8 @@ export default {
     }
     next(
       window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?"
+      )
     )
   },
   middleware: ['auth', 'contributor'],
@@ -227,7 +227,7 @@ export default {
     questionObj() {
       return this.$store.getters['quizzes/getPersonnalQuestion'](
         this.$route.params.quiz_ref,
-        this.$route.params.question,
+        this.$route.params.question
       )
     },
     quizzes() {
@@ -237,7 +237,6 @@ export default {
       return this.$route.params.question === 'create'
     },
     isDataEdited() {
-      // eslint-disable-next-line prettier/prettier
       return [
         'label',
         'time',
@@ -252,11 +251,11 @@ export default {
         'explication',
         'status',
       ].some(
-        v =>
+        (v) =>
           this.get(v) !==
           (v.startsWith('response')
             ? this.questionObj.responses || {}
-            : this.questionObj)[v],
+            : this.questionObj)[v]
       )
     },
   },
@@ -289,7 +288,7 @@ export default {
             : this.questionObj)[key]
     },
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     async createQuestion() {
       try {
@@ -313,7 +312,7 @@ export default {
             explication: this.get('explication') || '',
             contributorId: this.$auth.user.id,
             status: !!this.get('status') + 0,
-          },
+          }
         )
 
         if (this.isCreationPage) {
@@ -350,7 +349,7 @@ export default {
         })
 
         return this.$router.push(
-          `/contributeur/quiz/${this.$route.params.quiz_ref}`,
+          `/contributeur/quiz/${this.$route.params.quiz_ref}`
         )
       } catch (error) {
         console.log(error)

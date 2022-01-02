@@ -26,8 +26,8 @@
               :selected="quizId"
               :items="quizzes"
               placeholder="Selectionner le quiz"
-              displayKey="label"
-              refKey="id"
+              display-key="label"
+              ref-key="id"
               @input="quizId = $event"
             />
             <CheckboxElement
@@ -52,8 +52,8 @@
               :selected="quizId"
               :items="quizzes"
               placeholder="Selectionner le quiz"
-              displayKey="label"
-              refKey="id"
+              display-key="label"
+              ref-key="id"
               @input="quizId = $event"
             />
             <div class="button md green" @click="waiter()">Sélectionner</div>
@@ -141,7 +141,7 @@ export default {
           defaultValue(el) {
             el.innerHTML = '0'
           },
-          onUpdate: el => {
+          onUpdate: (el) => {
             el.innerHTML = `${this.simplemde.codemirror.getValue().length}${
               self.max ? ` /${self.max}` : ''
             }`
@@ -260,13 +260,13 @@ export default {
               '|',
               {
                 name: 'quiz',
-                action: async editor => {
+                action: async (editor) => {
                   const cm = editor.codemirror
 
                   self.quizId = cm.getSelection() || null
                   self.quizzesSelector = 1
 
-                  await new Promise(resolve => {
+                  await new Promise((resolve) => {
                     self.waiter = resolve
                   })
                   self.quizzesSelector = 0
@@ -293,13 +293,13 @@ export default {
               },
               {
                 name: 'quiz-next',
-                action: async editor => {
+                action: async (editor) => {
                   const cm = editor.codemirror
 
                   self.quizId = cm.getSelection() || null
                   self.quizzesSelector = 2
 
-                  await new Promise(resolve => {
+                  await new Promise((resolve) => {
                     self.waiter = resolve
                   })
                   self.quizzesSelector = 0
@@ -364,9 +364,9 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then(data => {
+        .then((data) => {
           this.simplemde.codemirror.replaceSelection(
-            "![Nom de l'image](" + data + ')',
+            "![Nom de l'image](" + data + ')'
           )
         })
         .catch(function (error) {

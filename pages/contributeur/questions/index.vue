@@ -15,10 +15,10 @@
           <vuetable
             :fields="tableFields"
             :data="questions"
-            :defaultSortBy="{ field: 'updated_at', direction: 'desc' }"
+            :default-sort-by="{ field: 'updated_at', direction: 'desc' }"
             @row-clicked="
               $router.push(
-                `/contributeur/quiz/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`,
+                `/contributeur/quiz/${$event.data.quiz.id}-${$event.data.quiz.url}/questions/${$event.data.id}`
               )
             "
           />
@@ -61,16 +61,6 @@ export default {
     vuetable,
   },
   middleware: ['auth', 'contributor'],
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('quizzes/fetchPeronnalQuizzes')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch your quiz on the Bio2Game API',
-      })
-    }
-  },
   data() {
     return {
       tableFields: [
@@ -94,28 +84,38 @@ export default {
         {
           name: 'quiz',
           title: 'Quiz',
-          formatter: quiz => (quiz ? quiz.label : 'Aucun'),
+          formatter: (quiz) => (quiz ? quiz.label : 'Aucun'),
           sortField: 'quiz',
         },
         {
           name: 'status',
           title: 'Status',
-          formatter: bool => (bool ? 'Publique' : 'Privé'),
+          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
           sortField: 'status',
         },
         {
           name: 'updated_at',
           title: 'Edition',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: 'updated_at',
         },
         {
           name: 'created_at',
           title: 'Création',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: 'created_at',
         },
       ],
+    }
+  },
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('quizzes/fetchPeronnalQuizzes')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch your quiz on the Bio2Game API',
+      })
     }
   },
   computed: {

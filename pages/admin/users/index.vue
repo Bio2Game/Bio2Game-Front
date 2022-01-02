@@ -18,7 +18,7 @@
           class="users"
           :fields="tableFields"
           :data="filtredUsers"
-          :defaultSortBy="{ field: 'username', direction: 'asc' }"
+          :default-sort-by="{ field: 'username', direction: 'asc' }"
         >
           <template slot="status-slot" slot-scope="props">
             <span
@@ -120,10 +120,10 @@ export default {
       /* eslint-disable indent */
       return this.search
         ? this.users.filter(
-            user =>
+            (user) =>
               user.username.includes(this.search) ||
               user.email.includes(this.search) ||
-              user.id === this.search,
+              user.id === this.search
           )
         : this.users
       /* eslint-enable indent */

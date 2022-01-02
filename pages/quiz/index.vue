@@ -72,16 +72,6 @@ export default {
     // Favorite,
     // FavoriteBorder,
   },
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('quizzes/fetchQuizzes')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch quiz on the Bio2Game API',
-      })
-    }
-  },
   data() {
     return {
       enter: null,
@@ -113,6 +103,16 @@ export default {
       ],
     }
   },
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('quizzes/fetchQuizzes')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch quiz on the Bio2Game API',
+      })
+    }
+  },
   computed: {
     quizzes() {
       return this.$store.state.quizzes.quizzes
@@ -121,7 +121,7 @@ export default {
       const search = this.search.toLowerCase()
       const places = this.places.toLowerCase()
       return this.quizzes.filter(
-        quiz =>
+        (quiz) =>
           this.selectedLevels.includes(Number(quiz.level)) &&
           (!search ||
             quiz.label.toLowerCase().includes(search) ||
@@ -132,7 +132,7 @@ export default {
             (quiz.author.name
               ? quiz.author.name.toLowerCase().includes(search)
               : false)) &&
-          (!places || quiz.localisation.toLowerCase().includes(places)),
+          (!places || quiz.localisation.toLowerCase().includes(places))
       )
     },
   },

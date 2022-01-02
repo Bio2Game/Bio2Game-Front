@@ -14,7 +14,7 @@
             placeholder="Libélé du quizz"
             :max="30"
             :error="filtredErrors('label')"
-            @input="value => (label = value)"
+            @input="(value) => (label = value)"
           />
           <InputElement
             :value="get('description')"
@@ -23,7 +23,7 @@
             class="white_label"
             placeholder="Description du quizz"
             :error="filtredErrors('description')"
-            @input="value => (description = value)"
+            @input="(value) => (description = value)"
           />
         </div>
         <div class="section">
@@ -34,7 +34,7 @@
                 class="white_label"
                 placeholder="Domaine"
                 :error="filtredErrors('domainId')"
-                @input="value => (domain_id = value)"
+                @input="(value) => (domain_id = value)"
               />
             </div>
             <div class="section">
@@ -54,7 +54,7 @@
             class="white_label"
             placeholder="Localisation (optionnel)"
             :error="filtredErrors('localisation')"
-            @input="value => (localisation = value)"
+            @input="(value) => (localisation = value)"
           />
         </div>
         <div class="section top-buttons">
@@ -76,11 +76,11 @@
             class="questions"
             :data="quiz.questions"
             :draggable="editOrder"
-            :defaultSortBy="{ field: 'updated_at', direction: 'asc' }"
+            :default-sort-by="{ field: 'updated_at', direction: 'asc' }"
             @row-clicked="
               !editOrder &&
                 $router.push(
-                  `/contributeur/quiz/${$route.params.quiz}/questions/${$event.data.id}`,
+                  `/contributeur/quiz/${$route.params.quiz}/questions/${$event.data.id}`
                 )
             "
             @input="saveTempQuestionsOrder"
@@ -142,6 +142,16 @@ export default {
   components: {
     vuetable,
   },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isDataEdited) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?"
+      )
+    )
+  },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     if (params.quiz !== 'create') {
@@ -195,7 +205,7 @@ export default {
     },
     quiz() {
       return this.$store.getters['quizzes/getPersonnalQuiz'](
-        this.$route.params.quiz,
+        this.$route.params.quiz
       )
     },
     tableFields() {
@@ -203,7 +213,7 @@ export default {
         {
           name: !this.editOrder ? 'order' : VuetableFieldHandle,
           title: 'Ordre',
-          formatter: index => index + 1,
+          formatter: (index) => index + 1,
           sortField: !this.editOrder ? 'order' : null,
         },
         {
@@ -226,19 +236,19 @@ export default {
         {
           name: 'status',
           title: 'Status',
-          formatter: bool => (bool ? 'Publique' : 'Privé'),
+          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
           sortField: !this.editOrder ? 'status' : null,
         },
         {
           name: 'updated_at',
           title: 'Edition',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: !this.editOrder ? 'updated_at' : null,
         },
         {
           name: 'created_at',
           title: 'Création',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: !this.editOrder ? 'created_at' : null,
         },
       ]
@@ -257,22 +267,12 @@ export default {
       )
     },
   },
-  beforeRouteLeave(to, from, next) {
-    if (!this.isDataEdited) {
-      return next()
-    }
-    next(
-      window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
-    )
-  },
   methods: {
     get(key) {
       return this[key] !== null ? this[key] : this.quiz[key]
     },
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     deleteData() {
       this.label = null
@@ -315,13 +315,13 @@ export default {
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
             status: !!this.get('status') + 0,
-          },
+          }
         )
 
         if (questionCreation) {
           this.deleteData()
           return this.$router.push(
-            `/contributeur/quiz/${quiz.id}-${quiz.url}/questions/create`,
+            `/contributeur/quiz/${quiz.id}-${quiz.url}/questions/create`
           )
         }
 

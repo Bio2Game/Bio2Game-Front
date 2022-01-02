@@ -24,8 +24,8 @@
                 :selected="quizId || $route.query.autoselect"
                 :items="quizzes"
                 placeholder="Selectionner le quiz"
-                displayKey="label"
-                refKey="id"
+                display-key="label"
+                ref-key="id"
                 @input="loadQuiz($event)"
               />
               <nuxt-link
@@ -146,7 +146,7 @@ export default {
   },
   methods: {
     loadQuestions(questions) {
-      this.questions = questions.map(q => ({ ...q, active: true }))
+      this.questions = questions.map((q) => ({ ...q, active: true }))
       this.questionPanel = false
     },
     generateLabel(label, index) {
@@ -154,7 +154,7 @@ export default {
     },
     loadQuiz(value) {
       this.quizId = value
-      const quiz = this.quizzes.find(q => q.id === value)
+      const quiz = this.quizzes.find((q) => q.id === value)
       this.questions = quiz.questions
     },
     startParty() {
@@ -167,7 +167,7 @@ export default {
         })
       }
 
-      if (this.questions.filter(q => q.active).length < 3) {
+      if (this.questions.filter((q) => q.active).length < 3) {
         return this.$notify({
           type: 'error',
           text: 'Veuillez selectionner au moins 3 questions.',
@@ -178,7 +178,7 @@ export default {
 
       this.$socket.client.emit('createGame', {
         name: this.name,
-        questions: this.questions.filter(q => q.active),
+        questions: this.questions.filter((q) => q.active),
         animatorId: this.$auth.user.id,
       })
     },

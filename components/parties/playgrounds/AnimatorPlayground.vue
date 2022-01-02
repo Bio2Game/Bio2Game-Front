@@ -19,7 +19,7 @@
         <PartyQuestionState
           v-if="game.status === 1"
           :interactive="false"
-          :forceAnswer="true"
+          :force-answer="true"
         />
       </Tab>
     </Tabs>

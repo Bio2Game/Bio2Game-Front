@@ -46,10 +46,17 @@ moment.locale('fr')
 
 export default {
   name: 'Password',
-  transition: 'left',
   middleware: ['auth', 'admin'],
   validate({ params }) {
     return /^\d+$/.test(params.id)
+  },
+  transition: 'left',
+  data() {
+    return {
+      errors: [],
+      password: '',
+      password_confirmation: '',
+    }
   },
   async fetch({ params, store, error }) {
     try {
@@ -61,23 +68,16 @@ export default {
       })
     }
   },
-  data() {
-    return {
-      errors: [],
-      password: '',
-      password_confirmation: '',
-    }
-  },
   computed: {
     user() {
       return this.$store.getters['admin/getNoAdminUser'](
-        Number(this.$route.params.id),
+        Number(this.$route.params.id)
       )
     },
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     async changePassword() {
       try {

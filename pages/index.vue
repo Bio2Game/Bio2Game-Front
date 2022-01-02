@@ -6,7 +6,7 @@
           <div class="image-container">
             <Lottie
               class="image"
-              :animationData="feature.data"
+              :animation-data="feature.data"
               :play="true"
             ></Lottie>
           </div>
@@ -23,12 +23,12 @@
       </div>
 
       <carousel
-        :perPage="3"
+        :per-page="3"
         :autoplay="false"
-        :navigationEnabled="true"
-        paginationPosition="top"
-        :navigationClickTargetSize="0"
-        :paginationEnabled="false"
+        :navigation-enabled="true"
+        pagination-position="top"
+        :navigation-click-target-size="0"
+        :pagination-enabled="false"
         class="container carousel"
       >
         <slide v-for="contributor in contributors" :key="contributor.id">
@@ -135,17 +135,17 @@ export default {
       ],
     }
   },
-  async mounted() {
-    const { contributors } = await this.$axios.$get('/api/contributors')
-    this.contributors = contributors.sort(
-      (a, b) => b.quizzes.length - a.quizzes.length,
-    )
-  },
   head() {
     return meta.get({
       description:
         'Jeu pour apprendre à consommer de façon responsable en testant vos connaissances dans le développement durable. En adhérant à BIO2GAME vous partagerez vos préoccupations environnementales.',
     })
+  },
+  async mounted() {
+    const { contributors } = await this.$axios.$get('/api/contributors')
+    this.contributors = contributors.sort(
+      (a, b) => b.quizzes.length - a.quizzes.length
+    )
   },
 }
 </script>

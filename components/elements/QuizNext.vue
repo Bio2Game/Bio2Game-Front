@@ -35,7 +35,7 @@ export default {
       return this.$store.getters['formations/quizzesFormation']
     },
     quiz() {
-      return this.quizzes.find(quiz => quiz.id === Number(this.id)) || {}
+      return this.quizzes.find((quiz) => quiz.id === Number(this.id)) || {}
     },
     url() {
       return `/quiz/${this.id}-${this.quiz.url}`

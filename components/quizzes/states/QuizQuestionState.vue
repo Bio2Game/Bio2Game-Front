@@ -164,7 +164,7 @@ export default {
       if (this.response === null) {
         this.cancel()
         this.response = this.$store.getters['quiz/getFakeIndex'](3)
-        await new Promise(resolve => setTimeout(() => resolve(), 1000))
+        await new Promise((resolve) => setTimeout(() => resolve(), 1000))
       }
 
       this.cancel()
@@ -195,8 +195,8 @@ export default {
         this.left = Math.floor(left / 1000)
       }
 
-      await new Promise(resolve => requestAnimationFrame(resolve))
-      await new Promise(resolve => requestAnimationFrame(resolve))
+      await new Promise((resolve) => requestAnimationFrame(resolve))
+      await new Promise((resolve) => requestAnimationFrame(resolve))
 
       loop()
     },

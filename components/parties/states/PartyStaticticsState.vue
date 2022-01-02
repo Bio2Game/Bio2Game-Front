@@ -3,7 +3,7 @@
     <div v-if="room_responses.length" class="questions">
       <div
         v-for="(question, index) of questions"
-        :key="index"
+        :key="question.id"
         class="question-stats"
       >
         <div class="infos">
@@ -11,7 +11,11 @@
           <p>{{ question.description }}</p>
         </div>
         <client-only>
-          <DoughnutElement class="doughnut" :chartData="question.data" />
+          <DoughnutElement
+            :id="question.id"
+            class="doughnut"
+            :chart-data="question.data"
+          />
         </client-only>
       </div>
     </div>
@@ -35,8 +39,9 @@ export default {
   computed: {
     ...mapState('parties', ['room_responses']),
     questions() {
-      return this.room_responses.map(question => ({
-        description: question.question_desc,
+      return this.room_responses.map((question) => ({
+        id: question.id,
+        description: question.label,
         data: {
           labels: [
             question.really_wrong_answers > 1

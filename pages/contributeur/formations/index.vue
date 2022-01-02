@@ -15,7 +15,7 @@
           <vuetable
             :fields="tableFields"
             :data="formations"
-            :defaultSortBy="{ field: 'updated_at', direction: 'desc' }"
+            :default-sort-by="{ field: 'updated_at', direction: 'desc' }"
             @row-clicked="
               $router.push(`/contributeur/formations/${$event.data.id}`)
             "
@@ -65,12 +65,12 @@ export default {
           name: 'domain',
           title: 'Domaine',
           sortField: 'domain.label',
-          formatter: domain => (domain ? domain.label : 'Aucun'),
+          formatter: (domain) => (domain ? domain.label : 'Aucun'),
         },
         {
           name: 'status',
           title: 'Status',
-          formatter: bool => (bool ? 'Publique' : 'Privé'),
+          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
           sortField: 'status',
         },
         {
@@ -82,18 +82,18 @@ export default {
         {
           name: 'quizzes',
           title: 'Quizzes',
-          formatter: quizzes => (quizzes ? quizzes.length : 0),
+          formatter: (quizzes) => (quizzes ? quizzes.length : 0),
         },
         {
           name: 'updated_at',
           title: 'Edition',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: 'updated_at',
         },
         {
           name: 'created_at',
           title: 'Création',
-          formatter: date => moment(date).fromNow(),
+          formatter: (date) => moment(date).fromNow(),
           sortField: 'created_at',
         },
       ],
