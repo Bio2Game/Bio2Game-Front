@@ -4,6 +4,7 @@
       :id="id"
       type="checkbox"
       :checked="checked"
+      :disabled="disabled"
       @change="$emit('input', !!$event.target.checked)"
     />
     <span v-html="label"></span>
@@ -21,6 +22,10 @@ export default {
     id: {
       type: [String, Number],
       default: () => Math.random().toString().substring(2),
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     label: {
       type: String,
@@ -80,6 +85,11 @@ export default {
     position: absolute;
     opacity: 0;
     pointer-events: none;
+
+    &:disabled + span {
+      cursor: not-allowed;
+      filter: grayscale(1);
+    }
 
     &:checked + span {
       &::before {
