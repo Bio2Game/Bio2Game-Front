@@ -25,8 +25,8 @@
           :selected="quiz_id"
           :items="quizzes"
           :error="filtredErrors('quiz_id')"
-          refKey="id"
-          displayKey="label"
+          ref-key="id"
+          display-key="label"
           placeholder="Quiz de la question"
           @input="quiz_id = $event"
         />
@@ -144,6 +144,16 @@ export default {
   components: {
     MarkdownEditor,
   },
+  beforeRouteLeave(to, from, next) {
+    if (!this.isDataEdited) {
+      return next()
+    }
+    next(
+      window.confirm(
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?"
+      )
+    )
+  },
   middleware: ['auth', 'contributor'],
   async asyncData({ store, error, params }) {
     try {
@@ -193,23 +203,27 @@ export default {
   },
   computed: {
     quizzes() {
-      return this.$store.state.quizzes.contributorQuizzes
+      return [...this.$store.state.quizzes.contributorQuizzes].sort((a, b) =>
+        a.label.localeCompare(b.label)
+      )
     },
     isDataEdited() {
-      // eslint-disable-next-line prettier/prettier
-      return [ 'label', 'time', 'quiz_id', 'question', 'source', 'endDate', 'profil', 'response0', 'response1', 'response2', 'response3', 'explication', 'status'
-      ].some(v => this[v])
+      return [
+        'label',
+        'time',
+        'quiz_id',
+        'question',
+        'source',
+        'endDate',
+        'profil',
+        'response0',
+        'response1',
+        'response2',
+        'response3',
+        'explication',
+        'status',
+      ].some((v) => this[v])
     },
-  },
-  beforeRouteLeave(to, from, next) {
-    if (!this.isDataEdited) {
-      return next()
-    }
-    next(
-      window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
-    )
   },
   methods: {
     deleteData() {
@@ -228,7 +242,7 @@ export default {
       this.status = ''
     },
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     async createQuestion() {
       try {

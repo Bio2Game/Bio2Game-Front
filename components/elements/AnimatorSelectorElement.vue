@@ -78,7 +78,7 @@ export default {
   },
   async mounted() {
     const data = await this.$axios.$get('/api/user/animators')
-    this.animators = data.all_animators
+    this.animators = data.all_animators.sort((a, b) => (a.name || a.username).localeCompare(b.name || b.username))
     this.selectedAnimators = data.current_animators_ids
   },
   methods: {

@@ -10,8 +10,8 @@
             v-model="quizId"
             :selected="quizId"
             :items="quizzes"
-            displayKey="label"
-            refKey="id"
+            display-key="label"
+            ref-key="id"
             placeholder="Quiz"
           />
           <div class="selected-quizzes">
@@ -116,13 +116,15 @@ export default {
   },
   computed: {
     quizzes() {
-      return this.$store.state.quizzes.quizzes
+      return [...this.$store.state.quizzes.quizzes].sort((a, b) =>
+        a.label.localeCompare(b.label)
+      )
     },
     globalQuestions() {
       return this.$store.getters['quizzes/questions']
     },
     quiz() {
-      return this.quizzes.find(q => q.id === this.quizId)
+      return this.quizzes.find((q) => q.id === this.quizId)
     },
     splitedQuestions() {
       if (!this.quiz) return [[], []]
@@ -138,21 +140,21 @@ export default {
     },
     selectedQuizzes() {
       const entries = Object.entries(this.selectedQuestions)
-        .filter(q => q[1])
-        .map(q => parseInt(q[0]))
-      return this.quizzes.filter(quiz =>
-        quiz.questions.some(q => entries.includes(q.id)),
+        .filter((q) => q[1])
+        .map((q) => parseInt(q[0]))
+      return this.quizzes.filter((quiz) =>
+        quiz.questions.some((q) => entries.includes(q.id))
       )
     },
     count() {
-      return Object.values(this.selectedQuestions).filter(q => q).length
+      return Object.values(this.selectedQuestions).filter((q) => q).length
     },
     formatedQuestions() {
-      return this.globalQuestions.filter(q => !!this.selectedQuestions[q.id])
+      return this.globalQuestions.filter((q) => !!this.selectedQuestions[q.id])
     },
   },
   mounted() {
-    this.questions.forEach(question => {
+    this.questions.forEach((question) => {
       this.$set(this.selectedQuestions, question.id, question.active)
     })
   },

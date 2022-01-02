@@ -108,8 +108,8 @@ export default {
     }
     next(
       window.confirm(
-        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?",
-      ),
+        "Vous n'avez pas sauvegardé vos modifications, êtes vous sûr de vouloir quitter la page ?"
+      )
     )
   },
   middleware: ['auth', 'contributor'],
@@ -158,18 +158,19 @@ export default {
     formation() {
       return (
         this.$store.state.formations.contributorFormations.find(
-          f => f.id === Number(this.$route.params.formation),
+          (f) => f.id === Number(this.$route.params.formation)
         ) || {}
       )
     },
     quizzes() {
-      return this.$store.state.quizzes.quizzes
+      return [...this.$store.state.quizzes.quizzes].sort((a, b) =>
+        a.label.localeCompare(b.label)
+      )
     },
     isCreationPage() {
       return this.$route.params.formation === 'create'
     },
     isDataEdited() {
-      // eslint-disable-next-line prettier/prettier
       return [
         'label',
         'description',
@@ -179,7 +180,7 @@ export default {
         'duration',
         'leaves',
         'domain_id',
-      ].some(v => this.get(v) !== this.formation[v])
+      ].some((v) => this.get(v) !== this.formation[v])
     },
     profils() {
       return [
@@ -211,7 +212,7 @@ export default {
       return this[key] === null ? this.formation[key] : this[key]
     },
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     deleteData() {
       this.label = null
@@ -241,7 +242,7 @@ export default {
             user_id: this.$auth.user.id,
             quizzes: this.findContentQuizzes(this.get('content')),
             status: !!this.get('status') + 0,
-          },
+          }
         )
 
         this.$notify({
@@ -267,7 +268,7 @@ export default {
       try {
         await this.$store.dispatch(
           `formations/deleteFormation`,
-          this.formation.id,
+          this.formation.id
         )
 
         return this.$router.push(`/contributeur/formations`)
