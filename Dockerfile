@@ -1,14 +1,14 @@
-FROM node:16.6.1
+FROM node:16.13
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 EXPOSE 6001
 
-CMD npm run start
+CMD yarn start
