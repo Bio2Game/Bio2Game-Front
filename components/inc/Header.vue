@@ -44,7 +44,7 @@
                   <DownIcon class="down" />
                 </div>
                 <div class="user-menu">
-                  <ul v-if="$auth.strategy.name === 'user'">
+                  <ul v-if="$auth.strategy.name !== 'guest'">
                     <nuxt-link to="/profil"><UserIcon /> Mon profil</nuxt-link>
                     <!-- <nuxt-link to="/quiz"><Favorite /> Mes favoris</nuxt-link> -->
                     <nuxt-link v-if="$auth.user.status" to="/contributeur/quiz">

@@ -227,6 +227,28 @@ export default {
           user: { url: '/api/auth/guest', method: 'get' },
         },
       },
+      ...Object.fromEntries(
+        ['google', 'twitter', 'linkedin', 'facebook'].map(social => [
+          social,
+          {
+            scheme: 'local',
+            token: {
+              property: 'token',
+              required: true,
+              type: 'Bearer',
+              maxAge: false,
+            },
+            user: {
+              property: false,
+              autoFetch: true,
+            },
+            endpoints: {
+              logout: { url: '/api/auth/user/logout', method: 'post' },
+              user: { url: '/api/auth/user', method: 'get' },
+            },
+          },
+        ]),
+      ),
     },
     redirect: {
       callback: '/login/callback',
@@ -273,6 +295,10 @@ export default {
       twitterCreator: '@DraftMan_Dev',
       nativeUI: true,
     },
+  },
+
+  publicRuntimeConfig: {
+    cdnURL: process.env.CDN_URL,
   },
 
   /*

@@ -131,16 +131,16 @@
           <hr />
           <p class="description">Connectez vous avez vos réseaux sociaux</p>
           <div class="social">
-            <a class="social-link facebook" href="/login/facebook">
-              <Facebook />
-            </a>
-            <a class="social-link google" href="/login/google">
+            <a class="social-link google" @click="socialLogin('google')">
               <Google />
             </a>
-            <a class="social-link twitter" href="/login/twitter">
+            <a class="social-link facebook" @click="socialLogin('facebook')">
+              <Facebook />
+            </a>
+            <a class="social-link twitter" @click="socialLogin('twitter')">
               <Twitter />
             </a>
-            <a class="social-link likedin" href="/login/likedin">
+            <a class="social-link linkedin" @click="socialLogin('linkedin')">
               <Linkedin />
             </a>
           </div>
@@ -158,13 +158,13 @@ import Linkedin from '@/assets/icons/linkedin.svg?inline'
 
 export default {
   name: 'Login',
-  middleware: ['simple-auth'],
   components: {
     Facebook,
     Google,
     Twitter,
     Linkedin,
   },
+  middleware: ['simple-auth'],
   data() {
     return {
       username: '',
@@ -285,6 +285,17 @@ export default {
         if (messages) {
           this.errors = messages.errors
         }
+      }
+    },
+    async socialLogin(type) {
+      try {
+        const response = await this.$axios.$get(`/api/auth/social/${type}`)
+        if (!response) return
+        window.location = response
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error.response)
+        this.errors = error.response.data.errors || []
       }
     },
   },
@@ -423,6 +434,7 @@ export default {
             font-size: 60px;
             flex: 1;
             border-radius: 6px;
+            cursor: pointer;
 
             svg {
               width: 28px;
@@ -441,7 +453,7 @@ export default {
             background-color: #00acee;
           }
 
-          .likedin {
+          .linkedin {
             background-color: #0e76a8;
           }
         }
@@ -461,7 +473,7 @@ export default {
           rgba(33, 37, 34, 0.85),
           rgba(33, 37, 34, 0.85)
         ),
-        url('../assets/images/login.jpg');
+        url('../../assets/images/login.jpg');
       left: -8px;
       bottom: -8px;
       flex: 1 0;
