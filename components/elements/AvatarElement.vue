@@ -31,13 +31,9 @@ export default {
         if (this.path.startsWith('http')) return this.path
         return `${this.$config.cdnURL}/${this.path}`
       }
-      if (this.email) {
-        return `https://www.gravatar.com/avatar/${md5(
-          this.email.trim().toLowerCase(),
-        )}?s=${this.size}&d=mp`
-      }
-
-      return this.default
+      return `https://www.gravatar.com/avatar/${md5(
+        this.email.trim().toLowerCase()
+      )}?s=${this.size}&d=mp`
     },
   },
 }
