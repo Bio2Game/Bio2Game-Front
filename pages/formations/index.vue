@@ -53,7 +53,7 @@
             <p>{{ formation.description }}</p>
           </div>
           <p class="creator">
-            <b>Créateur :</b> {{ formation.author.username }}
+            {{ formation.author.username }}
           </p>
           <span class="formation-id">#{{ formation.id }}</span>
         </div>
@@ -96,7 +96,7 @@ export default {
     filtredFormations() {
       const search = this.search.toLowerCase()
       return this.formations.filter(
-        formation =>
+        (formation) =>
           this.selectedLevels.includes(Number(formation.level)) &&
           (!search ||
             formation.label.toLowerCase().includes(search) ||
@@ -107,7 +107,7 @@ export default {
               formation.domain.label.toLowerCase().includes(search)) ||
             (formation.author.name
               ? formation.author.name.toLowerCase().includes(search)
-              : false)),
+              : false))
       )
     },
   },

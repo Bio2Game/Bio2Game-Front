@@ -99,7 +99,7 @@
                 class="source"
                 :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com`"
                 target="black"
-                >Contacter le créateur</a
+                >Contacter le contributeur</a
               >
             </div>
           </div>
@@ -169,7 +169,7 @@ export default {
       return this.quiz.questions.reduce(
         (acc, curr) =>
           acc + (curr.user_response && !curr.user_response.repons_nb ? 1 : 0),
-        0,
+        0
       )
     },
     score() {
@@ -192,7 +192,7 @@ export default {
       }
     },
     questions() {
-      return this.quiz.questions.map(question => {
+      return this.quiz.questions.map((question) => {
         const { responses, equivalents } =
           this.$store.state.quiz.responses[question.id] || {}
         return {
@@ -203,7 +203,7 @@ export default {
             ? question.user_response.repons_nb
             : 3,
           responses: responses
-            ? responses.map(text => ({
+            ? responses.map((text) => ({
                 text,
                 color: this.colors[equivalents.indexOf(text)],
               }))

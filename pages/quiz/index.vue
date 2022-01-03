@@ -41,7 +41,9 @@
         <div class="bottom-part">
           <div class="text">
             <p>{{ quiz.description }}</p>
-            <p class="creator"><b>Créateur :</b> {{ quiz.author.username }}</p>
+            <p class="creator">
+              <b>Contributeur :</b> {{ quiz.author.username }}
+            </p>
           </div>
           <div class="buttons">
             <!--
