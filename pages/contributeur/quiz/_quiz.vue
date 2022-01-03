@@ -60,7 +60,7 @@
         <div class="section top-buttons">
           <div
             class="button md equal border_white"
-            @click="status = !get('status')"
+            @click="status = +!get('status')"
           >
             {{ get('status') ? 'Publique' : 'Privé' }}
           </div>
@@ -314,7 +314,7 @@ export default {
             language: 'fr',
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
-            status: !!this.get('status') + 0,
+            status: +!!this.get('status'),
           }
         )
 

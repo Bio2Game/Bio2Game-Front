@@ -36,7 +36,7 @@
         />
         <div
           class="button md equal border_white"
-          @click="status = !get('status')"
+          @click="status = +!get('status')"
         >
           {{ get('status') ? 'Publique' : 'Privé' }}
         </div>
@@ -278,7 +278,7 @@ export default {
       this.status = null
     },
     getResponse(key) {
-      return this[key] || this.questionObj.responses[key] || ''
+      return this[key] || (this.questionObj.responses || {})[key] || ''
     },
     get(key) {
       return this[key] !== null
@@ -311,7 +311,7 @@ export default {
             },
             explication: this.get('explication') || '',
             contributorId: this.$auth.user.id,
-            status: !!this.get('status') + 0,
+            status: +!!this.get('status'),
           }
         )
 
