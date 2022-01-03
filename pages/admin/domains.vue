@@ -16,11 +16,11 @@
           :error="filtredErrors('label')"
         />
         <InputElement
-          v-model="current_domain.iconId"
-          :value="current_domain.iconId"
+          v-model="current_domain.icon_id"
+          :value="current_domain.icon_id"
           type="number"
           placeholder="Icone Id"
-          :error="filtredErrors('iconId')"
+          :error="filtredErrors('icon_id')"
         />
         <FileSelectorElement
           v-model="current_domain.image"
@@ -57,10 +57,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
-moment.locale('fr')
-
 export default {
   name: 'Domaines',
   middleware: ['auth', 'admin'],
@@ -70,7 +66,7 @@ export default {
       domain_id: false,
       current_domain: {
         name: '',
-        iconId: '',
+        icon_id: '',
         image: '',
         keyswords: '',
       },
@@ -94,11 +90,16 @@ export default {
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     editDomain(domain) {
       this.domain_id = domain.id
-      this.current_domain = domain
+      this.current_domain = {
+        id: domain.id,
+        label: domain.label,
+        icon_id: domain.icon_id,
+        keyswords: domain.keyswords,
+      }
     },
     async saveDomain() {
       if (!this.domain_id) {
@@ -143,6 +144,7 @@ export default {
 <style lang="scss">
 .blocks {
   display: flex;
+  width: 100%;
 
   .block {
     flex: 1;

@@ -12,11 +12,11 @@ const getDefaultState = () => ({
 export const state = getDefaultState
 
 export const getters = {
-  getNoAdminUsers: state => {
-    return state.users.filter(u => u.status < 1000)
+  getNoAdminUsers: (state) => {
+    return state.users.filter((u) => u.status < 1000)
   },
-  getNoAdminUser: state => id => {
-    return state.users.find(u => u.id === id && u.status < 1000)
+  getNoAdminUser: (state) => (id) => {
+    return state.users.find((u) => u.id === id && u.status < 1000)
   },
 }
 
@@ -54,7 +54,7 @@ export const mutations = {
   // Updates
 
   UPDATE_USER(state, user) {
-    const index = state.users.findIndex(u => u.id === user.id)
+    const index = state.users.findIndex((u) => u.id === user.id)
     Vue.set(state.users, index, user)
   },
 
@@ -63,11 +63,11 @@ export const mutations = {
   },
 
   UPDATE_DOMAIN(state, domain) {
-    const domainIndex = state.domains.findIndex(q => q.id === domain.id)
+    const domainIndex = state.domains.findIndex((q) => q.id === domain.id)
     Vue.set(
       state.domains,
       domainIndex,
-      Object.assign({}, state.domains[domainIndex], domain),
+      Object.assign({}, state.domains[domainIndex], domain)
     )
   },
 }
@@ -103,22 +103,32 @@ export const actions = {
   async updateUser({ commit }, payload) {
     const response = await this.$axios.$patch(
       `/api/admin/users/${payload.id}`,
-      payload,
+      payload
     )
     commit('UPDATE_USER', response.user)
     return response.user
   },
 
   async createDomain({ commit }, payload) {
-    const response = await this.$axios.$post(`/api/admin/domains`, payload)
+    const body = new FormData()
+    for (const key in payload) {
+      body.append(key, payload[key])
+    }
+
+    const response = await this.$axios.$post(`/api/admin/domains`, body)
     commit('ADD_DOMAIN', response.domain)
     return response.domain
   },
 
   async updateDomain({ commit }, payload) {
+    const body = new FormData()
+    for (const key in payload) {
+      body.append(key, payload[key])
+    }
+
     const response = await this.$axios.$patch(
       `/api/admin/domains/${payload.id}`,
-      payload,
+      body
     )
     commit('UPDATE_DOMAIN', response.domain)
     return response.domain
