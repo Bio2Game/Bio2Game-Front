@@ -55,30 +55,32 @@ export default {
   computed: {
     elements() {
       return this.animators
-        .map(item => ({
+        .map((item) => ({
           ...item,
           selected: this.selectedAnimators.includes(item.id),
         }))
         .filter(
-          animator =>
+          (animator) =>
             this.searchElement(animator.name) ||
-            this.searchElement(animator.username),
+            this.searchElement(animator.username)
         )
     },
     placeholder() {
       if (!this.selectedAnimators.length) {
-        return 'Animateurs à suivre'
+        return 'Enseignants à suivre'
       }
       return `${this.selectedAnimators.length} ${
         this.selectedAnimators.length > 1
-          ? 'animateurs selectionnés'
-          : 'animateur selectionné'
+          ? 'enseignants selectionnés'
+          : 'enseignant selectionné'
       }`
     },
   },
   async mounted() {
     const data = await this.$axios.$get('/api/user/animators')
-    this.animators = data.all_animators.sort((a, b) => (a.name || a.username).localeCompare(b.name || b.username))
+    this.animators = data.all_animators.sort((a, b) =>
+      (a.name || a.username).localeCompare(b.name || b.username)
+    )
     this.selectedAnimators = data.current_animators_ids
   },
   methods: {
