@@ -2,7 +2,7 @@
   <div class="animation-container">
     <div class="block">
       <div class="head">
-        <h5>Informations principales</h5>
+        <h5>Informations</h5>
       </div>
       <div class="content">
         <div class="part mr-3">
@@ -13,22 +13,6 @@
             placeholder="Pseudonyme"
             :error="filtredErrors('username')"
           />
-          <InputElement
-            v-model="basics.name"
-            :value="basics.name"
-            type="text"
-            name="name"
-            placeholder="Nom complet"
-            :error="filtredErrors('name')"
-          />
-          <TextareaElement
-            v-model="basics.description"
-            :value="basics.description"
-            placeholder="Description"
-            :error="filtredErrors('description')"
-          />
-        </div>
-        <div class="part">
           <InputElement
             v-model="basics.email"
             :value="basics.email"
@@ -48,16 +32,23 @@
             placeholder="Nouveau mot de passe"
             :error="filtredErrors('password')"
           />
-          <a class="button md green" @click="update(basics)">Sauvegarder</a>
+          <AnimatorSelectorElement @input="complete.animators = $event" />
+
+          <p class="additional-info">
+            En sélectionnant un enseignant, vous acceptez qu'il ai accès à vos
+            résultats.
+          </p>
+
         </div>
-      </div>
-    </div>
-    <div class="block">
-      <div class="head">
-        <h5>Informations secondaires</h5>
-      </div>
-      <div class="content">
-        <div class="part mr-3">
+        <div class="part">
+          <InputElement
+            v-model="basics.name"
+            :value="basics.name"
+            type="text"
+            name="name"
+            placeholder="Nom complet"
+            :error="filtredErrors('name')"
+          />
           <InputElement
             v-model="complete.birth_date"
             :value="formatDate(complete.birth_date)"
@@ -80,20 +71,21 @@
             placeholder="Localisation"
             :error="filtredErrors('localisation')"
           />
-          <AnimatorSelectorElement @input="complete.animators = $event" />
-
-          <p class="additional-info">
-            En sélectionnant un animateur, vous acceptez qu'il ai accès à vos
-            résultats.
-          </p>
+          <a class="button md green" @click="update(basics)">Sauvegarder</a>
         </div>
-        <div class="part">
+      </div>
+    </div>
+    <div v-if="$auth.user.status" class="block">
+      <div class="head">
+        <h5>Informations de contributeur</h5>
+      </div>
+      <div class="content">
+        <div class="part mr-3">
           <SelectorElement
             v-model="complete.contributor_type"
             :selected="complete.contributor_type"
             :items="types"
             placeholder="Contributeur"
-            :disabled="!$auth.user.status"
           />
           <InputElement
             v-model="complete.contributor_mobile"
@@ -101,7 +93,6 @@
             type="tel"
             placeholder="Numéro de téléphone (Contributeur)"
             :error="filtredErrors('contributor_mobile')"
-            :disabled="!$auth.user.status"
           />
           <InputElement
             v-model="complete.website"
@@ -109,8 +100,17 @@
             type="url"
             placeholder="Site web (Contributeur)"
             :error="filtredErrors('website')"
-            :disabled="!$auth.user.status"
           />
+        </div>
+        <div class="part">
+          <TextareaElement
+            v-model="basics.description"
+            :value="basics.description"
+            placeholder="Description"
+            :error="filtredErrors('description')"
+          />
+
+
           <CheckboxElement
             class="is_animator"
             :checked="complete.is_animator"
@@ -121,6 +121,14 @@
           <a class="button md green" @click="update(complete)">Sauvegarder</a>
         </div>
       </div>
+    </div>
+    <div v-else class="become-contributor-zone">
+      <nuxt-link
+          to="/profil/become"
+          class="before button md green"
+        >
+          Devenir contributeur
+        </nuxt-link>
     </div>
   </div>
 </template>
@@ -236,3 +244,15 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+  .become-contributor-zone {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+
+    .button {
+      min-width: 220px;
+    }
+  }
+</style>

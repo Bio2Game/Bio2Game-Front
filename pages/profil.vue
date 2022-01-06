@@ -41,14 +41,7 @@
         </div>
       </div>
       <template v-if="!$auth.user.status">
-        <nuxt-link
-          v-if="isIndex"
-          to="/profil/become"
-          class="before button md green"
-        >
-          Devenir contributeur
-        </nuxt-link>
-        <nuxt-link v-else to="/profil" class="before button md green">
+        <nuxt-link v-if="!isIndex" to="/profil" class="before button md green">
           Revenir au profil
         </nuxt-link>
       </template>
