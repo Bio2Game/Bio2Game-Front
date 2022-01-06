@@ -70,10 +70,12 @@ export default {
   },
   computed: {
     getSelected() {
-      return this.domains.find(domain => domain.id === this.selected)
+      return this.domains.find((domain) => domain.id === this.selected)
     },
     domains() {
-      return this.$store.state.admin.domains
+      return [...this.$store.state.admin.domains].sort((a, b) =>
+        a.label.localeCompare(b.label)
+      )
     },
   },
   watch: {
@@ -86,7 +88,7 @@ export default {
   },
   methods: {
     select(id, clicked = false) {
-      if (!this.domains.some(domain => domain.id === id)) {
+      if (!this.domains.some((domain) => domain.id === id)) {
         return this.$emit('input', null)
       }
 
