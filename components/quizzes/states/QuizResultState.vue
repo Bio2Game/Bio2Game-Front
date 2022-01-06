@@ -85,16 +85,18 @@
                 </div>
               </div>
             </div>
-            <div v-if="explications" class="explication">
-              <h6 class="explication-title">Explication:</h6>
-              <span v-html="markdown(question.explication)" />
+            <div class="explication">
+              <template v-if="explications && question.explication">
+                <h6 class="explication-title">Explication:</h6>
+                <span v-html="markdown(question.explication)" /> <br>
+              </template>
               <a
                 v-if="question.source"
                 class="source"
                 :href="formatSource(question.source)"
                 target="black"
                 >En savoir plus</a
-              >
+              ><br />
               <a
                 class="source"
                 :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com`"
