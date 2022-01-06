@@ -231,7 +231,9 @@ export default {
       )
     },
     quizzes() {
-      return this.$store.state.quizzes.contributorQuizzes
+      return [...this.$store.state.quizzes.contributorQuizzes].sort((a, b) =>
+        a.label.localeCompare(b.label)
+      )
     },
     isCreationPage() {
       return this.$route.params.question === 'create'
