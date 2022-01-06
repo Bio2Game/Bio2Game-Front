@@ -118,26 +118,52 @@ export default {
             margin-top: -8px;
             margin-bottom: 8px;
           }
+        }
+
+        .contributor-zone {
+          display: flex;
+          align-items: center;
+          background-color: #f8f7f7;
+          border-radius: 6px;
+          margin-bottom: 24px;
+          padding: 8px;
+          cursor: pointer;
+
+          h4 {
+            margin-left: 8px;
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+
+        .position {
+          display: flex;
+          align-items: center;
+
+          .progress-bar {
+            overflow: hidden;
+            height: 20px;
+            background-color: #eeeeee;
+            border-radius: 10px;
+            flex: 1;
+
+            .bar {
+              width: 0%;
+              height: 100%;
+              background-color: $green;
+              transition: width 1s linear;
+              border-radius: 10px;
+            }
+          }
 
           .question-position {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 24px;
-          }
-        }
+            margin-left: 8px;
 
-        .progress-bar {
-          overflow: hidden;
-          height: 20px;
-          background-color: #eeeeee;
-          border-radius: 10px;
-
-          .bar {
-            width: 0%;
-            height: 100%;
-            background-color: $green;
-            transition: width 1s linear;
-            border-radius: 10px;
+            .total {
+              color: #5e5e5e;
+            }
           }
         }
       }

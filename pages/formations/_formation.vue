@@ -1,5 +1,16 @@
 <template>
   <div class="formation-page">
+    <div class="top-part">
+      <a class="contributor-zone" :href="formation.author.website">
+        <AvatarElement
+          :email="formation.author.email"
+          :path="formation.author.avatar_path"
+          :size="24"
+          :name="formation.author.username"
+        />
+        <h4>{{ formation.author.username }}</h4>
+      </a>
+    </div>
     <div class="container container-formation">
       <div class="top">
         <h1>{{ formation.label }}</h1>
@@ -50,6 +61,30 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .top-part {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1620px;
+
+    .contributor-zone {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      cursor: pointer;
+      background-color: #f8f7f7;
+      border-radius: 6px;
+      margin-bottom: 16px;
+
+      h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+    }
+  }
 
   .nature {
     width: 350px;
