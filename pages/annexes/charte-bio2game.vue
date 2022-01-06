@@ -3,7 +3,7 @@
     <div class="context">
       <h1>La Charte Bio2Game</h1>
       <p>
-        Bio2Game est un jeu « Style Is Data » constitué d’un socle de
+        Bio2Game est un jeu produit par l'assocition Bio2game "Loi 1901". Il est constitué d’un socle de
         connaissances sur les thématiques du Développement Durable (DD) et
         proposé sous forme de quiz.
       </p>

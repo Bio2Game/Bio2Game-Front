@@ -4,7 +4,7 @@
       <h1>POLITIQUE DE PROTECTION DES DONNEES PERSONNELLES</h1>
       <p><strong>Dernière mise à jour : 4 mai 2020</strong></p>
       <p>
-        La société <strong>StyleIsData</strong> est soucieuse de la protection
+        L'assocition <strong>Bio2Game</strong> "Loi 1901" est soucieuse de la protection
         des données personnelles de ses utilisateurs. Elle s'engage à en assurer
         le meilleur niveau conformément à la réglementation européenne et
         française en la matière.
@@ -22,22 +22,22 @@
       </p>
       <p>
         Les données personnelles collectées sur le site
-        <strong>Bio2Game</strong> sont traitées par la société
-        <strong>StyleIsData</strong>, ci-après dénommée ensemble «
-        <strong>StyleIsData</strong> ».
+        <strong>Bio2Game</strong> sont traitées par l'association "Loi 1901"
+        <strong>Bio2Game</strong>, ci-après dénommée ensemble «
+        <strong>Bio2Game</strong> ».
       </p>
       <h4>
-        Pourquoi <strong>StyleIsData</strong> collecte mes données personnelles
+        Pourquoi <strong>Bio2Game</strong> collecte mes données personnelles
         ?
       </h4>
       <p>
-        <strong>StyleIsData</strong> utilise vos données personnelles
+        <strong>Bio2Game</strong> utilise vos données personnelles
         principalement pour les finalités suivantes :
       </p>
       <ul>
         <li>
           <p>
-            <strong>La connexion au compte</strong>: Style Is Data utilise votre
+            <strong>La connexion au compte</strong>: Bio2Game utilise votre
             adresse email pour une connexion au jeu fiable et simple
             d’utilisation. Elle permet de vous renvoyer votre mot de passe en
             cas de perte.
@@ -118,13 +118,13 @@
           ce consentement à tout moment.
         </li>
         <li>
-          <strong>L'intérêt légitime</strong> : Style Is Data a un besoin de
+          <strong>L'intérêt légitime</strong> : Bio2Game a un besoin de
           traiter vos données qui est justifié, équilibré et ne porte pas
           atteinte à votre vie privée.
         </li>
         <li>
           Sauf exception, vous pouvez à tout moment vous opposer à un traitement
-          fondé basé sur l'intérêt légitime en le signalant à Style Is Data.
+          fondé basé sur l'intérêt légitime en le signalant à Bio2Game.
         </li>
         <li>
           <strong> La loi</strong> : le traitement de vos données personnelles
@@ -181,7 +181,7 @@
           <tr>
             <td>
               <span
-                >Utilisation du compte&nbsp;<strong>StyleIsData</strong></span
+                >Utilisation du compte&nbsp;<strong>Bio2Game</strong></span
               >
             </td>
             <td>
@@ -292,7 +292,7 @@
       <p>Département analyse</p>
       <p>
         Seules les données anonymisées seront utilisées dans les tableaux de
-        bord accessibles à des tiers. Elles seront agrégées ??? au niveau des
+        bord accessibles à des tiers. Elles seront agrégées au niveau des
         domaines.
       </p>
       <p>
