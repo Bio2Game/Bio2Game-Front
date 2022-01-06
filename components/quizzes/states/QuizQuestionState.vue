@@ -3,13 +3,24 @@
     <div class="infos">
       <div class="title">
         <h1>{{ currentQuestion.label }}</h1>
-        <div class="question-position">
-          {{ renderNumber(position + 1, quiz.questions.length)
-          }}<span class="total">/{{ quiz.questions.length }}</span>
-        </div>
+        <a class="contributor-zone" :href="quiz.author.website">
+          <AvatarElement
+            :email="quiz.author.email"
+            :path="quiz.author.avatar_path"
+            :size="24"
+            :name="quiz.author.username"
+          />
+          <h4>{{ quiz.author.username }}</h4>
+        </a>
       </div>
-      <div id="progress" class="progress-bar">
-        <div class="bar" :style="{ width: progress }"></div>
+      <div class="position">
+        <div id="progress" class="progress-bar">
+          <div class="bar" :style="{ width: progress }"></div>
+        </div>
+        <div class="question-position">
+          {{ renderNumber(position + 1, quiz.questions.length) }}
+          <span class="total">/{{ quiz.questions.length }}</span>
+        </div>
       </div>
     </div>
     <div class="question">
@@ -126,7 +137,7 @@ export default {
     status(status) {
       if (status === 1) {
         this.shuffleResponses()
-        this.startTimer()
+        // this.startTimer()
       } else {
         this.progress = '100%'
       }
@@ -134,7 +145,7 @@ export default {
   },
   mounted() {
     this.shuffleResponses()
-    this.startTimer()
+    // this.startTimer()
   },
   methods: {
     skipResponses() {
