@@ -2,8 +2,8 @@
   <div
     v-closable="{ handler: 'closeSelector' }"
     class="selector-container"
-    :class="{ active, 'has-error': !!error }"
-    @click="active = !active"
+    :class="{ active, 'has-error': !!error, disabled }"
+    @click="!disabled && (active = !active)"
   >
     <label v-if="selected !== null" class="placeholder">{{
       placeholder
@@ -77,6 +77,10 @@ export default {
       type: Object,
       default: () => null,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -93,7 +97,7 @@ export default {
             [this.displayKey]: this.placeholder,
           },
           // eslint-disable-next-line eqeqeq
-        ].find(item => item[this.refKey] == this.selected) || {})[
+        ].find((item) => item[this.refKey] == this.selected) || {})[
           this.displayKey
         ] || this.placeholder
       )
@@ -107,7 +111,7 @@ export default {
   methods: {
     select(itemRef, clicked = false) {
       // eslint-disable-next-line eqeqeq
-      if (!this.items.some(item => item[this.refKey] == itemRef)) {
+      if (!this.items.some((item) => item[this.refKey] == itemRef)) {
         return this.$emit('input', this.defaultValue)
       }
 
@@ -242,6 +246,11 @@ export default {
         background-color: #e7e7e7;
       }
     }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    background-color: #e2e2e2;
   }
 
   &.active .select_elements {
