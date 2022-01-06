@@ -11,7 +11,7 @@
             Un jeu qui vous permet de tester vos connaissances sur l’impact
             environnemental de votre consommation et d'apprendre.
           </p>
-          <nuxt-link to="/a-propos">En savoir plus</nuxt-link>
+          <nuxt-link to="/annexes/a-propos">En savoir plus</nuxt-link>
         </div>
         <div class="item contact">
           <div class="title">
