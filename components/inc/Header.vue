@@ -36,7 +36,7 @@
                   <AvatarElement
                     class="avatar"
                     :email="$auth.user.email || ''"
-                    :path="$auth.user.path || ''"
+                    :path="$auth.user.avatar_path || ''"
                     :name="$auth.user.username"
                     :size="32"
                   />

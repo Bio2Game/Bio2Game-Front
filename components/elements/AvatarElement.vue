@@ -29,7 +29,7 @@ export default {
     getImage() {
       if (this.path) {
         if (this.path.startsWith('http')) return this.path
-        return `${this.$config.cdnURL}/${this.path}`
+        return `${this.$config.cdnURL}/avatar_uploads/${this.path}`
       }
       return `https://www.gravatar.com/avatar/${md5(
         this.email.trim().toLowerCase()

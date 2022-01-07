@@ -110,7 +110,7 @@
                 <AvatarElement
                   class="avatar"
                   :email="player.email"
-                  :path="player.icon_url"
+                  :path="player.avatar"
                   :name="player.name || player.username"
                   :size="32"
                 />
@@ -141,7 +141,7 @@
                 <AvatarElement
                   class="avatar"
                   :email="banPlayer ? banPlayer.email : 'fake@bio2game.com'"
-                  :path="banPlayer && banPlayer.icon_url"
+                  :path="banPlayer && banPlayer.avatar"
                   :name="banPlayer && (banPlayer.name || banPlayer.username)"
                   :size="32"
                 />
