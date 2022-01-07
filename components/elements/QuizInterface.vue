@@ -128,6 +128,7 @@ export default {
           margin-bottom: 24px;
           padding: 8px;
           cursor: pointer;
+          text-decoration: none;
 
           img {
             border-radius: 12px;
@@ -138,7 +139,6 @@ export default {
             color: #4f4f4f;
             font-size: 14px;
             font-weight: 600;
-            text-decoration: none;
           }
         }
 

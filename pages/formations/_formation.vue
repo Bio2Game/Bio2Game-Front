@@ -55,8 +55,9 @@ export default {
   },
   methods: {
     formatLink(link) {
+      if(!link) return ''
       return link.startsWith('http') ? link : `https://${link}`
-    }
+    },
   }
 }
 </script>
