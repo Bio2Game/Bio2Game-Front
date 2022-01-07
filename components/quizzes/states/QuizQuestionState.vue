@@ -137,7 +137,7 @@ export default {
     status(status) {
       if (status === 1) {
         this.shuffleResponses()
-        // this.startTimer()
+        this.startTimer()
       } else {
         this.progress = '100%'
       }
@@ -145,7 +145,7 @@ export default {
   },
   mounted() {
     this.shuffleResponses()
-    // this.startTimer()
+    this.startTimer()
   },
   methods: {
     skipResponses() {
