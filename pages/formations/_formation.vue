@@ -1,7 +1,7 @@
 <template>
   <div class="formation-page">
     <div class="top-part">
-      <a class="contributor-zone" :href="formation.author.website">
+      <a class="contributor-zone" :href="formatLink(formation.author.website)">
         <AvatarElement
           :email="formation.author.email"
           :path="formation.author.avatar_path"
@@ -53,6 +53,11 @@ export default {
       return this.$store.state.formations.formation
     },
   },
+  methods: {
+    formatLink(link) {
+      return link.startsWith('http') ? link : `https://${link}`
+    }
+  }
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="infos">
       <div class="title">
         <h1>{{ currentQuestion.label }}</h1>
-        <a class="contributor-zone" :href="quiz.author.website">
+        <a class="contributor-zone" :href="formatLink(quiz.author.website)">
           <AvatarElement
             :email="quiz.author.email"
             :path="quiz.author.avatar_path"
@@ -148,6 +148,9 @@ export default {
     this.startTimer()
   },
   methods: {
+    formatLink(link) {
+      return link.startsWith('http') ? link : `https://${link}`
+    },
     skipResponses() {
       this.response = null
       this.sended = false
