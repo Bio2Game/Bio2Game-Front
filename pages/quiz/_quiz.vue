@@ -132,10 +132,16 @@ export default {
           padding: 8px;
           cursor: pointer;
 
+          img {
+            border-radius: 12px;
+          }
+
           h4 {
             margin-left: 8px;
+            color: #4f4f4f;
             font-size: 14px;
             font-weight: 600;
+            text-decoration: none;
           }
         }
 
