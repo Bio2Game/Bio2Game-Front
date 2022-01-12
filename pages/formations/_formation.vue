@@ -6,9 +6,9 @@
           :email="formation.author.email"
           :path="formation.author.avatar_path"
           :size="24"
-          :name="formation.author.username"
+          :name="formation.author.name"
         />
-        <h4>{{ formation.author.username }}</h4>
+        <h4>{{ formation.author.name }}</h4>
       </a>
     </div>
     <div class="container container-formation">
