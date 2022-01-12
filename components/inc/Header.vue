@@ -59,6 +59,9 @@
                     <nuxt-link v-if="$auth.user.status === 1000" to="/admin">
                       <SettingsIcon /> Admin
                     </nuxt-link>
+                    <a @click="$store.commit('SET_DONATION_STATUS', true)">
+                      <DonateIcon /> Soutenir
+                    </a>
                     <a @click="logout()"><PowerIcon /> Déconnexion</a>
                   </ul>
                   <ul v-else>
@@ -92,6 +95,7 @@ import Nature2Icon from '@/assets/icons/nature2.svg?inline'
 import FormationsIcon from '@/assets/icons/formations.svg?inline'
 // import Favorite from '@/assets/icons/favorite.svg?inline'
 import SettingsIcon from '@/assets/icons/settings.svg?inline'
+import DonateIcon from '@/assets/icons/donate.svg?inline'
 import PowerIcon from '@/assets/icons/power.svg?inline'
 import HomeIcon from '@/assets/icons/home.svg?inline'
 import GamesIcon from '@/assets/icons/games.svg?inline'
@@ -105,6 +109,7 @@ export default {
     Nature2Icon,
     FormationsIcon,
     SettingsIcon,
+    DonateIcon,
     UserIcon,
     PowerIcon,
     HomeIcon,
