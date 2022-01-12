@@ -7,6 +7,7 @@
       <transition name="slide">
         <Nuxt class="page" />
       </transition>
+      <Donate />
     </div>
     <Footer />
   </div>
