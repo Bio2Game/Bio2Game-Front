@@ -98,6 +98,9 @@ export default {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
 
+    // https://github.com/nuxt-community/device-module
+    '@nuxtjs/device',
+
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg',
 
