@@ -231,7 +231,7 @@ export default {
         },
       },
       ...Object.fromEntries(
-        ['google', 'twitter', 'linkedin', 'facebook'].map(social => [
+        ['google', 'twitter', 'linkedin', 'facebook'].map((social) => [
           social,
           {
             scheme: 'local',
@@ -250,7 +250,7 @@ export default {
               user: { url: '/api/auth/user', method: 'get' },
             },
           },
-        ]),
+        ])
       ),
     },
     redirect: {
@@ -301,6 +301,7 @@ export default {
   },
 
   publicRuntimeConfig: {
+    publishableKey: process.env.STRIPE_KEY,
     cdnURL: process.env.CDN_URL,
   },
 

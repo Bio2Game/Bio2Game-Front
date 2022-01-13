@@ -150,7 +150,7 @@ export default {
         this.transition = true
         await this.$nextTick()
         this.isTransparent = !isScrollingDown
-        await new Promise(resolve => setTimeout(() => resolve(), 300))
+        await new Promise((resolve) => setTimeout(() => resolve(), 300))
         this.transition = false
       }
     },

@@ -6,11 +6,30 @@
     <div class="donation-interface modal">
       <h2>Nous soutenir !</h2>
       <form>
+        <InputElement
+          v-if="needIdentity"
+          :value="identity"
+          type="text"
+          placeholder="Prénom et Nom"
+          :error="filtredErrors('identity')"
+          @input="identity = $event"
+        />
+
+        <InputElement
+          v-if="needIdentity"
+          :value="email"
+          type="email"
+          placeholder="Prénom et Nom"
+          :error="filtredErrors('email')"
+          @input="email = $event"
+        />
+
         <!-- 1) Sélecteur motif : Vous organisez une formation / Vous organisez une événement ponctuel -->
         <SelectorElement
           :selected="reason"
           :items="reasons"
           placeholder="Selectionner le motif"
+          :error="filtredErrors('reason')"
           @input="reason = $event"
         />
         <!-- 2) Champ text  Nom de l'évènement (que pour événements) -->
@@ -19,6 +38,7 @@
           :value="name"
           type="text"
           placeholder="Nom de l'évènement"
+          :error="filtredErrors('name')"
           @input="name = $event"
         />
 
@@ -28,6 +48,7 @@
           :value="startDate"
           type="date"
           placeholder="Date du début de l'évènement"
+          :error="filtredErrors('startDate')"
           @input="startDate = $event"
         />
 
@@ -37,6 +58,7 @@
           :selected="duration"
           :items="durations"
           placeholder="Durée de l'évènement"
+          :error="filtredErrors('duration')"
           @input="duration = $event"
         />
 
@@ -46,6 +68,7 @@
           :value="name"
           type="text"
           placeholder="Nom de la formation"
+          :error="filtredErrors('name')"
           @input="name = $event"
         />
 
@@ -55,6 +78,7 @@
           :selected="students"
           :items="studentsList"
           placeholder="Nombre maximum d'élèves"
+          :error="filtredErrors('students')"
           @input="students = $event"
         />
         <!-- <br /> -->
@@ -88,7 +112,7 @@
           </a>
         </div>
 
-        <section v-if="totalCosts + totalDonations" class="abstract">
+        <section v-if="total" class="abstract">
           <h5>Résumé :</h5>
           <ul>
             <li>{{ totalCosts }} € de frais</li>
@@ -97,15 +121,18 @@
             </li>
           </ul>
           <p>
-            TOTAL : <b>{{ totalCosts + totalDonations }} €</b>
+            TOTAL : <b>{{ total }} €</b>
           </p>
         </section>
 
         <div class="buttons">
-          <a class="button white_sky sm submit" @click="$store.commit('SET_DONATION_STATUS', false)">
+          <a
+            class="button white_sky sm submit"
+            @click="$store.commit('SET_DONATION_STATUS', false)"
+          >
             Annuler
           </a>
-          <a class="button green sm submit" @click="saveInvoice()"> Don </a>
+          <a class="button green sm submit" @click="donate()"> Don </a>
         </div>
       </form>
     </div>
@@ -113,6 +140,8 @@
 </template>
 
 <script>
+import { loadStripe } from '@stripe/stripe-js/pure'
+
 export default {
   name: 'Donate',
   data() {
@@ -161,6 +190,8 @@ export default {
         },
       ],
 
+      identity: '',
+      email: '',
       reason: null,
       name: '',
       startDate: '',
@@ -169,26 +200,122 @@ export default {
       results: false,
       donations: [],
       iframe: false,
+
+      stripe: null,
+
+      errors: [],
     }
   },
   computed: {
     donatorStatus() {
       return this.$store.state.donatorStatus
     },
+    total() {
+      return this.totalDonations + this.totalCosts
+    },
     totalDonations() {
       return this.donations.reduce((acc, current) => acc + current, 0)
     },
     totalCosts() {
-      return 0
+      let costs = 0
+      switch (this.reason) {
+        case 'formation':
+          switch (this.students) {
+            case 40:
+              costs += 4
+              break
+            case 150:
+              costs += 10
+              break
+            case 500:
+              costs += 20
+              break
+            case 1000:
+              costs += 30
+              break
+            default:
+              break
+          }
+          break
+        case 'event':
+          switch (this.duration) {
+            case 'day':
+              costs += 10
+              break
+            case 'week':
+              costs += 20
+              break
+            case 'month':
+              costs += 50
+              break
+            default:
+              break
+          }
+          break
+
+        default:
+          break
+      }
+      return costs
+    },
+    needIdentity() {
+      return !this.$auth.loggedIn || this.$store.state.auth.strategy === 'guest'
+    },
+  },
+  watch: {
+    donatorStatus(status) {
+      if (status && this.stripe === null) {
+        this.loadStripeLib()
+      }
     },
   },
   methods: {
+    filtredErrors(field) {
+      return this.errors.find((error) => error.field === field)
+    },
+    async loadStripeLib() {
+      this.stripe = await loadStripe(this.$config.publishableKey, {
+        locale: 'fr',
+      })
+    },
     toggleDonation(amount) {
       if (this.donations.includes(amount)) {
         const index = this.donations.indexOf(amount)
         this.$delete(this.donations, index)
       } else {
         this.donations.push(amount)
+      }
+    },
+    async donate() {
+      try {
+        const session = await this.$axios.$post(`/api/payment`, {
+          identity: this.needIndentity ? this.identity : null,
+          email: this.needIndentity ? this.email : null,
+
+          reason: this.reason,
+          name: this.name,
+          startDate: this.startDate,
+          duration: this.duration,
+          students: this.students,
+          results: this.results,
+          iframe: this.iframe,
+          costs: this.totalCosts,
+          donations: this.totalDonations,
+        })
+        const result = await this.stripe.redirectToCheckout({
+          sessionId: session.id,
+        })
+
+        if (result.error) {
+          return this.$toast.show(
+            `Une erreur s'est produite: ${result.error.message}`
+          )
+        }
+      } catch (error) {
+        console.error(error)
+        if (error.response) {
+          this.errors = error.response.data.errors
+        }
       }
     },
   },
@@ -210,7 +337,8 @@ export default {
     margin-bottom: 32px;
   }
 
-  .input-container, .selector-container {
+  .input-container,
+  .selector-container {
     margin: 8px 0 24px;
   }
 
