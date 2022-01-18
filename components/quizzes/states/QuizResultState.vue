@@ -5,6 +5,15 @@
         <h1>{{ quiz.label }}</h1>
         <p>{{ quiz.description }}</p>
       </div>
+      <a class="contributor-zone" :href="formatLink(quiz.author.website)">
+        <AvatarElement
+          :email="quiz.author.email"
+          :path="quiz.author.avatar_path"
+          :size="24"
+          :name="quiz.author.username"
+        />
+        <h4>{{ quiz.author.username }}</h4>
+      </a>
     </div>
     <div class="appreciation" :class="score.color">
       {{ score.text }}
@@ -88,12 +97,12 @@
             <div class="explication">
               <template v-if="explications && question.explication">
                 <h6 class="explication-title">Explication:</h6>
-                <span v-html="markdown(question.explication)" /> <br>
+                <span v-html="markdown(question.explication)" /> <br />
               </template>
               <a
                 v-if="question.source"
                 class="source"
-                :href="formatSource(question.source)"
+                :href="formatLink(question.source)"
                 target="black"
                 >En savoir plus</a
               ><br />
@@ -220,8 +229,9 @@ export default {
     },
   },
   methods: {
-    formatSource(source) {
-      return source.startsWith('http') ? source : `https://${source}`
+    formatLink(link) {
+      if (!link) return ''
+      return link.startsWith('http') ? link : `https://${link}`
     },
   },
 }

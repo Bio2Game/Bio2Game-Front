@@ -131,6 +131,7 @@ export default {
           margin-bottom: 24px;
           padding: 8px;
           cursor: pointer;
+          text-decoration: none;
 
           img {
             border-radius: 12px;
@@ -312,10 +313,14 @@ export default {
       }
 
       &.result-interface {
-        .infos .title {
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+        .infos {
+          display: flex;
+          justify-content: space-between;
+
+          .title {
+            flex-direction: column;
+            align-items: flex-start;
+          }
         }
 
         .appreciation {
