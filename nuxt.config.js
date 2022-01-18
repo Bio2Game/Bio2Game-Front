@@ -138,6 +138,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-notification.js', mode: 'client' },
+    { src: '~/plugins/vue-body-scroll-lock', mode: 'client' },
     { src: '~/plugins/vue-closable.js', mode: 'client' },
     { src: '~/plugins/vue-socket.io.js', mode: 'client' },
   ],
