@@ -115,7 +115,10 @@
         <section v-if="total" class="abstract">
           <h5>Résumé :</h5>
           <ul>
-            <li>{{ totalCosts }} € de frais</li>
+            <li v-if="totalCosts">{{ totalCosts }} € de frais</li>
+            <li v-if="totalFeatures">
+              {{ totalFeatures }} € de fonctionnalités
+            </li>
             <li v-if="totalDonations">
               {{ totalDonations }} € de dons (Merci ❤️)
             </li>
@@ -211,7 +214,7 @@ export default {
       return this.$store.state.donatorStatus
     },
     total() {
-      return this.totalDonations + this.totalCosts
+      return this.totalDonations + this.totalCosts + this.totalFeatures
     },
     totalDonations() {
       return this.donations.reduce((acc, current) => acc + current, 0)
@@ -256,6 +259,13 @@ export default {
         default:
           break
       }
+
+      return costs
+    },
+    totalFeatures() {
+      let costs = 0
+      if (this.iframe) costs += 1000
+      if (this.results) costs += 1000
       return costs
     },
     needIdentity() {
@@ -288,6 +298,15 @@ export default {
     },
     async donate() {
       try {
+        if (!this.total) {
+          return this.$notify({
+            type: 'error',
+            text: `Veuillez sélectionner des options pour faire un don.`,
+            duration: 3000,
+            width: 400,
+          })
+        }
+
         const session = await this.$axios.$post(`/api/payment`, {
           identity: this.needIndentity ? this.identity : null,
           email: this.needIndentity ? this.email : null,
@@ -300,16 +319,27 @@ export default {
           results: this.results,
           iframe: this.iframe,
           costs: this.totalCosts,
+          features: this.totalFeatures,
           donations: this.totalDonations,
         })
+
+        this.errors = []
+
+        if (this.stripe === null) {
+          await this.loadStripeLib()
+        }
+
         const result = await this.stripe.redirectToCheckout({
           sessionId: session.id,
         })
 
         if (result.error) {
-          return this.$toast.show(
-            `Une erreur s'est produite: ${result.error.message}`
-          )
+          return this.$notify({
+            type: 'error',
+            text: `Une erreur s'est produite: ${result.error.message}`,
+            duration: 3000,
+            width: 400,
+          })
         }
       } catch (error) {
         console.error(error)
