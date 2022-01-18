@@ -155,7 +155,6 @@ export default {
       }
     },
     async logout() {
-      console.log('cc')
       await this.$auth.logout()
       this.$store.commit('admin/RESET_STATE')
       this.$store.commit('formations/RESET_STATE')
