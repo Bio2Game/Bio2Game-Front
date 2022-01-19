@@ -99,6 +99,11 @@
           @input="iframe = $event"
         />
 
+        <div v-if="results || iframe" class="message-notif">
+          Vous serez prochainement recontacté par Bio2Game afin de mettre ces
+          fonctionnalités en place.
+        </div>
+
         <!-- 10) Plusieurs boutons pour ajouter : 4 €, 10 €, 30 €, 50 €, 100 €, 500 € (que pour faire un don) -->
         <div class="donation-buttons">
           <a
@@ -116,9 +121,6 @@
           <h5>Résumé :</h5>
           <ul>
             <li v-if="totalCosts">{{ totalCosts }} € de frais</li>
-            <li v-if="totalFeatures">
-              {{ totalFeatures }} € de fonctionnalités
-            </li>
             <li v-if="totalDonations">
               {{ totalDonations }} € de dons (Merci ❤️)
             </li>
@@ -214,7 +216,7 @@ export default {
       return this.$store.state.donatorStatus
     },
     total() {
-      return this.totalDonations + this.totalCosts + this.totalFeatures
+      return this.totalDonations + this.totalCosts
     },
     totalDonations() {
       return this.donations.reduce((acc, current) => acc + current, 0)
@@ -260,12 +262,6 @@ export default {
           break
       }
 
-      return costs
-    },
-    totalFeatures() {
-      let costs = 0
-      if (this.iframe) costs += 1000
-      if (this.results) costs += 1000
       return costs
     },
     needIdentity() {
@@ -319,7 +315,6 @@ export default {
           results: this.results,
           iframe: this.iframe,
           costs: this.totalCosts,
-          features: this.totalFeatures,
           donations: this.totalDonations,
         })
 
@@ -377,6 +372,14 @@ export default {
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 20px;
+  }
+
+  .message-notif {
+    padding: 16px;
+    color: white;
+    background-color: $green;
+    border-radius: 4px;
+    font-size: 14px;
   }
 
   .donation-buttons {
