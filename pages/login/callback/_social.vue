@@ -10,10 +10,8 @@ export default {
   async mounted() {
     try {
       const { user, token } = await this.$axios.$get(
-        `/api${this.$route.fullPath}`,
+        `/api${this.$route.fullPath}`
       )
-
-      console.log(this.$auth)
 
       this.$auth.strategy.token.set(token)
       this.$auth.setUser(user)
