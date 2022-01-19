@@ -99,12 +99,12 @@ export default {
   methods: {
     getDuration(value) {
       switch (value) {
+        case 'day':
+          return 'Un jour'
         case 'week':
           return 'Une semaine'
         case 'month':
           return 'Un mois'
-        case 'year':
-          return 'Un ans'
         default:
       }
     },
