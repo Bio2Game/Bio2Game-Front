@@ -20,6 +20,9 @@
             <nuxt-link class="link" to="/formations">
               <GroupIcon /> Formations
             </nuxt-link>
+            <a class="link" @click="$store.commit('SET_DONATION_STATUS', true)">
+              <DonateIcon /> Soutenir
+            </a>
           </div>
           <client-only>
             <div v-if="!$auth.loggedIn" class="right-menu">
@@ -214,6 +217,7 @@ export default {
           font-weight: 500;
           line-height: 24px;
           text-decoration: none;
+          cursor: pointer;
 
           svg {
             display: none;

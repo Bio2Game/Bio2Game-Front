@@ -23,6 +23,12 @@
           <nuxt-link to="/formations" class="button border_black lg xxl">
             Formations
           </nuxt-link>
+          <a
+            class="button border_black lg right"
+            @click="$store.commit('SET_DONATION_STATUS', true)"
+          >
+            Soutenir
+          </a>
         </div>
       </div>
     </div>
