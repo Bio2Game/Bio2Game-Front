@@ -186,7 +186,7 @@ export default {
   },
   methods: {
     filtredErrors(field) {
-      return this.errors.find(error => error.field === field)
+      return this.errors.find((error) => error.field === field)
     },
     switchForm(value) {
       this.isRegister = value
@@ -291,6 +291,7 @@ export default {
       try {
         const response = await this.$axios.$get(`/api/auth/social/${type}`)
         if (!response) return
+        await this.$auth.setStrategy('user')
         window.location = response
       } catch (error) {
         // eslint-disable-next-line no-console
