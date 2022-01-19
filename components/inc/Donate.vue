@@ -5,6 +5,11 @@
   >
     <div class="donation-interface modal">
       <h2>Nous soutenir !</h2>
+      <p class="description">
+        Votre contribution est importante !<br />Elle seule nous permet de
+        financer la plateforme.<br />Les contenus sont libres d'accès (Common
+        Law)
+      </p>
       <form>
         <InputElement
           v-if="needIdentity"
@@ -19,7 +24,7 @@
           v-if="needIdentity"
           :value="email"
           type="email"
-          placeholder="Prénom et Nom"
+          placeholder="Adresse email"
           :error="filtredErrors('email')"
           @input="email = $event"
         />
@@ -163,7 +168,7 @@ export default {
       ],
       durations: [
         {
-          name: 'Une Journée',
+          name: 'Une journée',
           ref: 'day',
         },
         {
@@ -359,7 +364,14 @@ export default {
     color: #bbe242;
     font-size: 24px;
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+  }
+
+  .description {
+    color: #999999;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 24px;
   }
 
   .input-container,
