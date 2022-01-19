@@ -78,25 +78,42 @@
           <span>{{ getResponses()[3] }}</span>
         </div>
       </div>
-      <div v-if="status === 2 && explications" class="explication">
-        <h6 class="explication-title">Explication:</h6>
-        <span v-html="markdown(currentQuestion.explication)"></span>
-        <p v-if="currentQuestion.source" class="kown">
-          <a :href="currentQuestion.source" target="black">En savoir plus</a>.
-        </p>
+      <div v-if="status === 2" class="explication">
+        <template v-if="explications && currentQuestion.explication">
+          <h6 class="explication-title">Explication:</h6>
+          <span v-html="markdown(currentQuestion.explication)" /> <br />
+        </template>
+        <a
+          v-if="currentQuestion.source"
+          class="source"
+          :href="formatLink(currentQuestion.source)"
+          target="black"
+        >
+          En savoir plus
+        </a>
+        <br />
+        <a
+          class="source"
+          :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com&subject=Retour sur la question ${currentQuestion.label} (#${currentQuestion.id})`"
+          target="black"
+        >
+          Contacter le contributeur
+        </a>
       </div>
       <a
         v-if="status === 1"
         class="submit-next button lg green"
         @click="sendResponse()"
-        >Valider</a
       >
+        Valider
+      </a>
       <a
         v-if="status === 2"
         class="submit-next resp button lg green"
         @click="skipResponses()"
-        >Question suivante</a
       >
+        Question suivante
+      </a>
     </div>
   </div>
 </template>
@@ -149,7 +166,7 @@ export default {
   },
   methods: {
     formatLink(link) {
-      if(!link) return ''
+      if (!link) return ''
       return link.startsWith('http') ? link : `https://${link}`
     },
     skipResponses() {

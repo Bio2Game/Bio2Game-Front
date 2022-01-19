@@ -104,14 +104,16 @@
                 class="source"
                 :href="formatLink(question.source)"
                 target="black"
-                >En savoir plus</a
+              >
+                En savoir plus </a
               ><br />
               <a
                 class="source"
-                :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com`"
+                :href="`mailto:${quiz.author.email}?cc=contact@bio2game.com&subject=Retour sur la question ${question.label} (#${question.id})`"
                 target="black"
-                >Contacter le contributeur</a
               >
+                Contacter le contributeur
+              </a>
             </div>
           </div>
         </div>
