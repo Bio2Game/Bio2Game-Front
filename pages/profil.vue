@@ -39,6 +39,29 @@
           <span>Adresse</span>
           <p>{{ $auth.user.localisation || 'Aucune adresse' }}</p>
         </div>
+
+        <hr />
+
+        <h2>Soutien Bio2Game</h2>
+
+        <div
+          v-for="(entry, index) in $auth.user.donations"
+          :key="index"
+          class="info"
+        >
+          <span
+            >{{ $dayjs(entry.created_at, 'dd/MM/yyyy à hh:mm') }} -
+            {{ entry.costs + entry.donations }}</span
+          >
+          <p v-if="entry.reason">
+            {{
+              entry.reason === 'formation'
+                ? `Formation: ${entry.students} élèves (${entry.costs}€)`
+                : `Evènement: ${getDuration(entry.duration)} (${entry.costs}€)`
+            }}
+          </p>
+          <p v-if="entry.donations">Dons: {{ entry.donations }}€</p>
+        </div>
       </div>
       <template v-if="!$auth.user.status">
         <nuxt-link v-if="!isIndex" to="/profil" class="before button md green">
@@ -69,6 +92,19 @@ export default {
   computed: {
     isIndex() {
       return this.$route.name === 'profil'
+    },
+  },
+  methods: {
+    getDuration(value) {
+      switch (value) {
+        case 'week':
+          return 'Une semaine'
+        case 'month':
+          return 'Un mois'
+        case 'year':
+          return 'Un ans'
+        default:
+      }
     },
   },
 }
