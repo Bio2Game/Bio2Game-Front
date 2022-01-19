@@ -49,8 +49,8 @@
             class="info"
           >
             <span
-              >{{ $dayjs(entry.created_at, 'dd/MM/yyyy à hh:mm') }} -
-              {{ entry.costs + entry.donations }}</span
+              >{{ $dayjs(entry.created_at).format('DD/MM/YYYY à hh:mm') }} -
+              {{ entry.costs + entry.donations }}€</span
             >
             <p v-if="entry.reason">
               {{
@@ -219,9 +219,9 @@ export default {
         padding: 24px;
 
         h3 {
+          margin: 16px 0 8px;
           color: $green;
           font-weight: 500;
-          margin-top: 16px;
         }
 
         .info {
