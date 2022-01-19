@@ -32,7 +32,9 @@
             <Nature />
             <h5>SOCIAL</h5>
           </div>
-          <a class="contact-button" href="mailto:">Contactez nous</a>
+          <a class="contact-button" href="mailto:contact@bio2game.com"
+            >Contactez nous</a
+          >
         </div>
       </div>
     </div>
