@@ -142,6 +142,14 @@ export default {
     })
   },
   async mounted() {
+    if (this.$route.query.donation) {
+      return this.$notify({
+        type: 'success',
+        text: 'Merci pour votre soutient ! Vous serez recontacté sous quelques jours !',
+        duration: 20000,
+        width: 400,
+      })
+    }
     const { contributors } = await this.$axios.$get('/api/contributors')
     this.contributors = contributors.sort(
       (a, b) => b.quizzes.length - a.quizzes.length
