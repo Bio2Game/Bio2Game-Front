@@ -5,7 +5,7 @@
 <script>
 export default {
   validate({ params }) {
-    return ['google', 'twitter', 'linkedin', 'facebook'].includes(params.social)
+    return ['google', 'linkedin', 'facebook'].includes(params.social)
   },
   async mounted() {
     try {
