@@ -137,9 +137,6 @@
             <a class="social-link facebook" @click="socialLogin('facebook')">
               <Facebook />
             </a>
-            <a class="social-link twitter" @click="socialLogin('twitter')">
-              <Twitter />
-            </a>
             <a class="social-link linkedin" @click="socialLogin('linkedin')">
               <Linkedin />
             </a>
@@ -153,7 +150,6 @@
 <script>
 import Facebook from '@/assets/icons/facebook.svg?inline'
 import Google from '@/assets/icons/google.svg?inline'
-import Twitter from '@/assets/icons/twitter.svg?inline'
 import Linkedin from '@/assets/icons/linkedin.svg?inline'
 
 export default {
@@ -161,7 +157,6 @@ export default {
   components: {
     Facebook,
     Google,
-    Twitter,
     Linkedin,
   },
   middleware: ['simple-auth'],
