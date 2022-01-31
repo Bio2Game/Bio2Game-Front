@@ -3,7 +3,7 @@
     v-if="showIt"
     class="modal_overlay"
     :class="{ open: status, close: !status, isMobile: $device.isMobile }"
-    @click.self="closeModal"
+    @click="closeModal"
   >
     <div
       v-body-scroll-lock="status"
