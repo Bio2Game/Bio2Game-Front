@@ -11,7 +11,7 @@
       :size="24"
       :name="user.name"
     />
-    <h4 class="name-preview">{{ user.name }}</h4>
+    <h4 class="name-preview">{{ user.name || user.username }}</h4>
     <transition name="popup">
       <div v-show="active" class="popup">
         <div class="popup-head">
@@ -31,14 +31,19 @@
             <span>Description</span>
             <p>{{ user.description }}</p>
           </div>
-          <div v-if="user.email" class="info">
+          <div class="info">
             <span>Adresse email</span>
-            <p>{{ user.email }}</p>
+            <p>
+              <a :href="`mailto:${user.email}`" target="blank">{{
+                user.email
+              }}</a>
+            </p>
           </div>
           <a
             v-if="user.website"
-            class="button md primary"
+            class="button md green"
             :href="formatLink(user.website)"
+            target="blank"
             >Site web</a
           >
         </div>
@@ -171,21 +176,22 @@ export default {
         span {
           color: #ababab;
           font-size: 10px;
-          margin-bottom: 4px;
+          margin-bottom: 8px;
         }
 
         p {
           color: #717171;
           font-size: 14px;
+          margin-bottom: 0;
+
+          a {
+            color: $green;
+          }
         }
 
         &:last-child {
           margin-bottom: 0;
         }
-      }
-
-      .button {
-        margin-top: 16px;
       }
     }
   }
