@@ -3,15 +3,7 @@
     <div class="infos">
       <div class="title">
         <h1>{{ currentQuestion.label }}</h1>
-        <a class="contributor-zone" :href="formatLink(quiz.author.website)">
-          <AvatarElement
-            :email="quiz.author.email"
-            :path="quiz.author.avatar_path"
-            :size="24"
-            :name="quiz.author.username"
-          />
-          <h4>{{ quiz.author.username }}</h4>
-        </a>
+        <ContributorZone :user="quiz.author" />
       </div>
       <div class="position">
         <div id="progress" class="progress-bar">
@@ -166,7 +158,7 @@ export default {
   },
   methods: {
     formatLink(link) {
-      if (!link) return ''
+      if (!link) return null
       return link.startsWith('http') ? link : `https://${link}`
     },
     skipResponses() {

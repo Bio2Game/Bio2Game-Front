@@ -120,28 +120,6 @@ export default {
           }
         }
 
-        .contributor-zone {
-          display: flex;
-          align-items: center;
-          background-color: #f8f7f7;
-          border-radius: 6px;
-          margin-bottom: 24px;
-          padding: 8px;
-          cursor: pointer;
-          text-decoration: none;
-
-          img {
-            border-radius: 12px;
-          }
-
-          h4 {
-            margin-left: 8px;
-            color: #4f4f4f;
-            font-size: 14px;
-            font-weight: 600;
-          }
-        }
-
         .position {
           display: flex;
           align-items: center;

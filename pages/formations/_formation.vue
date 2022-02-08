@@ -1,15 +1,7 @@
 <template>
   <div class="formation-page">
     <div class="top-part">
-      <a class="contributor-zone" :href="formatLink(formation.author.website)">
-        <AvatarElement
-          :email="formation.author.email"
-          :path="formation.author.avatar_path"
-          :size="24"
-          :name="formation.author.name"
-        />
-        <h4>{{ formation.author.name }}</h4>
-      </a>
+      <ContributorZone :user="formation.author" />
     </div>
     <div class="container container-formation">
       <div class="top">
@@ -53,12 +45,6 @@ export default {
       return this.$store.state.formations.formation
     },
   },
-  methods: {
-    formatLink(link) {
-      if(!link) return ''
-      return link.startsWith('http') ? link : `https://${link}`
-    },
-  }
 }
 </script>
 
@@ -74,28 +60,6 @@ export default {
     width: 100%;
     margin: 0 auto;
     max-width: 1620px;
-
-    .contributor-zone {
-      display: flex;
-      align-items: center;
-      background-color: #f8f7f7;
-      border-radius: 6px;
-      margin-bottom: 24px;
-      padding: 8px;
-      cursor: pointer;
-
-      img {
-        border-radius: 12px;
-      }
-
-      h4 {
-        margin-left: 8px;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-weight: 600;
-        text-decoration: none;
-      }
-    }
   }
 
   .nature {
