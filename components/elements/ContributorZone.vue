@@ -152,12 +152,12 @@ export default {
           font-size: 24px;
           font-weight: 600;
           font-style: normal;
-          margin-bottom: 8px;
         }
 
         .name {
           color: #4e4e4e;
           font-size: 18px;
+          margin-top: 8px;
         }
       }
     }
