@@ -38,7 +38,6 @@
             En sélectionnant un enseignant, vous acceptez qu'il ai accès à vos
             résultats.
           </p>
-
         </div>
         <div class="part">
           <InputElement
@@ -50,23 +49,23 @@
             :error="filtredErrors('name')"
           />
           <InputElement
-            v-model="complete.birth_date"
-            :value="formatDate(complete.birth_date)"
+            v-model="basics.birth_date"
+            :value="formatDate(basics.birth_date)"
             type="date"
             placeholder="Date de naissance"
             :error="filtredErrors('birth_date')"
           />
           <SelectorElement
-            v-model="complete.sex"
-            :selected="complete.sex"
+            v-model="basics.sex"
+            :selected="basics.sex"
             :items="sexes"
             :default-value="0"
             placeholder="Sexe"
           />
 
           <InputElement
-            v-model="complete.localisation"
-            :value="complete.localisation"
+            v-model="basics.localisation"
+            :value="basics.localisation"
             type="text"
             placeholder="Localisation"
             :error="filtredErrors('localisation')"
@@ -104,12 +103,11 @@
         </div>
         <div class="part">
           <TextareaElement
-            v-model="basics.description"
-            :value="basics.description"
+            v-model="complete.description"
+            :value="complete.description"
             placeholder="Description"
             :error="filtredErrors('description')"
           />
-
 
           <CheckboxElement
             class="is_animator"
@@ -123,12 +121,9 @@
       </div>
     </div>
     <div v-else class="become-contributor-zone">
-      <nuxt-link
-          to="/profil/become"
-          class="before button md green"
-        >
-          Devenir contributeur
-        </nuxt-link>
+      <nuxt-link to="/profil/become" class="before button md green">
+        Devenir contributeur
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -141,17 +136,20 @@ export default {
     return {
       basics: {
         username: '',
-        name: '',
-        description: '',
         email: '',
         password: '',
         password_confirmation: '',
+        name: '',
+        birth_date: '',
+        sex: '',
+        localisation: '',
       },
       complete: {
-        sex: '',
-        birth_date: '',
+        contributor_type: null,
         contributor_mobile: '',
         website: '',
+        description: '',
+        is_animator: false,
       },
       errors: [],
       sexes: [
@@ -195,23 +193,23 @@ export default {
   mounted() {
     this.basics = {
       username: this.$auth.user.username,
-      name: this.$auth.user.name || '',
-      description: this.$auth.user.description || '',
       email: this.$auth.user.email,
       password: '',
       password_confirmation: '',
+      name: this.$auth.user.name || '',
+      birth_date: this.$auth.user.birth_date,
+      sex: this.$auth.user.sex,
+      localisation: this.$auth.user.localisation,
     }
     this.complete = {
-      sex: this.$auth.user.sex,
-      birth_date: this.$auth.user.birth_date,
-      current_animators_ids: [],
-      contributor_mobile: this.$auth.user.status
-        ? this.$auth.user.contributor_mobile
-        : '',
       contributor_type: this.$auth.user.status
         ? this.$auth.user.contributor_type
         : '',
+      contributor_mobile: this.$auth.user.status
+        ? this.$auth.user.contributor_mobile
+        : '',
       website: this.$auth.user.status ? this.$auth.user.website : '',
+      description: this.$auth.user.description || '',
       is_animator: this.$auth.user.is_animator
         ? this.$auth.user.is_animator
         : false,
@@ -246,13 +244,13 @@ export default {
 </script>
 
 <style lang="scss">
-  .become-contributor-zone {
-    margin-top: 24px;
-    display: flex;
-    justify-content: center;
+.become-contributor-zone {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
 
-    .button {
-      min-width: 220px;
-    }
+  .button {
+    min-width: 220px;
   }
+}
 </style>
