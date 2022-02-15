@@ -18,6 +18,7 @@
             name="avatar"
             class="form-control"
             accept="image/*"
+            @change="processFile"
           />
         </label>
 
@@ -106,6 +107,33 @@ export default {
         case 'month':
           return 'Un mois'
         default:
+      }
+    },
+    async processFile(event) {
+      const file = event.target.files[0]
+      if (!file) return
+
+      if (!['jpg', 'jpeg', 'png'].includes(file.type.split('/')[1])) {
+        return this.$toast.show("Ce type d'image n'est pas supporté.")
+      }
+
+      if (file.size >= 10000000) {
+        return this.$toast.show(
+          "La taille de l'avatar est trop grande ! (supperieur à 10 Mo)"
+        )
+      }
+
+      const formData = new FormData()
+      formData.append('avatar', file)
+      try {
+        const name = await this.$axios.$post('/api/user/avatar', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        await this.$store.commit('UPDATE_USER_AVATAR', name)
+      } catch (error) {
+        console.error(error)
       }
     },
   },
