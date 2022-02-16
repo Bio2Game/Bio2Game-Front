@@ -33,7 +33,7 @@
         <SelectorElement
           :selected="reason"
           :items="reasons"
-          placeholder="Selectionner le motif"
+          placeholder="Sélectionner le motif"
           :error="filtredErrors('reason')"
           @input="reason = $event"
         />

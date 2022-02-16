@@ -23,7 +23,7 @@
                 class="select-quiz"
                 :selected="quizId || $route.query.autoselect"
                 :items="quizzes"
-                placeholder="Selectionner le quiz"
+                placeholder="Sélectionner le quiz"
                 display-key="label"
                 ref-key="id"
                 @input="loadQuiz($event)"
@@ -170,7 +170,7 @@ export default {
       if (this.questions.filter((q) => q.active).length < 3) {
         return this.$notify({
           type: 'error',
-          text: 'Veuillez selectionner au moins 3 questions.',
+          text: 'Veuillez sélectionner au moins 3 questions.',
           duration: 3000,
           width: 400,
         })
