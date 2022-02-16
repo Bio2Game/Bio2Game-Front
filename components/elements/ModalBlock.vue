@@ -73,7 +73,7 @@ export default {
 .modal_overlay {
   position: fixed;
   z-index: 1002;
-  top: 5rem;
+  top: 0;
   right: 0;
   display: flex;
   justify-content: center;
