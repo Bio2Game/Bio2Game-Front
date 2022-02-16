@@ -48,7 +48,17 @@
             :error="filtredErrors('password')"
             @keydown.enter.native="register()"
           />
-          <a class="button green md full" @click="register()"
+          <CheckboxElement
+            id="cgu"
+            class="cgu"
+            :checked="cgu"
+            label="J'accepte les conditions générales d'utilisation"
+            @input="cgu = $event"
+          />
+          <a
+            class="button green md full"
+            :class="{ disabled: !cgu }"
+            @click="cgu && register()"
             >Créer mon compte</a
           >
         </div>
@@ -172,6 +182,7 @@ export default {
       restore: true,
       noPassword: false,
       status: 'login',
+      cgu: false,
     }
   },
   mounted() {
@@ -401,6 +412,16 @@ export default {
             font-weight: 500;
             text-decoration: none;
             cursor: pointer;
+          }
+        }
+
+        .cgu {
+          margin-bottom: 16px;
+
+          span {
+            color: #aaaaaa;
+            font-size: 12px;
+            padding-left: 30px;
           }
         }
 
