@@ -138,6 +138,11 @@ export default {
       )
     },
   },
+  mounted() {
+    if (this.$route.query.query) {
+      this.search = this.$route.query.query
+    }
+  },
   methods: {
     levelSelect(level) {
       if (this.selectedLevels.includes(level)) {
