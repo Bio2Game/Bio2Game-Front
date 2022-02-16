@@ -5,7 +5,7 @@
         <div class="item a-propos">
           <div class="title">
             <Nature />
-            <h5>A PROPOS</h5>
+            <h5>QUI SOMMES NOUS</h5>
           </div>
           <p>
             Un jeu qui vous permet de tester vos connaissances sur l’impact
@@ -16,11 +16,14 @@
         <div class="item contact">
           <div class="title">
             <Nature />
-            <h5>CONTACT</h5>
+            <h5>NOS ENGAGEMENTS</h5>
           </div>
-          <nuxt-link to="/annexes/a-propos">À Propos</nuxt-link>
           <nuxt-link to="/annexes/charte-bio2game">
             La Charte Bio2Game
+          </nuxt-link>
+          <!-- Dans le login -->
+          <nuxt-link to="/annexes/cgu">
+            Conditions générales d'utilisation
           </nuxt-link>
           <nuxt-link to="/annexes/donnees-personnelles">
             Politique de protection des données personnelles
@@ -30,7 +33,7 @@
         <div class="item social">
           <div class="title">
             <Nature />
-            <h5>SOCIAL</h5>
+            <h5>CONTACTEZ-NOUS</h5>
           </div>
           <a class="contact-button" href="mailto:contact@bio2game.com"
             >Contactez nous</a
