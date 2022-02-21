@@ -169,7 +169,7 @@ export default {
     classes: false,
     events: false,
     google: {
-      families: ['Montserrat:500,600,700,800,900&display=swap'],
+      families: ['Montserrat:400,500,600,700,800,900&display=swap'],
     },
     custom: {
       families: ['Material-Icons'],
