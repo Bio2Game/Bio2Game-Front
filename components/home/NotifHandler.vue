@@ -1,6 +1,6 @@
 <template>
-  <div class="notif-container-v2">
-    <div class="notif">
+  <div v-if="display" class="notif-container-v2">
+    <div class="notif" :class="{ hide }">
       <h3 class="title">Journée Mondiale de l’eau</h3>
       <div class="wrapper">
         <p>
@@ -24,6 +24,23 @@
 <script>
 export default {
   name: 'NotifHandler',
+  data() {
+    return {
+      hide: false,
+      display: true,
+      small: true,
+    }
+  },
+  watch: {
+    $route(newValue, oldValue) {
+      this.display = newValue.name === 'index' || oldValue.name === 'index'
+      this.hide = newValue.name !== 'index'
+    },
+  },
+  mounted() {
+    this.display = this.$route.name === 'index'
+    this.hide = this.$route.name !== 'index'
+  },
 }
 </script>
 
@@ -47,12 +64,42 @@ export default {
     background-color: #f5f5f5;
     border-radius: 12px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    transform: translateY(550px);
+    animation: fadeUp 0.3s ease-out forwards 1s;
+    transition: 0.2s width ease-out, 0.2s height ease-out, 0.3s padding ease;
     @media screen and (max-width: 1024px) {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       margin-left: 40px;
       max-width: 100%;
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(550px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &.hide {
+      animation: fadeInRight 0.3s ease-out forwards;
+      @keyframes fadeInRight {
+        0% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateX(500px);
+        }
+      }
     }
 
     .title {
