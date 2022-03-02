@@ -4,6 +4,12 @@
       <div class="wrapper">
         <div class="logos">
           <img
+            src="~/assets/images/waterfamily.png"
+            alt="Logo WaterFamily"
+            class="logo"
+          />
+          <hr />
+          <img
             src="~/assets/images/logo.png"
             alt="Logo Bio2Game"
             class="logo bio2game"
@@ -11,7 +17,10 @@
         </div>
         <div class="head-content">
           <h1>Journée Mondiale de l'eau</h1>
-          <h2>Contenu proposé par la WaterFamily</h2>
+          <h2>
+            <span class="waterfamily">Water Family</span> &
+            <span class="bio2game">Bio2Game</span>
+          </h2>
         </div>
       </div>
     </div>
@@ -42,7 +51,7 @@ export default {
   },
   computed: {
     color() {
-      let color = '#bbe242'
+      let color = '#199eb6'
       if (this.$route.query.color) {
         switch (this.$route.query.color) {
           case 'blue':
@@ -105,7 +114,7 @@ export default {
           border-radius: 32px;
 
           &.bio2game {
-            // margin-left: -8px;
+            margin-left: -8px;
             margin-right: -8px;
           }
         }
@@ -122,6 +131,7 @@ export default {
       .head-content {
         display: flex;
         justify-content: center;
+        align-items: center;
         flex: 1;
         flex-direction: column;
         gap: 8px;
@@ -129,14 +139,16 @@ export default {
         h1 {
           color: var(--widget-color);
           font-family: 'Uni Sans', sans-serif;
-          font-size: 24px;
+          font-size: 20px;
+          text-align: center;
           text-transform: uppercase;
         }
 
         h2 {
           color: var(--widget-color);
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 500;
+          text-align: center;
 
           &.bio2game {
             color: var(--widget-color);
