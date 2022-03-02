@@ -5,36 +5,60 @@
         <div class="item a-propos">
           <div class="title">
             <Nature />
-            <h5>QUI SOMMES NOUS</h5>
+            <nuxt-link to="/annexes/a-propos">
+              <h5>QUI SOMMES NOUS</h5>
+            </nuxt-link>
           </div>
           <p>
             Un jeu qui vous permet de tester vos connaissances sur l’impact
             environnemental de votre consommation et d'apprendre.
           </p>
-          <nuxt-link to="/annexes/a-propos">En savoir plus</nuxt-link>
+          <div class="title subtitle">
+            <Nature />
+            <h5>MODES D'EMPLOIS</h5>
+          </div>
+          <a class="big-link" href="/MODE_EMPLOI_JOUEUR.pdf" target="blank"
+            >Partenaire</a
+          >
+          <span class="separator">•</span>
+          <a
+            class="big-link"
+            href="/MODE_EMPLOI_CONTRIBUTEUR.pdf"
+            target="blank"
+            >Contributeur</a
+          >
+          <span class="separator">•</span>
+          <a class="big-link" href="/MODE_EMPLOI_PARTENAIRE.pdf" target="blank"
+            >Joueur</a
+          >
         </div>
         <div class="item contact">
           <div class="title">
             <Nature />
             <h5>NOS ENGAGEMENTS</h5>
           </div>
-          <nuxt-link to="/annexes/charte-bio2game">
+          <nuxt-link class="link" to="/annexes/charte-bio2game">
             La Charte Bio2Game
           </nuxt-link>
           <!-- Dans le login -->
-          <nuxt-link to="/annexes/cgu">
+          <nuxt-link class="link" to="/annexes/cgu">
             Conditions générales d'utilisation
           </nuxt-link>
-          <nuxt-link to="/annexes/donnees-personnelles">
+          <nuxt-link class="link" to="/annexes/donnees-personnelles">
             Politique de protection des données personnelles
           </nuxt-link>
-          <nuxt-link to="/annexes/cookies">Utilisation des cookies</nuxt-link>
+          <nuxt-link class="link" to="/annexes/cookies"
+            >Utilisation des cookies</nuxt-link
+          >
         </div>
         <div class="item social">
           <div class="title">
             <Nature />
-            <h5>CONTACTEZ-NOUS</h5>
+            <h5>DOSSIERS DE PRESSE</h5>
           </div>
+          <a class="link" href="/Dossier_de_presse_JMDL.pdf" target="blank">
+            Presse journée mondiale de l'eau
+          </a>
           <a class="contact-button" href="mailto:contact@bio2game.com"
             >Contactez nous</a
           >
@@ -112,9 +136,15 @@ footer {
           display: flex;
           margin-bottom: 16px;
 
+          &.subtitle {
+            margin-top: 24px;
+            margin-bottom: 8px;
+          }
+
           h5 {
             margin: 0;
             color: white;
+            font-size: 14px;
             padding-left: 15px;
           }
         }
@@ -127,7 +157,11 @@ footer {
           margin-bottom: 10px;
         }
 
-        &.a-propos a {
+        .separator {
+          color: $green;
+        }
+
+        a.big-link {
           color: $green;
           font-size: 14px;
           font-weight: 600;
@@ -138,22 +172,24 @@ footer {
         &.contact {
           display: flex;
           flex-direction: column;
+        }
 
-          a {
-            padding: 6px 0;
-            color: #ffffff;
-            font-size: 13px;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
+        a.link {
+          padding: 6px 0;
+          color: #ffffff;
+          font-size: 13px;
+          text-decoration: none;
+          transition: color 0.3s ease-in-out;
 
-            &:hover {
-              color: $green;
-            }
+          &:hover {
+            color: $green;
           }
         }
 
         &.social {
-          flex: none;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
         }
 
         .contact-button {
@@ -162,11 +198,12 @@ footer {
           color: $green;
           font-size: 11px;
           font-weight: 600;
-          line-height: 34px;
+          line-height: 14px;
           border-radius: 30px;
           text-transform: uppercase;
           text-decoration: none;
           transition: all 0.3s ease-in-out;
+          margin-top: 16px;
 
           &:hover {
             color: #3b413e;
