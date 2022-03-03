@@ -47,13 +47,23 @@ export default {
 <style lang="scss">
 .notif-container-v2 {
   position: absolute;
-  z-index: 1000;
+  z-index: 10;
   top: 0;
   right: 0;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
   height: 100vh;
+
+  @media screen and (max-width: 780px) {
+    top: 100vh;
+    margin-left: 0;
+    height: auto;
+
+    .notif {
+      margin: 16px !important;
+    }
+  }
 
   .notif {
     position: relative;

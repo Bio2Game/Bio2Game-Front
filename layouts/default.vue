@@ -83,6 +83,9 @@ export default {
   .cover-hero {
     height: 100vh;
     transition: all 0.1s;
+    @media screen and (max-width: 780px) {
+      height: calc(100vh + 280px);
+    }
   }
 }
 
