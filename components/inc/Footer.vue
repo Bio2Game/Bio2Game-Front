@@ -147,6 +147,15 @@ footer {
             font-size: 14px;
             padding-left: 15px;
           }
+
+          a {
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
 
         p {
