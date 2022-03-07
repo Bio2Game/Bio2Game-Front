@@ -107,6 +107,7 @@
             :value="complete.description"
             placeholder="Description"
             :error="filtredErrors('description')"
+            :max="400"
           />
 
           <CheckboxElement
