@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import NotifHandler from '~/components/home/NotifHandler.vue'
+import NotifHandler from '~/components/home/NotifHandlerStandard.vue'
 
 export default {
   name: 'Hero',
