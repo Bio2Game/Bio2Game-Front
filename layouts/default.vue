@@ -200,10 +200,10 @@ export default {
 
     .text {
       display: flex;
+      flex-direction: column;
       margin: 16px;
       color: #484848;
       font-size: 15px;
-      flex-direction: column;
 
       .title {
         overflow: hidden;

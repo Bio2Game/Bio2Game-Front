@@ -7,18 +7,18 @@
 <style lang="scss">
 #document {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 50px 40px;
-  flex-direction: column;
 
   .context {
     display: flex;
-    padding: 32px;
     flex-direction: column;
+    padding: 32px;
+    margin: 0 auto;
     flex: 1;
     background-color: #ffffff;
     max-width: 1400px;
-    margin: 0 auto;
     border-radius: 4px;
 
     h1 {

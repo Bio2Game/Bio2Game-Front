@@ -150,9 +150,9 @@ export default {
 
     .wrapper {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       width: 100%;
-      flex-direction: column;
       transition: 0.1s opacity ease-in-out, 0.2s transform ease-in-out;
       min-width: 296px;
       @media screen and (max-width: 1024px) {

@@ -154,9 +154,9 @@ export default {
 
       .responses {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
         flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: wrap;
 
         .separator {
           display: flex;
@@ -399,8 +399,8 @@ export default {
 
               .stat {
                 display: flex;
-                align-items: center;
                 flex-direction: column;
+                align-items: center;
                 flex: 1;
 
                 .num {

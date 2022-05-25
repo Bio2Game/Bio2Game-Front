@@ -177,8 +177,8 @@ export default {
 
   .elements {
     display: flex;
-    width: 100%;
     flex-direction: row;
+    width: 100%;
 
     div.block {
       flex: 1;
@@ -195,8 +195,8 @@ export default {
 
         .selected-quizzes {
           display: flex;
-          align-items: center;
           flex-direction: column;
+          align-items: center;
 
           .title {
             margin: 8px 0 16px;
@@ -213,9 +213,9 @@ export default {
 
             .quiz-element {
               display: flex;
+              flex-direction: column;
               align-items: center;
               cursor: pointer;
-              flex-direction: column;
 
               .quiz-icon {
                 width: 48px;
@@ -241,8 +241,8 @@ export default {
 
         .questions-selection {
           display: flex;
-          align-items: center;
           flex-direction: column;
+          align-items: center;
           flex: 1;
 
           .quiz-name {
@@ -261,8 +261,8 @@ export default {
 
             .list {
               display: flex;
-              flex: 1;
               flex-direction: column;
+              flex: 1;
 
               .checkbox {
                 margin-bottom: 8px;

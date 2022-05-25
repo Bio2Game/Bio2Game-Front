@@ -109,9 +109,9 @@ export default {
 footer {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   background: url('../../assets/images/footer.jpg');
-  flex-direction: column;
   background-size: cover;
   background-position: center;
 
@@ -149,8 +149,8 @@ footer {
           }
 
           a {
-            text-decoration: none;
             color: white;
+            text-decoration: none;
 
             &:hover {
               text-decoration: underline;

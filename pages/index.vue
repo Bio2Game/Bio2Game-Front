@@ -247,8 +247,8 @@ export default {
   .contributors {
     position: relative;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     background-color: white;
 
     .title {
@@ -259,11 +259,11 @@ export default {
 
       h2 {
         display: flex;
+        flex-direction: column;
         align-items: center;
         color: $green;
         font-size: 35px;
         font-weight: 700;
-        flex-direction: column;
         text-transform: uppercase;
       }
     }

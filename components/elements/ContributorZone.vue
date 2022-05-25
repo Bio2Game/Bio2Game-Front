@@ -123,9 +123,9 @@ export default {
     top: calc(100% + 8px);
     right: 0;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
     width: 300px;
-    flex-direction: column;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
     border-radius: 19px;
 
@@ -164,8 +164,8 @@ export default {
 
     .popup-content {
       display: flex;
-      padding: 16px 24px 24px;
       flex-direction: column;
+      padding: 16px 24px 24px;
       background-color: #ffffff;
 
       .info {

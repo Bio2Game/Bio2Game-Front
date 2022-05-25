@@ -342,9 +342,9 @@ export default {
     border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     @media screen and (max-width: $md) {
+      flex-direction: column;
       overflow: hidden;
       margin: 0;
-      flex-direction: column;
       border-radius: 0;
     }
 
@@ -362,9 +362,9 @@ export default {
 
       .part {
         display: flex;
+        flex-direction: column;
         padding: 48px 32px;
         flex: 1 0;
-        flex-direction: column;
         transition: transform 0.3s ease-in-out;
         @media screen and (max-width: $md) {
           min-width: 100%;
@@ -410,8 +410,8 @@ export default {
             color: $green;
             font-size: 14px;
             font-weight: 500;
-            text-decoration: none;
             cursor: pointer;
+            text-decoration: none;
           }
         }
 
@@ -449,9 +449,9 @@ export default {
             height: 52px;
             color: #ffffff;
             font-size: 60px;
+            cursor: pointer;
             flex: 1;
             border-radius: 6px;
-            cursor: pointer;
 
             svg {
               width: 28px;
@@ -521,8 +521,8 @@ export default {
 
       .content {
         display: flex;
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
 
         h3 {
           color: #ffffff;

@@ -131,9 +131,9 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   border: 1px solid #cccccc;
   margin: 8px 0 16px;
-  flex-wrap: wrap;
   border-radius: 4px;
   background-color: white;
   padding-left: 8px;

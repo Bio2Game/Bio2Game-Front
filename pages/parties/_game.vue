@@ -381,9 +381,9 @@ export default {
 
       .responses {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
         flex-direction: column;
+        justify-content: space-between;
+        flex-wrap: wrap;
 
         .separator {
           display: flex;

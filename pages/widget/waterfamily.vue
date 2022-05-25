@@ -121,9 +121,9 @@ export default {
 
       .head-content {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         flex: 1;
-        flex-direction: column;
         gap: 8px;
 
         h1 {

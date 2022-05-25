@@ -337,8 +337,8 @@ export default {
         position: fixed;
         top: 0;
         right: 0;
-        overflow: hidden;
         flex-direction: column;
+        overflow: hidden;
         background-color: $green;
         max-height: 0;
         border-bottom-left-radius: 24px;
@@ -346,10 +346,10 @@ export default {
         transition: 0.4s max-height ease;
 
         .left-menu {
+          flex-direction: column;
           align-items: flex-start;
           width: 100%;
           padding: 72px 24px 0;
-          flex-direction: column;
 
           .link {
             padding: 16px;
@@ -365,8 +365,8 @@ export default {
         }
 
         .right-menu {
-          padding: 0 24px 24px;
           flex-direction: column;
+          padding: 0 24px 24px;
 
           .button {
             margin-left: 0;

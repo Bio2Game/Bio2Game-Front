@@ -127,13 +127,13 @@ export default {
 
     .wrapper {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       width: 100%;
       font-size: 17px;
       font-weight: 500;
       line-height: 20px;
       text-align: center;
-      flex-direction: column;
       transition: 0.1s opacity ease-in-out, 0.2s transform ease-in-out;
 
       .button {

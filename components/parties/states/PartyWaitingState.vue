@@ -108,10 +108,10 @@ export default {
 
 .watting {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  flex-direction: column;
   min-height: 70vh;
 
   .loader {
@@ -222,8 +222,8 @@ export default {
         }
 
         &.qr-code {
-          background-color: #282828;
           cursor: pointer;
+          background-color: #282828;
         }
 
         &.twitter {

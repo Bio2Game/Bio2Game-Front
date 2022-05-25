@@ -90,11 +90,11 @@ export default {
         top: 20%;
         right: 20%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         color: #585858;
         text-align: center;
-        flex-direction: column;
         bottom: 20%;
         left: 20%;
         user-select: none;
