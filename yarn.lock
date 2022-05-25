@@ -10521,9 +10521,9 @@ vuedraggable@^2.24.3:
   dependencies:
     sortablejs "1.10.2"
 
-"vuetable-2@git://github.com/Bio2Game/vuetable-2.git#b0a3afe2ea75ae2209bf79425bf9397c62a8860a":
+"vuetable-2@github:Bio2Game/vuetable-2.git#b0a3afe2ea75ae2209bf79425bf9397c62a8860a":
   version "2.0.0-beta.4"
-  resolved "git://github.com/Bio2Game/vuetable-2.git#b0a3afe2ea75ae2209bf79425bf9397c62a8860a"
+  resolved "https://codeload.github.com/Bio2Game/vuetable-2/tar.gz/b0a3afe2ea75ae2209bf79425bf9397c62a8860a"
   dependencies:
     lodash.orderby "^4.6.0"
     vuedraggable "^2.24.3"
