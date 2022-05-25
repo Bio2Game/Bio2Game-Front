@@ -14,7 +14,7 @@
             placeholder="Libélé du quizz"
             :max="30"
             :error="filtredErrors('label')"
-            @input="(value) => (label = value)"
+            @input="label = $event"
           />
           <InputElement
             :value="get('description')"
@@ -23,7 +23,7 @@
             class="white_label"
             placeholder="Description du quizz"
             :error="filtredErrors('description')"
-            @input="(value) => (description = value)"
+            @input="description = $event"
           />
         </div>
         <div class="section">
@@ -34,7 +34,7 @@
                 class="white_label"
                 placeholder="Domaine"
                 :error="filtredErrors('domainId')"
-                @input="(value) => (domain_id = value)"
+                @input="domain_id = $event"
               />
             </div>
             <div class="section">
@@ -47,22 +47,35 @@
               />
             </div>
           </div>
-          <InputElement
-            :value="get('localisation')"
-            type="text"
-            name="localisation"
-            class="white_label"
-            placeholder="Localisation (optionnel)"
-            :error="filtredErrors('localisation')"
-            @input="(value) => (localisation = value)"
-          />
+          <div class="section-zones">
+            <div class="section">
+              <InputElement
+                :value="get('localisation')"
+                type="text"
+                name="localisation"
+                class="white_label"
+                placeholder="Localisation (optionnel)"
+                :error="filtredErrors('localisation')"
+                @input="localisation = $event"
+              />
+            </div>
+            <div class="section">
+              <SelectorElement
+                :selected="get('language')"
+                :items="languages"
+                :error="filtredErrors('language')"
+                placeholder="Langue"
+                @input="language = $event"
+              />
+            </div>
+          </div>
         </div>
         <div class="section top-buttons">
           <div
             class="button md equal border_white"
-            @click="status = +!get('status')"
+            @click="status = getNextStatus(get('status'))"
           >
-            {{ get('status') ? 'Publique' : 'Privé' }}
+            {{ statusNames[get('status')] }}
           </div>
           <div class="button white_sky sm equal" @click="createQuiz(true)">
             Créer une question
@@ -142,7 +155,7 @@ export default {
   components: {
     vuetable,
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(_to, _from, next) {
     if (!this.isDataEdited) {
       return next()
     }
@@ -170,12 +183,44 @@ export default {
       label: null,
       description: null,
       level: null,
+      language: 'fr',
       domain_id: null,
       localisation: null,
       status: null,
       questions: null,
       editOrder: false,
       errors: [],
+      languages: [
+        {
+          name: 'Français',
+          ref: 'fr',
+        },
+        {
+          name: 'Anglais',
+          ref: 'en',
+        },
+        {
+          name: 'Japonais',
+          ref: 'jp',
+        },
+        {
+          name: 'Arabe',
+          ref: 'ar',
+        },
+        {
+          name: 'Allemand',
+          ref: 'de',
+        },
+        {
+          name: 'Espagnole',
+          ref: 'es',
+        },
+        {
+          name: 'Italien',
+          ref: 'it',
+        },
+      ],
+      statusNames: ['Dev', 'Publique', 'Privé'],
     }
   },
   computed: {
@@ -271,6 +316,10 @@ export default {
     get(key) {
       return this[key] !== null ? this[key] : this.quiz[key]
     },
+    getNextStatus(status) {
+      if (status === 2) return 0
+      return status + 1
+    },
     filtredErrors(field) {
       return this.errors.find((error) => error.field === field)
     },
@@ -280,6 +329,7 @@ export default {
       this.level = null
       this.domain_id = null
       this.localisation = null
+      this.language = 'fr'
       this.status = null
     },
     saveTempQuestionsOrder(data) {
@@ -311,7 +361,7 @@ export default {
             description: this.get('description'),
             level: this.get('level'),
             localisation: this.get('localisation'),
-            language: 'fr',
+            language: this.get('language'),
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
             status: +!!this.get('status'),
@@ -378,10 +428,10 @@ export default {
       }
     },
     generateURL(label = '') {
-      /* eslint-disable no-control-regex */
       return label
         .toLowerCase()
         .normalize('NFKD')
+        /* eslint-disable-next-line no-control-regex */
         .replace(/[^\x00-\x7F]+/g, '')
         .replace(/[^a-zA-Z0-9]+/g, '-')
     },

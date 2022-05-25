@@ -30,8 +30,8 @@
           :error="filtredErrors('domainId')"
           @input="domain_id = $event"
         />
-        <div class="button md equal border_white" @click="status = !status">
-          {{ get('status') ? 'Publique' : 'Privé' }}
+        <div class="button md equal border_white" @click="status = getNextStatus(get('status'))">
+          {{ statusNames[get('status')] }}
         </div>
       </div>
       <div class="content">
@@ -102,7 +102,7 @@ export default {
   components: {
     MarkdownEditor,
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(_to, _from, next) {
     if (!this.isDataEdited) {
       return next()
     }
@@ -152,6 +152,7 @@ export default {
           ref: 1,
         },
       ],
+      statusNames: ['Dev', 'Publique', 'Privé'],
     }
   },
   computed: {
@@ -211,6 +212,10 @@ export default {
     get(key) {
       return this[key] === null ? this.formation[key] : this[key]
     },
+    getNextStatus(status) {
+      if (status === 2) return 0
+      return status + 1
+    },
     filtredErrors(field) {
       return this.errors.find((error) => error.field === field)
     },
@@ -241,7 +246,7 @@ export default {
             domain_id: this.get('domain_id'),
             user_id: this.$auth.user.id,
             quizzes: this.findContentQuizzes(this.get('content')),
-            status: !!this.get('status') + 0,
+            status: +!!this.get('status'),
           }
         )
 
@@ -283,10 +288,10 @@ export default {
       }
     },
     generateURL(label = '') {
-      /* eslint-disable no-control-regex */
       return label
         .toLowerCase()
         .normalize('NFKD')
+        /* eslint-disable-next-line no-control-regex */
         .replace(/[^\x00-\x7F]+/g, '')
         .replace(/[^a-zA-Z0-9]+/g, '-')
     },
