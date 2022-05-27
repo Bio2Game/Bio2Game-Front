@@ -79,14 +79,14 @@
             @input="lastname = $event"
           />
           <InputElement
-            :value="website"
+            :value="site"
             type="text"
-            placeholder="Website"
-            @input="website = $event"
+            placeholder="Site"
+            @input="site = $event"
           />
           <button
             class="button green lg"
-            :class="{ disabled: !firstname || !lastname || !website }"
+            :class="{ disabled: !firstname || !lastname || !site }"
             @click="registerSimpleAuth()"
           >
             Start quiz !
@@ -123,7 +123,7 @@ export default {
     return {
       firstname: '',
       lastname: '',
-      website: '',
+      site: '',
       askAuth: false,
       lang: null,
       quizzesLangs: {
@@ -166,11 +166,11 @@ export default {
       }
     },
     async registerSimpleAuth() {
-      if (!this.firstname || !this.lastname || !this.website) return
+      if (!this.firstname || !this.lastname || !this.site) return
 
       await this.$auth.loginWith('guest', {
         data: {
-          username: `${this.firstname}:${this.lastname}:${this.website}`,
+          username: `${this.firstname}:${this.lastname}:${this.site}`,
         },
       })
 
