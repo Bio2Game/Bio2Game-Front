@@ -156,7 +156,7 @@ export default {
     vuetable,
   },
   beforeRouteLeave(_to, _from, next) {
-    if (!this.isDataEdited) {
+    if (!this.isDataEdited()) {
       return next()
     }
     next(
@@ -301,16 +301,6 @@ export default {
     isCreationPage() {
       return this.$route.params.quiz === 'create'
     },
-    isDataEdited() {
-      return !!(
-        this.label !== null ||
-        this.description !== null ||
-        this.level !== null ||
-        this.domain_id !== null ||
-        this.localisation !== null ||
-        this.status !== null
-      )
-    },
   },
   methods: {
     get(key) {
@@ -364,12 +354,13 @@ export default {
             language: this.get('language'),
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
-            status: +!!this.get('status'),
+            status: this.get('status'),
           }
         )
 
+        this.deleteData()
+
         if (questionCreation) {
-          this.deleteData()
           return this.$router.push(
             `/contributeur/quiz/${quiz.id}-${quiz.url}/questions/create`
           )
@@ -428,12 +419,32 @@ export default {
       }
     },
     generateURL(label = '') {
-      return label
-        .toLowerCase()
-        .normalize('NFKD')
-        /* eslint-disable-next-line no-control-regex */
-        .replace(/[^\x00-\x7F]+/g, '')
-        .replace(/[^a-zA-Z0-9]+/g, '-')
+      return (
+        label
+          .toLowerCase()
+          .normalize('NFKD')
+          /* eslint-disable-next-line no-control-regex */
+          .replace(/[^\x00-\x7F]+/g, '')
+          .replace(/[^a-zA-Z0-9]+/g, '-')
+      )
+    },
+    isDataEdited() {
+      console.log(
+        this.label !== null,
+        this.description !== null,
+        this.level !== null,
+        this.domain_id !== null,
+        this.localisation !== null,
+        this.status !== null
+      )
+      return !!(
+        this.label !== null ||
+        this.description !== null ||
+        this.level !== null ||
+        this.domain_id !== null ||
+        this.localisation !== null ||
+        this.status !== null
+      )
     },
   },
 }

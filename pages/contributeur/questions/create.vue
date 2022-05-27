@@ -144,8 +144,8 @@ export default {
   components: {
     MarkdownEditor,
   },
-  beforeRouteLeave(to, from, next) {
-    if (!this.isDataEdited) {
+  beforeRouteLeave(_to, _from, next) {
+    if (!this.isDataEdited()) {
       return next()
     }
     next(
@@ -155,7 +155,7 @@ export default {
     )
   },
   middleware: ['auth', 'contributor'],
-  async asyncData({ store, error, params }) {
+  async asyncData({ store, error }) {
     try {
       await store.dispatch('quizzes/fetchPeronnalQuizzes')
     } catch (e) {
@@ -206,23 +206,6 @@ export default {
       return [...this.$store.state.quizzes.contributorQuizzes].sort((a, b) =>
         a.label.localeCompare(b.label)
       )
-    },
-    isDataEdited() {
-      return [
-        'label',
-        'time',
-        'quiz_id',
-        'question',
-        'source',
-        'endDate',
-        'profil',
-        'response0',
-        'response1',
-        'response2',
-        'response3',
-        'explication',
-        'status',
-      ].some((v) => this[v])
     },
   },
   methods: {
@@ -282,6 +265,23 @@ export default {
           this.errors = messages.errors
         }
       }
+    },
+    isDataEdited() {
+      return [
+        'label',
+        'time',
+        'quiz_id',
+        'question',
+        'source',
+        'endDate',
+        'profil',
+        'response0',
+        'response1',
+        'response2',
+        'response3',
+        'explication',
+        'status',
+      ].some((v) => this[v])
     },
   },
 }

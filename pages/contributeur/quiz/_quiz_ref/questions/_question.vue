@@ -157,9 +157,9 @@ export default {
   components: {
     MarkdownEditor,
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(to, _from, next) {
     if (
-      (!this.isDataEdited || this.created) &&
+      (!this.isDataEdited() || this.created) &&
       (!to.params.quiz_ref ||
         this.get('quiz_id') === to.params.quiz_ref.split('-')[0])
     ) {
@@ -237,28 +237,6 @@ export default {
     },
     isCreationPage() {
       return this.$route.params.question === 'create'
-    },
-    isDataEdited() {
-      return [
-        'label',
-        'time',
-        'question',
-        'source',
-        'endDate',
-        'profil',
-        'response0',
-        'response1',
-        'response2',
-        'response3',
-        'explication',
-        'status',
-      ].some(
-        (v) =>
-          this.get(v) !==
-          (v.startsWith('response')
-            ? this.questionObj.responses || {}
-            : this.questionObj)[v]
-      )
     },
   },
   mounted() {
@@ -362,6 +340,28 @@ export default {
           width: 400,
         })
       }
+    },
+    isDataEdited() {
+      return [
+        'label',
+        'time',
+        'question',
+        'source',
+        'endDate',
+        'profil',
+        'response0',
+        'response1',
+        'response2',
+        'response3',
+        'explication',
+        'status',
+      ].some(
+        (v) =>
+          this.get(v) !==
+          (v.startsWith('response')
+            ? this.questionObj.responses || {}
+            : this.questionObj)[v]
+      )
     },
   },
 }
