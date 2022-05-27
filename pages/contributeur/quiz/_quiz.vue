@@ -61,7 +61,7 @@
             </div>
             <div class="section">
               <SelectorElement
-                :selected="get('language')"
+                :selected="get('language') || 'fr'"
                 :items="languages"
                 :error="filtredErrors('language')"
                 placeholder="Langue"
@@ -183,7 +183,7 @@ export default {
       label: null,
       description: null,
       level: null,
-      language: 'fr',
+      language: null,
       domain_id: null,
       localisation: null,
       status: null,
@@ -319,7 +319,7 @@ export default {
       this.level = null
       this.domain_id = null
       this.localisation = null
-      this.language = 'fr'
+      this.language = null
       this.status = null
     },
     saveTempQuestionsOrder(data) {
@@ -351,7 +351,7 @@ export default {
             description: this.get('description'),
             level: this.get('level'),
             localisation: this.get('localisation'),
-            language: this.get('language'),
+            language: this.get('language') || 'fr',
             contributorId: this.$auth.user.id,
             domainId: this.get('domain_id'),
             status: this.get('status'),
