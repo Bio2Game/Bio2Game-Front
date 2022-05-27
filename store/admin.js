@@ -13,10 +13,10 @@ export const state = getDefaultState
 
 export const getters = {
   getNoAdminUsers: (state) => {
-    return state.users.filter((u) => u.status < 1000)
+    return state.users.filter((u) => u.status !== 1000)
   },
   getNoAdminUser: (state) => (id) => {
-    return state.users.find((u) => u.id === id && u.status < 1000)
+    return state.users.find((u) => u.id === id && u.status !== 1000)
   },
 }
 

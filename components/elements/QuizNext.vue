@@ -6,6 +6,7 @@
           :src="`https://cdn.bio2game.com/icons/${
             quiz.domain && quiz.domain.icon && quiz.domain.icon.reference
           }`"
+          :alt="quiz.domain && quiz.domain.name"
         />
       </div>
     </div>

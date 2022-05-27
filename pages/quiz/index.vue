@@ -46,12 +46,6 @@
             </p>
           </div>
           <div class="buttons">
-            <!--
-              <template v-if="$auth.loggedIn">
-              <Favorite class="favorite" />
-              <FavoriteBorder class="favorite" />
-            </template>
-            -->
             <nuxt-link :to="getURL(quiz)" class="jouer">Jouer</nuxt-link>
           </div>
           <span class="quiz-id">#{{ quiz.id }}</span>

@@ -12,7 +12,7 @@ const getDefaultState = () => ({
 export const state = getDefaultState
 
 export const getters = {
-  quizzesFormation: state => {
+  quizzesFormation: (state) => {
     if (!state.formation) return []
     return state.formation.quizzes || []
   },
@@ -47,17 +47,17 @@ export const mutations = {
 
   UPDATE_CONTRIBUTOR_FORMATION(state, formation) {
     const formationIndex = state.contributorFormations.findIndex(
-      q => q.id === formation.id,
+      (q) => q.id === formation.id
     )
     Vue.set(
       state.contributorFormations,
       formationIndex,
-      Object.assign({}, state.contributorFormations[formationIndex], formation),
+      Object.assign({}, state.contributorFormations[formationIndex], formation)
     )
   },
   DELETE_CONTRIBUTOR_FORMATION(state, formation) {
     const formationIndex = state.contributorFormations.findIndex(
-      q => q.id === formation.id,
+      (q) => q.id === formation.id
     )
     Vue.delete(state.contributorFormations, formationIndex)
   },
@@ -90,7 +90,7 @@ export const actions = {
   async createFormation({ commit }, payload) {
     const response = await this.$axios.$post(
       `/api/contributor/formations`,
-      payload,
+      payload
     )
     commit('ADD_CONTRIBUTOR_FORMATION', response.formation)
     commit('SET_FORMATIONS', [])
@@ -100,7 +100,7 @@ export const actions = {
   async updateFormation({ commit }, payload) {
     const response = await this.$axios.$patch(
       `/api/contributor/formations/${payload.id}`,
-      payload,
+      payload
     )
     commit('UPDATE_CONTRIBUTOR_FORMATION', response.formation)
     commit('SET_FORMATIONS', [])
@@ -109,7 +109,7 @@ export const actions = {
 
   async deleteFormation({ commit }, id) {
     const response = await this.$axios.$delete(
-      `/api/contributor/formations/${id}`,
+      `/api/contributor/formations/${id}`
     )
     commit('DELETE_CONTRIBUTOR_FORMATION', response.formation)
     commit('SET_FORMATIONS', [])
