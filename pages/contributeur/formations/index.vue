@@ -70,14 +70,14 @@ export default {
         {
           name: 'status',
           title: 'Status',
-          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
+          formatter: (index) => this.statusNames[index],
           sortField: 'status',
         },
         {
           name: 'author.username',
           title: 'Contributeur',
           sortField: 'author.username',
-          visible: this.$auth.user.status > 999,
+          visible: this.$auth.user.status === 1000,
         },
         {
           name: 'quizzes',
@@ -97,6 +97,7 @@ export default {
           sortField: 'created_at',
         },
       ],
+      statusNames: ['Dev', 'Publique', 'Privé'],
     }
   },
   async fetch({ store, error }) {

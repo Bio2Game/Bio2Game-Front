@@ -30,7 +30,10 @@
           :error="filtredErrors('domainId')"
           @input="domain_id = $event"
         />
-        <div class="button md equal border_white" @click="status = getNextStatus(get('status'))">
+        <div
+          class="button md equal border_white"
+          @click="status = getNextStatus(get('status'))"
+        >
           {{ statusNames[get('status')] }}
         </div>
       </div>
@@ -103,7 +106,7 @@ export default {
     MarkdownEditor,
   },
   beforeRouteLeave(_to, _from, next) {
-    if (!this.isDataEdited) {
+    if (!this.isDataEdited()) {
       return next()
     }
     next(
@@ -171,18 +174,6 @@ export default {
     isCreationPage() {
       return this.$route.params.formation === 'create'
     },
-    isDataEdited() {
-      return [
-        'label',
-        'description',
-        'content',
-        'level',
-        'status',
-        'duration',
-        'leaves',
-        'domain_id',
-      ].some((v) => this.get(v) !== this.formation[v])
-    },
     profils() {
       return [
         {
@@ -246,9 +237,11 @@ export default {
             domain_id: this.get('domain_id'),
             user_id: this.$auth.user.id,
             quizzes: this.findContentQuizzes(this.get('content')),
-            status: +!!this.get('status'),
+            status: this.get('status'),
           }
         )
+
+        this.deleteData()
 
         this.$notify({
           type: 'success',
@@ -288,12 +281,14 @@ export default {
       }
     },
     generateURL(label = '') {
-      return label
-        .toLowerCase()
-        .normalize('NFKD')
-        /* eslint-disable-next-line no-control-regex */
-        .replace(/[^\x00-\x7F]+/g, '')
-        .replace(/[^a-zA-Z0-9]+/g, '-')
+      return (
+        label
+          .toLowerCase()
+          .normalize('NFKD')
+          /* eslint-disable-next-line no-control-regex */
+          .replace(/[^\x00-\x7F]+/g, '')
+          .replace(/[^a-zA-Z0-9]+/g, '-')
+      )
     },
     findContentQuizzes(content) {
       const regex = /[@$]?{{\s*(\d+)?\s*}}/gm
@@ -306,6 +301,18 @@ export default {
         }
       } while (temp)
       return [...new Set(quizzes)]
+    },
+    isDataEdited() {
+      return [
+        'label',
+        'description',
+        'content',
+        'level',
+        'status',
+        'duration',
+        'leaves',
+        'domain_id',
+      ].some((v) => this.get(v) !== this.formation[v])
     },
   },
 }

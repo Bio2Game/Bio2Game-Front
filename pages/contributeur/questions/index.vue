@@ -90,7 +90,7 @@ export default {
         {
           name: 'status',
           title: 'Status',
-          formatter: (bool) => (bool ? 'Publique' : 'Privé'),
+          formatter: (index) => this.statusNames[index],
           sortField: 'status',
         },
         {
