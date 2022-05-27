@@ -127,11 +127,11 @@ export default {
       askAuth: false,
       lang: null,
       quizzesLangs: {
-        fr: 1,
-        en: 2,
-        de: 3,
-        it: 4,
-        mar: 5,
+        fr: 318,
+        en: 321,
+        de: 319,
+        it: 320,
+        mar: 317,
       },
       started: false,
     }
@@ -266,10 +266,10 @@ export default {
       &:hover {
         transform: scale(1.1);
 
-        // .overlay {
-        //   opacity: 1;
-        //   transition: opacity 0.3s ease 0.6s;
-        // }
+        .overlay {
+          opacity: 1;
+          transition: opacity 0.3s ease 0.6s;
+        }
       }
 
       // .placeholder {
