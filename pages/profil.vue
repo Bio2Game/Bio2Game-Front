@@ -114,13 +114,21 @@ export default {
       if (!file) return
 
       if (!['jpg', 'jpeg', 'png'].includes(file.type.split('/')[1])) {
-        return this.$toast.show("Ce type d'image n'est pas supporté.")
+        return this.$notify({
+          type: 'error',
+          text: "Ce type d'image n'est pas supporté.",
+          duration: 3000,
+          width: 400,
+        })
       }
 
       if (file.size >= 10000000) {
-        return this.$toast.show(
-          "La taille de l'avatar est trop grande ! (supperieur à 10 Mo)"
-        )
+        return this.$notify({
+          type: 'error',
+          text: "La taille de l'avatar est trop grande ! (supperieur à 10 Mo)",
+          duration: 3000,
+          width: 400,
+        })
       }
 
       const formData = new FormData()
@@ -131,7 +139,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         })
-        await this.$store.commit('UPDATE_USER_AVATAR', name)
+        this.$store.commit('UPDATE_USER_AVATAR', name)
       } catch (error) {
         console.error(error)
       }
