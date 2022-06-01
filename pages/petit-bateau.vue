@@ -146,8 +146,12 @@ export default {
 
       if (!this.$auth.loggedIn) {
         this.askAuth = true
+        return;
       }
 
+      await this.loadQuiz();
+    },
+    async loadQuiz() {
       try {
         await this.$store.dispatch('quiz/fetchQuiz', {
           id: this.quizzesLangs[this.lang],
@@ -173,6 +177,8 @@ export default {
       })
 
       this.askAuth = false
+
+      await this.loadQuiz();
     },
   },
 }
