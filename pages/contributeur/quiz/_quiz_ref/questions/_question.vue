@@ -38,7 +38,7 @@
           class="button md equal border_white"
           @click="status = +!get('status')"
         >
-          {{ get('status') ? 'Publique' : 'Privé' }}
+          {{ get('status') ? 'Affiché' : 'Caché' }}
         </div>
       </div>
       <div class="content">

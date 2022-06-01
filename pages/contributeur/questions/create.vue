@@ -31,7 +31,7 @@
           @input="quiz_id = $event"
         />
         <div class="button md equal border_white" @click="status = !status">
-          {{ status ? 'Publique' : 'Privé' }}
+          {{ status ? 'Affiché' : 'Caché' }}
         </div>
       </div>
       <div class="content">
