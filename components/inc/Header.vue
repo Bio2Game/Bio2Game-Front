@@ -43,7 +43,7 @@
                     :name="$auth.user.username"
                     :size="32"
                   />
-                  <span class="username">{{ $auth.user.username }}</span>
+                  <span class="username">{{ formatUsername($auth.user.username) }}</span>
                   <DownIcon class="down" />
                 </div>
                 <div class="user-menu">
@@ -139,6 +139,10 @@ export default {
     window.removeEventListener('scroll', this.checkHeader)
   },
   methods: {
+    formatUsername(username) {
+      if(!username) return '';
+      return username.split(':')[0]
+    },
     async checkHeader() {
       if (this.$route.name !== 'index') {
         this.isTransparent = false
