@@ -6,10 +6,8 @@
       </div>
       <h1 class="title">Water Family & Bio2Game</h1>
       <div class="description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-        necessitatibus a molestias velit fuga. Nemo repudiandae aperiam
-        deserunt. Pariatur ducimus sunt eaque provident cumque eveniet fugit
-        saepe incidunt officiis ipsa.
+        Bienvenue sur le quizz Petit Bateau et Water Family ! Choisis ta langue pour le quizz.<br>
+        Welcome to the Petit Bateau and Water Family quiz ! Please select your language.
       </div>
       <div class="languages">
         <div class="lang" @click="play('fr')">
