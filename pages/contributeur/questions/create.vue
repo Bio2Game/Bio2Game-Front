@@ -188,7 +188,7 @@ export default {
         },
         {
           ref: 1,
-          name: 'Consomateur',
+          name: 'Consommateur',
         },
         {
           ref: 2,
